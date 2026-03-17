@@ -1,4 +1,4 @@
-# Canonical language paths
+# Language redirects
 /es                     /es/                    301
 /pt-br                  /pt-br/                 301
 /en                     /                       301
@@ -6,7 +6,12 @@
 /es/precios             /es/precios/            301
 /pt-br/precos           /pt-br/precos/          301
 
-# Assets (protect from SPA fallback)
+# ES homepage
+/es/                    /es/index.html          200
+
+# Static files — protect from SPA fallback
+/sitemap.xml            /sitemap.xml            200
+/robots.txt             /robots.txt             200
 /assets/*               /assets/:splat          200
 
 # Docs
