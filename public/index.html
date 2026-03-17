@@ -1,8 +1,365 @@
 <!doctype html>
-<html>
-<head><meta charset="utf-8"><title>PrimeBPO</title></head>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PrimeCore Intelligence — AI-Powered Contact Center Operations</title>
+  <meta name="description" content="PrimeCore Intelligence delivers autonomous AI for contact centers — real-time agent assistance, multilingual call handling in 50+ languages, and SLA-driven performance analytics for logistics, healthcare, and financial services." />
+  <meta name="theme-color" content="#040812" />
+  <meta name="color-scheme" content="dark" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://primecoreintelligence.com" />
+  <meta property="og:title" content="PrimeCore Intelligence — AI-Powered Contact Center Operations" />
+  <meta property="og:description" content="Autonomous AI for contact centers. 50+ languages. Zero SLA breaches." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://primecoreintelligence.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+:root{--bg:#040812;--surface:#080f1e;--card:#0d1628;--border:#162035;--border2:#1e2e4a;--text:#e8effc;--muted:#7a93b8;--dim:#3d5278;--accent:#2d7aff;--accent2:#00c9a7;--warn:#f59e0b;--danger:#ef4444;--font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--radius:14px;--radius-sm:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+a{color:inherit;text-decoration:none}
+.container{max-width:1140px;margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+nav{position:sticky;top:0;z-index:100;background:rgba(4,8,18,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1140px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-brand{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:700;font-size:17px;letter-spacing:-.3px}
+.nav-brand .dot{width:8px;height:8px;background:var(--accent2);border-radius:50%;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-size:14px;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{display:flex;gap:10px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;border:none;transition:all .2s;white-space:nowrap}
+.btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--muted)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--text)}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 0 24px rgba(45,122,255,.3)}
+.btn-primary:hover{background:#4d8fff;box-shadow:0 0 32px rgba(45,122,255,.5);transform:translateY(-1px)}
+.btn-accent{background:var(--accent2);color:#000;font-weight:600}
+.btn-accent:hover{background:#00e0bc;transform:translateY(-1px)}
+.hero{position:relative;padding:120px 0 100px;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(45,122,255,.12) 0%,transparent 70%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(45,122,255,.1);border:1px solid rgba(45,122,255,.25);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:500;color:var(--accent);letter-spacing:.5px;text-transform:uppercase;margin-bottom:28px}
+.hero-eyebrow::before{content:'';width:6px;height:6px;background:var(--accent2);border-radius:50%}
+.hero-h1{font-family:var(--font-head);font-size:clamp(38px,5vw,62px);font-weight:800;line-height:1.08;letter-spacing:-1.5px;margin-bottom:24px}
+.hero-h1 .hl{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:18px;color:var(--muted);line-height:1.7;margin-bottom:40px;max-width:480px;font-weight:300}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.timer-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden}
+.timer-panel::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(45,122,255,.04) 0%,transparent 60%);pointer-events:none}
+.timer-panel-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-bottom:16px}
+.call-states{display:flex;flex-direction:column;gap:10px}
+.call-state{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--radius-sm);background:rgba(255,255,255,.03);border:1px solid transparent;transition:all .3s}
+.call-state.green{border-color:rgba(0,201,167,.2)}
+.call-state.amber{border-color:rgba(245,158,11,.2)}
+.call-state.red{border-color:rgba(239,68,68,.2)}
+.state-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.state-dot.green{background:var(--accent2);box-shadow:0 0 8px var(--accent2)}
+.state-dot.amber{background:var(--warn);box-shadow:0 0 8px var(--warn)}
+.state-dot.red{background:var(--danger);box-shadow:0 0 8px var(--danger);animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.state-info{flex:1}
+.state-label{font-size:13px;font-weight:500}
+.state-desc{font-size:11px;color:var(--muted);margin-top:2px}
+.state-timer{font-family:var(--font-head);font-size:22px;font-weight:700;letter-spacing:-1px}
+.state-timer.green{color:var(--accent2)}
+.state-timer.amber{color:var(--warn)}
+.state-timer.red{color:var(--danger)}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.stat-box{text-align:center;padding:14px 8px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--radius-sm)}
+.stat-value{font-family:var(--font-head);font-size:22px;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--dim);margin-top:4px}
+.trust-bar{padding:32px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.trust-inner{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+.trust-label{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);white-space:nowrap}
+.trust-items{display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.trust-item{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.trust-item::before{content:'✓';color:var(--accent2);font-weight:700}
+section{padding:96px 0;position:relative;z-index:1}
+.section-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:12px;font-weight:600}
+.section-h2{font-family:var(--font-head);font-size:clamp(28px,3.5vw,44px);font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:16px}
+.section-sub{font-size:17px;color:var(--muted);max-width:560px;font-weight:300;line-height:1.7}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
+.feature-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all .25s;position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent) 0%,var(--accent2) 100%);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.feature-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.feature-card:hover::before{transform:scaleX(1)}
+.feature-icon{width:44px;height:44px;background:rgba(45,122,255,.1);border:1px solid rgba(45,122,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px}
+.feature-title{font-family:var(--font-head);font-size:17px;font-weight:700;margin-bottom:10px;letter-spacing:-.3px}
+.feature-desc{font-size:14px;color:var(--muted);line-height:1.65}
+.verticals-section{background:var(--surface)}
+.verticals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.vertical-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all .25s}
+.vertical-card:hover{border-color:var(--accent2);box-shadow:0 0 0 1px rgba(0,201,167,.15)}
+.vertical-emoji{font-size:28px;margin-bottom:12px}
+.vertical-name{font-family:var(--font-head);font-size:15px;font-weight:700;margin-bottom:6px}
+.vertical-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px}
+.step{padding:24px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+.step-num{font-family:var(--font-head);font-size:48px;font-weight:800;color:var(--border2);line-height:1;margin-bottom:12px}
+.step-title{font-family:var(--font-head);font-size:15px;font-weight:700;margin-bottom:8px}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px;align-items:start}
+.pricing-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px 28px;position:relative}
+.pricing-card.featured{border-color:var(--accent);box-shadow:0 0 0 1px rgba(45,122,255,.3),0 24px 48px rgba(0,0,0,.5);transform:scale(1.03)}
+.pricing-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:4px 14px;border-radius:999px;white-space:nowrap}
+.pricing-tier{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px}
+.pricing-price{font-family:var(--font-head);font-size:46px;font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:4px}
+.pricing-price sup{font-size:22px;letter-spacing:0;vertical-align:super}
+.pricing-period{font-size:13px;color:var(--muted);margin-bottom:20px}
+.pricing-desc{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.pricing-features{list-style:none;margin-bottom:28px}
+.pricing-features li{font-size:13px;color:var(--muted);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:10px;align-items:flex-start}
+.pricing-features li::before{content:'✓';color:var(--accent2);flex-shrink:0;font-weight:700}
+.pricing-pilot{font-size:12px;color:var(--accent2);text-align:center;margin-top:12px}
+.cta-section{background:var(--surface);text-align:center}
+.cta-box{max-width:640px;margin:0 auto}
+.cta-notice{font-size:12px;color:var(--dim);margin-top:16px}
+footer{padding:40px 0;border-top:1px solid var(--border)}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.footer-brand{font-family:var(--font-head);font-weight:700;font-size:15px;color:var(--text)}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap}
+.footer-links a{font-size:13px;color:var(--muted);transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+.footer-legal{font-size:12px;color:var(--dim);max-width:760px;margin-top:24px;padding-top:24px;border-top:1px solid var(--border);line-height:1.6}
+.lang-strip{display:flex;gap:6px;align-items:center}
+.lang-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;font-family:var(--font-body);transition:all .15s}
+.lang-btn.active,.lang-btn:hover{border-color:var(--accent);color:var(--text)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-left>*{animation:fadeUp .6s ease both}
+.hero-left>*:nth-child(1){animation-delay:0s}
+.hero-left>*:nth-child(2){animation-delay:.1s}
+.hero-left>*:nth-child(3){animation-delay:.2s}
+.hero-left>*:nth-child(4){animation-delay:.3s}
+.timer-panel{animation:fadeUp .6s .4s ease both}
+@media(max-width:900px){.hero-grid,.features-grid,.verticals-grid,.pricing-grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.pricing-card.featured{transform:none}.nav-links{display:none}}
+@media(max-width:600px){.steps{grid-template-columns:1fr}.hero{padding:80px 0 60px}section{padding:64px 0}}
+  </style>
+</head>
 <body>
-  <h1>PrimeBPO is live</h1>
-  <p>Cloudflare Pages deployment works.</p>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/"><span class="dot"></span>PrimeCore Intelligence</a>
+    <ul class="nav-links">
+      <li><a href="#features">Platform</a></li>
+      <li><a href="#verticals">Verticals</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <div class="nav-cta">
+      <div class="lang-strip">
+        <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
+        <button class="lang-btn" onclick="setLang('es',this)">ES</button>
+        <button class="lang-btn" onclick="setLang('pt',this)">PT</button>
+      </div>
+      <a class="btn btn-primary" href="https://pilot.primecoreintelligence.com">Request Pilot &rarr;</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Contact Center AI Platform</div>
+        <h1 class="hero-h1">Every call.<br><span class="hl">Zero SLA breaches.</span></h1>
+        <p class="hero-sub">PrimeCore Intelligence delivers autonomous AI for contact center operations — real-time agent guidance, 50+ language call handling, and policy-enforced performance analytics for logistics, healthcare, and financial services.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://pilot.primecoreintelligence.com">Start Pilot &mdash; 50% off Month 1</a>
+          <a class="btn btn-ghost" href="/assets/PrimeCore_LATAM_Enterprise_Pack_v1_3.pdf" target="_blank" rel="noopener">Download Security Pack</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="timer-panel">
+          <div class="timer-panel-label">Live Call Intelligence &middot; Active State Monitor</div>
+          <div class="call-states">
+            <div class="call-state green">
+              <span class="state-dot green"></span>
+              <div class="state-info"><div class="state-label">Green &mdash; On Track</div><div class="state-desc">Agent handling &middot; SLA protected &middot; AI assist active</div></div>
+              <div class="state-timer green" id="liveTimer">2:14</div>
+            </div>
+            <div class="call-state amber">
+              <span class="state-dot amber"></span>
+              <div class="state-info"><div class="state-label">Amber &mdash; Approaching Threshold</div><div class="state-desc">Escalation guidance queued &middot; supervisor alerted</div></div>
+              <div class="state-timer amber">4:30</div>
+            </div>
+            <div class="call-state red">
+              <span class="state-dot red"></span>
+              <div class="state-info"><div class="state-label">Red &mdash; SLA Breach Imminent</div><div class="state-desc">Autonomous intervention &middot; override path ready</div></div>
+              <div class="state-timer red">6:00</div>
+            </div>
+          </div>
+          <div class="stats-row">
+            <div class="stat-box"><div class="stat-value">98.4%</div><div class="stat-label">FCR Rate</div></div>
+            <div class="stat-box"><div class="stat-value">50+</div><div class="stat-label">Languages</div></div>
+            <div class="stat-box"><div class="stat-value">&lt;200ms</div><div class="stat-label">Assist Latency</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-inner">
+      <span class="trust-label">Integrates with</span>
+      <div class="trust-items">
+        <span class="trust-item">Five9</span>
+        <span class="trust-item">Genesys</span>
+        <span class="trust-item">RingCentral</span>
+        <span class="trust-item">3CX</span>
+        <span class="trust-item">Atento</span>
+        <span class="trust-item">Bliss</span>
+      </div>
+      <div style="margin-left:auto;font-size:12px;color:var(--dim)">No PAN/CVV &middot; PHI disabled by default &middot; SOC2-aligned</div>
+    </div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="container">
+    <div class="section-eyebrow">Platform</div>
+    <h2 class="section-h2">Built for operations teams<br>that can't afford downtime</h2>
+    <p class="section-sub">Every module is policy-enforced. Every decision is logged. Every production action requires founder approval.</p>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">🎯</div><div class="feature-title">Real-Time Agent Assist</div><p class="feature-desc">Live call intelligence surfaces the right response at the right moment. Reduces AHT by up to 35% without adding headcount.</p></div>
+      <div class="feature-card"><div class="feature-icon">🌐</div><div class="feature-title">50+ Language Support</div><p class="feature-desc">Multilingual handling across Spanish, Portuguese, English, French, and 46 more. LATAM, US, and EU contact centers covered out of the box.</p></div>
+      <div class="feature-card"><div class="feature-icon">⚡</div><div class="feature-title">Autonomous Call Handling</div><p class="feature-desc">Tier-1 and Tier-2 calls handled autonomously with escalation paths that preserve agent bandwidth for complex cases.</p></div>
+      <div class="feature-card"><div class="feature-icon">📊</div><div class="feature-title">Performance Analytics</div><p class="feature-desc">FCR, AHT, SLA breach rates, agent churn indicators — all in a single real-time dashboard with policy-gated alerting.</p></div>
+      <div class="feature-card"><div class="feature-icon">🔒</div><div class="feature-title">Policy-Enforced Governance</div><p class="feature-desc">Every mutation requires policy clearance. No silent writes. Full audit trail. Founder-approval gate on all production actions.</p></div>
+      <div class="feature-card"><div class="feature-icon">🔌</div><div class="feature-title">Universal CCaaS Compatibility</div><p class="feature-desc">Drop-in integration with Five9, Genesys, RingCentral, 3CX, Atento, and Bliss. No rip-and-replace required.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="verticals-section" id="verticals">
+  <div class="container">
+    <div class="section-eyebrow">Verticals</div>
+    <h2 class="section-h2">Elite industries only</h2>
+    <p class="section-sub">Purpose-built for operations where a single SLA breach costs real money and agent churn is a financial event.</p>
+    <div class="verticals-grid">
+      <div class="vertical-card"><div class="vertical-emoji">🚛</div><div class="vertical-name">Logistics &amp; 3PL</div><p class="vertical-desc">Shipment tracking calls, carrier disputes, exception handling — automated with 24/7 multilingual coverage.</p></div>
+      <div class="vertical-card"><div class="vertical-emoji">🏥</div><div class="vertical-name">Healthcare</div><p class="vertical-desc">Appointment scheduling, insurance verification, and prior auth — PHI controls enforced at the infrastructure layer.</p></div>
+      <div class="vertical-card"><div class="vertical-emoji">💳</div><div class="vertical-name">Financial Services</div><p class="vertical-desc">Account inquiries, dispute resolution, and compliance-sensitive calls with full audit trail and no PAN/CVV exposure.</p></div>
+      <div class="vertical-card"><div class="vertical-emoji">🚗</div><div class="vertical-name">Fleet Management</div><p class="vertical-desc">Driver support, dispatch coordination, and vehicle incident handling at scale across mixed-language fleets.</p></div>
+      <div class="vertical-card"><div class="vertical-emoji">🏢</div><div class="vertical-name">BPO Operations</div><p class="vertical-desc">Multi-client contact center management with tenant isolation, per-client SLA enforcement, and consolidated reporting.</p></div>
+      <div class="vertical-card"><div class="vertical-emoji">🌎</div><div class="vertical-name">LATAM Enterprise</div><p class="vertical-desc">Purpose-built for Guatemala, Mexico, Colombia, and Brazil. Native Spanish and Portuguese AI with regional compliance.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-eyebrow">How It Works</div>
+    <h2 class="section-h2">From pilot to production<br>in 30 days</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><div class="step-title">Compatibility Check</div><p class="step-desc">We validate your CCaaS platform, call volume, language mix, and SLA targets. No surprises after deployment.</p></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">Pilot Deployment</div><p class="step-desc">30-day controlled pilot with shadow mode — AI runs alongside agents with zero side-effects until you approve.</p></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">Evidence Review</div><p class="step-desc">Full verification pack: FCR delta, AHT improvement, SLA breach rate, and cost-per-call before any production flip.</p></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">Founder Approval</div><p class="step-desc">Every production cutover requires explicit founder-level sign-off. No auto-promotions. No silent deployments.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="background:var(--surface)">
+  <div class="container">
+    <div class="section-eyebrow">Pricing</div>
+    <h2 class="section-h2">Transparent pricing.<br>No surprises.</h2>
+    <p class="section-sub">Billed monthly. Pilot Month 1 is 50% off. Month 2+ renews at standard rate unless canceled before renewal.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-price"><sup>$</sup>2,400</div>
+        <div class="pricing-period">/ month &middot; up to 5,000 calls</div>
+        <p class="pricing-desc">For contact centers piloting AI with a single queue or language.</p>
+        <ul class="pricing-features"><li>Real-time agent assist</li><li>Up to 3 languages</li><li>1 CCaaS integration</li><li>Performance dashboard</li><li>Email support</li></ul>
+        <a class="btn btn-ghost" style="width:100%;justify-content:center" href="https://pilot.primecoreintelligence.com">Request Pilot</a>
+        <div class="pricing-pilot">50% off first month &middot; $1,200</div>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-tier">Growth</div>
+        <div class="pricing-price"><sup>$</sup>5,800</div>
+        <div class="pricing-period">/ month &middot; up to 20,000 calls</div>
+        <p class="pricing-desc">For multilingual queues across multiple CCaaS platforms.</p>
+        <ul class="pricing-features"><li>Autonomous call handling</li><li>Up to 15 languages</li><li>3 CCaaS integrations</li><li>SLA breach alerting</li><li>Policy governance dashboard</li><li>Slack + email support</li></ul>
+        <a class="btn btn-primary" style="width:100%;justify-content:center" href="https://pilot.primecoreintelligence.com">Request Pilot &rarr;</a>
+        <div class="pricing-pilot">50% off first month &middot; $2,900</div>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-tier">Enterprise</div>
+        <div class="pricing-price" style="font-size:32px;letter-spacing:-1px">Custom</div>
+        <div class="pricing-period">/ month &middot; unlimited volume</div>
+        <p class="pricing-desc">For enterprise BPOs and multi-tenant contact centers with custom compliance requirements.</p>
+        <ul class="pricing-features"><li>50+ languages</li><li>Unlimited CCaaS integrations</li><li>Tenant isolation</li><li>Custom SLA enforcement</li><li>LATAM regional pack</li><li>Dedicated success engineer</li></ul>
+        <a class="btn btn-ghost" style="width:100%;justify-content:center" href="mailto:sales@primecoreintelligence.com">Contact Sales</a>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:32px;font-size:13px;color:var(--dim)">No PAN/CVV &middot; PHI disabled by default &middot; Agentic Engineer protective controls on all plans &middot; <a href="/assets/PrimeCore_LATAM_Enterprise_Pack_v1_3.pdf" style="color:var(--accent)" target="_blank" rel="noopener">Download Security Packet &rarr;</a></p>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <div class="section-eyebrow" style="text-align:center">Get Started</div>
+      <h2 class="section-h2" style="text-align:center">Ready to eliminate<br>SLA breaches?</h2>
+      <p class="section-sub" style="text-align:center;margin:16px auto 36px;max-width:440px">Start a 30-day pilot. Shadow mode first &mdash; no side effects until you approve. Cancel anytime before Month 2.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn-accent" href="https://pilot.primecoreintelligence.com">Start Your Pilot &rarr;</a>
+        <a class="btn btn-ghost" href="mailto:sales@primecoreintelligence.com">Talk to Sales</a>
+      </div>
+      <p class="cta-notice">Not legal, medical, financial, or compliance advice. PrimeCore Intelligence is an AI tooling platform &mdash; results depend on your deployment configuration.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">PrimeCore Intelligence</div>
+      <div class="footer-links">
+        <a href="#features">Platform</a>
+        <a href="#pricing">Pricing</a>
+        <a href="https://app.primecoreintelligence.com">Client Portal</a>
+        <a href="https://pilot.primecoreintelligence.com">Pilot</a>
+        <a href="https://warroom.primecoreintelligence.com">War Room</a>
+        <a href="mailto:support@primecoreintelligence.com">Support</a>
+        <a href="mailto:security@primecoreintelligence.com">Security</a>
+        <a href="mailto:legal@primecoreintelligence.com">Legal</a>
+        <a href="mailto:billing@primecoreintelligence.com">Billing</a>
+      </div>
+    </div>
+    <p class="footer-legal">&copy; 2026 PrimeCore Intelligence S.A. &middot; Guatemala City, Guatemala &middot; USA and Guatemala dual operations &middot; All rights reserved. Not legal, medical, financial, or compliance advice. PrimeCore Intelligence is an AI-powered software platform. Results depend on deployment configuration. Pilot terms apply.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var el=document.getElementById('liveTimer');
+  if(!el)return;
+  var secs=134;
+  setInterval(function(){
+    secs=(secs+1)%(6*60);
+    var m=Math.floor(secs/60);
+    var s=String(secs%60).padStart(2,'0');
+    el.textContent=m+':'+s;
+  },1000);
+})();
+
+function setLang(lang,btn){
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});
+  if(btn)btn.classList.add('active');
+  if(lang==='es')window.location.href='/es/';
+  if(lang==='pt')window.location.href='/pt-br/';
+}
+</script>
 </body>
 </html>

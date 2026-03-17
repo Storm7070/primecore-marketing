@@ -1,0 +1,16 @@
+# Canonical language paths
+/es                     /es/                    301
+/pt-br                  /pt-br/                 301
+/en                     /                       301
+/en/pricing             /en/pricing/            301
+/es/precios             /es/precios/            301
+/pt-br/precos           /pt-br/precos/          301
+
+# Assets (protect from SPA fallback)
+/assets/*               /assets/:splat          200
+
+# Docs
+/docs/*                 /docs/:splat            200
+
+# SPA fallback — last
+/*                      /index.html             200
