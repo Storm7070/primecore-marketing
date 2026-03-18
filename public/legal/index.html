@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Legal & Terms | PrimeCore Intelligence</title>
+  <meta name="description" content="PrimeCore Intelligence legal documents — Terms of Service, Privacy Policy, SLA, Data Processing Agreement. Available in English, Spanish, and Portuguese."/>
+  <link rel="canonical" href="https://primecoreintelligence.com/legal/"/>
+  <meta name="robots" content="index,follow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+  <style>
+:root{--bg:#040812;--surface:#06101c;--card:#0d1628;--border:#162035;--border2:#1e2e4a;--text:#e8effc;--muted:#7a93b8;--dim:#3d5278;--accent:#2d7aff;--accent2:#00c9a7;--warn:#f59e0b;--font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--radius:12px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.7;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:100;background:rgba(4,8,18,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:860px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-brand{font-family:var(--font-head);font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px;color:var(--text);text-decoration:none}
+.nav-brand:hover{text-decoration:none}
+.dot{width:7px;height:7px;background:var(--accent2);border-radius:50%;animation:p 2.4s ease-in-out infinite}
+@keyframes p{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+/* Language toggle */
+.lang-toggle{display:flex;gap:4px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;padding:3px}
+.lang-btn{background:transparent;border:none;color:var(--muted);padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all .15s;letter-spacing:.3px}
+.lang-btn.active{background:var(--accent);color:#fff}
+.lang-btn:hover:not(.active){color:var(--text)}
+
+/* Hero */
+.hero{padding:56px 0 40px;border-bottom:1px solid var(--border)}
+.hero-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:12px;font-weight:600}
+.hero h1{font-family:var(--font-head);font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:12px}
+.hero-sub{font-size:15px;color:var(--muted);font-weight:300;max-width:600px}
+.hero-meta{display:flex;gap:16px;margin-top:20px;flex-wrap:wrap}
+.meta-pill{font-size:11px;color:var(--dim);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:999px;padding:4px 12px}
+
+/* Layout */
+.layout{display:grid;grid-template-columns:220px 1fr;gap:48px;padding:48px 0 96px;align-items:start}
+
+/* Sidebar ToC */
+.toc{position:sticky;top:80px}
+.toc-title{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);margin-bottom:14px;font-weight:600}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc-item a{display:block;font-size:13px;color:var(--muted);padding:5px 10px;border-radius:6px;transition:all .15s;border-left:2px solid transparent}
+.toc-item a:hover{color:var(--text);border-color:var(--accent);text-decoration:none}
+.toc-item a.active{color:var(--accent);border-color:var(--accent);background:rgba(45,122,255,.05)}
+
+/* Content */
+.content{display:flex;flex-direction:column;gap:48px}
+
+.doc-section{scroll-margin-top:80px}
+
+.section-tag{display:inline-flex;align-items:center;gap:7px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.tag-terms{background:rgba(45,122,255,.1);color:var(--accent);border:1px solid rgba(45,122,255,.2)}
+.tag-privacy{background:rgba(0,201,167,.1);color:var(--accent2);border:1px solid rgba(0,201,167,.2)}
+.tag-sla{background:rgba(245,158,11,.1);color:var(--warn);border:1px solid rgba(245,158,11,.2)}
+.tag-dpa{background:rgba(139,92,246,.1);color:#a78bfa;border:1px solid rgba(139,92,246,.2)}
+.tag-ai{background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.2)}
+
+.section-title{font-family:var(--font-head);font-size:22px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.section-update{font-size:11px;color:var(--dim);margin-bottom:20px}
+
+h3{font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--text);margin:24px 0 8px}
+p{color:var(--muted);margin-bottom:12px;font-size:14px}
+ul,ol{color:var(--muted);padding-left:20px;margin-bottom:12px;font-size:14px}
+li{margin-bottom:6px}
+strong{color:var(--text);font-weight:500}
+
+.highlight-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin:18px 0}
+.highlight-box.warn{border-color:rgba(245,158,11,.25);background:rgba(245,158,11,.04)}
+.highlight-box.info{border-color:rgba(45,122,255,.25);background:rgba(45,122,255,.04)}
+.highlight-box p{margin:0;font-size:13px}
+
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.data-table th{font-weight:600;color:var(--text);text-align:left;padding:8px 12px;border-bottom:1px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.8px}
+.data-table td{color:var(--muted);padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.04)}
+.data-table tr:last-child td{border-bottom:none}
+
+/* Footer */
+footer{padding:32px 0;border-top:1px solid var(--border)}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.foot-brand{font-family:var(--font-head);font-weight:700;font-size:14px}
+.foot-links{display:flex;gap:20px;flex-wrap:wrap}
+.foot-links a{font-size:13px;color:var(--muted);transition:color .15s}
+.foot-links a:hover{color:var(--text)}
+.foot-note{font-size:11px;color:var(--dim);margin-top:20px;padding-top:16px;border-top:1px solid var(--border);line-height:1.6}
+
+/* Language sections — shown/hidden based on active lang */
+.lang-section{display:none}
+.lang-section.visible{display:block}
+
+@media(max-width:760px){.layout{grid-template-columns:1fr}.toc{display:none}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/"><span class="dot"></span>PrimeCore Intelligence</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn" onclick="setLang('es',this)">ES</button>
+      <button class="lang-btn" onclick="setLang('pt',this)">PT</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ENGLISH -->
+<div class="lang-section visible" id="lang-en">
+<div class="container">
+
+<div class="hero">
+  <div class="hero-eyebrow">Legal &amp; Compliance</div>
+  <h1>Terms, Privacy &amp; Policies</h1>
+  <p class="hero-sub">Complete legal documentation for PrimeCore Intelligence services. All documents govern your use of the platform and related services.</p>
+  <div class="hero-meta">
+    <span class="meta-pill">Governing entity: PrimeCore Intelligence S.A.</span>
+    <span class="meta-pill">Jurisdiction: Guatemala / ICC Arbitration</span>
+    <span class="meta-pill">Last updated: March 2026</span>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="toc">
+    <div class="toc-title">On this page</div>
+    <ul class="toc-list">
+      <li class="toc-item"><a href="#terms-en">Terms of Service</a></li>
+      <li class="toc-item"><a href="#privacy-en">Privacy Policy</a></li>
+      <li class="toc-item"><a href="#sla-en">Service Level Agreement</a></li>
+      <li class="toc-item"><a href="#dpa-en">Data Processing Agreement</a></li>
+      <li class="toc-item"><a href="#ai-en">AI Disclosure &amp; Limitations</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+
+    <div class="doc-section" id="terms-en">
+      <div class="section-tag tag-terms">Terms of Service</div>
+      <div class="section-title">Terms of Service</div>
+      <div class="section-update">Effective: March 17, 2026 &middot; Version 1.0</div>
+
+      <div class="highlight-box warn">
+        <p><strong>Summary:</strong> PrimeCore Intelligence provides AI-powered software tools for contact center operations. You are purchasing access to software, not a managed service. Performance targets are benchmarks under optimal configuration, not contractual guarantees.</p>
+      </div>
+
+      <h3>1. Acceptance of Terms</h3>
+      <p>By accessing or using PrimeCore Intelligence platform, APIs, or associated services ("Services"), you agree to these Terms of Service. If you do not agree, do not use the Services. These Terms apply to all users, clients, and authorized operators.</p>
+
+      <h3>2. Services Description</h3>
+      <p>PrimeCore Intelligence provides AI-powered software for contact center operations including autonomous call handling, real-time agent assistance, multilingual processing, SLA monitoring, and performance analytics. Services are provided as-is via software license.</p>
+
+      <h3>3. Subscription &amp; Billing</h3>
+      <p>Services are billed monthly via Paddle (merchant of record). Subscriptions auto-renew unless canceled before the renewal date. Pilot Month 1 is billed at 50% of the standard tier rate. Month 2+ renews at the standard rate. No refunds for partial months.</p>
+
+      <h3>4. Acceptable Use</h3>
+      <ul>
+        <li>You may not use the Services to process calls in violation of applicable telecommunications law</li>
+        <li>You must comply with all applicable call recording consent laws in your jurisdiction</li>
+        <li>You may not attempt to reverse-engineer, copy, or resell the AI models or software</li>
+        <li>You must implement appropriate human oversight for calls involving medical, legal, or financial decisions</li>
+      </ul>
+
+      <h3>5. Limitation of Liability</h3>
+      <p>PrimeCore Intelligence&rsquo;s total aggregate liability is capped at fees paid in the prior <strong>3 months</strong>. We are not liable for lost profits, lost data, business interruption, or consequential damages under any circumstances. This limitation applies even if we were advised of the possibility of such damages.</p>
+
+      <h3>6. Disclaimer of Warranties</h3>
+      <p>Services are provided &ldquo;AS IS&rdquo; without warranty of any kind. Performance benchmarks (FCR rates, AHT reductions, resolution rates) are targets achievable under optimal deployment configuration &mdash; they are <strong>not representations, warranties, or contractual commitments</strong>. Actual results depend on your CCaaS configuration, call volume, and data quality.</p>
+
+      <h3>7. Governing Law &amp; Disputes</h3>
+      <p>These Terms are governed by the laws of Guatemala. All disputes shall be resolved by binding arbitration under ICC rules, seated in Guatemala City, Guatemala. Any claim must be filed within <strong>12 months</strong> of the event giving rise to the claim. Class action waiver applies.</p>
+    </div>
+
+    <div class="doc-section" id="privacy-en">
+      <div class="section-tag tag-privacy">Privacy Policy</div>
+      <div class="section-title">Privacy Policy</div>
+      <div class="section-update">Effective: March 17, 2026 &middot; Version 1.0</div>
+
+      <h3>Data We Collect</h3>
+      <table class="data-table">
+        <thead><tr><th>Category</th><th>Data</th><th>Purpose</th><th>Retention</th></tr></thead>
+        <tbody>
+          <tr><td>Account</td><td>Name, email, company</td><td>Service delivery</td><td>Life of account + 90 days</td></tr>
+          <tr><td>Call data</td><td>Anonymized transcripts, intent patterns</td><td>AI model improvement</td><td>Anonymized indefinitely</td></tr>
+          <tr><td>Payment</td><td>Processed by Paddle (MoR)</td><td>Billing</td><td>Paddle&rsquo;s policy applies</td></tr>
+          <tr><td>Usage logs</td><td>API calls, error events</td><td>Security &amp; monitoring</td><td>90 days</td></tr>
+        </tbody>
+      </table>
+
+      <h3>What We Do NOT Store</h3>
+      <ul>
+        <li><strong>No PAN/CVV</strong> &mdash; payment card data processed by Paddle only</li>
+        <li><strong>PHI disabled by default</strong> &mdash; HIPAA-protected health information handling requires explicit enablement and a BAA</li>
+        <li><strong>No caller PII</strong> beyond what you explicitly configure for your deployment</li>
+        <li><strong>No identifiable personal data</strong> is retained after contract termination &mdash; anonymized call patterns may be retained for AI training</li>
+      </ul>
+
+      <h3>Data on Termination</h3>
+      <p>Upon contract termination, all identifiable client data is deleted within 30 days. Anonymized call patterns (no names, no identifiers, no company data) may be retained to improve AI models. You can request a deletion certificate upon request.</p>
+
+      <h3>International Transfers</h3>
+      <p>Data is processed in the United States and Guatemala. EU clients: Standard Contractual Clauses (SCCs) apply. We do not transfer data to countries without adequate protection without appropriate safeguards.</p>
+    </div>
+
+    <div class="doc-section" id="sla-en">
+      <div class="section-tag tag-sla">Service Level Agreement</div>
+      <div class="section-title">Service Level Agreement</div>
+      <div class="section-update">Effective: March 17, 2026 &middot; Version 1.0</div>
+
+      <div class="highlight-box info">
+        <p><strong>What is guaranteed:</strong> Platform uptime, API response times, and support response SLAs are contractually guaranteed. Call resolution rates and AI accuracy metrics are deployment benchmarks &mdash; not SLA items.</p>
+      </div>
+
+      <h3>Uptime Commitment</h3>
+      <table class="data-table">
+        <thead><tr><th>Service</th><th>SLA Target</th><th>Measurement</th></tr></thead>
+        <tbody>
+          <tr><td>API (api.primecoreintelligence.com)</td><td>99.5% monthly uptime</td><td>Cloudflare monitoring</td></tr>
+          <tr><td>Client Portal (app.*)</td><td>99.0% monthly uptime</td><td>Cloudflare monitoring</td></tr>
+          <tr><td>Pilot Portal (pilot.*)</td><td>99.0% monthly uptime</td><td>Cloudflare monitoring</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Support Response Times</h3>
+      <table class="data-table">
+        <thead><tr><th>Severity</th><th>Definition</th><th>First Response</th></tr></thead>
+        <tbody>
+          <tr><td>Critical</td><td>Platform down, no calls processing</td><td>2 hours</td></tr>
+          <tr><td>High</td><td>Degraded performance &gt;20%</td><td>8 business hours</td></tr>
+          <tr><td>Medium</td><td>Feature unavailable, workaround exists</td><td>1 business day</td></tr>
+          <tr><td>Low</td><td>General questions, enhancements</td><td>3 business days</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Exclusions</h3>
+      <p>SLA credits do not apply to downtime caused by: your CCaaS platform, Twilio/telephony providers, force majeure, scheduled maintenance (announced 48h in advance), or client misconfiguration.</p>
+    </div>
+
+    <div class="doc-section" id="dpa-en">
+      <div class="section-tag tag-dpa">Data Processing Agreement</div>
+      <div class="section-title">Data Processing Agreement</div>
+      <div class="section-update">Effective: March 17, 2026 &middot; GDPR Art. 28 compliant</div>
+
+      <h3>Roles</h3>
+      <p>You are the <strong>Data Controller</strong>. PrimeCore Intelligence is the <strong>Data Processor</strong>. We process personal data only on your documented instructions.</p>
+
+      <h3>Our Obligations as Processor</h3>
+      <ul>
+        <li>Process data only for the purposes specified in your MSA</li>
+        <li>Implement appropriate technical and organizational security measures</li>
+        <li>Assist you in fulfilling data subject rights requests within 30 days</li>
+        <li>Notify you of personal data breaches within 72 hours of becoming aware</li>
+        <li>Delete or return all personal data upon termination of services</li>
+        <li>Make available all information necessary to demonstrate compliance</li>
+      </ul>
+
+      <h3>Sub-processors</h3>
+      <table class="data-table">
+        <thead><tr><th>Sub-processor</th><th>Purpose</th><th>Location</th></tr></thead>
+        <tbody>
+          <tr><td>Cloudflare, Inc.</td><td>Infrastructure, CDN, Workers</td><td>USA / Global</td></tr>
+          <tr><td>Paddle.com Market Ltd.</td><td>Payment processing (MoR)</td><td>UK</td></tr>
+          <tr><td>OpenAI (optional)</td><td>AI model fallback only</td><td>USA</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="doc-section" id="ai-en">
+      <div class="section-tag tag-ai">AI Disclosure</div>
+      <div class="section-title">AI Disclosure &amp; Limitations</div>
+      <div class="section-update">Effective: March 17, 2026 &middot; Version 1.0</div>
+
+      <div class="highlight-box warn">
+        <p><strong>Important:</strong> PrimeCore Intelligence uses artificial intelligence to handle calls and assist agents. AI outputs may be incorrect, incomplete, or inappropriate for specific situations. Human oversight is required for high-stakes decisions.</p>
+      </div>
+
+      <h3>What the AI Does</h3>
+      <ul>
+        <li>Processes spoken language and generates text/voice responses autonomously</li>
+        <li>Classifies caller intent and routes calls based on trained models</li>
+        <li>Provides real-time guidance to human agents via the Agent Assist overlay</li>
+        <li>Generates post-call summaries and analytics</li>
+      </ul>
+
+      <h3>Known Limitations</h3>
+      <ul>
+        <li>AI may misunderstand accents, dialects, or domain-specific terminology</li>
+        <li>Performance varies by language &mdash; Tier 1 languages (EN, ES, PT, FR) have lowest error rates</li>
+        <li>AI is not a licensed professional &mdash; outputs are never legal, medical, financial, or compliance advice</li>
+        <li>Context window limits may affect recall in very long calls (&gt;15 minutes)</li>
+      </ul>
+
+      <h3>Prohibited Uses</h3>
+      <ul>
+        <li>Sole decision-maker for medical diagnoses or treatment recommendations</li>
+        <li>Sole decision-maker for legal advice or formal legal proceedings</li>
+        <li>Deceptive practices &mdash; callers must be informed they may be speaking with AI</li>
+        <li>Processing calls without appropriate two-party consent where required by law</li>
+      </ul>
+
+      <h3>Call Recording Consent</h3>
+      <p>You are solely responsible for complying with call recording consent laws in your jurisdiction. In the United States, 12 states require two-party consent. In the EU, GDPR Article 6 applies. PrimeCore Intelligence&rsquo;s auto-disclosure system fires a consent notice at call start &mdash; you must configure it correctly for your jurisdiction.</p>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /layout -->
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">PrimeCore Intelligence</div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/trust/">Security &amp; Trust</a>
+      <a href="mailto:legal@primecoreintelligence.com">Legal Contact</a>
+    </div>
+  </div>
+  <p class="foot-note">&copy; 2026 PrimeCore Intelligence S.A. &middot; Guatemala City, Guatemala &middot; USA operations &middot; All rights reserved. Not legal, medical, financial, or compliance advice.</p>
+</footer>
+
+</div><!-- /container -->
+</div><!-- /lang-en -->
+
+<!-- SPANISH -->
+<div class="lang-section" id="lang-es">
+<div class="container">
+<div class="hero">
+  <div class="hero-eyebrow">Legal y Cumplimiento</div>
+  <h1>T&eacute;rminos, Privacidad y Pol&iacute;ticas</h1>
+  <p class="hero-sub">Documentaci&oacute;n legal completa para los servicios de PrimeCore Intelligence. Todos los documentos rigen su uso de la plataforma y servicios relacionados.</p>
+  <div class="hero-meta">
+    <span class="meta-pill">Entidad: PrimeCore Intelligence S.A.</span>
+    <span class="meta-pill">Jurisdicci&oacute;n: Guatemala / Arbitraje ICC</span>
+    <span class="meta-pill">&Uacute;ltima actualizaci&oacute;n: Marzo 2026</span>
+  </div>
+</div>
+<div class="layout">
+  <div class="toc">
+    <div class="toc-title">En esta p&aacute;gina</div>
+    <ul class="toc-list">
+      <li class="toc-item"><a href="#terms-es">T&eacute;rminos de Servicio</a></li>
+      <li class="toc-item"><a href="#privacy-es">Pol&iacute;tica de Privacidad</a></li>
+      <li class="toc-item"><a href="#sla-es">Acuerdo de Nivel de Servicio</a></li>
+      <li class="toc-item"><a href="#dpa-es">Acuerdo de Procesamiento de Datos</a></li>
+      <li class="toc-item"><a href="#ai-es">Divulgaci&oacute;n de IA</a></li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="doc-section" id="terms-es">
+      <div class="section-tag tag-terms">T&eacute;rminos de Servicio</div>
+      <div class="section-title">T&eacute;rminos de Servicio</div>
+      <div class="section-update">Vigente: 17 de marzo de 2026 &middot; Versi&oacute;n 1.0</div>
+      <div class="highlight-box warn"><p><strong>Resumen:</strong> PrimeCore Intelligence proporciona herramientas de software con IA para operaciones de centros de contacto. Est&aacute; adquiriendo acceso a software, no a un servicio administrado. Los objetivos de rendimiento son referencias bajo configuraci&oacute;n &oacute;ptima, no garant&iacute;as contractuales.</p></div>
+      <h3>1. Aceptaci&oacute;n de T&eacute;rminos</h3><p>Al acceder o utilizar la plataforma PrimeCore Intelligence, APIs o servicios asociados, acepta estos T&eacute;rminos de Servicio. Estos T&eacute;rminos se aplican a todos los usuarios, clientes y operadores autorizados.</p>
+      <h3>2. Descripci&oacute;n de Servicios</h3><p>PrimeCore Intelligence proporciona software con IA para operaciones de centros de contacto: manejo aut&oacute;nomo de llamadas, asistencia de agentes en tiempo real, procesamiento multiling&uuml;e, monitoreo de SLA y anal&iacute;tica de rendimiento.</p>
+      <h3>3. Suscripci&oacute;n y Facturaci&oacute;n</h3><p>Los servicios se facturan mensualmente a trav&eacute;s de Paddle (comerciante registrado). Las suscripciones se renuevan autom&aacute;ticamente. El Mes 1 del Piloto se factura al 50% del precio est&aacute;ndar. Sin reembolsos por meses parciales.</p>
+      <h3>4. Limitaci&oacute;n de Responsabilidad</h3><p>La responsabilidad total agregada de PrimeCore Intelligence se limita a las cuotas pagadas en los <strong>3 meses anteriores</strong>. No somos responsables por lucro cesante, p&eacute;rdida de datos, interrupci&oacute;n del negocio ni da&ntilde;os consecuentes.</p>
+      <h3>5. Ley Aplicable y Disputas</h3><p>Estos T&eacute;rminos se rigen por las leyes de Guatemala. Todas las disputas se resolver&aacute;n mediante arbitraje vinculante bajo las reglas de la ICC, con sede en Ciudad de Guatemala. Las reclamaciones deben presentarse dentro de los <strong>12 meses</strong> del evento.</p>
+    </div>
+    <div class="doc-section" id="privacy-es">
+      <div class="section-tag tag-privacy">Pol&iacute;tica de Privacidad</div>
+      <div class="section-title">Pol&iacute;tica de Privacidad</div>
+      <div class="section-update">Vigente: 17 de marzo de 2026 &middot; Versi&oacute;n 1.0</div>
+      <h3>Datos que Recopilamos</h3>
+      <table class="data-table"><thead><tr><th>Categor&iacute;a</th><th>Datos</th><th>Prop&oacute;sito</th><th>Retenci&oacute;n</th></tr></thead><tbody>
+        <tr><td>Cuenta</td><td>Nombre, email, empresa</td><td>Prestaci&oacute;n del servicio</td><td>Vida de la cuenta + 90 d&iacute;as</td></tr>
+        <tr><td>Datos de llamadas</td><td>Transcripciones anonimizadas</td><td>Mejora del modelo de IA</td><td>Anonimizado indefinidamente</td></tr>
+        <tr><td>Pagos</td><td>Procesados por Paddle</td><td>Facturaci&oacute;n</td><td>Pol&iacute;tica de Paddle</td></tr>
+      </tbody></table>
+      <h3>Lo que NO Almacenamos</h3>
+      <ul><li><strong>Sin PAN/CVV</strong> &mdash; datos de tarjetas procesados solo por Paddle</li><li><strong>PHI deshabilitado por defecto</strong> &mdash; requiere habilitaci&oacute;n expl&iacute;cita y BAA</li><li>No se retienen datos personales identificables tras la terminaci&oacute;n del contrato</li></ul>
+    </div>
+    <div class="doc-section" id="sla-es">
+      <div class="section-tag tag-sla">Acuerdo de Nivel de Servicio</div>
+      <div class="section-title">Acuerdo de Nivel de Servicio</div>
+      <div class="section-update">Vigente: 17 de marzo de 2026</div>
+      <div class="highlight-box info"><p><strong>Qu&eacute; est&aacute; garantizado:</strong> Tiempo de actividad de la plataforma, tiempos de respuesta de la API y SLAs de soporte. Las tasas de resoluci&oacute;n y precisi&oacute;n de IA son referencias de implementaci&oacute;n, no elementos de SLA.</p></div>
+      <h3>Compromiso de Disponibilidad</h3>
+      <table class="data-table"><thead><tr><th>Servicio</th><th>Objetivo SLA</th></tr></thead><tbody>
+        <tr><td>API (api.primecoreintelligence.com)</td><td>99.5% uptime mensual</td></tr>
+        <tr><td>Portal de Clientes (app.*)</td><td>99.0% uptime mensual</td></tr>
+      </tbody></table>
+    </div>
+    <div class="doc-section" id="dpa-es">
+      <div class="section-tag tag-dpa">Acuerdo de Procesamiento</div>
+      <div class="section-title">Acuerdo de Procesamiento de Datos</div>
+      <div class="section-update">Vigente: 17 de marzo de 2026 &middot; Conforme GDPR Art. 28</div>
+      <h3>Roles</h3><p>Usted es el <strong>Responsable del Tratamiento</strong>. PrimeCore Intelligence es el <strong>Encargado del Tratamiento</strong>. Procesamos datos personales &uacute;nicamente seg&uacute;n sus instrucciones documentadas.</p>
+      <h3>Nuestras Obligaciones</h3><ul><li>Procesar datos solo para los fines especificados en su MSA</li><li>Notificarle sobre violaciones de datos personales en 72 horas</li><li>Eliminar o devolver todos los datos personales al terminar los servicios</li></ul>
+    </div>
+    <div class="doc-section" id="ai-es">
+      <div class="section-tag tag-ai">Divulgaci&oacute;n de IA</div>
+      <div class="section-title">Divulgaci&oacute;n y Limitaciones de IA</div>
+      <div class="section-update">Vigente: 17 de marzo de 2026</div>
+      <div class="highlight-box warn"><p><strong>Importante:</strong> PrimeCore Intelligence utiliza inteligencia artificial. Las respuestas de la IA pueden ser incorrectas o inapropiadas. Se requiere supervisi&oacute;n humana para decisiones de alto impacto.</p></div>
+      <h3>Limitaciones Conocidas</h3><ul><li>La IA puede malinterpretar acentos, dialectos o terminolog&iacute;a especializada</li><li>Los resultados no son asesor&iacute;a legal, m&eacute;dica, financiera ni de cumplimiento</li><li>Los l&iacute;mites del contexto pueden afectar llamadas muy largas (&gt;15 minutos)</li></ul>
+      <h3>Consentimiento de Grabaci&oacute;n</h3><p>Usted es el &uacute;nico responsable de cumplir con las leyes de consentimiento para grabaci&oacute;n de llamadas en su jurisdicci&oacute;n.</p>
+    </div>
+  </div>
+</div>
+<footer><div class="foot-inner"><div class="foot-brand">PrimeCore Intelligence</div><div class="foot-links"><a href="/">Inicio</a><a href="mailto:legal@primecoreintelligence.com">Contacto Legal</a></div></div><p class="foot-note">&copy; 2026 PrimeCore Intelligence S.A. &middot; Ciudad de Guatemala &middot; No constituye asesor&iacute;a legal, m&eacute;dica, financiera ni de cumplimiento.</p></footer>
+</div></div>
+
+<!-- PORTUGUESE -->
+<div class="lang-section" id="lang-pt">
+<div class="container">
+<div class="hero">
+  <div class="hero-eyebrow">Legal e Conformidade</div>
+  <h1>Termos, Privacidade e Pol&iacute;ticas</h1>
+  <p class="hero-sub">Documenta&ccedil;&atilde;o legal completa para os servi&ccedil;os da PrimeCore Intelligence. Todos os documentos regem o uso da plataforma e servi&ccedil;os relacionados.</p>
+  <div class="hero-meta">
+    <span class="meta-pill">Entidade: PrimeCore Intelligence S.A.</span>
+    <span class="meta-pill">Jurisdi&ccedil;&atilde;o: Guatemala / Arbitragem ICC</span>
+    <span class="meta-pill">&Uacute;ltima atualiza&ccedil;&atilde;o: Mar&ccedil;o 2026</span>
+  </div>
+</div>
+<div class="layout">
+  <div class="toc">
+    <div class="toc-title">Nesta p&aacute;gina</div>
+    <ul class="toc-list">
+      <li class="toc-item"><a href="#terms-pt">Termos de Servi&ccedil;o</a></li>
+      <li class="toc-item"><a href="#privacy-pt">Pol&iacute;tica de Privacidade</a></li>
+      <li class="toc-item"><a href="#sla-pt">Acordo de N&iacute;vel de Servi&ccedil;o</a></li>
+      <li class="toc-item"><a href="#dpa-pt">Acordo de Processamento</a></li>
+      <li class="toc-item"><a href="#ai-pt">Divulga&ccedil;&atilde;o de IA</a></li>
+    </ul>
+  </div>
+  <div class="content">
+    <div class="doc-section" id="terms-pt">
+      <div class="section-tag tag-terms">Termos de Servi&ccedil;o</div>
+      <div class="section-title">Termos de Servi&ccedil;o</div>
+      <div class="section-update">Vig&ecirc;ncia: 17 de mar&ccedil;o de 2026 &middot; Vers&atilde;o 1.0</div>
+      <div class="highlight-box warn"><p><strong>Resumo:</strong> A PrimeCore Intelligence fornece ferramentas de software com IA para opera&ccedil;&otilde;es de call center. Voc&ecirc; est&aacute; adquirindo acesso a software, n&atilde;o a um servi&ccedil;o gerenciado. As metas de desempenho s&atilde;o refer&ecirc;ncias sob configura&ccedil;&atilde;o ideal, n&atilde;o garantias contratuais.</p></div>
+      <h3>1. Aceita&ccedil;&atilde;o dos Termos</h3><p>Ao acessar ou utilizar a plataforma PrimeCore Intelligence, APIs ou servi&ccedil;os associados, voc&ecirc; concorda com estes Termos de Servi&ccedil;o.</p>
+      <h3>2. Limita&ccedil;&atilde;o de Responsabilidade</h3><p>A responsabilidade total agregada da PrimeCore Intelligence est&aacute; limitada &agrave;s taxas pagas nos <strong>3 meses anteriores</strong>. N&atilde;o somos respons&aacute;veis por lucros cessantes, perda de dados ou danos consequentes.</p>
+      <h3>3. Lei Aplic&aacute;vel</h3><p>Estes Termos s&atilde;o regidos pelas leis da Guatemala. Disputas ser&atilde;o resolvidas por arbitragem vinculante sob regras da ICC, com sede na Cidade da Guatemala. Prazo de 12 meses para apresentar reclama&ccedil;&otilde;es.</p>
+    </div>
+    <div class="doc-section" id="privacy-pt">
+      <div class="section-tag tag-privacy">Pol&iacute;tica de Privacidade</div>
+      <div class="section-title">Pol&iacute;tica de Privacidade</div>
+      <div class="section-update">Vig&ecirc;ncia: 17 de mar&ccedil;o de 2026 &middot; Em conformidade com a LGPD</div>
+      <h3>O que n&atilde;o armazenamos</h3><ul><li><strong>Sem PAN/CVV</strong> &mdash; dados de cart&atilde;o processados apenas pela Paddle</li><li><strong>PHI desativado por padr&atilde;o</strong></li><li>Nenhum dado pessoal identific&aacute;vel ap&oacute;s t&eacute;rmino do contrato</li></ul>
+      <h3>Lei Geral de Prote&ccedil;&atilde;o de Dados (LGPD)</h3><p>Para clientes brasileiros: cumprimos a LGPD (Lei n&ordm; 13.709/2018). Voc&ecirc; &eacute; o Controlador; a PrimeCore Intelligence &eacute; o Operador. Pode exercer seus direitos de titular entrando em contato com legal@primecoreintelligence.com.</p>
+    </div>
+    <div class="doc-section" id="sla-pt">
+      <div class="section-tag tag-sla">Acordo de N&iacute;vel de Servi&ccedil;o</div>
+      <div class="section-title">Acordo de N&iacute;vel de Servi&ccedil;o</div>
+      <div class="section-update">Vig&ecirc;ncia: 17 de mar&ccedil;o de 2026</div>
+      <h3>Compromisso de Disponibilidade</h3>
+      <table class="data-table"><thead><tr><th>Servi&ccedil;o</th><th>Meta SLA</th></tr></thead><tbody>
+        <tr><td>API</td><td>99,5% de disponibilidade mensal</td></tr>
+        <tr><td>Portal do Cliente</td><td>99,0% de disponibilidade mensal</td></tr>
+      </tbody></table>
+    </div>
+    <div class="doc-section" id="dpa-pt">
+      <div class="section-tag tag-dpa">Acordo de Processamento</div>
+      <div class="section-title">Acordo de Processamento de Dados</div>
+      <div class="section-update">Vig&ecirc;ncia: 17 de mar&ccedil;o de 2026</div>
+      <h3>Pap&eacute;is</h3><p>Voc&ecirc; &eacute; o <strong>Controlador</strong>. A PrimeCore Intelligence &eacute; o <strong>Operador</strong>. Processamos dados pessoais apenas conforme suas instru&ccedil;&otilde;es documentadas.</p>
+    </div>
+    <div class="doc-section" id="ai-pt">
+      <div class="section-tag tag-ai">Divulga&ccedil;&atilde;o de IA</div>
+      <div class="section-title">Divulga&ccedil;&atilde;o e Limita&ccedil;&otilde;es de IA</div>
+      <div class="section-update">Vig&ecirc;ncia: 17 de mar&ccedil;o de 2026</div>
+      <div class="highlight-box warn"><p><strong>Importante:</strong> A PrimeCore Intelligence utiliza intelig&ecirc;ncia artificial. As respostas da IA podem estar incorretas. Supervisão humana &eacute; necess&aacute;ria para decis&otilde;es de alto impacto. N&atilde;o constitui assessoria jur&iacute;dica, m&eacute;dica, financeira ou de conformidade.</p></div>
+    </div>
+  </div>
+</div>
+<footer><div class="foot-inner"><div class="foot-brand">PrimeCore Intelligence</div><div class="foot-links"><a href="/">In&iacute;cio</a><a href="mailto:legal@primecoreintelligence.com">Contato Jur&iacute;dico</a></div></div><p class="foot-note">&copy; 2026 PrimeCore Intelligence S.A. &middot; Cidade da Guatemala &middot; N&atilde;o constitui assessoria jur&iacute;dica, m&eacute;dica, financeira ou de conformidade.</p></footer>
+</div></div>
+
+<script>
+function setLang(lang, btn) {
+  document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
+  if (btn) btn.classList.add("active");
+  document.querySelectorAll(".lang-section").forEach(s => s.classList.remove("visible"));
+  const target = document.getElementById("lang-" + lang);
+  if (target) target.classList.add("visible");
+  document.documentElement.lang = lang === "pt" ? "pt-BR" : lang;
+  localStorage.setItem("pc_legal_lang", lang);
+}
+
+// Auto-detect language on load
+(function() {
+  const saved = localStorage.getItem("pc_legal_lang");
+  const browser = (navigator.language || "en").toLowerCase().slice(0, 2);
+  const lang = saved || (["es","pt"].includes(browser) ? browser : "en");
+  const btn = document.querySelector(\`.lang-btn[onclick*="'${lang}'"]\`);
+  setLang(lang, btn);
+})();
+</script>
+</body>
+</html>

@@ -1,21 +1,31 @@
-# Language redirects
-/es                     /es/                    301
-/pt-br                  /pt-br/                 301
-/en                     /                       301
-/en/pricing             /en/pricing/            301
-/es/precios             /es/precios/            301
-/pt-br/precos           /pt-br/precos/          301
+# Language paths
+/es                     /es/                        301
+/pt-br                  /pt-br/                     301
+/en                     /                           301
+/en/pricing             /en/pricing/                301
+/es/precios             /es/precios/                301
+/pt-br/precos           /pt-br/precos/              301
 
-# ES homepage
-/es/                    /es/index.html          200
+# ES and PT homepages
+/es/                    /es/index.html              200
+/pt-br/                 /pt-br/index.html           200
 
-# Static files — protect from SPA fallback
-/sitemap.xml            /sitemap.xml            200
-/robots.txt             /robots.txt             200
-/assets/*               /assets/:splat          200
+# Well-known + static files (MUST be above SPA fallback)
+/.well-known/*          /.well-known/:splat          200
+/sitemap.xml            /sitemap.xml                 200
+/robots.txt             /robots.txt                  200
+/assets/*               /assets/:splat               200
+/docs/*                 /docs/:splat                 200
 
-# Docs
-/docs/*                 /docs/:splat            200
+# Legal page
+/legal                  /legal/index.html            200
+/legal/                 /legal/index.html            200
 
-# SPA fallback — last
-/*                      /index.html             200
+/security               /security/index.html         200
+/security/              /security/index.html         200
+
+/trust                  /trust/index.html            200
+/trust/                 /trust/index.html            200
+
+# SPA fallback — LAST
+/*                      /index.html                  200
