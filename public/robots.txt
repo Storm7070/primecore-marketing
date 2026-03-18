@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /assets/*.pdf
+Disallow: /.well-known/pgp-key.txt
 
 Sitemap: https://primecoreintelligence.com/sitemap.xml

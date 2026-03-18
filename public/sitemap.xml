@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://primecoreintelligence.com/</loc>
-    <lastmod>2026-03-17</lastmod>
+    <lastmod>2026-03-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://primecoreintelligence.com/"/>
@@ -15,40 +15,52 @@
 
   <url>
     <loc>https://primecoreintelligence.com/es/</loc>
-    <lastmod>2026-03-17</lastmod>
+    <lastmod>2026-03-18</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://primecoreintelligence.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://primecoreintelligence.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://primecoreintelligence.com/pt-br/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://primecoreintelligence.com/"/>
   </url>
 
   <url>
     <loc>https://primecoreintelligence.com/pt-br/</loc>
-    <lastmod>2026-03-17</lastmod>
+    <lastmod>2026-03-18</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://primecoreintelligence.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://primecoreintelligence.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://primecoreintelligence.com/pt-br/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://primecoreintelligence.com/"/>
   </url>
 
   <url>
     <loc>https://primecoreintelligence.com/en/pricing/</loc>
-    <lastmod>2026-03-17</lastmod>
+    <lastmod>2026-03-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://primecoreintelligence.com/es/precios/</loc>
-    <lastmod>2026-03-17</lastmod>
+    <lastmod>2026-03-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://primecoreintelligence.com/pt-br/precos/</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
   <url>
-    <loc>https://primecoreintelligence.com/legal/</loc>
-    <lastmod>2026-03-17</lastmod>
+    <loc>https://primecoreintelligence.com/trust</loc>
+    <lastmod>2026-03-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+
 </urlset>

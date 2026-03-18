@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Trust &amp; Security | PrimeCore Intelligence</title>
+  <meta name="description" content="PrimeCore Intelligence security architecture, compliance posture, data handling practices, and vulnerability disclosure policy."/>
+  <link rel="canonical" href="https://primecoreintelligence.com/trust"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+  <script defer data-domain="primecoreintelligence.com" src="https://plausible.io/js/script.js"></script>
+  <style>
+:root{--bg:#040812;--surface:#06101c;--card:#0d1628;--border:#162035;--border2:#1e2e4a;--text:#e8effc;--muted:#7a93b8;--dim:#3d5278;--accent:#2d7aff;--accent2:#00c9a7;--warn:#f59e0b;--font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--radius:14px;--radius-sm:8px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.65}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:860px;margin:0 auto;padding:0 24px}
+nav{background:rgba(4,8,18,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:860px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:var(--font-head);font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px;color:var(--text)}
+.dot{width:7px;height:7px;background:var(--accent2);border-radius:50%;animation:p 2.4s ease-in-out infinite}
+@keyframes p{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.back-link{font-size:13px;color:var(--muted)}
+main{padding:64px 0 100px}
+.page-eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:12px}
+.page-h1{font-family:var(--font-head);font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-1.5px;line-height:1.06;margin-bottom:20px}
+.page-sub{font-size:17px;color:var(--muted);font-weight:300;line-height:1.7;max-width:640px;margin-bottom:32px}
+.updated{font-size:12px;color:var(--dim);margin-bottom:56px;padding-bottom:32px;border-bottom:1px solid var(--border)}
+.trust-section{margin-bottom:56px}
+.sec-h2{font-family:var(--font-head);font-size:20px;font-weight:700;letter-spacing:-.3px;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.prose{font-size:15px;color:var(--muted);line-height:1.8;max-width:720px}
+.prose p{margin-bottom:14px}
+.prose strong{color:var(--text)}
+.compliance-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+.compliance-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px 20px}
+.comp-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.comp-status{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.comp-status::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.status-aligned::before{background:var(--accent2)}
+.status-roadmap::before{background:var(--warn)}
+.comp-desc{font-size:12px;color:var(--dim);line-height:1.6}
+.data-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}
+.data-table th{text-align:left;padding:10px 14px;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);border-bottom:1px solid var(--border);font-weight:600}
+.data-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--muted);vertical-align:top}
+.data-table td:first-child{color:var(--text);font-weight:500}
+.controls-list{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.control-row{display:flex;gap:14px;align-items:flex-start;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm)}
+.control-check{color:var(--accent2);font-size:14px;flex-shrink:0;margin-top:1px}
+.control-text{font-size:13px;color:var(--muted);line-height:1.6}
+.control-text strong{color:var(--text)}
+.disclosure-box{background:rgba(45,122,255,.06);border:1px solid rgba(45,122,255,.2);border-radius:var(--radius);padding:24px 28px;margin-top:20px}
+.disc-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:10px}
+.disc-body{font-size:13px;color:var(--muted);line-height:1.7}
+footer{padding:32px 0;border-top:1px solid var(--border)}
+.foot-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.foot-brand{font-family:var(--font-head);font-weight:700;font-size:14px}
+.foot-links{display:flex;gap:20px;flex-wrap:wrap}
+.foot-links a{font-size:13px;color:var(--muted)}
+.foot-links a:hover{color:var(--text)}
+.foot-note{font-size:11px;color:var(--dim);margin-top:16px;padding-top:16px;border-top:1px solid var(--border);line-height:1.6}
+@media(max-width:640px){.compliance-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/"><span class="dot"></span>PrimeCore Intelligence</a>
+    <a class="back-link" href="/">&larr; Back to site</a>
+  </div>
+</nav>
+<main>
+<div class="container">
+  <div class="page-eyebrow">Trust &amp; Security</div>
+  <h1 class="page-h1">How we protect<br>your operations</h1>
+  <p class="page-sub">PrimeCore Intelligence is built around a single principle: every action is policy-enforced, every decision is logged, and nothing runs in production without explicit approval.</p>
+  <div class="updated">Last updated: March 18, 2026 &middot; Questions: <a href="mailto:security@primecoreintelligence.com">security@primecoreintelligence.com</a></div>
+
+  <div class="trust-section">
+    <div class="sec-h2"><span>&#128737;&#65039;</span> Compliance Posture</div>
+    <div class="prose"><p>PrimeCore Intelligence is designed with the following compliance frameworks as architectural requirements. Each framework governs specific deployment configurations &mdash; not all apply to all clients.</p></div>
+    <div class="compliance-grid">
+      <div class="compliance-card"><div class="comp-name">HIPAA</div><div class="comp-status status-aligned">Architecture-aligned</div><div class="comp-desc">PHI handling disabled by default. PrimeCore can serve as a HIPAA Business Associate with a signed BAA for healthcare deployments.</div></div>
+      <div class="compliance-card"><div class="comp-name">GDPR (EU)</div><div class="comp-status status-aligned">Architecture-aligned</div><div class="comp-desc">Data processing agreements available. EU client data configurable to remain within EU-region infrastructure. Standard Contractual Clauses in EU MSAs.</div></div>
+      <div class="compliance-card"><div class="comp-name">PCI-DSS</div><div class="comp-status status-aligned">Architecture-aligned</div><div class="comp-desc">No PAN or CVV is ever stored or logged. Call recordings with payment card data are automatically scrubbed at the infrastructure layer.</div></div>
+      <div class="compliance-card"><div class="comp-name">TCPA (US)</div><div class="comp-status status-aligned">Enforced in outbound engine</div><div class="comp-desc">DNC registry checks, consent verification, and time-window enforcement built into the outbound engine. Opt-out handling is automatic and immediate.</div></div>
+      <div class="compliance-card"><div class="comp-name">SOC 2 Type II</div><div class="comp-status status-roadmap">Roadmap &mdash; 2026</div><div class="comp-desc">SOC 2 Type II audit is on our 2026 roadmap. Controls are designed to meet SOC 2 criteria. Contact us to discuss timeline for your procurement.</div></div>
+      <div class="compliance-card"><div class="comp-name">42 CFR Part 2</div><div class="comp-status status-aligned">Behavioral health deployments</div><div class="comp-desc">Substance use disorder confidentiality requirements enforced for behavioral health deployments. Crisis routing never logs identifiable information without consent.</div></div>
+    </div>
+  </div>
+
+  <div class="trust-section">
+    <div class="sec-h2"><span>&#128451;&#65039;</span> Data Handling</div>
+    <table class="data-table">
+      <thead><tr><th>Data Type</th><th>Retention</th><th>Storage</th><th>Access</th></tr></thead>
+      <tbody>
+        <tr><td>Call recordings</td><td>Client-configured (default 90 days)</td><td>Tenant-isolated</td><td>Client admin only</td></tr>
+        <tr><td>Call transcripts</td><td>4h live &middot; 90 days archived</td><td>Tenant-prefixed KV</td><td>Client admin + agents</td></tr>
+        <tr><td>Pilot lead requests</td><td>365 days</td><td>PrimeCore KV (public tenant)</td><td>PrimeCore sales only</td></tr>
+        <tr><td>Policy decision receipts</td><td>90 days</td><td>Tenant-isolated KV</td><td>Founder + authorized operators</td></tr>
+        <tr><td>AI training data</td><td>Anonymized only</td><td>PrimeCore internal</td><td>PrimeCore ML team only</td></tr>
+        <tr><td>PAN / CVV</td><td><strong>Never stored</strong></td><td>Scrubbed at infrastructure layer</td><td>N/A</td></tr>
+        <tr><td>PHI (health information)</td><td>Disabled by default</td><td>Only if BAA signed + enabled</td><td>HIPAA-governed chain of custody</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="trust-section">
+    <div class="sec-h2"><span>&#128274;</span> Tenant Isolation</div>
+    <div class="prose">
+      <p>Every piece of data is stored with the format <strong>tenant:{clientId}:{category}:{key}</strong> &mdash; making it architecturally impossible for one client's data to appear in another client's queries, even in the event of a misconfigured request.</p>
+      <p>Each client deployment runs in an isolated compute context. Call processing, transcript storage, KPI metrics, and audit logs are fully separated at the data layer.</p>
+    </div>
+  </div>
+
+  <div class="trust-section">
+    <div class="sec-h2"><span>&#9881;&#65039;</span> Security Controls</div>
+    <div class="controls-list">
+      <div class="control-row"><span class="control-check">&#10003;</span><div class="control-text"><strong>Rate limiting</strong> &mdash; All public endpoints rate-limited per IP per time window. Pilot form: 3/hour. Call events: 500/5 min. Enforced at both relay layer and War Room API layer.</div></div>
+      <div class="control-row"><span class="control-check">&#10003;</span><div class="control-text"><strong>HMAC webhook validation</strong> &mdash; All CCaaS webhooks (Five9, Genesys, Bliss) validated with HMAC-SHA256 before processing. Invalid signatures rejected with 401 and logged.</div></div>
+      <div class="control-row"><span class="control-check">&#10003;</span><div class="control-text"><strong>Policy engine governance</strong> &mdash; Every mutation routes through the Policy Router before execution. Privileged actions require explicit founder approval. No silent writes ever.</div></div>
+      <div class="control-row"><span class="control-check">&#10003;</span><div class="control-text"><strong>Bearer token authentication</strong> &mdash; All authenticated endpoints require Bearer tokens stored as encrypted secrets in Cloudflare's secure environment &mdash; never in code or config files.</div></div>
+      <div class="control-row"><span class="control-check">&#10003;</span><div class="control-text"><strong>Audit logging</strong> &mdash; Every inbound event, policy decision, and data mutation logged with timestamp, IP, tenant ID, and actor. 90-day retention. Append-only.</div></div>
+      <div class="control-row"><span class="control-check">&#10003;</span><div class="control-text"><strong>Zero PAN/CVV storage</strong> &mdash; Payment card data scrubbed at the Cloudflare Worker layer before reaching any storage. Paddle is the merchant of record.</div></div>
+      <div class="control-row"><span class="control-check">&#10003;</span><div class="control-text"><strong>7-layer hallucination prevention</strong> &mdash; AI outputs are RAG-grounded, confidence-gated, citation-required, and post-validated by a second model. Refused-answer registry enforces hard stops on high-risk query categories.</div></div>
+      <div class="control-row"><span class="control-check">&#10003;</span><div class="control-text"><strong>Prompt injection protection</strong> &mdash; AI inference layer includes explicit guardrails against prompt injection attacks. Every AI response is policy-checked before delivery.</div></div>
+    </div>
+  </div>
+
+  <div class="trust-section">
+    <div class="sec-h2"><span>&#129302;</span> AI Disclosure</div>
+    <div class="prose">
+      <p>PrimeCore Intelligence uses AI to handle phone calls on behalf of clients. Callers interacting with a PrimeCore-powered contact center are speaking with an AI system unless escalated to a human agent.</p>
+      <p><strong>We never instruct our AI to claim it is human.</strong> Our systems are configured to acknowledge being an AI if directly and sincerely asked. This is a non-negotiable design requirement, not a preference. Client disclosure obligations under applicable law remain the client's responsibility.</p>
+    </div>
+  </div>
+
+  <div class="trust-section">
+    <div class="sec-h2"><span>&#128269;</span> Vulnerability Disclosure</div>
+    <div class="disclosure-box">
+      <div class="disc-title">Responsible Disclosure Policy</div>
+      <div class="disc-body">
+        If you discover a security vulnerability in PrimeCore Intelligence systems, please report it to <a href="mailto:security@primecoreintelligence.com">security@primecoreintelligence.com</a>. We ask that you give us reasonable time to investigate before public disclosure, and that you not access data that does not belong to you.<br><br>
+        We acknowledge all reports within 2 business days. We do not currently offer a bug bounty program but recognize significant contributions publicly with your permission.<br><br>
+        Our security.txt is at <a href="/.well-known/security.txt">/.well-known/security.txt</a>.
+      </div>
+    </div>
+  </div>
+
+  <div class="trust-section">
+    <div class="sec-h2"><span>&#127760;</span> Infrastructure</div>
+    <div class="prose">
+      <p>PrimeCore runs on <strong>Cloudflare's global edge network</strong> &mdash; Workers, Pages, and KV across 300+ global data centers. DDoS protection is built in at the infrastructure layer. Cloudflare holds its own SOC 2 Type II certification.</p>
+      <p>Client call processing (AI inference, STT, TTS) runs on dedicated per-client servers architecturally separated from the PrimeCore control plane. Call data never touches shared infrastructure.</p>
+    </div>
+  </div>
+
+</div>
+</main>
+<footer>
+  <div class="container">
+    <div class="foot-inner">
+      <div class="foot-brand">PrimeCore Intelligence</div>
+      <div class="foot-links">
+        <a href="/">Home</a>
+        <a href="mailto:security@primecoreintelligence.com">security@</a>
+        <a href="mailto:legal@primecoreintelligence.com">legal@</a>
+        <a href="/.well-known/security.txt">security.txt</a>
+      </div>
+    </div>
+    <p class="foot-note">Not legal, medical, financial, or compliance advice. Compliance posture reflects architectural design intent. Formal certifications require separate agreements. &copy; 2026 PrimeCore Intelligence S.A.</p>
+  </div>
+</footer>
+</body>
+</html>

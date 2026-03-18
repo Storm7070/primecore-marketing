@@ -1,21 +1,9 @@
-# PrimeCore Intelligence — Security Policy
-# https://primecoreintelligence.com/.well-known/security.txt
-
 Contact: mailto:security@primecoreintelligence.com
-Expires: 2027-03-17T00:00:00.000Z
-Encryption: mailto:security@primecoreintelligence.com
+Contact: https://primecoreintelligence.com/security
+Expires: 2027-01-01T00:00:00.000Z
+Encryption: https://primecoreintelligence.com/.well-known/pgp-key.txt
+Acknowledgments: https://primecoreintelligence.com/security/hall-of-fame
 Preferred-Languages: en, es, pt
 Canonical: https://primecoreintelligence.com/.well-known/security.txt
 Policy: https://primecoreintelligence.com/security
-
-# Scope
-# In scope: *.primecoreintelligence.com, API endpoints, worker infrastructure
-# Out of scope: Third-party services (Cloudflare, Paddle, CCaaS platforms)
-
-# Response SLA
-# Critical (RCE, data breach): 24 hours
-# High (auth bypass, data exposure): 72 hours
-# Medium/Low: 7 business days
-
-# We do NOT offer a bug bounty program at this time.
-# Responsible disclosure appreciated.
+Hiring: https://primecoreintelligence.com/careers
