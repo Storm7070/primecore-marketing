@@ -25,5 +25,8 @@
 /roi                    /roi/index.html         200
 /roi/                   /roi/index.html         200
 
+/legal                  /legal/index.html       200
+/legal/                 /legal/index.html       200
+
 # SPA fallback — last
 /*                      /index.html             200
