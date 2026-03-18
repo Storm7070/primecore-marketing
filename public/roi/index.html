@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ROI Calculator | PrimeCore Intelligence</title>
+<meta name="description" content="Calculate your exact monthly savings with PrimeCore Intelligence AI contact center. Enter your industry, call volume, and agent cost — get your ROI in seconds."/>
+<link rel="canonical" href="https://primecoreintelligence.com/roi"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<script defer data-domain="primecoreintelligence.com" src="https://plausible.io/js/script.js"></script>
+<style>
+:root{
+  --bg:#040812;--surface:#06101c;--card:#0d1628;--card2:#0f1d30;
+  --border:#162035;--border2:#1e2e4a;
+  --text:#e8effc;--muted:#7a93b8;--dim:#3d5278;
+  --accent:#2d7aff;--accent2:#00c9a7;--warn:#f59e0b;--danger:#ef4444;
+  --font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
+  --radius:14px;--radius-sm:8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% -10%,rgba(45,122,255,.1) 0%,transparent 55%);pointer-events:none;z-index:0}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:980px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:100;background:rgba(4,8,18,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:980px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:var(--font-head);font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px;color:var(--text)}
+.nav-dot{width:7px;height:7px;background:var(--accent2);border-radius:50%;animation:p 2.4s ease-in-out infinite}
+@keyframes p{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.back-link{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+
+/* Page header */
+.page-header{padding:56px 0 48px}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:700;margin-bottom:12px}
+.page-h1{font-family:var(--font-head);font-size:clamp(32px,5vw,54px);font-weight:800;letter-spacing:-1.5px;line-height:1.06;margin-bottom:16px}
+.page-h1 .hl{background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-sub{font-size:17px;color:var(--muted);font-weight:300;line-height:1.7;max-width:580px}
+
+/* Main calculator layout */
+.calc-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding-bottom:80px}
+
+/* Inputs panel */
+.inputs-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column;gap:28px}
+.panel-title{font-family:var(--font-head);font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px}
+.panel-sub{font-size:12px;color:var(--muted)}
+
+.field-group{display:flex;flex-direction:column;gap:8px}
+.field-label{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;display:flex;align-items:center;justify-content:space-between}
+.field-hint{font-size:11px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0}
+
+/* Industry selector */
+.industry-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.industry-btn{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:var(--font-body);font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .15s;text-align:left;display:flex;align-items:center;gap:8px}
+.industry-btn:hover{border-color:var(--border2);color:var(--text)}
+.industry-btn.active{border-color:var(--accent);background:rgba(45,122,255,.1);color:var(--text)}
+.industry-btn .ind-icon{font-size:16px;flex-shrink:0}
+
+/* Sliders */
+.slider-wrap{display:flex;flex-direction:column;gap:8px}
+.slider-row{display:flex;align-items:center;gap:12px}
+input[type=range]{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:rgba(255,255,255,.08);outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);cursor:pointer;box-shadow:0 0 8px rgba(45,122,255,.4);transition:transform .15s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);cursor:pointer}
+.slider-val{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:var(--text);min-width:100px;text-align:right}
+
+/* Results panel */
+.results-panel{display:flex;flex-direction:column;gap:16px;position:sticky;top:80px;height:fit-content}
+
+.result-hero{background:linear-gradient(135deg,rgba(45,122,255,.12) 0%,rgba(0,201,167,.08) 100%);border:1px solid rgba(45,122,255,.25);border-radius:var(--radius);padding:28px;text-align:center;position:relative;overflow:hidden}
+.result-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(45,122,255,.1),transparent 60%);pointer-events:none}
+.result-label{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:8px;font-weight:600}
+.result-amount{font-family:var(--font-head);font-size:clamp(42px,6vw,64px);font-weight:800;letter-spacing:-2px;line-height:1;color:var(--text);margin-bottom:6px;transition:all .3s}
+.result-period{font-size:14px;color:var(--muted)}
+.result-subclaim{font-size:12px;color:var(--accent2);margin-top:12px;font-weight:500}
+
+.metrics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.metric-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;text-align:center}
+.metric-val{font-family:var(--font-head);font-size:24px;font-weight:800;letter-spacing:-1px;margin-bottom:3px;transition:all .3s}
+.metric-val.green{color:var(--accent2)}
+.metric-val.blue{color:var(--accent)}
+.metric-val.amber{color:var(--warn)}
+.metric-label{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--dim)}
+
+/* Breakdown table */
+.breakdown-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.breakdown-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:14px}
+.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+.breakdown-row:last-child{border-bottom:none}
+.breakdown-label{color:var(--muted)}
+.breakdown-value{font-weight:600;color:var(--text)}
+.breakdown-value.positive{color:var(--accent2)}
+.breakdown-value.negative{color:var(--danger)}
+.breakdown-value.highlight{color:var(--accent);font-size:15px}
+.breakdown-divider{height:1px;background:var(--border2);margin:6px 0}
+
+/* CTA panel */
+.cta-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center}
+.cta-title{font-family:var(--font-head);font-size:15px;font-weight:700;margin-bottom:6px}
+.cta-sub{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:12px 24px;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s;width:100%;white-space:nowrap}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 0 20px rgba(45,122,255,.3)}
+.btn-primary:hover{background:#4d8fff;transform:translateY(-1px);box-shadow:0 0 28px rgba(45,122,255,.5)}
+.btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--muted);margin-top:8px}
+.btn-ghost:hover{border-color:var(--accent);color:var(--text)}
+
+/* Assumptions note */
+.assumptions{font-size:11px;color:var(--dim);text-align:center;padding:16px 0;line-height:1.7;border-top:1px solid var(--border);margin-top:0}
+.assumptions a{color:var(--dim)}
+.assumptions a:hover{color:var(--muted)}
+
+/* Recommend badge */
+.recommend-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,201,167,.1);border:1px solid rgba(0,201,167,.2);border-radius:999px;padding:4px 12px;font-size:11px;color:var(--accent2);font-weight:600;margin-bottom:14px}
+
+/* Animation */
+@keyframes countUp{from{opacity:.3;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.animate-count{animation:countUp .25s ease both}
+
+@media(max-width:820px){
+  .calc-wrap{grid-template-columns:1fr}
+  .results-panel{position:static}
+  .industry-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:520px){
+  .industry-grid{grid-template-columns:repeat(2,1fr)}
+  .metrics-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/"><span class="nav-dot"></span>PrimeCore Intelligence</a>
+    <a class="back-link" href="/">&larr; Back to site</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <div class="eyebrow">ROI Calculator</div>
+    <h1 class="page-h1">Your exact savings.<br><span class="hl">In 30 seconds.</span></h1>
+    <p class="page-sub">Three inputs. One number. See how much PrimeCore Intelligence saves your contact center every month — based on your actual operation, not industry averages.</p>
+  </div>
+
+  <div class="calc-wrap">
+
+    <!-- LEFT: Inputs -->
+    <div class="inputs-panel">
+      <div>
+        <div class="panel-title">Your Operation</div>
+        <div class="panel-sub">Adjust the inputs to match your contact center</div>
+      </div>
+
+      <!-- Industry -->
+      <div class="field-group">
+        <div class="field-label">
+          Industry
+          <span class="field-hint">Affects AI resolution rate benchmark</span>
+        </div>
+        <div class="industry-grid">
+          <button class="industry-btn active" data-industry="logistics" onclick="setIndustry(this)"><span class="ind-icon">🚛</span>Logistics / 3PL</button>
+          <button class="industry-btn" data-industry="healthcare" onclick="setIndustry(this)"><span class="ind-icon">🏥</span>Healthcare</button>
+          <button class="industry-btn" data-industry="financial" onclick="setIndustry(this)"><span class="ind-icon">💳</span>Financial</button>
+          <button class="industry-btn" data-industry="retail" onclick="setIndustry(this)"><span class="ind-icon">🛒</span>Retail / E-com</button>
+          <button class="industry-btn" data-industry="fleet" onclick="setIndustry(this)"><span class="ind-icon">🚗</span>Fleet / Dispatch</button>
+          <button class="industry-btn" data-industry="bpo" onclick="setIndustry(this)"><span class="ind-icon">🏢</span>BPO Operations</button>
+        </div>
+      </div>
+
+      <!-- Monthly call volume -->
+      <div class="field-group">
+        <div class="field-label">
+          Monthly Call Volume
+          <span class="field-hint" id="volumeHint">22,000 calls / month</span>
+        </div>
+        <div class="slider-wrap">
+          <div class="slider-row">
+            <input type="range" id="volumeSlider" min="1000" max="150000" step="1000" value="22000" oninput="updateCalc()"/>
+            <span class="slider-val" id="volumeDisplay">22,000</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent cost -->
+      <div class="field-group">
+        <div class="field-label">
+          Monthly Agent Cost (fully loaded)
+          <span class="field-hint" id="costHint">per agent</span>
+        </div>
+        <div class="slider-wrap">
+          <div class="slider-row">
+            <input type="range" id="costSlider" min="500" max="6000" step="100" value="1800" oninput="updateCalc()"/>
+            <span class="slider-val" id="costDisplay">$1,800</span>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--dim);margin-top:4px">LATAM typical: $600–$1,500 &nbsp;·&nbsp; US typical: $3,500–$5,500</div>
+      </div>
+
+      <!-- Agents handling calls -->
+      <div class="field-group">
+        <div class="field-label">
+          Agents Handling These Calls
+          <span class="field-hint" id="agentsHint">full-time equivalent</span>
+        </div>
+        <div class="slider-wrap">
+          <div class="slider-row">
+            <input type="range" id="agentsSlider" min="2" max="200" step="1" value="12" oninput="updateCalc()"/>
+            <span class="slider-val" id="agentsDisplay">12 agents</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Results -->
+    <div class="results-panel">
+
+      <!-- Hero savings number -->
+      <div class="result-hero">
+        <div class="result-label">Estimated Monthly Net Savings</div>
+        <div class="result-amount" id="netSavings">$0</div>
+        <div class="result-period">after PrimeCore subscription cost</div>
+        <div class="result-subclaim" id="savingsClaim">Calculate your operation above</div>
+      </div>
+
+      <!-- Key metrics -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-val green" id="fcrDisplay">—</div>
+          <div class="metric-label">AI Resolution Rate</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val blue" id="callsHandled">—</div>
+          <div class="metric-label">Calls Handled by AI / mo</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val amber" id="breakeven">—</div>
+          <div class="metric-label">Break-Even Point</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val green" id="costPerCall">—</div>
+          <div class="metric-label">AI Cost per Call</div>
+        </div>
+      </div>
+
+      <!-- Breakdown -->
+      <div class="breakdown-card">
+        <div class="breakdown-title">Monthly Breakdown</div>
+        <div class="breakdown-row"><span class="breakdown-label">Current monthly agent cost</span><span class="breakdown-value negative" id="bAgentCost">—</span></div>
+        <div class="breakdown-row"><span class="breakdown-label">Calls AI resolves autonomously</span><span class="breakdown-value positive" id="bAiCalls">—</span></div>
+        <div class="breakdown-row"><span class="breakdown-label">Agent hours freed up</span><span class="breakdown-value positive" id="bHoursFreed">—</span></div>
+        <div class="breakdown-row"><span class="breakdown-label">Labor cost saved</span><span class="breakdown-value positive" id="bLaborSaved">—</span></div>
+        <div class="breakdown-divider"></div>
+        <div class="breakdown-row"><span class="breakdown-label">PrimeCore plan recommended</span><span class="breakdown-value" id="bPlan">—</span></div>
+        <div class="breakdown-row"><span class="breakdown-label">PrimeCore monthly cost</span><span class="breakdown-value negative" id="bPlanCost">—</span></div>
+        <div class="breakdown-divider"></div>
+        <div class="breakdown-row"><span class="breakdown-label" style="font-weight:600;color:var(--text)">Net monthly benefit</span><span class="breakdown-value highlight" id="bNet">—</span></div>
+        <div class="breakdown-row"><span class="breakdown-label">Annual benefit (Year 1)</span><span class="breakdown-value positive" id="bAnnual">—</span></div>
+      </div>
+
+      <!-- Recommend badge + CTA -->
+      <div class="cta-panel">
+        <div class="recommend-badge" id="recommendBadge">Recommended: Professional</div>
+        <div class="cta-title">Start your 30-day pilot</div>
+        <div class="cta-sub">Month 1 at 50% off. Shadow mode — AI runs alongside your agents with zero side effects. Cancel before Day 30 if the numbers don't confirm.</div>
+        <a class="btn btn-primary" href="https://pilot.primecoreintelligence.com" id="pilotCta">Start Pilot — $2,900 Month 1 &rarr;</a>
+        <a class="btn btn-ghost" href="mailto:sales@primecoreintelligence.com">Talk to Sales First</a>
+      </div>
+
+      <div class="assumptions">
+        Calculations based on industry benchmarks under optimal deployment configuration. Results are estimates, not guarantees. AI resolution rate, AHT, and cost-per-call vary by client configuration, call mix, and CCaaS platform. Not legal, financial, or compliance advice.<br>
+        <a href="/trust">Security &amp; Compliance</a> &nbsp;·&nbsp; <a href="/assets/PrimeCore_LATAM_Enterprise_Pack_v1_3.pdf" target="_blank" rel="noopener">Download Security Pack</a>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+"use strict";
+
+// ── Industry benchmarks ───────────────────────────────────────────────────
+const INDUSTRIES = {
+  logistics: { name:"Logistics / 3PL",    fcr:0.89, aht:87,  label:"Tracking, exceptions, dispatch" },
+  healthcare: { name:"Healthcare",          fcr:0.82, aht:120, label:"Scheduling, billing, intake" },
+  financial:  { name:"Financial Services",  fcr:0.79, aht:105, label:"Inquiries, disputes, verification" },
+  retail:     { name:"Retail / E-commerce", fcr:0.87, aht:72,  label:"WISMO, returns, order support" },
+  fleet:      { name:"Fleet / Dispatch",    fcr:0.85, aht:95,  label:"Driver support, coordination" },
+  bpo:        { name:"BPO Operations",      fcr:0.83, aht:102, label:"Multi-client mixed queues" },
+};
+
+// ── Pricing tiers ─────────────────────────────────────────────────────────
+const PLANS = [
+  { name:"Starter",      monthly:2400, pilotPrice:1200, maxCalls:5000  },
+  { name:"Professional", monthly:5800, pilotPrice:2900, maxCalls:20000 },
+  { name:"Enterprise",   monthly:7997, pilotPrice:3999, maxCalls:999999},
+];
+
+// ── State ─────────────────────────────────────────────────────────────────
+let industry = "logistics";
+
+function setIndustry(btn) {
+  document.querySelectorAll(".industry-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  industry = btn.dataset.industry;
+  updateCalc();
+}
+
+// ── Formatters ────────────────────────────────────────────────────────────
+function fmtMoney(n) {
+  if (n >= 1000000) return "$" + (n/1000000).toFixed(1) + "M";
+  if (n >= 1000)    return "$" + Math.round(n/1000) + "K";
+  return "$" + Math.round(n).toLocaleString();
+}
+
+function fmtNum(n) {
+  if (n >= 1000) return Math.round(n/1000) + "K";
+  return Math.round(n).toLocaleString();
+}
+
+function animateEl(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove("animate-count");
+  void el.offsetWidth;
+  el.classList.add("animate-count");
+}
+
+// ── Core calculation ──────────────────────────────────────────────────────
+function updateCalc() {
+  const volume    = parseInt(document.getElementById("volumeSlider").value);
+  const agentCost = parseInt(document.getElementById("costSlider").value);
+  const agents    = parseInt(document.getElementById("agentsSlider").value);
+  const ind       = INDUSTRIES[industry];
+
+  // Update display values
+  document.getElementById("volumeDisplay").textContent  = volume.toLocaleString();
+  document.getElementById("volumeHint").textContent     = volume.toLocaleString() + " calls / month";
+  document.getElementById("costDisplay").textContent    = "$" + agentCost.toLocaleString();
+  document.getElementById("agentsDisplay").textContent  = agents + " agent" + (agents !== 1 ? "s":"");
+
+  // ── Calculations ─────────────────────────────────────────────────────────
+  const totalAgentCost    = agents * agentCost;
+  const aiCallsHandled    = Math.round(volume * ind.fcr);
+  const humanCallsLeft    = volume - aiCallsHandled;
+
+  // Cost per call (current) — assume 160 working hours/month per agent
+  const hoursPerMonth     = 160;
+  const callsPerAgentHour = 60 / (ind.aht / 60); // calls per hour based on AHT
+  const callsPerAgent     = hoursPerMonth * callsPerAgentHour;
+  const costPerCallCurrent = agentCost / callsPerAgent;
+
+  // Labor savings from AI handling calls
+  const laborSaved        = aiCallsHandled * costPerCallCurrent;
+  const aiCostPerCall     = 0.04; // PrimeCore cost per AI-handled call
+  const aiOpsCost         = aiCallsHandled * aiCostPerCall;
+
+  // Recommend plan
+  let plan = PLANS[0];
+  for (const p of PLANS) { if (volume > p.maxCalls) plan = PLANS[Math.min(PLANS.indexOf(p)+1, PLANS.length-1)]; }
+  // Simpler: pick by volume
+  if (volume <= 5000)       plan = PLANS[0];
+  else if (volume <= 20000) plan = PLANS[1];
+  else                      plan = PLANS[2];
+
+  const planCost          = plan.monthly;
+  const netMonthly        = laborSaved - planCost;
+  const annualBenefit     = netMonthly * 12;
+  const hoursFreed        = Math.round(aiCallsHandled / callsPerAgentHour);
+  const breakEven         = netMonthly > 0 ? "Month 1" : "Month " + Math.ceil(planCost / (laborSaved || 1));
+
+  // ── Update DOM ────────────────────────────────────────────────────────────
+  const ids = ["netSavings","fcrDisplay","callsHandled","breakeven","costPerCall",
+               "bAgentCost","bAiCalls","bHoursFreed","bLaborSaved","bPlan","bPlanCost","bNet","bAnnual"];
+
+  document.getElementById("netSavings").textContent    = netMonthly >= 0 ? fmtMoney(netMonthly) : "-" + fmtMoney(Math.abs(netMonthly));
+  document.getElementById("savingsClaim").textContent  = netMonthly > 0
+    ? `+${fmtMoney(annualBenefit)} in Year 1 · Break-even: ${breakEven}`
+    : "Increase call volume to see positive ROI";
+
+  document.getElementById("fcrDisplay").textContent    = Math.round(ind.fcr * 100) + "%";
+  document.getElementById("callsHandled").textContent  = fmtNum(aiCallsHandled);
+  document.getElementById("breakeven").textContent     = breakEven;
+  document.getElementById("costPerCall").textContent   = "$" + aiCostPerCall.toFixed(2);
+
+  document.getElementById("bAgentCost").textContent    = "-" + fmtMoney(totalAgentCost);
+  document.getElementById("bAiCalls").textContent      = fmtNum(aiCallsHandled) + " calls";
+  document.getElementById("bHoursFreed").textContent   = fmtNum(hoursFreed) + " hours";
+  document.getElementById("bLaborSaved").textContent   = "+" + fmtMoney(laborSaved);
+  document.getElementById("bPlan").textContent         = plan.name;
+  document.getElementById("bPlanCost").textContent     = "-" + fmtMoney(planCost);
+  document.getElementById("bNet").textContent          = (netMonthly >= 0 ? "+" : "") + fmtMoney(netMonthly);
+  document.getElementById("bAnnual").textContent       = (annualBenefit >= 0 ? "+" : "") + fmtMoney(annualBenefit);
+
+  // Net savings color
+  const ns = document.getElementById("netSavings");
+  ns.style.color = netMonthly >= 0 ? "var(--text)" : "var(--danger)";
+
+  // Recommend badge + CTA
+  document.getElementById("recommendBadge").textContent = "Recommended: " + plan.name;
+  const cta = document.getElementById("pilotCta");
+  cta.textContent = `Start ${plan.name} Pilot — ${fmtMoney(plan.pilotPrice)} Month 1 →`;
+
+  // Animate
+  ids.forEach(animateEl);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+updateCalc();
+</script>
+</body>
+</html>
