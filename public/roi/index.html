@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="theme-color" content="#040812"/>
 <title>ROI Calculator | PrimeCore Intelligence</title>
 <meta name="description" content="Calculate your exact monthly savings with PrimeCore Intelligence AI contact center. Enter your industry, call volume, and agent cost — get your ROI in seconds."/>
 <link rel="canonical" href="https://primecoreintelligence.com/roi"/>
@@ -65,6 +66,9 @@ nav{position:sticky;top:0;z-index:100;background:rgba(4,8,18,.88);backdrop-filte
 input[type=range]{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:rgba(255,255,255,.08);outline:none;cursor:pointer}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);cursor:pointer;box-shadow:0 0 8px rgba(45,122,255,.4);transition:transform .15s}
 input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+input[type=range]:focus{outline:none}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--accent);transform:scale(1.15)}
+input[type=range]:focus-visible::-moz-range-thumb{box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--accent);transform:scale(1.15)}
 input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);cursor:pointer}
 .slider-val{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;color:var(--text);min-width:100px;text-align:right}
 
@@ -174,13 +178,13 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 
       <!-- Monthly call volume -->
       <div class="field-group">
-        <div class="field-label">
+        <div class="field-label" id="volumeLabel">
           Monthly Call Volume
           <span class="field-hint" id="volumeHint">22,000 calls / month</span>
         </div>
         <div class="slider-wrap">
           <div class="slider-row">
-            <input type="range" id="volumeSlider" min="1000" max="150000" step="1000" value="22000" oninput="updateCalc()"/>
+            <input type="range" id="volumeSlider" min="1000" max="150000" step="1000" value="22000" oninput="updateCalc()" aria-labelledby="volumeLabel" aria-describedby="volumeHint"/>
             <span class="slider-val" id="volumeDisplay">22,000</span>
           </div>
         </div>
@@ -188,13 +192,13 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 
       <!-- Agent cost -->
       <div class="field-group">
-        <div class="field-label">
+        <div class="field-label" id="costLabel">
           Monthly Agent Cost (fully loaded)
           <span class="field-hint" id="costHint">per agent</span>
         </div>
         <div class="slider-wrap">
           <div class="slider-row">
-            <input type="range" id="costSlider" min="500" max="6000" step="100" value="1800" oninput="updateCalc()"/>
+            <input type="range" id="costSlider" min="500" max="6000" step="100" value="1800" oninput="updateCalc()" aria-labelledby="costLabel" aria-describedby="costHint"/>
             <span class="slider-val" id="costDisplay">$1,800</span>
           </div>
         </div>
@@ -203,13 +207,13 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 
       <!-- Agents handling calls -->
       <div class="field-group">
-        <div class="field-label">
+        <div class="field-label" id="agentsLabel">
           Agents Handling These Calls
           <span class="field-hint" id="agentsHint">full-time equivalent</span>
         </div>
         <div class="slider-wrap">
           <div class="slider-row">
-            <input type="range" id="agentsSlider" min="2" max="200" step="1" value="12" oninput="updateCalc()"/>
+            <input type="range" id="agentsSlider" min="2" max="200" step="1" value="12" oninput="updateCalc()" aria-labelledby="agentsLabel" aria-describedby="agentsHint"/>
             <span class="slider-val" id="agentsDisplay">12 agents</span>
           </div>
         </div>

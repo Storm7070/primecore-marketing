@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="theme-color" content="#040812"/>
 <title>Legal &amp; Compliance | PrimeCore Intelligence</title>
 <meta name="description" content="PrimeCore Intelligence legal documents — Terms of Service, Privacy Policy, SLA, Data Processing Agreement, AI Disclosure. Available in English, Spanish, and Portuguese."/>
 <meta name="robots" content="index,follow"/>
@@ -33,6 +34,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(4,8,18,.92);backdrop-filte
 .lang-strip{display:flex;gap:4px}
 .lang-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:4px 9px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:all .15s;letter-spacing:.3px}
 .lang-btn.active,.lang-btn:hover{border-color:var(--accent);color:var(--text)}
+.lang-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .back-link{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:5px}
 .back-link:hover{color:var(--text);text-decoration:none}
 
@@ -860,7 +862,15 @@ function activateToc() {
   }
 }
 
-window.addEventListener("scroll", activateToc, { passive: true });
+// Performance: debounce scroll with rAF — prevents layout thrash on every px
+let _tocRafId = null;
+window.addEventListener("scroll", () => {
+  if (_tocRafId) return;
+  _tocRafId = requestAnimationFrame(() => {
+    activateToc();
+    _tocRafId = null;
+  });
+}, { passive: true });
 
 // Init
 lang = detect();
