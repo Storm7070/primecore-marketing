@@ -1616,6 +1616,186 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   .roi-sliders, .roi-results { padding: 20px; }
   .roi-savings-value { font-size: 36px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION 7 — Compliance badges (expand on hover/focus/tap)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.compliance-section {
+  padding: 80px 0;
+  background: var(--surface);
+}
+.compliance-section .comp-inner {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-slow) var(--ease-out-expo),
+              transform var(--dur-slow) var(--ease-out-expo);
+}
+.compliance-section.in-view .comp-inner { opacity: 1; transform: translateY(0); }
+
+.comp-intro { max-width: 540px; margin-bottom: 48px; }
+
+/* Badge grid */
+.comp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* Individual badge */
+.comp-badge {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--dur-std) ease,
+              box-shadow var(--dur-std) ease,
+              transform var(--dur-fast) ease;
+  /* Closed height — set by JS or CSS min-height */
+}
+.comp-badge::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  border-radius: 2px 2px 0 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-std) var(--ease-out-quart);
+}
+.comp-badge:hover,
+.comp-badge:focus-visible,
+.comp-badge.expanded {
+  border-color: var(--border2);
+  box-shadow: 0 12px 32px rgba(0,0,0,.3);
+  transform: translateY(-2px);
+  outline: none;
+}
+.comp-badge:hover::before,
+.comp-badge:focus-visible::before,
+.comp-badge.expanded::before { transform: scaleX(1); }
+.comp-badge:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Badge top row */
+.comp-badge-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.comp-badge-icon {
+  width: 44px; height: 44px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.comp-badge-title {
+  font-family: var(--font-head);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+  letter-spacing: -.3px;
+}
+.comp-badge-status {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.status-live    { background: rgba(0,201,167,.1); color: var(--accent2); border: 1px solid rgba(0,201,167,.2); }
+.status-aligned { background: rgba(45,122,255,.1); color: var(--accent); border: 1px solid rgba(45,122,255,.2); }
+.status-roadmap { background: rgba(245,158,11,.1); color: var(--warn); border: 1px solid rgba(245,158,11,.2); }
+
+/* Expand chevron */
+.comp-badge-chevron {
+  margin-left: auto;
+  color: var(--dim);
+  font-size: 12px;
+  transition: transform var(--dur-std) var(--ease-out-quart);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.comp-badge.expanded .comp-badge-chevron { transform: rotate(180deg); }
+
+/* Detail panel (hidden by default) */
+.comp-badge-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--dur-slow) var(--ease-out-expo),
+              opacity var(--dur-std) ease;
+  opacity: 0;
+}
+.comp-badge.expanded .comp-badge-detail {
+  max-height: 240px;
+  opacity: 1;
+  transition: max-height var(--dur-slow) var(--ease-out-expo),
+              opacity var(--dur-std) var(--ease-out-quart);
+}
+.comp-badge-detail-inner {
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.comp-badge-detail-inner a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.comp-badge-detail-inner a:hover { text-decoration: underline; }
+
+/* Trust bar at bottom */
+.comp-trust-bar {
+  margin-top: 36px;
+  padding: 18px 24px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--muted);
+}
+.comp-trust-bar strong { color: var(--text); }
+.comp-trust-link {
+  color: var(--accent);
+  font-size: 12px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.comp-trust-link:hover { text-decoration: underline; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .compliance-section .comp-inner { transition: none !important; opacity: 1 !important; transform: none !important; }
+  .comp-badge { transition: none !important; }
+  .comp-badge::before { transition: none !important; }
+  .comp-badge-detail { transition: none !important; }
+  .comp-badge-chevron { transition: none !important; }
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .comp-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .comp-grid { grid-template-columns: 1fr; }
+  .comp-trust-link { margin-left: 0; }
+}
 </style>
   <!-- Analytics: Plausible (privacy-first, no cookies, GDPR compliant) -->
   <script defer data-domain="primecoreintelligence.com" src="https://plausible.io/js/script.js"></script>
@@ -2734,6 +2914,228 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   </div>
 </section>
 
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SECTION 7 — Compliance & Security Badges
+     Expand on hover (desktop) / tap (mobile) / focus (keyboard)
+     Status values reflect actual state per trust/index.html
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="compliance-section" id="compliance" aria-labelledby="comp-heading">
+  <div class="container">
+    <div class="comp-inner">
+
+      <div class="comp-intro">
+        <div class="section-eyebrow">Security &amp; Compliance</div>
+        <h2 class="section-h2" id="comp-heading">
+          Built for regulated<br>industries from day one.
+        </h2>
+        <p class="section-sub">
+          Enterprise IT teams at logistics operators, healthcare networks,
+          and financial services firms have reviewed and approved this architecture.
+          Click any badge to see the detail.
+        </p>
+      </div>
+
+      <!-- Badge grid -->
+      <div class="comp-grid"
+           role="list"
+           aria-label="Compliance and security certifications">
+
+        <!-- 1. GDPR -->
+        <div class="comp-badge"
+             role="listitem"
+             tabindex="0"
+             aria-expanded="false"
+             aria-label="GDPR compliance — click to expand"
+             onclick="toggleBadge(this)"
+             onkeydown="badgeKey(event,this)"
+             style="--badge-color:var(--accent)">
+          <div class="comp-badge::before" style="background:var(--accent)"></div>
+          <div class="comp-badge-top">
+            <div class="comp-badge-icon"
+                 style="background:rgba(45,122,255,.1);border:1px solid rgba(45,122,255,.2)"
+                 aria-hidden="true">🇪🇺</div>
+            <div>
+              <div class="comp-badge-title">GDPR</div>
+              <span class="comp-badge-status status-aligned">Architecture-aligned</span>
+            </div>
+            <span class="comp-badge-chevron" aria-hidden="true">▾</span>
+          </div>
+          <div class="comp-badge-detail" role="region" aria-label="GDPR details">
+            <div class="comp-badge-detail-inner">
+              Data Processing Agreements available for EU clients.
+              Standard Contractual Clauses (SCCs) in all EU MSAs.
+              EU client data configurable to stay within EU-region infrastructure.
+              30-day deletion window on contract termination.
+              <br><a href="/legal/?lang=en#dpa-en">Read our DPA &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. HIPAA Ready -->
+        <div class="comp-badge"
+             role="listitem"
+             tabindex="0"
+             aria-expanded="false"
+             aria-label="HIPAA readiness — click to expand"
+             onclick="toggleBadge(this)"
+             onkeydown="badgeKey(event,this)">
+          <div class="comp-badge-top">
+            <div class="comp-badge-icon"
+                 style="background:rgba(0,201,167,.1);border:1px solid rgba(0,201,167,.2)"
+                 aria-hidden="true">🏥</div>
+            <div>
+              <div class="comp-badge-title">HIPAA Ready</div>
+              <span class="comp-badge-status status-aligned">Architecture-aligned</span>
+            </div>
+            <span class="comp-badge-chevron" aria-hidden="true">▾</span>
+          </div>
+          <div class="comp-badge-detail" role="region" aria-label="HIPAA details">
+            <div class="comp-badge-detail-inner">
+              PHI handling is disabled by default on all deployments.
+              PrimeCore can serve as a HIPAA Business Associate
+              with a signed BAA for healthcare deployments.
+              No PHI is ever stored without explicit BAA + configuration.
+              <br><a href="mailto:legal@primecoreintelligence.com">Request BAA &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. AES-256 Encryption -->
+        <div class="comp-badge"
+             role="listitem"
+             tabindex="0"
+             aria-expanded="false"
+             aria-label="AES-256 encryption — click to expand"
+             onclick="toggleBadge(this)"
+             onkeydown="badgeKey(event,this)">
+          <div class="comp-badge-top">
+            <div class="comp-badge-icon"
+                 style="background:rgba(0,201,167,.1);border:1px solid rgba(0,201,167,.2)"
+                 aria-hidden="true">🔐</div>
+            <div>
+              <div class="comp-badge-title">AES-256</div>
+              <span class="comp-badge-status status-live">Live</span>
+            </div>
+            <span class="comp-badge-chevron" aria-hidden="true">▾</span>
+          </div>
+          <div class="comp-badge-detail" role="region" aria-label="Encryption details">
+            <div class="comp-badge-detail-inner">
+              All data at rest encrypted with AES-256.
+              All data in transit encrypted with TLS 1.2 or higher.
+              Tenant data isolated via prefixed KV key structures —
+              no cross-tenant data access is architecturally possible.
+              <br><a href="/trust">Full security architecture &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. LGPD (Brazil) -->
+        <div class="comp-badge"
+             role="listitem"
+             tabindex="0"
+             aria-expanded="false"
+             aria-label="LGPD Brazil compliance — click to expand"
+             onclick="toggleBadge(this)"
+             onkeydown="badgeKey(event,this)">
+          <div class="comp-badge-top">
+            <div class="comp-badge-icon"
+                 style="background:rgba(45,122,255,.1);border:1px solid rgba(45,122,255,.2)"
+                 aria-hidden="true">🌎</div>
+            <div>
+              <div class="comp-badge-title">LGPD</div>
+              <span class="comp-badge-status status-aligned">Architecture-aligned</span>
+            </div>
+            <span class="comp-badge-chevron" aria-hidden="true">▾</span>
+          </div>
+          <div class="comp-badge-detail" role="region" aria-label="LGPD details">
+            <div class="comp-badge-detail-inner">
+              Lei Geral de Proteção de Dados (Lei n.º 13.709/2018) compliant architecture.
+              Brazilian data residency available on Enterprise plans.
+              ANPD regulatory requirements addressed in Brazil-specific DPA.
+              International transfers follow LGPD Chapter V provisions.
+              <br><a href="/legal/?lang=pt#dpa-pt">Ler nosso DPA (PT) &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. 99.5% Uptime SLA -->
+        <div class="comp-badge"
+             role="listitem"
+             tabindex="0"
+             aria-expanded="false"
+             aria-label="99.5% uptime SLA — click to expand"
+             onclick="toggleBadge(this)"
+             onkeydown="badgeKey(event,this)">
+          <div class="comp-badge-top">
+            <div class="comp-badge-icon"
+                 style="background:rgba(0,201,167,.1);border:1px solid rgba(0,201,167,.2)"
+                 aria-hidden="true">⚡</div>
+            <div>
+              <div class="comp-badge-title">99.5% SLA</div>
+              <span class="comp-badge-status status-live">Contractual</span>
+            </div>
+            <span class="comp-badge-chevron" aria-hidden="true">▾</span>
+          </div>
+          <div class="comp-badge-detail" role="region" aria-label="SLA details">
+            <div class="comp-badge-detail-inner">
+              99.5% monthly uptime guaranteed on the API and relay layer.
+              Cloudflare edge network — 300+ global data centers,
+              built-in DDoS protection. Credits issued within 30 days
+              of any verified incident. Verified live at
+              <a href="https://status.primecoreintelligence.com" target="_blank" rel="noopener">
+                status.primecoreintelligence.com</a>.
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. SOC 2 (Roadmap) -->
+        <div class="comp-badge"
+             role="listitem"
+             tabindex="0"
+             aria-expanded="false"
+             aria-label="SOC 2 Type II roadmap — click to expand"
+             onclick="toggleBadge(this)"
+             onkeydown="badgeKey(event,this)">
+          <div class="comp-badge-top">
+            <div class="comp-badge-icon"
+                 style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2)"
+                 aria-hidden="true">🔒</div>
+            <div>
+              <div class="comp-badge-title">SOC 2 Type II</div>
+              <span class="comp-badge-status status-roadmap">2026 Roadmap</span>
+            </div>
+            <span class="comp-badge-chevron" aria-hidden="true">▾</span>
+          </div>
+          <div class="comp-badge-detail" role="region" aria-label="SOC 2 details">
+            <div class="comp-badge-detail-inner">
+              SOC 2 Type II audit is on our 2026 roadmap.
+              Controls are designed to meet SOC 2 criteria — access controls,
+              audit logging, encryption, and incident response are all in place.
+              Cloudflare (our infrastructure provider) holds its own SOC 2 Type II.
+              <br><a href="mailto:security@primecoreintelligence.com">
+                Contact us to discuss procurement timeline &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /comp-grid -->
+
+      <!-- Trust bar -->
+      <div class="comp-trust-bar">
+        <span>
+          <strong>No PAN · No CVV · No PHI by default</strong>
+          &nbsp;&mdash;&nbsp; Zero sensitive data stored without explicit configuration
+        </span>
+        <a class="comp-trust-link" href="/trust">
+          Full security architecture &rarr;
+        </a>
+      </div>
+
+    </div><!-- /comp-inner -->
+  </div>
+</section>
+
 <section class="cta-section" id="cta-final">
   <div class="container">
     <div class="cta-box" id="ctaFinalBox">
@@ -3543,6 +3945,116 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
 
   /* ── Initial render ───────────────────────────────────────────────── */
   calculate();
+
+})();
+
+
+
+/* ── Section 7: Compliance badge expand/collapse ───────────────────────
+   Hover: CSS handles the top-border reveal (::before scaleX).
+   Click/tap: toggleBadge() toggles .expanded class + aria-expanded.
+   Keyboard: Enter/Space trigger toggle, Escape collapses.
+   Desktop also auto-expands on hover via CSS transitions
+   (max-height on .comp-badge:hover .comp-badge-detail not used —
+    hover intent is ambiguous; explicit click/tap is the primary trigger).
+   ─────────────────────────────────────────────────────────────────────── */
+(function() {
+  'use strict';
+
+  /* Per-badge accent colors for the ::before top line */
+  var BADGE_COLORS = {
+    0: 'var(--accent)',   /* GDPR   — blue  */
+    1: 'var(--accent2)',  /* HIPAA  — teal  */
+    2: 'var(--accent2)',  /* AES    — teal  */
+    3: 'var(--accent)',   /* LGPD   — blue  */
+    4: 'var(--accent2)',  /* Uptime — teal  */
+    5: 'var(--warn)',     /* SOC 2  — amber */
+  };
+
+  var badges = Array.from(document.querySelectorAll('.comp-badge'));
+
+  /* Set top-border color on each badge via CSS custom prop */
+  badges.forEach(function(badge, i) {
+    badge.style.setProperty('--badge-accent', BADGE_COLORS[i] || 'var(--accent)');
+    /* Inject ::before color via inline style on the pseudo's host */
+    badge.style.cssText += '; ';
+    /* We can't style ::before via JS directly — use a data attr + CSS */
+    badge.setAttribute('data-color', i);
+  });
+
+  window.toggleBadge = function(badge) {
+    var isExpanded = badge.classList.contains('expanded');
+
+    /* Collapse all others first */
+    badges.forEach(function(b) {
+      if (b !== badge) {
+        b.classList.remove('expanded');
+        b.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    /* Toggle this one */
+    badge.classList.toggle('expanded', !isExpanded);
+    badge.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
+  };
+
+  window.badgeKey = function(e, badge) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      window.toggleBadge(badge);
+    }
+    if (e.key === 'Escape') {
+      badge.classList.remove('expanded');
+      badge.setAttribute('aria-expanded', 'false');
+      badge.focus();
+    }
+  };
+
+  /* Apply ::before color via attribute-based CSS injection */
+  var styleEl = document.createElement('style');
+  styleEl.textContent = [
+    '[data-color="0"]::before { background: var(--accent);  transform-origin: left; }',
+    '[data-color="1"]::before { background: var(--accent2); transform-origin: left; }',
+    '[data-color="2"]::before { background: var(--accent2); transform-origin: left; }',
+    '[data-color="3"]::before { background: var(--accent);  transform-origin: left; }',
+    '[data-color="4"]::before { background: var(--accent2); transform-origin: left; }',
+    '[data-color="5"]::before { background: var(--warn);    transform-origin: left; }',
+  ].join('\n');
+  document.head.appendChild(styleEl);
+
+  /* ── Scroll trigger ─────────────────────────────────────────────── */
+  var compSection = document.getElementById('compliance');
+  if (compSection && 'IntersectionObserver' in window) {
+    var compIO = new IntersectionObserver(function(entries, obs) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+
+          /* Stagger badge entrance — each badge fades up with delay */
+          var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (!REDUCED) {
+            badges.forEach(function(badge, i) {
+              badge.style.opacity = '0';
+              badge.style.transform = 'translateY(16px)';
+              badge.style.transition =
+                'opacity 350ms var(--ease-out-expo) ' + (i * 60) + 'ms, ' +
+                'transform 350ms var(--ease-out-expo) ' + (i * 60) + 'ms, ' +
+                'border-color 250ms ease, box-shadow 250ms ease, transform 150ms ease';
+              setTimeout(function() {
+                badge.style.opacity = '';
+                badge.style.transform = '';
+              }, 50 + i * 60);
+            });
+          }
+
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.12 });
+    compIO.observe(compSection);
+  } else if (compSection) {
+    compSection.classList.add('in-view');
+  }
 
 })();
 
