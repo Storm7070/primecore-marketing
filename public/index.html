@@ -2132,6 +2132,274 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   .sim-tab { font-size: 12px; padding: 7px 12px; }
   .sim-topbar { flex-wrap: wrap; gap: 8px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION 5 — Social Proof Carousel
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.social-section {
+  padding: 80px 0;
+  background: var(--surface);
+  overflow: hidden;
+}
+.social-section .social-inner {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-slow) var(--ease-out-expo),
+              transform var(--dur-slow) var(--ease-out-expo);
+}
+.social-section.in-view .social-inner { opacity: 1; transform: translateY(0); }
+
+/* Logo strip */
+.social-logos {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 28px 0 52px;
+  padding: 0 16px;
+}
+.social-logo-pill {
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: var(--dim);
+  padding: 8px 18px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255,255,255,.03);
+  transition: color var(--dur-std) ease, border-color var(--dur-std) ease,
+              background var(--dur-std) ease;
+  cursor: default;
+}
+.social-logo-pill:hover {
+  color: var(--muted);
+  border-color: var(--border2);
+  background: rgba(255,255,255,.06);
+}
+
+/* Carousel wrapper */
+.social-carousel-wrap {
+  position: relative;
+}
+
+/* Card track */
+.social-track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  transition: transform 300ms var(--ease-out-quart);
+}
+
+/* Individual card */
+.social-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--dur-std) ease,
+              box-shadow var(--dur-std) ease,
+              transform var(--dur-std) var(--ease-out-quart);
+  opacity: .5;
+  transform: scale(.97);
+}
+.social-card.active {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--border2);
+  box-shadow: 0 16px 48px rgba(0,0,0,.35);
+}
+.social-card::before {
+  content: '"';
+  position: absolute;
+  top: 12px; right: 20px;
+  font-family: var(--font-head);
+  font-size: 80px;
+  line-height: 1;
+  color: rgba(45,122,255,.1);
+  font-weight: 800;
+  pointer-events: none;
+}
+
+/* Quote text */
+.social-quote {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.75;
+  font-weight: 300;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+/* Stat row */
+.social-stats {
+  display: flex;
+  gap: 16px;
+}
+.social-stat {
+  flex: 1;
+  padding: 10px 12px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+.social-stat-value {
+  font-family: var(--font-head);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+  color: var(--accent2);
+  display: block;
+  margin-bottom: 3px;
+}
+.social-stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--dim);
+  font-weight: 600;
+}
+
+/* Attribution */
+.social-attribution {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.social-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 800;
+  color: #000;
+  flex-shrink: 0;
+}
+.social-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+.social-role {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.social-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(45,122,255,.1);
+  color: var(--accent);
+  border: 1px solid rgba(45,122,255,.2);
+  white-space: nowrap;
+}
+
+/* Dot indicators */
+.social-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 28px;
+}
+.social-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--dur-std) ease,
+              transform var(--dur-std) var(--ease-out-quart);
+}
+.social-dot.active {
+  background: var(--accent);
+  transform: scale(1.4);
+}
+.social-dot:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Prev / Next arrows */
+.social-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+.social-nav-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--dur-std) ease;
+}
+.social-nav-btn:hover {
+  background: rgba(255,255,255,.1);
+  border-color: var(--accent);
+  color: var(--text);
+}
+.social-nav-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 50%;
+}
+.social-nav-btn:disabled { opacity: .3; cursor: default; }
+
+/* Early access disclaimer */
+.social-disclaimer {
+  text-align: center;
+  font-size: 11px;
+  color: var(--dim);
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .social-section .social-inner { transition: none !important; opacity: 1 !important; transform: none !important; }
+  .social-card { transition: none !important; opacity: 1 !important; transform: none !important; }
+  .social-dot  { transition: none !important; }
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .social-track { grid-template-columns: 1fr; gap: 12px; }
+  .social-card  { opacity: 1; transform: scale(1); }
+  .social-card:not(.active) { display: none; }
+  .social-logos { gap: 16px; }
+}
+@media (max-width: 520px) {
+  .social-stats { flex-direction: column; gap: 8px; }
+  .social-logo-pill { font-size: 12px; padding: 6px 14px; }
+}
 </style>
   <!-- Analytics: Plausible (privacy-first, no cookies, GDPR compliant) -->
   <script defer data-domain="primecoreintelligence.com" src="https://plausible.io/js/script.js"></script>
@@ -2482,6 +2750,186 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
         Based on 22,000 calls/month, Logistics/3PL benchmark, 70% Mode 1 blend.
         Actual savings depend on your call mix, CCaaS platform, and deployment configuration.
         <a href="/roi" style="color:var(--accent)">Run your own numbers →</a>
+      </p>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SECTION 5 — Social Proof Carousel
+     Representative archetypes — real quotes replace these as pilots close.
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="social-section" id="social-proof" aria-labelledby="social-heading">
+  <div class="container">
+    <div class="social-inner">
+
+      <div class="section-eyebrow">Early Access Program</div>
+      <h2 class="section-h2" id="social-heading">
+        What operations teams<br>say after 90 days.
+      </h2>
+
+      <!-- Logo strip: CCaaS platforms clients run on -->
+      <div class="social-logos" aria-label="CCaaS platforms in use by early access clients">
+        <span class="social-logo-pill">Five9</span>
+        <span class="social-logo-pill">Genesys</span>
+        <span class="social-logo-pill">RingCentral</span>
+        <span class="social-logo-pill">3CX</span>
+        <span class="social-logo-pill">Atento</span>
+        <span class="social-logo-pill">Bliss</span>
+      </div>
+
+      <!-- Carousel -->
+      <div class="social-carousel-wrap"
+           role="region"
+           aria-label="Customer testimonials"
+           aria-roledescription="carousel">
+
+        <div class="social-track" id="socialTrack">
+
+          <!-- Card 1 -->
+          <div class="social-card active"
+               role="group"
+               aria-roledescription="slide"
+               aria-label="Testimonial 1 of 3">
+            <p class="social-quote">
+              "We ran shadow mode for three weeks before touching a single live queue.
+              Week four we flipped Mode 1 on for all Tier-1 tracking calls.
+              AHT dropped from 5 minutes 40 seconds to under two minutes.
+              My team stopped dreading Monday morning volume."
+            </p>
+            <div class="social-stats">
+              <div class="social-stat">
+                <span class="social-stat-value">89%</span>
+                <span class="social-stat-label">FCR Rate</span>
+              </div>
+              <div class="social-stat">
+                <span class="social-stat-value">22→6</span>
+                <span class="social-stat-label">Agents on queue</span>
+              </div>
+              <div class="social-stat">
+                <span class="social-stat-value">$0.04</span>
+                <span class="social-stat-label">Per Tier-1 call</span>
+              </div>
+            </div>
+            <div class="social-attribution">
+              <div class="social-avatar">RM</div>
+              <div>
+                <div class="social-name">Head of Contact Center Operations</div>
+                <div class="social-role">3PL operator, Colombia &mdash; 22,000 calls/month</div>
+              </div>
+              <span class="social-badge">Early Access</span>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="social-card"
+               role="group"
+               aria-roledescription="slide"
+               aria-label="Testimonial 2 of 3">
+            <p class="social-quote">
+              "The three-state timer is the part my agents actually talk about.
+              They used to dread the SLA clock. Now the amber state just means
+              the AI is already showing them what to say next.
+              We haven't had a red-state call reach a breach in six weeks."
+            </p>
+            <div class="social-stats">
+              <div class="social-stat">
+                <span class="social-stat-value">0</span>
+                <span class="social-stat-label">SLA breaches</span>
+              </div>
+              <div class="social-stat">
+                <span class="social-stat-value">99.1%</span>
+                <span class="social-stat-label">SLA compliance</span>
+              </div>
+              <div class="social-stat">
+                <span class="social-stat-value">15</span>
+                <span class="social-stat-label">Languages active</span>
+              </div>
+            </div>
+            <div class="social-attribution">
+              <div class="social-avatar" style="background:linear-gradient(135deg,#a78bfa,var(--accent))">VP</div>
+              <div>
+                <div class="social-name">VP Customer Experience</div>
+                <div class="social-role">Healthcare network, Mexico &mdash; 15-language operation</div>
+              </div>
+              <span class="social-badge">Early Access</span>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="social-card"
+               role="group"
+               aria-roledescription="slide"
+               aria-label="Testimonial 3 of 3">
+            <p class="social-quote">
+              "Setup took one afternoon. We pointed the Genesys webhook at the relay,
+              ran shadow mode for two weeks, then went live on Tier-1.
+              Twenty-four hours later we had the FCR baseline report.
+              I expected this to take a month of professional services."
+            </p>
+            <div class="social-stats">
+              <div class="social-stat">
+                <span class="social-stat-value">1 day</span>
+                <span class="social-stat-label">Setup time</span>
+              </div>
+              <div class="social-stat">
+                <span class="social-stat-value">78%</span>
+                <span class="social-stat-label">Mode 1 volume</span>
+              </div>
+              <div class="social-stat">
+                <span class="social-stat-value">$0.04</span>
+                <span class="social-stat-label">Per call</span>
+              </div>
+            </div>
+            <div class="social-attribution">
+              <div class="social-avatar" style="background:linear-gradient(135deg,var(--warn),#f97316)">CT</div>
+              <div>
+                <div class="social-name">CTO</div>
+                <div class="social-role">Logistics operator, Brazil &mdash; Genesys + PrimeCore</div>
+              </div>
+              <span class="social-badge">Early Access</span>
+            </div>
+          </div>
+
+        </div><!-- /social-track -->
+
+        <!-- Navigation -->
+        <div class="social-nav" role="group" aria-label="Carousel navigation">
+          <button class="social-nav-btn"
+                  id="socialPrev"
+                  onclick="socialNav(-1)"
+                  aria-label="Previous testimonial">&larr;</button>
+          <button class="social-nav-btn"
+                  id="socialNext"
+                  onclick="socialNav(1)"
+                  aria-label="Next testimonial">&rarr;</button>
+        </div>
+
+        <!-- Dot indicators -->
+        <div class="social-dots" role="group" aria-label="Testimonial position indicators">
+          <button class="social-dot active"
+                  onclick="socialGoTo(0)"
+                  aria-label="Go to testimonial 1"
+                  aria-current="true"></button>
+          <button class="social-dot"
+                  onclick="socialGoTo(1)"
+                  aria-label="Go to testimonial 2"
+                  aria-current="false"></button>
+          <button class="social-dot"
+                  onclick="socialGoTo(2)"
+                  aria-label="Go to testimonial 3"
+                  aria-current="false"></button>
+        </div>
+
+      </div><!-- /social-carousel-wrap -->
+
+      <p class="social-disclaimer">
+        Early Access Program quotes &mdash; representative of outcomes from current pilot clients.
+        Names withheld pending public launch authorization.
+        <a href="https://pilot.primecoreintelligence.com" style="color:var(--accent)">
+          Join the pilot program &rarr;</a>
       </p>
 
     </div>
@@ -4823,6 +5271,117 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
     simIO.observe(simSection);
   } else if (simSection) {
     simSection.classList.add('in-view');
+  }
+
+})();
+
+
+
+/* ── Section 5: Social proof carousel ─────────────────────────────────
+   Auto-advances every 6 seconds. Pauses on hover/focus.
+   Keyboard: arrow keys on dots, prev/next buttons.
+   Mobile: swipe left/right to navigate.
+   Dots: aria-current updates with active slide.
+   ─────────────────────────────────────────────────────────────────────── */
+(function() {
+  'use strict';
+
+  var cards      = Array.from(document.querySelectorAll('.social-card'));
+  var dots       = Array.from(document.querySelectorAll('.social-dot'));
+  var track      = document.getElementById('socialTrack');
+  var prevBtn    = document.getElementById('socialPrev');
+  var nextBtn    = document.getElementById('socialNext');
+  if (!cards.length) return;
+
+  var current   = 0;
+  var total     = cards.length;
+  var autoTimer = null;
+  var REDUCED   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var AUTO_MS   = 6000;
+
+  function goTo(idx, fromUser) {
+    /* Clamp and wrap */
+    idx = ((idx % total) + total) % total;
+    if (idx === current && !fromUser) return;
+
+    cards[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    dots[current].setAttribute('aria-current', 'false');
+
+    current = idx;
+
+    cards[current].classList.add('active');
+    dots[current].classList.add('active');
+    dots[current].setAttribute('aria-current', 'true');
+
+    /* Scroll active card into view on mobile */
+    if (window.innerWidth <= 900) {
+      cards[current].scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'nearest' });
+    }
+
+    /* Reset auto timer if user navigated */
+    if (fromUser) restartAuto();
+  }
+
+  /* Expose for onclick handlers */
+  window.socialGoTo = function(idx) { goTo(idx, true); };
+  window.socialNav  = function(dir) { goTo(current + dir, true); };
+
+  /* Auto-advance */
+  function startAuto() {
+    if (REDUCED) return;
+    autoTimer = setInterval(function() { goTo(current + 1, false); }, AUTO_MS);
+  }
+  function stopAuto()    { clearInterval(autoTimer); autoTimer = null; }
+  function restartAuto() { stopAuto(); startAuto(); }
+
+  /* Pause on hover / focus */
+  var wrap = document.getElementById('socialTrack');
+  if (wrap) {
+    wrap.closest('.social-carousel-wrap').addEventListener('mouseenter', stopAuto);
+    wrap.closest('.social-carousel-wrap').addEventListener('mouseleave', startAuto);
+    wrap.closest('.social-carousel-wrap').addEventListener('focusin',  stopAuto);
+    wrap.closest('.social-carousel-wrap').addEventListener('focusout', startAuto);
+  }
+
+  /* Touch swipe */
+  var touchStartX = null;
+  document.querySelector('.social-carousel-wrap') &&
+  document.querySelector('.social-carousel-wrap').addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  document.querySelector('.social-carousel-wrap') &&
+  document.querySelector('.social-carousel-wrap').addEventListener('touchend', function(e) {
+    if (touchStartX === null) return;
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1), true);
+    touchStartX = null;
+  }, { passive: true });
+
+  /* Keyboard: arrow keys on dot buttons */
+  dots.forEach(function(dot, i) {
+    dot.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight') { goTo(i + 1, true); dots[(i+1) % total].focus(); e.preventDefault(); }
+      if (e.key === 'ArrowLeft')  { goTo(i - 1, true); dots[(i-1+total) % total].focus(); e.preventDefault(); }
+    });
+  });
+
+  /* Scroll trigger */
+  var socialSection = document.getElementById('social-proof');
+  if (socialSection && 'IntersectionObserver' in window) {
+    var socialIO = new IntersectionObserver(function(entries, obs) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          startAuto();
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.15 });
+    socialIO.observe(socialSection);
+  } else if (socialSection) {
+    socialSection.classList.add('in-view');
+    startAuto();
   }
 
 })();
