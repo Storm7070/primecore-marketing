@@ -1796,6 +1796,342 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   .comp-grid { grid-template-columns: 1fr; }
   .comp-trust-link { margin-left: 0; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION 4 — Live Call Simulator
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.sim-section {
+  padding: 96px 0;
+}
+.sim-section .sim-inner {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-slow) var(--ease-out-expo),
+              transform var(--dur-slow) var(--ease-out-expo);
+}
+.sim-section.in-view .sim-inner { opacity: 1; transform: translateY(0); }
+
+/* Industry tab row */
+.sim-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 32px 0 24px;
+}
+.sim-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--dur-std) ease;
+}
+.sim-tab:hover { border-color: var(--accent); color: var(--text); }
+.sim-tab.active {
+  font-weight: 600;
+  color: var(--text);
+}
+.sim-tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 999px; }
+
+/* ── Main simulator widget ──────────────────────────────────────────── */
+.sim-widget {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,.4);
+}
+
+/* Widget top bar */
+.sim-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,.02);
+  gap: 16px;
+}
+.sim-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sim-industry-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+.sim-scenario-label {
+  font-size: 11px;
+  color: var(--dim);
+}
+/* Call status pill */
+.sim-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  transition: all var(--dur-std) ease;
+}
+.sim-status-pill.idle    { background: rgba(255,255,255,.05); color: var(--dim); border: 1px solid var(--border); }
+.sim-status-pill.ringing { background: rgba(245,158,11,.1); color: var(--warn); border: 1px solid rgba(245,158,11,.25); }
+.sim-status-pill.active  { background: rgba(0,201,167,.1); color: var(--accent2); border: 1px solid rgba(0,201,167,.25); }
+.sim-status-pill.resolved{ background: rgba(0,201,167,.15); color: var(--accent2); border: 1px solid rgba(0,201,167,.3); }
+.sim-status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.sim-status-pill.active .sim-status-dot { animation: livePulse 1.5s infinite; }
+
+/* Timer */
+.sim-timer {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--text);
+  min-width: 52px;
+  text-align: right;
+  transition: color var(--dur-std) ease;
+}
+.sim-timer.green { color: var(--accent2); }
+.sim-timer.amber { color: var(--warn); }
+
+/* Widget body: transcript + actions */
+.sim-body {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  min-height: 340px;
+}
+
+/* Transcript panel */
+.sim-transcript {
+  padding: 20px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+  max-height: 360px;
+  scroll-behavior: smooth;
+}
+.sim-line {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.sim-line.visible { opacity: 1; transform: translateY(0); }
+.sim-line:last-child { border-bottom: none; }
+
+.sim-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.sim-avatar-caller { background: rgba(255,255,255,.08); color: var(--muted); }
+.sim-avatar-ai     { background: rgba(45,122,255,.2);   color: var(--accent); }
+
+.sim-bubble {
+  flex: 1;
+}
+.sim-speaker {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.sim-speaker-caller { color: var(--dim); }
+.sim-speaker-ai     { color: var(--accent); }
+
+.sim-text {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.sim-text-ai { color: var(--text); }
+
+/* Typewriter cursor */
+.sim-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  background: var(--accent2);
+  border-radius: 1px;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 0.6s step-end infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Right panel: actions + FCR */
+.sim-actions-panel {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sim-actions-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--dim);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.sim-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--dim);
+  transition: all var(--dur-std) ease;
+  opacity: .4;
+}
+.sim-action.done {
+  opacity: 1;
+  color: var(--accent2);
+  background: rgba(0,201,167,.07);
+  border-color: rgba(0,201,167,.2);
+}
+.sim-action-check {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  flex-shrink: 0;
+  transition: all var(--dur-std) ease;
+}
+.sim-action.done .sim-action-check {
+  background: var(--accent2);
+  border-color: var(--accent2);
+  color: #000;
+  font-weight: 700;
+}
+
+/* FCR badge (appears at end) */
+.sim-fcr-badge {
+  margin-top: auto;
+  padding: 14px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(0,201,167,.08);
+  border: 1px solid rgba(0,201,167,.25);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+.sim-fcr-badge.visible { opacity: 1; transform: translateY(0); }
+.sim-fcr-value {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--accent2);
+  letter-spacing: -.5px;
+  margin-bottom: 3px;
+}
+.sim-fcr-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--dim);
+  font-weight: 600;
+}
+.sim-fcr-cost {
+  font-size: 11px;
+  color: var(--accent2);
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+/* Widget footer: start/restart */
+.sim-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  background: rgba(255,255,255,.02);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.sim-start-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: var(--accent2);
+  color: #000;
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: background var(--dur-std) ease, transform var(--dur-fast) ease;
+}
+.sim-start-btn:hover { background: #00e0bc; transform: translateY(-1px); }
+.sim-start-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.sim-start-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; }
+
+.sim-note {
+  font-size: 12px;
+  color: var(--dim);
+  line-height: 1.5;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .sim-section .sim-inner { transition: none !important; opacity: 1 !important; transform: none !important; }
+  .sim-line { transition: none !important; opacity: 1 !important; transform: none !important; }
+  .sim-cursor { animation: none !important; }
+  .sim-status-dot { animation: none !important; }
+  .sim-fcr-badge { transition: none !important; }
+}
+
+/* Mobile */
+@media (max-width: 740px) {
+  .sim-body { grid-template-columns: 1fr; }
+  .sim-actions-panel { border-top: 1px solid var(--border); border-right: none; }
+  .sim-transcript { max-height: 280px; border-right: none; }
+}
+@media (max-width: 520px) {
+  .sim-tabs { gap: 6px; }
+  .sim-tab { font-size: 12px; padding: 7px 12px; }
+  .sim-topbar { flex-wrap: wrap; gap: 8px; }
+}
 </style>
   <!-- Analytics: Plausible (privacy-first, no cookies, GDPR compliant) -->
   <script defer data-domain="primecoreintelligence.com" src="https://plausible.io/js/script.js"></script>
@@ -2639,6 +2975,104 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
       </div>
     </div>
 
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SECTION 4 — Live Call Simulator
+     Shows Mode 1 (Fully Autonomous) resolving a Tier-1 call.
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="sim-section" id="live-sim" aria-labelledby="sim-heading">
+  <div class="container">
+    <div class="sim-inner">
+
+      <div class="section-eyebrow">Live Call Simulator</div>
+      <h2 class="section-h2" id="sim-heading">
+        Watch Mode 1 resolve a call.<br>No agent. No wait.
+      </h2>
+      <p class="section-sub">
+        Pick an industry and press Start Call. This is exactly what runs
+        in your contact center — the AI handles it, logs it, and closes the ticket.
+      </p>
+
+      <!-- Industry tabs -->
+      <div class="sim-tabs" role="group" aria-label="Select industry scenario">
+        <button class="sim-tab active" data-sim="logistics" aria-pressed="true">📦 Logistics</button>
+        <button class="sim-tab" data-sim="healthcare" aria-pressed="false">🏥 Healthcare</button>
+        <button class="sim-tab" data-sim="financial" aria-pressed="false">💳 Financial</button>
+        <button class="sim-tab" data-sim="latam" aria-pressed="false">🌎 LATAM (ES)</button>
+      </div>
+
+      <!-- Simulator widget -->
+      <div class="sim-widget" role="region" aria-label="Call simulator" aria-live="polite">
+
+        <!-- Top bar -->
+        <div class="sim-topbar">
+          <div class="sim-topbar-left">
+            <div>
+              <div class="sim-industry-label" id="simIndustryLabel">📦 Logistics / 3PL</div>
+              <div class="sim-scenario-label" id="simScenarioLabel">Package tracking · Mode 1 Autonomous</div>
+            </div>
+          </div>
+          <div class="sim-status-pill idle" id="simStatus" aria-live="polite">
+            <span class="sim-status-dot"></span>
+            <span id="simStatusText">Ready</span>
+          </div>
+          <div class="sim-timer green" id="simTimer" aria-label="Call duration" aria-live="off">0:00</div>
+        </div>
+
+        <!-- Body: transcript + actions -->
+        <div class="sim-body">
+
+          <!-- Transcript -->
+          <div class="sim-transcript"
+               id="simTranscript"
+               role="log"
+               aria-label="Call transcript"
+               aria-live="polite"
+               aria-atomic="false">
+            <!-- Lines injected by JS -->
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--dim);font-size:13px;padding:40px 0" id="simPlaceholder">
+              Press Start Call to begin the simulation
+            </div>
+          </div>
+
+          <!-- Actions panel -->
+          <div class="sim-actions-panel">
+            <div class="sim-actions-label">AI Actions</div>
+            <div id="simActionsList">
+              <!-- Actions injected by JS -->
+              <div style="font-size:12px;color:var(--dim);padding:8px 0">
+                Actions appear as the AI works
+              </div>
+            </div>
+            <!-- FCR badge -->
+            <div class="sim-fcr-badge" id="simFcrBadge" aria-live="polite">
+              <div class="sim-fcr-value">FCR ✓</div>
+              <div class="sim-fcr-label">First Call Resolution</div>
+              <div class="sim-fcr-cost" id="simFcrCost">$0.04</div>
+            </div>
+          </div>
+
+        </div><!-- /sim-body -->
+
+        <!-- Footer -->
+        <div class="sim-footer">
+          <button class="sim-start-btn"
+                  id="simStartBtn"
+                  onclick="simStart()"
+                  aria-label="Start the call simulation">
+            ▶ Start Call
+          </button>
+          <p class="sim-note" id="simFooterNote">
+            Simulated Mode 1 call · Real AI logic · No live telephony required
+          </p>
+        </div>
+
+      </div><!-- /sim-widget -->
+
+    </div>
   </div>
 </section>
 
@@ -4054,6 +4488,341 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
     compIO.observe(compSection);
   } else if (compSection) {
     compSection.classList.add('in-view');
+  }
+
+})();
+
+
+
+/* ── Section 4: Live Call Simulator ────────────────────────────────────
+   State machine: idle → ringing → active → resolved
+   Typewriter effect renders AI lines character-by-character.
+   Caller lines appear instantly (they typed it, not the AI).
+   Actions appear when their parent AI line finishes rendering.
+   Timer counts up every second while active.
+   Restart resets all state cleanly.
+   ─────────────────────────────────────────────────────────────────────── */
+(function() {
+  'use strict';
+
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── Scripts ────────────────────────────────────────────────────── */
+  var SCRIPTS = {
+    logistics: {
+      label: '📦 Logistics / 3PL',
+      scenario: 'Package tracking · Mode 1 Autonomous',
+      color: 'var(--accent2)',
+      lines: [
+        { speaker: 'caller', text: "Hi, I'm calling about my delivery — order 8812. It was supposed to arrive yesterday and it's still not here.", delay: 0 },
+        { speaker: 'ai', text: "I found order TRK-8812. It left the Memphis distribution center this morning at 6:14 AM. Your driver is currently 12 stops away — estimated delivery is between 2:00 and 4:00 PM today.", delay: 1200, action: 'WMS lookup complete' },
+        { speaker: 'caller', text: "Okay, can you send me a text when they're close?", delay: 2400 },
+        { speaker: 'ai', text: "Done. You'll receive a text to the number on file when the driver is 30 minutes out. Is there anything else I can help with today?", delay: 800, action: 'SMS notification scheduled' },
+        { speaker: 'caller', text: "No, that's great. Thank you.", delay: 1600 },
+        { speaker: 'ai', text: "You're all set. Have a good day.", delay: 600, action: 'FCR confirmed · $0.04' }
+      ]
+    },
+    healthcare: {
+      label: '🏥 Healthcare',
+      scenario: 'Appointment scheduling · Mode 1 Autonomous',
+      color: '#a78bfa',
+      lines: [
+        { speaker: 'caller', text: "Hello, I need to reschedule my appointment with Dr. Reyes. I have it for Thursday but something came up.", delay: 0 },
+        { speaker: 'ai', text: "I have your appointment on Thursday at 10:30 AM with Dr. Reyes. I can see availability on Friday at 9:00 AM or Monday at 2:15 PM. Which works better for you?", delay: 1400, action: 'EHR calendar loaded' },
+        { speaker: 'caller', text: "Friday at 9 works.", delay: 1800 },
+        { speaker: 'ai', text: "Perfect. I've rescheduled your appointment to Friday at 9:00 AM with Dr. Reyes. You'll receive a confirmation text and a reminder the day before. Is there anything else?", delay: 900, action: 'Appointment rescheduled' },
+        { speaker: 'caller', text: "No, that's all. Thanks.", delay: 1400 },
+        { speaker: 'ai', text: "Have a great day.", delay: 500, action: 'FCR confirmed · $0.04' }
+      ]
+    },
+    financial: {
+      label: '💳 Financial Services',
+      scenario: 'Account inquiry · Mode 1 Autonomous',
+      color: 'var(--accent)',
+      lines: [
+        { speaker: 'caller', text: "I'm seeing a charge on my account from yesterday for $47.50 that I don't recognize. The description just says 'SVC FEE'.", delay: 0 },
+        { speaker: 'ai', text: "I can see that charge. The $47.50 SVC FEE is the annual account maintenance fee — it posts every year in March. Your last one was also in March 2024.", delay: 1600, action: 'Transaction history pulled' },
+        { speaker: 'caller', text: "Oh, okay. I forgot about that. Is there any way to waive it?", delay: 2000 },
+        { speaker: 'ai', text: "Based on your account history, you qualify for a one-time fee waiver. I've applied it — you'll see the $47.50 credit within one business day.", delay: 1200, action: 'Fee waiver applied' },
+        { speaker: 'caller', text: "Wow, that was easy. Thank you.", delay: 1400 },
+        { speaker: 'ai', text: "Happy to help. Is there anything else I can do for you today?", delay: 600, action: 'FCR confirmed · $0.04' }
+      ]
+    },
+    latam: {
+      label: '🌎 LATAM BPO',
+      scenario: 'Consulta de envío · Modo 1 Autónomo',
+      color: 'var(--warn)',
+      lines: [
+        { speaker: 'caller', text: "Hola, llamo por el pedido número 4421. Debía llegar el lunes y todavía no ha llegado.", delay: 0 },
+        { speaker: 'ai', text: "Encontré el pedido 4421. Salió del centro de distribución en Bogotá esta mañana. El courier lo tiene en ruta — entrega estimada hoy entre las 3:00 y las 5:00 PM.", delay: 1300, action: 'Consulta WMS completada' },
+        { speaker: 'caller', text: "¿Me pueden mandar un mensaje cuando vaya a llegar?", delay: 2200 },
+        { speaker: 'ai', text: "Claro. Le enviaremos un SMS al número registrado cuando el courier esté a 30 minutos. ¿Hay algo más en que pueda ayudarle?", delay: 800, action: 'Notificación SMS programada' },
+        { speaker: 'caller', text: "No, eso es todo. Muchas gracias.", delay: 1600 },
+        { speaker: 'ai', text: "Con gusto. Que tenga un buen día.", delay: 500, action: 'FCR confirmado · $0.04' }
+      ]
+    }
+  };
+
+  /* ── State ──────────────────────────────────────────────────────── */
+  var currentSim  = 'logistics';
+  var simRunning  = false;
+  var timerSecs   = 0;
+  var timerInt    = null;
+  var lineTimeouts = [];
+
+  /* ── DOM refs ─────────────────────────────────────────────────────── */
+  var elStatus      = document.getElementById('simStatus');
+  var elStatusText  = document.getElementById('simStatusText');
+  var elTimer       = document.getElementById('simTimer');
+  var elTranscript  = document.getElementById('simTranscript');
+  var elPlaceholder = document.getElementById('simPlaceholder');
+  var elActionsList = document.getElementById('simActionsList');
+  var elFcrBadge    = document.getElementById('simFcrBadge');
+  var elFcrCost     = document.getElementById('simFcrCost');
+  var elStartBtn    = document.getElementById('simStartBtn');
+  var elFooterNote  = document.getElementById('simFooterNote');
+  var elIndustry    = document.getElementById('simIndustryLabel');
+  var elScenario    = document.getElementById('simScenarioLabel');
+  if (!elStatus) return;
+
+  /* ── Timer helpers ───────────────────────────────────────────────── */
+  function fmtTime(s) {
+    return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+  }
+  function startTimer() {
+    timerSecs = 0;
+    elTimer.textContent = '0:00';
+    elTimer.className = 'sim-timer green';
+    timerInt = setInterval(function() {
+      timerSecs++;
+      elTimer.textContent = fmtTime(timerSecs);
+      if (timerSecs >= 120) elTimer.className = 'sim-timer amber';
+    }, 1000);
+  }
+  function stopTimer() { clearInterval(timerInt); timerInt = null; }
+
+  /* ── Status pill ─────────────────────────────────────────────────── */
+  function setStatus(state, text) {
+    elStatus.className = 'sim-status-pill ' + state;
+    elStatusText.textContent = text;
+  }
+
+  /* ── Render a transcript line ────────────────────────────────────── */
+  function renderLine(line, onDone) {
+    var lineEl = document.createElement('div');
+    lineEl.className = 'sim-line';
+
+    var isAI = line.speaker === 'ai';
+    lineEl.innerHTML =
+      '<div class="sim-avatar sim-avatar-' + line.speaker + '">' +
+        (isAI ? 'AI' : 'C') +
+      '</div>' +
+      '<div class="sim-bubble">' +
+        '<div class="sim-speaker sim-speaker-' + line.speaker + '">' +
+          (isAI ? 'PrimeCore AI' : 'Caller') +
+        '</div>' +
+        '<div class="sim-text' + (isAI ? ' sim-text-ai' : '') + '" id="sim-text-' + Date.now() + '">' +
+        '</div>' +
+      '</div>';
+
+    elTranscript.appendChild(lineEl);
+    /* Force reflow so transition fires */
+    void lineEl.offsetWidth;
+    lineEl.classList.add('visible');
+
+    /* Auto-scroll transcript */
+    elTranscript.scrollTop = elTranscript.scrollHeight;
+
+    var textEl = lineEl.querySelector('.sim-text');
+
+    if (!isAI || REDUCED) {
+      /* Caller lines appear instantly; reduced-motion AI lines too */
+      textEl.textContent = line.text;
+      if (onDone) onDone();
+      return;
+    }
+
+    /* AI lines: typewriter effect */
+    var cursor = document.createElement('span');
+    cursor.className = 'sim-cursor';
+    cursor.setAttribute('aria-hidden', 'true');
+    textEl.appendChild(cursor);
+
+    var i = 0;
+    var chars = line.text.split('');
+    var speed = REDUCED ? 0 : Math.max(14, Math.min(26, 3000 / chars.length));
+
+    function typeNext() {
+      if (i >= chars.length) {
+        cursor.remove();
+        elTranscript.scrollTop = elTranscript.scrollHeight;
+        if (onDone) onDone();
+        return;
+      }
+      textEl.insertBefore(document.createTextNode(chars[i]), cursor);
+      i++;
+      elTranscript.scrollTop = elTranscript.scrollHeight;
+      var t = setTimeout(typeNext, speed + (Math.random() * 8 - 4));
+      lineTimeouts.push(t);
+    }
+    typeNext();
+  }
+
+  /* ── Build actions list ──────────────────────────────────────────── */
+  function buildActions(script) {
+    var actions = script.lines
+      .filter(function(l) { return l.action; })
+      .map(function(l) { return l.action; });
+
+    elActionsList.innerHTML = '';
+    actions.forEach(function(action, idx) {
+      var el = document.createElement('div');
+      el.className = 'sim-action';
+      el.id = 'sim-action-' + idx;
+      el.innerHTML =
+        '<div class="sim-action-check" aria-hidden="true"></div>' +
+        '<span>' + action + '</span>';
+      elActionsList.appendChild(el);
+    });
+  }
+
+  function completeAction(actionText) {
+    var items = elActionsList.querySelectorAll('.sim-action');
+    items.forEach(function(item) {
+      if (item.querySelector('span').textContent === actionText) {
+        item.classList.add('done');
+        item.querySelector('.sim-action-check').textContent = '✓';
+        /* If this is the FCR action, show the badge */
+        if (actionText.toLowerCase().indexOf('fcr') >= 0) {
+          setTimeout(function() {
+            elFcrBadge.classList.add('visible');
+            /* Extract cost from action text */
+            var m = actionText.match(/\$[\d.]+/);
+            if (m) elFcrCost.textContent = m[0] + ' per call';
+          }, 300);
+        }
+      }
+    });
+  }
+
+  /* ── Main simulation runner ──────────────────────────────────────── */
+  function runScript(script) {
+    var lineIndex = 0;
+    var totalDelay = 0;
+
+    function scheduleNextLine() {
+      if (lineIndex >= script.lines.length) {
+        /* All lines done */
+        stopTimer();
+        setStatus('resolved', 'Resolved');
+        elStartBtn.textContent = '↺ Restart';
+        elStartBtn.disabled = false;
+        elFooterNote.textContent =
+          'Resolved in ' + fmtTime(timerSecs) +
+          ' · FCR: ✓ · Cost: $0.04 · 0 agents involved';
+        simRunning = false;
+        return;
+      }
+
+      var line = script.lines[lineIndex];
+      var delay = lineIndex === 0 ? 800 : (totalDelay + line.delay);
+      totalDelay = delay;
+      lineIndex++;
+
+      var t = setTimeout(function() {
+        renderLine(line, function() {
+          if (line.action) {
+            completeAction(line.action);
+          }
+          scheduleNextLine();
+        });
+      }, delay);
+      lineTimeouts.push(t);
+    }
+
+    scheduleNextLine();
+  }
+
+  /* ── Start / Restart ─────────────────────────────────────────────── */
+  window.simStart = function() {
+    if (simRunning) return;
+
+    /* Clear previous */
+    lineTimeouts.forEach(clearTimeout);
+    lineTimeouts = [];
+    elTranscript.innerHTML = '';
+    elFcrBadge.classList.remove('visible');
+    stopTimer();
+
+    var script = SCRIPTS[currentSim];
+    buildActions(script);
+
+    elStartBtn.textContent = '● In Progress…';
+    elStartBtn.disabled = true;
+    simRunning = true;
+
+    /* Ringing state */
+    setStatus('ringing', 'Ringing…');
+    var ringT = setTimeout(function() {
+      setStatus('active', 'Active');
+      startTimer();
+      runScript(script);
+    }, 800);
+    lineTimeouts.push(ringT);
+  };
+
+  /* ── Industry tab switching ──────────────────────────────────────── */
+  var simTabs = document.querySelectorAll('.sim-tab');
+  simTabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      /* Can't switch during active simulation */
+      if (simRunning) return;
+
+      currentSim = tab.dataset.sim;
+      simTabs.forEach(function(t) {
+        t.classList.remove('active');
+        t.setAttribute('aria-pressed', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-pressed', 'true');
+
+      var script = SCRIPTS[currentSim];
+      elIndustry.textContent  = script.label;
+      elScenario.textContent  = script.scenario;
+
+      /* Reset widget */
+      elTranscript.innerHTML = '';
+      var ph = document.createElement('div');
+      ph.style.cssText = 'display:flex;align-items:center;justify-content:center;height:100%;color:var(--dim);font-size:13px;padding:40px 0';
+      ph.textContent = 'Press Start Call to begin the simulation';
+      elTranscript.appendChild(ph);
+
+      elActionsList.innerHTML = '<div style="font-size:12px;color:var(--dim);padding:8px 0">Actions appear as the AI works</div>';
+      elFcrBadge.classList.remove('visible');
+      elTimer.textContent = '0:00';
+      elTimer.className = 'sim-timer green';
+      setStatus('idle', 'Ready');
+      elStartBtn.textContent = '▶ Start Call';
+      elStartBtn.disabled = false;
+      elFooterNote.textContent = 'Simulated Mode 1 call · Real AI logic · No live telephony required';
+      simRunning = false;
+    });
+  });
+
+  /* ── Scroll trigger ──────────────────────────────────────────────── */
+  var simSection = document.getElementById('live-sim');
+  if (simSection && 'IntersectionObserver' in window) {
+    var simIO = new IntersectionObserver(function(entries, obs) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.1 });
+    simIO.observe(simSection);
+  } else if (simSection) {
+    simSection.classList.add('in-view');
   }
 
 })();
