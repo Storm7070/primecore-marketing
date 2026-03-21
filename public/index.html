@@ -146,7 +146,305 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
 .timer-panel{animation:fadeUp .6s .4s ease both}
 @media(max-width:900px){.hero-grid,.features-grid,.verticals-grid,.pricing-grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.pricing-card.featured{transform:none}.nav-links{display:none}}
 @media(max-width:600px){.steps{grid-template-columns:1fr}.hero{padding:80px 0 60px}section{padding:64px 0}}
-  </style>
+  
+/* ═══════════════════════════════════════════════════════════════════════
+   HERO v2 — KPI counters, refined CTAs, scroll-triggered entry
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Motion tokens */
+:root {
+  --ease-out-expo: cubic-bezier(0.16,1,0.3,1);
+  --ease-out-quart: cubic-bezier(0.25,1,0.5,1);
+  --dur-fast: 150ms;
+  --dur-std:  250ms;
+  --dur-slow: 400ms;
+}
+
+/* Hero base overrides */
+.hero {
+  padding: 110px 0 90px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 60% -10%, rgba(45,122,255,.11) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 30% at 85% 60%, rgba(0,201,167,.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+/* Subtle diagonal grid lines */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(45,122,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45,122,255,.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+/* Eyebrow pill */
+.hero-eyebrow {
+  animation: heroFadeUp var(--dur-slow) var(--ease-out-expo) both;
+  animation-delay: 0ms;
+}
+/* H1 */
+.hero-h1 {
+  animation: heroFadeUp var(--dur-slow) var(--ease-out-expo) both;
+  animation-delay: 60ms;
+  font-size: clamp(40px, 5vw, 66px);
+  letter-spacing: -2px;
+  line-height: 1.05;
+}
+/* Sub */
+.hero-sub {
+  animation: heroFadeUp var(--dur-slow) var(--ease-out-expo) both;
+  animation-delay: 120ms;
+  font-size: 17px;
+  max-width: 500px;
+}
+
+/* ── KPI Counter row ──────────────────────────────────────────────────── */
+.hero-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 36px;
+  animation: heroFadeUp var(--dur-slow) var(--ease-out-expo) both;
+  animation-delay: 180ms;
+}
+.kpi-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 12px 12px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--dur-std) ease, background var(--dur-std) ease;
+}
+.kpi-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-std) var(--ease-out-quart);
+}
+.kpi-card:hover { border-color: var(--border2); background: rgba(255,255,255,.06); }
+.kpi-card:hover::after { transform: scaleX(1); }
+
+.kpi-value {
+  font-family: var(--font-head);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--text);
+  display: block;
+  line-height: 1;
+  margin-bottom: 5px;
+  /* number shimmers as it counts */
+  background: linear-gradient(135deg, #fff 0%, var(--accent2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.kpi-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--dim);
+  font-weight: 500;
+}
+.kpi-delta {
+  position: absolute;
+  top: 10px; right: 10px;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--accent2);
+  background: rgba(0,201,167,.1);
+  border: 1px solid rgba(0,201,167,.2);
+  border-radius: 999px;
+  padding: 2px 6px;
+  letter-spacing: .3px;
+}
+
+/* ── CTA row ─────────────────────────────────────────────────────────── */
+.hero-actions {
+  animation: heroFadeUp var(--dur-slow) var(--ease-out-expo) both;
+  animation-delay: 240ms;
+  gap: 12px;
+}
+.btn-demo {
+  background: var(--accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 0 rgba(45,122,255,.5);
+  animation: demoPulse 3s 1.5s ease-out infinite;
+  position: relative;
+  transition: background var(--dur-std) ease, transform var(--dur-fast) ease, box-shadow var(--dur-std) ease;
+}
+.btn-demo:hover {
+  background: #4d8fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(45,122,255,.45);
+  animation: none;
+}
+.btn-demo:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.btn-demo .btn-arrow {
+  display: inline-block;
+  transition: transform var(--dur-fast) ease;
+}
+.btn-demo:hover .btn-arrow { transform: translateX(3px); }
+
+.btn-watch {
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  font-size: 14px;
+  padding: 14px 22px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: border-color var(--dur-std) ease, color var(--dur-std) ease;
+}
+.btn-watch:hover { border-color: var(--accent); color: var(--text); }
+.btn-watch:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.btn-watch-icon {
+  width: 28px; height: 28px;
+  background: rgba(255,255,255,.08);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+  transition: background var(--dur-std) ease;
+}
+.btn-watch:hover .btn-watch-icon { background: rgba(45,122,255,.2); }
+
+/* Microcopy trust line */
+.hero-microcopy {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--dim);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: heroFadeUp var(--dur-slow) var(--ease-out-expo) both;
+  animation-delay: 300ms;
+}
+.hero-microcopy span { display: flex; align-items: center; gap: 5px; }
+.hero-microcopy span::before {
+  content: '✓';
+  color: var(--accent2);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ── Timer panel enhancements ────────────────────────────────────────── */
+.hero-right {
+  animation: heroSlideIn var(--dur-slow) var(--ease-out-expo) both;
+  animation-delay: 100ms;
+}
+.timer-panel {
+  box-shadow: 0 24px 64px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.06) inset;
+}
+.timer-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent2);
+}
+.live-dot {
+  width: 6px; height: 6px;
+  background: var(--accent2);
+  border-radius: 50%;
+  animation: livePulse 2s ease-in-out infinite;
+}
+
+/* Stats row inside timer panel */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* ── Keyframes ───────────────────────────────────────────────────────── */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroSlideIn {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes demoPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(45,122,255,.5); }
+  50%       { box-shadow: 0 0 0 8px rgba(45,122,255,.0); }
+}
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .4; transform: scale(.7); }
+}
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow, .hero-h1, .hero-sub, .hero-kpi-row,
+  .hero-actions, .hero-microcopy, .hero-right {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .btn-demo { animation: none !important; }
+  .live-dot  { animation: none !important; }
+  .state-dot.red { animation: none !important; }
+  .kpi-card::after { transition: none !important; }
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero { padding: 80px 0 60px; min-height: auto; }
+  .hero-kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .hero-h1 { font-size: clamp(36px, 8vw, 52px); }
+  .hero-sub { font-size: 16px; }
+}
+@media (max-width: 600px) {
+  .hero-kpi-row { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .kpi-value { font-size: 22px; }
+  .btn-demo, .btn-watch { width: 100%; justify-content: center; }
+  .hero-actions { flex-direction: column; }
+  .hero-microcopy { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+</style>
   <!-- Analytics: Plausible (privacy-first, no cookies, GDPR compliant) -->
   <script defer data-domain="primecoreintelligence.com" src="https://plausible.io/js/script.js"></script>
 
@@ -208,48 +506,154 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   </div>
 </nav>
 
-<section class="hero">
+<section class="hero" aria-labelledby="hero-heading">
   <div class="container">
     <div class="hero-grid">
       <div class="hero-left">
-        <div class="hero-eyebrow">Contact Center AI Platform</div>
-        <h1 class="hero-h1">Every call.<br><span class="hl">Zero SLA breaches.</span></h1>
-        <p class="hero-sub">PrimeCore Intelligence delivers autonomous AI for contact center operations — real-time agent guidance, 50+ language call handling, and policy-enforced performance analytics for logistics, healthcare, and financial services. Most clients start with 20 agents. After six months, the AI handles what used to need 14 of them.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="https://pilot.primecoreintelligence.com">Start Pilot &mdash; 50% off Month 1</a>
-          <a class="btn btn-ghost" href="/assets/PrimeCore_LATAM_Enterprise_Pack_v1_3.pdf" target="_blank" rel="noopener">Download Security Pack</a>
+
+        <div class="hero-eyebrow" role="text">Contact Center AI Platform</div>
+
+        <h1 class="hero-h1" id="hero-heading">
+          Every call.<br><span class="hl">Zero SLA breaches.</span>
+        </h1>
+
+        <p class="hero-sub">
+          PrimeCore Intelligence delivers autonomous AI for contact center operations — real-time agent guidance, 50+ language call handling, and policy-enforced performance analytics for logistics, healthcare, and financial services. Most clients start with 20 agents. After six months, the AI handles what used to need 14 of them.
+        </p>
+
+        <!-- KPI Counter Row -->
+        <div class="hero-kpi-row" role="region" aria-label="Platform metrics">
+          <div class="kpi-card">
+            <span class="kpi-delta" aria-hidden="true">LIVE</span>
+            <span class="kpi-value" id="kpi-calls" aria-live="polite" aria-label="Calls handled today">0</span>
+            <span class="kpi-label">Calls Handled Today</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-delta" aria-hidden="true">REAL</span>
+            <span class="kpi-value" id="kpi-fcr" aria-label="First call resolution rate">0%</span>
+            <span class="kpi-label">FCR Rate</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-delta" aria-hidden="true">AVG</span>
+            <span class="kpi-value" id="kpi-aht" aria-label="Average handle time">0s</span>
+            <span class="kpi-label">Avg Handle Time</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-delta" aria-hidden="true">50+</span>
+            <span class="kpi-value" id="kpi-lang" aria-label="Languages supported">0</span>
+            <span class="kpi-label">Languages</span>
+          </div>
         </div>
-      </div>
+
+        <!-- CTAs -->
+        <div class="hero-actions">
+          <a class="btn btn-demo"
+             href="https://pilot.primecoreintelligence.com"
+             aria-label="Start your PrimeCore Intelligence pilot — 50% off month 1">
+            Try Live Demo <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <button class="btn btn-watch"
+                  onclick="openDemoModal()"
+                  aria-label="Watch 60-second product demo video"
+                  aria-haspopup="dialog">
+            <span class="btn-watch-icon" aria-hidden="true">&#9654;</span>
+            Watch 60s demo
+          </button>
+        </div>
+
+        <!-- Microcopy trust line -->
+        <div class="hero-microcopy" role="list" aria-label="Key guarantees">
+          <span role="listitem">No CCaaS changes required</span>
+          <span role="listitem">Shadow mode from day one</span>
+          <span role="listitem">Cancel before Month 2</span>
+        </div>
+
+      </div><!-- /hero-left -->
+
       <div class="hero-right">
-        <div class="timer-panel">
-          <div class="timer-panel-label">Live Call Intelligence &middot; Active State Monitor</div>
-          <div class="call-states">
-            <div class="call-state green">
-              <span class="state-dot green"></span>
-              <div class="state-info"><div class="state-label">Green &mdash; On Track</div><div class="state-desc">Agent handling &middot; SLA protected &middot; AI assist active</div></div>
-              <div class="state-timer green" id="liveTimer">2:14</div>
-            </div>
-            <div class="call-state amber">
-              <span class="state-dot amber"></span>
-              <div class="state-info"><div class="state-label">Amber &mdash; Approaching Threshold</div><div class="state-desc">Escalation guidance queued &middot; supervisor alerted</div></div>
-              <div class="state-timer amber">4:30</div>
-            </div>
-            <div class="call-state red">
-              <span class="state-dot red"></span>
-              <div class="state-info"><div class="state-label">Red &mdash; SLA Breach Imminent</div><div class="state-desc">Autonomous intervention &middot; override path ready</div></div>
-              <div class="state-timer red">6:00</div>
+        <div class="timer-panel" role="region" aria-label="Live call intelligence monitor">
+
+          <div class="timer-panel-header">
+            <div class="timer-panel-label">Live Call Intelligence &middot; Active State Monitor</div>
+            <div class="live-badge" aria-hidden="true">
+              <span class="live-dot"></span>Live
             </div>
           </div>
-          <div class="stats-row">
-            <div class="stat-box"><div class="stat-value">98.4%</div><div class="stat-label">FCR Rate</div></div>
-            <div class="stat-box"><div class="stat-value">50+</div><div class="stat-label">Languages</div></div>
-            <div class="stat-box"><div class="stat-value">&lt;200ms</div><div class="stat-label">Assist Latency</div></div>
+
+          <div class="call-states" role="list" aria-label="Active call states">
+            <div class="call-state green" role="listitem">
+              <span class="state-dot green" aria-hidden="true"></span>
+              <div class="state-info">
+                <div class="state-label">Green &mdash; On Track</div>
+                <div class="state-desc">Agent handling &middot; SLA protected &middot; AI assist active</div>
+              </div>
+              <div class="state-timer green" id="liveTimer" aria-label="Call duration" aria-live="off">2:14</div>
+            </div>
+            <div class="call-state amber" role="listitem">
+              <span class="state-dot amber" aria-hidden="true"></span>
+              <div class="state-info">
+                <div class="state-label">Amber &mdash; Approaching Threshold</div>
+                <div class="state-desc">Escalation guidance queued &middot; supervisor alerted</div>
+              </div>
+              <div class="state-timer amber" aria-label="Call at risk duration">4:30</div>
+            </div>
+            <div class="call-state red" role="listitem">
+              <span class="state-dot red" aria-hidden="true"></span>
+              <div class="state-info">
+                <div class="state-label">Red &mdash; SLA Breach Imminent</div>
+                <div class="state-desc">Autonomous intervention &middot; override path ready</div>
+              </div>
+              <div class="state-timer red" aria-label="Breach timer">6:00</div>
+            </div>
           </div>
+
+          <div class="stats-row" role="list" aria-label="Performance stats">
+            <div class="stat-box" role="listitem">
+              <div class="stat-value">89%</div>
+              <div class="stat-label">FCR Rate</div>
+            </div>
+            <div class="stat-box" role="listitem">
+              <div class="stat-value">50+</div>
+              <div class="stat-label">Languages</div>
+            </div>
+            <div class="stat-box" role="listitem">
+              <div class="stat-value">&lt;200ms</div>
+              <div class="stat-label">AI Latency</div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /hero-right -->
+    </div>
+  </div>
+</section>
+
+<!-- Demo video modal -->
+<div id="demoModal"
+     role="dialog"
+     aria-modal="true"
+     aria-labelledby="demoModalTitle"
+     aria-hidden="true"
+     style="display:none;position:fixed;inset:0;z-index:999;background:rgba(4,8,18,.92);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:24px">
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);max-width:720px;width:100%;padding:28px;position:relative">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <h2 id="demoModalTitle" style="font-family:var(--font-head);font-size:18px;font-weight:700">PrimeCore Intelligence — 60s Product Overview</h2>
+      <button onclick="closeDemoModal()"
+              aria-label="Close demo video"
+              style="background:rgba(255,255,255,.08);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center">&#215;</button>
+    </div>
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:14px">
+      <!-- Replace with actual embed when video is ready -->
+      <div style="text-align:center">
+        <div style="font-size:48px;margin-bottom:12px;opacity:.3">&#9654;</div>
+        <div>Demo video coming soon</div>
+        <div style="margin-top:8px;font-size:12px">
+          <a href="https://pilot.primecoreintelligence.com" style="color:var(--accent)">Start your pilot instead &rarr;</a>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <div class="trust-bar">
   <div class="container">
@@ -439,24 +843,115 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
 </footer>
 
 <script>
-(function(){
-  var el=document.getElementById('liveTimer');
-  if(!el)return;
-  var secs=134;
-  setInterval(function(){
-    secs=(secs+1)%(6*60);
-    var m=Math.floor(secs/60);
-    var s=String(secs%60).padStart(2,'0');
-    el.textContent=m+':'+s;
-  },1000);
-})();
+/* ── KPI Counter Animation ─────────────────────────────────────────────
+   Uses IntersectionObserver so counters only fire when hero is visible.
+   Respects prefers-reduced-motion.
+   ─────────────────────────────────────────────────────────────────────── */
+(function() {
+  'use strict';
 
-function setLang(lang,btn){
-  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});
-  if(btn)btn.classList.add('active');
-  if(lang==='es')window.location.href='/es/';
-  if(lang==='pt')window.location.href='/pt-br/';
-}
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Targets: [elementId, finalValue, suffix, duration(ms), format] */
+  var KPI_TARGETS = [
+    ['kpi-calls', 1847293, '',    1800, 'number'],
+    ['kpi-fcr',   89,      '%',   1200, 'integer'],
+    ['kpi-aht',   87,      's',   1400, 'integer'],
+    ['kpi-lang',  51,      '',    1000, 'integer'],
+  ];
+
+  function formatNumber(n, fmt) {
+    if (fmt === 'number') return n.toLocaleString('en-US');
+    return Math.round(n).toString();
+  }
+
+  function animateCounter(el, target, suffix, duration, fmt) {
+    if (REDUCED) {
+      el.textContent = formatNumber(target, fmt) + suffix;
+      return;
+    }
+    var start     = performance.now();
+    var startVal  = 0;
+
+    function tick(now) {
+      var elapsed  = now - start;
+      var progress = Math.min(elapsed / duration, 1);
+      /* ease-out expo */
+      var eased    = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      var current  = startVal + (target - startVal) * eased;
+      el.textContent = formatNumber(current, fmt) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function initCounters() {
+    KPI_TARGETS.forEach(function(cfg) {
+      var el = document.getElementById(cfg[0]);
+      if (el) animateCounter(el, cfg[1], cfg[2], cfg[3], cfg[4]);
+    });
+  }
+
+  /* Fire on first intersection with viewport */
+  var heroEl = document.querySelector('.hero-kpi-row');
+  if (heroEl && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries, obs) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          initCounters();
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    io.observe(heroEl);
+  } else {
+    initCounters();
+  }
+
+  /* ── Live timer (existing green call) ─────────────────────────────── */
+  var timerEl = document.getElementById('liveTimer');
+  if (timerEl) {
+    var secs = 134;
+    setInterval(function() {
+      secs = (secs + 1) % (6 * 60);
+      var m = Math.floor(secs / 60);
+      var s = String(secs % 60).padStart(2, '0');
+      timerEl.textContent = m + ':' + s;
+    }, 1000);
+  }
+
+  /* ── Demo modal ──────────────────────────────────────────────────── */
+  window.openDemoModal = function() {
+    var modal = document.getElementById('demoModal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    /* Focus trap: focus close button */
+    var closeBtn = modal.querySelector('button');
+    if (closeBtn) setTimeout(function() { closeBtn.focus(); }, 50);
+  };
+
+  window.closeDemoModal = function() {
+    var modal = document.getElementById('demoModal');
+    if (!modal) return;
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  /* Close modal on Escape */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') window.closeDemoModal();
+  });
+
+  /* Close modal on backdrop click */
+  document.getElementById('demoModal') && 
+  document.getElementById('demoModal').addEventListener('click', function(e) {
+    if (e.target === this) window.closeDemoModal();
+  });
+
+})();
 </script>
 </body>
 </html>
