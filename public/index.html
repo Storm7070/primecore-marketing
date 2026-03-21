@@ -1286,6 +1286,336 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   .compare-summary-arrow { display: none; }
   .compare-wrap { display: flex; flex-direction: column; background: transparent; box-shadow: none; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION 6 — Inline ROI Calculator
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.roi-section {
+  padding: 96px 0;
+}
+.roi-section .roi-inner {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-slow) var(--ease-out-expo),
+              transform var(--dur-slow) var(--ease-out-expo);
+}
+.roi-section.in-view .roi-inner { opacity: 1; transform: translateY(0); }
+
+/* Layout: sliders left, results right */
+.roi-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 28px;
+  margin-top: 48px;
+  align-items: start;
+}
+
+/* ── Industry presets ───────────────────────────────────────────────── */
+.roi-industry-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.roi-industry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--dur-std) ease;
+}
+.roi-industry-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+.roi-industry-btn.active {
+  background: rgba(45,122,255,.1);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+.roi-industry-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ── Sliders ────────────────────────────────────────────────────────── */
+.roi-sliders {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.roi-field { display: flex; flex-direction: column; gap: 10px; }
+.roi-field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.roi-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--dim);
+}
+.roi-value-display {
+  font-family: var(--font-head);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  min-width: 80px;
+  text-align: right;
+}
+
+/* Slider track */
+.roi-slider-wrap {
+  position: relative;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+.roi-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,.08);
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+.roi-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 8px rgba(45,122,255,.5);
+  cursor: pointer;
+  transition: transform var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+}
+.roi-slider::-moz-range-thumb {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  cursor: pointer;
+}
+.roi-slider::-webkit-slider-thumb:hover { transform: scale(1.2); box-shadow: 0 0 14px rgba(45,122,255,.7); }
+.roi-slider:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent);
+}
+.roi-slider-range {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--dim);
+  margin-top: 3px;
+}
+
+/* Benchmark badge */
+.roi-benchmark {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--dim);
+  margin-top: 2px;
+}
+.roi-benchmark-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent2);
+  flex-shrink: 0;
+}
+
+/* ── Results card ───────────────────────────────────────────────────── */
+.roi-results {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  position: sticky;
+  top: 80px;
+}
+.roi-results-header {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--dim);
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.roi-results-header::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--accent2);
+  border-radius: 50%;
+  animation: livePulse 2s infinite;
+}
+
+/* Big savings number */
+.roi-savings-block {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.roi-savings-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--dim);
+  margin-bottom: 6px;
+}
+.roi-savings-value {
+  font-family: var(--font-head);
+  font-size: 46px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--accent2) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  margin-bottom: 4px;
+  transition: all var(--dur-std) ease;
+}
+.roi-savings-sub {
+  font-size: 13px;
+  color: var(--muted);
+}
+.roi-annual {
+  font-family: var(--font-head);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent2);
+}
+
+/* Breakdown table */
+.roi-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.roi-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+}
+.roi-row-label { color: var(--muted); }
+.roi-row-value {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -.3px;
+  white-space: nowrap;
+}
+.roi-row-value.negative { color: var(--danger); }
+.roi-row-value.positive { color: var(--accent2); }
+.roi-row-value.neutral  { color: var(--text); }
+.roi-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+/* Plan recommendation badge */
+.roi-plan-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: rgba(45,122,255,.07);
+  border: 1px solid rgba(45,122,255,.2);
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+.roi-plan-badge-label { color: var(--muted); font-size: 11px; }
+.roi-plan-badge-name  { color: var(--accent); font-weight: 700; }
+.roi-plan-badge-price { color: var(--text); font-family: var(--font-head); font-weight: 800; margin-left: auto; }
+
+/* CTA inside results */
+.roi-cta-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 20px;
+  background: var(--accent2);
+  color: #000;
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--dur-std) ease, transform var(--dur-fast) ease;
+}
+.roi-cta-btn:hover { background: #00e0bc; transform: translateY(-1px); }
+.roi-cta-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; }
+.roi-cta-note {
+  font-size: 11px;
+  color: var(--dim);
+  text-align: center;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* Number animation */
+@keyframes numPop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+.roi-savings-value.updating {
+  animation: numPop 200ms var(--ease-out-quart);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .roi-section .roi-inner  { transition: none !important; opacity: 1 !important; transform: none !important; }
+  .roi-savings-value.updating { animation: none !important; }
+  .roi-results-header::before { animation: none !important; }
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .roi-grid { grid-template-columns: 1fr; }
+  .roi-results { position: static; }
+}
+@media (max-width: 600px) {
+  .roi-industry-row { gap: 6px; }
+  .roi-industry-btn { font-size: 11px; padding: 6px 11px; }
+  .roi-sliders, .roi-results { padding: 20px; }
+  .roi-savings-value { font-size: 36px; }
+}
 </style>
   <!-- Analytics: Plausible (privacy-first, no cookies, GDPR compliant) -->
   <script defer data-domain="primecoreintelligence.com" src="https://plausible.io/js/script.js"></script>
@@ -2145,6 +2475,227 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   </div>
 </section>
 
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SECTION 6 — Inline ROI Calculator
+     Numbers: canonical benchmarks from CLAUDE.md / roi/index.html
+     ═══════════════════════════════════════════════════════════════════ -->
+<section class="roi-section" id="roi-calc" aria-labelledby="roi-heading">
+  <div class="container">
+    <div class="roi-inner">
+
+      <div class="section-eyebrow">ROI Calculator</div>
+      <h2 class="section-h2" id="roi-heading">
+        See your savings<br>before you commit.
+      </h2>
+      <p class="section-sub">
+        Adjust the inputs for your operation. Results update instantly.
+        No sign-up, no sales call required.
+      </p>
+
+      <!-- Industry presets -->
+      <div class="roi-industry-row"
+           role="group"
+           aria-label="Select your industry to load benchmarks">
+        <button class="roi-industry-btn active"
+                data-ind="logistics"
+                aria-pressed="true">
+          📦 Logistics / 3PL
+        </button>
+        <button class="roi-industry-btn"
+                data-ind="healthcare"
+                aria-pressed="false">
+          🏥 Healthcare
+        </button>
+        <button class="roi-industry-btn"
+                data-ind="financial"
+                aria-pressed="false">
+          💳 Financial
+        </button>
+        <button class="roi-industry-btn"
+                data-ind="retail"
+                aria-pressed="false">
+          🛒 Retail
+        </button>
+        <button class="roi-industry-btn"
+                data-ind="fleet"
+                aria-pressed="false">
+          🚚 Fleet
+        </button>
+        <button class="roi-industry-btn"
+                data-ind="bpo"
+                aria-pressed="false">
+          🌎 BPO
+        </button>
+      </div>
+
+      <div class="roi-grid">
+
+        <!-- LEFT: sliders -->
+        <div>
+          <div class="roi-sliders">
+
+            <!-- Volume slider -->
+            <div class="roi-field">
+              <div class="roi-field-header">
+                <label class="roi-label" for="roiVolume">Monthly Call Volume</label>
+                <span class="roi-value-display" id="roiVolumeDisplay"
+                      aria-live="polite" aria-atomic="true">22,000</span>
+              </div>
+              <div class="roi-slider-wrap">
+                <input class="roi-slider"
+                       type="range"
+                       id="roiVolume"
+                       min="1000" max="150000" step="500"
+                       value="22000"
+                       aria-label="Monthly call volume"
+                       aria-describedby="roiVolumeBench"/>
+              </div>
+              <div class="roi-slider-range">
+                <span>1,000</span><span>150,000</span>
+              </div>
+              <div class="roi-benchmark" id="roiVolumeBench" aria-live="polite">
+                <span class="roi-benchmark-dot"></span>
+                <span id="roiBenchFcr">Logistics benchmark: 89% FCR</span>
+              </div>
+            </div>
+
+            <!-- Agents slider -->
+            <div class="roi-field">
+              <div class="roi-field-header">
+                <label class="roi-label" for="roiAgents">Agents Handling These Calls</label>
+                <span class="roi-value-display" id="roiAgentsDisplay"
+                      aria-live="polite" aria-atomic="true">12</span>
+              </div>
+              <div class="roi-slider-wrap">
+                <input class="roi-slider"
+                       type="range"
+                       id="roiAgents"
+                       min="2" max="200" step="1"
+                       value="12"
+                       aria-label="Number of agents"
+                       aria-labelledby="roiAgentsLabel"/>
+              </div>
+              <div class="roi-slider-range"><span>2</span><span>200</span></div>
+            </div>
+
+            <!-- Cost per agent slider -->
+            <div class="roi-field">
+              <div class="roi-field-header">
+                <label class="roi-label" for="roiCost">Monthly Cost per Agent (fully loaded)</label>
+                <span class="roi-value-display" id="roiCostDisplay"
+                      aria-live="polite" aria-atomic="true">$1,800</span>
+              </div>
+              <div class="roi-slider-wrap">
+                <input class="roi-slider"
+                       type="range"
+                       id="roiCost"
+                       min="500" max="6000" step="100"
+                       value="1800"
+                       aria-label="Monthly cost per agent in dollars"/>
+              </div>
+              <div class="roi-slider-range"><span>$500</span><span>$6,000</span></div>
+            </div>
+
+          </div><!-- /roi-sliders -->
+
+          <!-- Methodology note -->
+          <p style="margin-top:14px;font-size:12px;color:var(--dim);line-height:1.6">
+            Assumes 70% Mode 1 (autonomous) · 20% Mode 2 (agent assist) · 10% Mode 3 (warm handoff).
+            Mode costs: $0.04 / $2.50 / $1.80 per call respectively.
+            Remaining agents handle assisted and escalated volume.
+          </p>
+        </div>
+
+        <!-- RIGHT: live results -->
+        <div class="roi-results" role="region" aria-label="Your ROI calculation results" aria-live="polite">
+          <div class="roi-results-header">Live Results</div>
+
+          <!-- Big savings number -->
+          <div class="roi-savings-block">
+            <div class="roi-savings-label">Monthly savings</div>
+            <span class="roi-savings-value" id="roiMonthlySavings">$0</span>
+            <div class="roi-savings-sub">
+              Annual: <span class="roi-annual" id="roiAnnualSavings">$0</span>
+            </div>
+          </div>
+
+          <!-- Breakdown -->
+          <div class="roi-breakdown">
+
+            <div class="roi-row">
+              <span class="roi-row-label">Current monthly labor</span>
+              <span class="roi-row-value negative" id="roiCurrentCost">$0</span>
+            </div>
+
+            <div class="roi-divider"></div>
+
+            <div class="roi-row">
+              <span class="roi-row-label">AI cost (Mode 1 · 70%)</span>
+              <span class="roi-row-value neutral" id="roiMode1Cost">$0</span>
+            </div>
+            <div class="roi-row">
+              <span class="roi-row-label">Assisted calls (Mode 2 · 20%)</span>
+              <span class="roi-row-value neutral" id="roiMode2Cost">$0</span>
+            </div>
+            <div class="roi-row">
+              <span class="roi-row-label">Warm handoffs (Mode 3 · 10%)</span>
+              <span class="roi-row-value neutral" id="roiMode3Cost">$0</span>
+            </div>
+            <div class="roi-row">
+              <span class="roi-row-label">Remaining agents needed</span>
+              <span class="roi-row-value neutral" id="roiAgentsNeeded">0</span>
+            </div>
+            <div class="roi-row">
+              <span class="roi-row-label">Residual agent labor</span>
+              <span class="roi-row-value neutral" id="roiResidualLabor">$0</span>
+            </div>
+            <div class="roi-row">
+              <span class="roi-row-label">PrimeCore subscription</span>
+              <span class="roi-row-value neutral" id="roiSubscription">$0</span>
+            </div>
+
+            <div class="roi-divider"></div>
+
+            <div class="roi-row">
+              <span class="roi-row-label" style="font-weight:600;color:var(--text)">New monthly total</span>
+              <span class="roi-row-value positive" id="roiNewTotal" style="font-size:16px">$0</span>
+            </div>
+
+            <div class="roi-row" style="margin-top:4px">
+              <span class="roi-row-label">Payback period</span>
+              <span class="roi-row-value positive" id="roiPayback">&lt; 30 days</span>
+            </div>
+
+          </div><!-- /roi-breakdown -->
+
+          <!-- Plan badge -->
+          <div class="roi-plan-badge" id="roiPlanBadge" aria-live="polite">
+            <div>
+              <div class="roi-plan-badge-label">Recommended plan</div>
+              <div class="roi-plan-badge-name" id="roiPlanName">Growth</div>
+            </div>
+            <div class="roi-plan-badge-price" id="roiPlanPrice">$5,800/mo</div>
+          </div>
+
+          <!-- CTA -->
+          <a class="roi-cta-btn"
+             id="roiCtaBtn"
+             href="https://pilot.primecoreintelligence.com"
+             aria-label="Start your pilot — pricing shown above">
+            Start Pilot at <span id="roiPilotPrice">$2,900</span> &rarr;
+          </a>
+          <p class="roi-cta-note">
+            50% off Month 1 &middot; Cancel before Month 2 &middot; No setup fees
+          </p>
+
+        </div><!-- /roi-results -->
+      </div><!-- /roi-grid -->
+
+    </div><!-- /roi-inner -->
+  </div>
+</section>
+
 <section id="pricing" style="background:var(--surface)">
   <div class="container">
     <div class="section-eyebrow">Pricing</div>
@@ -2763,6 +3314,235 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
     /* Small delay so user sees the "before" state first */
     setTimeout(function() { requestAnimationFrame(tick); }, 200);
   }
+
+})();
+
+
+
+/* ── Section 6: Inline ROI Calculator ─────────────────────────────────
+   Recalculates on every slider input event (synchronous, no debounce).
+   Industry presets load canonical benchmarks and update benchmark hint.
+   Number animation: requestAnimationFrame counter for savings value.
+   ─────────────────────────────────────────────────────────────────────── */
+(function() {
+  'use strict';
+
+  /* Canonical benchmarks from CLAUDE.md */
+  var BENCHMARKS = {
+    logistics:  { fcr: 0.89, aht: 87,  cost: 6.50,  label: 'Logistics/3PL',  defaultVol: 22000 },
+    healthcare: { fcr: 0.82, aht: 120, cost: 9.20,  label: 'Healthcare',     defaultVol: 15000 },
+    financial:  { fcr: 0.79, aht: 105, cost: 8.80,  label: 'Financial',      defaultVol: 18000 },
+    retail:     { fcr: 0.87, aht: 72,  cost: 5.40,  label: 'Retail/E-com',   defaultVol: 30000 },
+    fleet:      { fcr: 0.85, aht: 95,  cost: 7.10,  label: 'Fleet/Dispatch', defaultVol: 12000 },
+    bpo:        { fcr: 0.83, aht: 102, cost: 6.90,  label: 'BPO',            defaultVol: 50000 },
+  };
+
+  /* Plans: Starter ≤5k, Growth ≤20k, Enterprise >20k */
+  var PLANS = [
+    { name: 'Starter',    price: 2400, pilot: 1200, max: 5000 },
+    { name: 'Growth',     price: 5800, pilot: 2900, max: 20000 },
+    { name: 'Enterprise', price: 7997, pilot: 3999, max: Infinity },
+  ];
+
+  /* Mode cost rates */
+  var MODE1_RATE = 0.04;
+  var MODE2_RATE = 2.50;
+  var MODE3_RATE = 1.80;
+
+  /* Mode blend */
+  var BLEND = { m1: 0.70, m2: 0.20, m3: 0.10 };
+
+  var currentInd = 'logistics';
+  var REDUCED    = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── DOM refs ─────────────────────────────────────────────────────── */
+  var sliderVol    = document.getElementById('roiVolume');
+  var sliderAgents = document.getElementById('roiAgents');
+  var sliderCost   = document.getElementById('roiCost');
+  if (!sliderVol) return;
+
+  var displayVol    = document.getElementById('roiVolumeDisplay');
+  var displayAgents = document.getElementById('roiAgentsDisplay');
+  var displayCost   = document.getElementById('roiCostDisplay');
+  var benchFcr      = document.getElementById('roiBenchFcr');
+
+  var elSavings     = document.getElementById('roiMonthlySavings');
+  var elAnnual      = document.getElementById('roiAnnualSavings');
+  var elCurrent     = document.getElementById('roiCurrentCost');
+  var elM1          = document.getElementById('roiMode1Cost');
+  var elM2          = document.getElementById('roiMode2Cost');
+  var elM3          = document.getElementById('roiMode3Cost');
+  var elAgentsNeeded= document.getElementById('roiAgentsNeeded');
+  var elResidual    = document.getElementById('roiResidualLabor');
+  var elSub         = document.getElementById('roiSubscription');
+  var elNewTotal    = document.getElementById('roiNewTotal');
+  var elPayback     = document.getElementById('roiPayback');
+  var elPlanName    = document.getElementById('roiPlanName');
+  var elPlanPrice   = document.getElementById('roiPlanPrice');
+  var elPilotPrice  = document.getElementById('roiPilotPrice');
+  var elCtaBtn      = document.getElementById('roiCtaBtn');
+
+  /* ── Helpers ──────────────────────────────────────────────────────── */
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+  function fmtNum(n) {
+    return Math.round(n).toLocaleString('en-US');
+  }
+
+  /* Animate a value element from current displayed number to target */
+  var lastSavings = 0;
+  function animateSavings(target) {
+    if (REDUCED) { elSavings.textContent = fmt(target); lastSavings = target; return; }
+    var start   = lastSavings;
+    var diff    = target - start;
+    var t0      = performance.now();
+    var dur     = Math.min(400, Math.abs(diff) / 50 + 100);
+
+    elSavings.classList.remove('updating');
+    void elSavings.offsetWidth; /* force reflow for re-trigger */
+    elSavings.classList.add('updating');
+
+    function tick(now) {
+      var p = Math.min((now - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3); /* ease-out-cubic */
+      elSavings.textContent = fmt(start + diff * e);
+      if (p < 1) requestAnimationFrame(tick);
+      else { elSavings.classList.remove('updating'); lastSavings = target; }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* ── Core calculation ─────────────────────────────────────────────── */
+  function calculate() {
+    var vol        = parseInt(sliderVol.value,    10);
+    var agents     = parseInt(sliderAgents.value, 10);
+    var agentCost  = parseInt(sliderCost.value,   10);
+    var bench      = BENCHMARKS[currentInd];
+
+    /* Current state */
+    var currentLabor = agents * agentCost;
+
+    /* AI cost by mode */
+    var m1Calls = Math.round(vol * BLEND.m1);
+    var m2Calls = Math.round(vol * BLEND.m2);
+    var m3Calls = Math.round(vol * BLEND.m3);
+    var m1Cost  = m1Calls * MODE1_RATE;
+    var m2Cost  = m2Calls * MODE2_RATE;
+    var m3Cost  = m3Calls * MODE3_RATE;
+    var totalAiCost = m1Cost + m2Cost + m3Cost;
+
+    /* Agents still needed for Mode 2/3 (assisted + handoff calls)
+       Rough: 1 agent handles ~600 assisted calls/month @ 2.5 min avg */
+    var agentsNeeded = Math.max(1, Math.ceil((m2Calls + m3Calls) / 600));
+    var residualLabor = agentsNeeded * agentCost;
+
+    /* Plan */
+    var plan = PLANS[0];
+    for (var i = 0; i < PLANS.length; i++) {
+      if (vol <= PLANS[i].max) { plan = PLANS[i]; break; }
+    }
+    /* Enterprise custom — use $7,997 as floor */
+    var subCost = plan.price;
+
+    /* New total */
+    var newTotal = totalAiCost + residualLabor + subCost;
+    var monthlySavings = Math.max(0, currentLabor - newTotal);
+    var annualSavings  = monthlySavings * 12;
+
+    /* Payback: pilot Month 1 = 50% of plan */
+    var pilotCost  = plan.pilot + (totalAiCost + residualLabor);
+    var paybackDays = monthlySavings > 0 ? Math.ceil((pilotCost / monthlySavings) * 30) : 999;
+
+    /* ── Update display displays ───────────────────────────────────── */
+    displayVol.textContent    = fmtNum(vol);
+    displayAgents.textContent = agents;
+    displayCost.textContent   = '$' + fmtNum(agentCost);
+
+    /* Update benchmark hint */
+    benchFcr.textContent = bench.label + ' benchmark: ' +
+      Math.round(bench.fcr * 100) + '% FCR · ' + bench.aht + 's AHT';
+
+    elCurrent.textContent      = fmt(currentLabor);
+    elM1.textContent           = fmt(m1Cost);
+    elM2.textContent           = fmt(m2Cost);
+    elM3.textContent           = fmt(m3Cost);
+    elAgentsNeeded.textContent = agentsNeeded + ' agent' + (agentsNeeded !== 1 ? 's' : '');
+    elResidual.textContent     = fmt(residualLabor);
+    elSub.textContent          = fmt(subCost) + '/mo';
+    elNewTotal.textContent     = fmt(newTotal);
+    elAnnual.textContent       = fmt(annualSavings);
+
+    elPayback.textContent = paybackDays <= 30 ? '< 30 days' :
+      paybackDays <= 60 ? '~' + paybackDays + ' days' : '>60 days';
+
+    elPlanName.textContent  = plan.name;
+    elPlanPrice.textContent = '$' + fmtNum(plan.price) + '/mo';
+    elPilotPrice.textContent = '$' + fmtNum(plan.pilot);
+
+    /* Color savings: green if positive, dim if zero */
+    elMonthlySavings = elSavings;
+    animateSavings(monthlySavings);
+
+    /* Update slider fill gradient (visual progress on track) */
+    updateSliderFill(sliderVol,    sliderVol.min,    sliderVol.max);
+    updateSliderFill(sliderAgents, sliderAgents.min, sliderAgents.max);
+    updateSliderFill(sliderCost,   sliderCost.min,   sliderCost.max);
+  }
+
+  /* Fill the slider track from left to thumb */
+  function updateSliderFill(slider, min, max) {
+    var pct = ((slider.value - min) / (max - min)) * 100;
+    slider.style.background =
+      'linear-gradient(to right, var(--accent) 0%, var(--accent) ' + pct +
+      '%, rgba(255,255,255,.08) ' + pct + '%, rgba(255,255,255,.08) 100%)';
+  }
+
+  /* ── Industry preset buttons ──────────────────────────────────────── */
+  var indBtns = document.querySelectorAll('.roi-industry-btn');
+  indBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var ind = btn.dataset.ind;
+      if (!BENCHMARKS[ind]) return;
+
+      currentInd = ind;
+      indBtns.forEach(function(b) {
+        b.classList.remove('active');
+        b.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+
+      /* Load benchmark defaults */
+      var bench = BENCHMARKS[ind];
+      sliderVol.value = bench.defaultVol;
+      calculate();
+    });
+  });
+
+  /* ── Slider event listeners ────────────────────────────────────────── */
+  [sliderVol, sliderAgents, sliderCost].forEach(function(s) {
+    s.addEventListener('input', calculate);
+  });
+
+  /* ── Scroll-trigger ───────────────────────────────────────────────── */
+  var roiSection = document.getElementById('roi-calc');
+  if (roiSection && 'IntersectionObserver' in window) {
+    var roiIO = new IntersectionObserver(function(entries, obs) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.1 });
+    roiIO.observe(roiSection);
+  } else if (roiSection) {
+    roiSection.classList.add('in-view');
+  }
+
+  /* ── Initial render ───────────────────────────────────────────────── */
+  calculate();
 
 })();
 
