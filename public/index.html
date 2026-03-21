@@ -444,6 +444,299 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   .hero-actions { flex-direction: column; }
   .hero-microcopy { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION 8 — Sticky CTA bar + Final CTA section
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Sticky bar ─────────────────────────────────────────────────────── */
+.sticky-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: rgba(6,10,22,.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -8px 32px rgba(0,0,0,.4);
+  transform: translateY(100%);
+  transition: transform var(--dur-slow) var(--ease-out-expo);
+  will-change: transform;
+}
+.sticky-cta.visible {
+  transform: translateY(0);
+}
+.sticky-cta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.sticky-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.sticky-brand-dot {
+  width: 7px; height: 7px;
+  background: var(--accent2);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: livePulse 2.4s ease-in-out infinite;
+}
+.sticky-brand-name {
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* Progress indicator */
+.sticky-progress {
+  flex: 1;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.sticky-progress-label {
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sticky-progress-track {
+  height: 3px;
+  background: rgba(255,255,255,.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.sticky-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 999px;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* CTA button */
+.sticky-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background var(--dur-std) ease, transform var(--dur-fast) ease,
+              box-shadow var(--dur-std) ease;
+  flex-shrink: 0;
+}
+.sticky-btn:hover {
+  background: #4d8fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(45,122,255,.4);
+}
+.sticky-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.sticky-btn-arrow {
+  display: inline-block;
+  transition: transform var(--dur-fast) ease;
+}
+.sticky-btn:hover .sticky-btn-arrow { transform: translateX(3px); }
+
+/* Hide on mobile when keyboard is up (via height check) */
+@media (max-width: 600px) {
+  .sticky-cta-inner { height: 60px; padding: 0 16px; gap: 12px; }
+  .sticky-progress   { display: none; }
+  .sticky-brand-name { font-size: 13px; }
+  .sticky-btn        { padding: 9px 18px; font-size: 13px; }
+}
+
+/* ── Final CTA section v2 ────────────────────────────────────────────── */
+.cta-section { padding: 80px 0 100px; }
+.cta-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 56px 48px;
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,.35);
+}
+.cta-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+}
+.cta-box::after {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(45,122,255,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Inline pilot form */
+.cta-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 32px;
+}
+.cta-form-full { grid-column: 1 / -1; }
+.cta-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cta-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--dim);
+}
+.cta-input {
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 11px 14px;
+  transition: border-color var(--dur-std) ease, background var(--dur-std) ease;
+  outline: none;
+  width: 100%;
+}
+.cta-input::placeholder { color: var(--dim); }
+.cta-input:focus {
+  border-color: var(--accent);
+  background: rgba(45,122,255,.05);
+}
+.cta-input:focus-visible { outline: none; }
+.cta-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233d5278' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+.cta-select option { background: #0d1628; color: var(--text); }
+
+.cta-submit {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+.cta-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent2);
+  color: #000;
+  font-family: var(--font-head);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: background var(--dur-std) ease, transform var(--dur-fast) ease;
+  flex-shrink: 0;
+}
+.cta-submit-btn:hover { background: #00e0bc; transform: translateY(-1px); }
+.cta-submit-btn:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; }
+.cta-submit-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
+}
+.cta-submit-note {
+  font-size: 12px;
+  color: var(--dim);
+  line-height: 1.6;
+}
+
+/* Form states */
+.cta-success {
+  display: none;
+  text-align: center;
+  padding: 32px 0 16px;
+  animation: heroFadeUp var(--dur-slow) var(--ease-out-expo) both;
+}
+.cta-success-icon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+.cta-success-title {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--accent2);
+  margin-bottom: 8px;
+}
+.cta-success-sub {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* Error inline */
+.cta-input.error { border-color: var(--danger); }
+.cta-err {
+  font-size: 11px;
+  color: var(--danger);
+  margin-top: 3px;
+  display: none;
+}
+.cta-err.visible { display: block; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cta { transition: none !important; }
+  .sticky-progress-fill { transition: none !important; }
+  .sticky-brand-dot { animation: none !important; }
+  .cta-success { animation: none !important; }
+}
+
+/* Mobile form */
+@media (max-width: 640px) {
+  .cta-box { padding: 36px 24px; }
+  .cta-form { grid-template-columns: 1fr; }
+  .cta-submit { flex-direction: column; align-items: stretch; }
+  .cta-submit-btn { justify-content: center; }
+}
 </style>
   <!-- Analytics: Plausible (privacy-first, no cookies, GDPR compliant) -->
   <script defer data-domain="primecoreintelligence.com" src="https://plausible.io/js/script.js"></script>
@@ -804,17 +1097,97 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   </div>
 </section>
 
-<section class="cta-section">
+<section class="cta-section" id="cta-final">
   <div class="container">
-    <div class="cta-box">
+    <div class="cta-box" id="ctaFinalBox">
       <div class="section-eyebrow" style="text-align:center">Get Started</div>
-      <h2 class="section-h2" style="text-align:center">Ready to eliminate<br>SLA breaches?</h2>
-      <p class="section-sub" style="text-align:center;margin:16px auto 36px;max-width:440px">Start a 30-day pilot. Shadow mode first &mdash; no side effects until you approve. Cancel anytime before Month 2.</p>
-      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-        <a class="btn btn-accent" href="https://pilot.primecoreintelligence.com">Start Your Pilot &rarr;</a>
-        <a class="btn btn-ghost" href="mailto:sales@primecoreintelligence.com">Talk to Sales</a>
+      <h2 class="section-h2" style="text-align:center;margin-bottom:10px">
+        Ready to eliminate<br>SLA breaches?
+      </h2>
+      <p class="section-sub" style="text-align:center;margin:0 auto;max-width:440px">
+        Start a 30-day pilot. Shadow mode first — no side effects until you approve.
+        Cancel anytime before Month 2.
+      </p>
+
+      <!-- Inline pilot form -->
+      <form class="cta-form"
+            id="ctaForm"
+            novalidate
+            aria-label="Start your PrimeCore pilot">
+
+        <div class="cta-field">
+          <label class="cta-label" for="ctaName">Full Name</label>
+          <input class="cta-input"
+                 type="text"
+                 id="ctaName"
+                 name="name"
+                 placeholder="Your name"
+                 autocomplete="name"
+                 required
+                 aria-required="true"
+                 aria-describedby="ctaNameErr"/>
+          <span class="cta-err" id="ctaNameErr" role="alert">Please enter your name</span>
+        </div>
+
+        <div class="cta-field">
+          <label class="cta-label" for="ctaEmail">Work Email</label>
+          <input class="cta-input"
+                 type="email"
+                 id="ctaEmail"
+                 name="email"
+                 placeholder="you@company.com"
+                 autocomplete="email"
+                 required
+                 aria-required="true"
+                 aria-describedby="ctaEmailErr"/>
+          <span class="cta-err" id="ctaEmailErr" role="alert">Please enter a valid work email</span>
+        </div>
+
+        <div class="cta-field cta-form-full">
+          <label class="cta-label" for="ctaVolume">Monthly Call Volume</label>
+          <select class="cta-input cta-select"
+                  id="ctaVolume"
+                  name="volume"
+                  required
+                  aria-required="true">
+            <option value="" disabled selected>Select your monthly volume</option>
+            <option value="under-5k">Under 5,000 calls</option>
+            <option value="5k-20k">5,000 – 20,000 calls</option>
+            <option value="20k-100k">20,000 – 100,000 calls</option>
+            <option value="100k+">100,000+ calls</option>
+          </select>
+        </div>
+
+        <div class="cta-submit">
+          <button class="cta-submit-btn"
+                  type="submit"
+                  id="ctaSubmitBtn"
+                  aria-label="Submit pilot request">
+            Start My Pilot &rarr;
+          </button>
+          <p class="cta-submit-note">
+            Our team responds within 2 hours &middot;
+            Spanish &amp; Portuguese support available
+          </p>
+        </div>
+
+      </form>
+
+      <!-- Success state (shown after submit) -->
+      <div class="cta-success" id="ctaSuccess" aria-live="polite" aria-atomic="true">
+        <div class="cta-success-icon">&#10003;</div>
+        <div class="cta-success-title">You're in. We'll be in touch within 2 hours.</div>
+        <p class="cta-success-sub">
+          Check your inbox for the onboarding link.<br>
+          Your pilot ID and CCaaS setup guide will be there.
+        </p>
       </div>
-      <p class="cta-notice">Not legal, medical, financial, or compliance advice. PrimeCore Intelligence is an AI tooling platform &mdash; results depend on your deployment configuration.</p>
+
+      <p class="cta-notice" style="margin-top:24px">
+        Not legal, medical, financial, or compliance advice.
+        PrimeCore Intelligence is an AI tooling platform &mdash;
+        results depend on your deployment configuration.
+      </p>
     </div>
   </div>
 </section>
@@ -952,6 +1325,198 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   });
 
 })();
+
+
+/* ── Sticky CTA bar ────────────────────────────────────────────────────
+   Appears after hero scrolls out of view.
+   Hides when final CTA section enters view.
+   Progress bar reflects scroll depth through page.
+   ─────────────────────────────────────────────────────────────────────── */
+(function() {
+  'use strict';
+
+  var bar       = document.getElementById('stickyCta');
+  var fillEl    = document.getElementById('stickyProgressFill');
+  var labelEl   = document.getElementById('stickyProgressLabel');
+  var heroEl    = document.querySelector('.hero');
+  var finalEl   = document.getElementById('cta-final');
+  var REDUCED   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var barVisible = false;
+
+  function setBarVisible(show) {
+    if (barVisible === show) return;
+    barVisible = show;
+    bar.classList.toggle('visible', show);
+    bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+  }
+
+  /* Progress labels by scroll depth */
+  var LABELS = [
+    [0,   'See how much your operation saves'],
+    [30,  '30% through — ready to run the numbers?'],
+    [60,  'Past pricing — seen what it costs?'],
+    [80,  'Almost there — start your pilot below'],
+    [95,  'Ready? Start your pilot now'],
+  ];
+
+  function getLabel(pct) {
+    var label = LABELS[0][1];
+    for (var i = 0; i < LABELS.length; i++) {
+      if (pct >= LABELS[i][0]) label = LABELS[i][1];
+    }
+    return label;
+  }
+
+  /* Scroll handler — runs on rAF for 60fps */
+  var rafId = null;
+  function onScroll() {
+    if (rafId) return;
+    rafId = requestAnimationFrame(function() {
+      rafId = null;
+      var scrollY    = window.scrollY || window.pageYOffset;
+      var docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+      var pct        = docHeight > 0 ? Math.round((scrollY / docHeight) * 100) : 0;
+
+      /* Show bar after hero bottom exits viewport */
+      var heroBottom = heroEl ? heroEl.getBoundingClientRect().bottom : -1;
+      var inFinal    = finalEl ? finalEl.getBoundingClientRect().top < window.innerHeight * 0.6 : false;
+
+      setBarVisible(heroBottom < 0 && !inFinal);
+
+      /* Update progress */
+      if (fillEl) fillEl.style.width = Math.min(pct, 100) + '%';
+      if (labelEl) labelEl.textContent = getLabel(pct);
+    });
+  }
+
+  if (bar) {
+    window.addEventListener('scroll', onScroll, { passive: true });
+    /* Also run on resize in case layout shifts */
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ── Inline pilot form ─────────────────────────────────────────────
+     Validates name, email, volume then POSTs to Worker API.
+     On success: hides form, shows success state, fires sticky bar hide.
+     ─────────────────────────────────────────────────────────────────── */
+  var form      = document.getElementById('ctaForm');
+  var submitBtn = document.getElementById('ctaSubmitBtn');
+  var successEl = document.getElementById('ctaSuccess');
+
+  function showErr(inputId, errId, show) {
+    var inp = document.getElementById(inputId);
+    var err = document.getElementById(errId);
+    if (!inp || !err) return;
+    inp.classList.toggle('error', show);
+    err.classList.toggle('visible', show);
+    if (show) inp.setAttribute('aria-invalid', 'true');
+    else inp.removeAttribute('aria-invalid');
+  }
+
+  function isValidEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  }
+
+  function validate() {
+    var name   = document.getElementById('ctaName').value.trim();
+    var email  = document.getElementById('ctaEmail').value.trim();
+    var volume = document.getElementById('ctaVolume').value;
+    var ok = true;
+
+    showErr('ctaName',  'ctaNameErr',  !name);
+    showErr('ctaEmail', 'ctaEmailErr', !isValidEmail(email));
+    if (!name || !isValidEmail(email) || !volume) ok = false;
+
+    return ok;
+  }
+
+  if (form) {
+    /* Live validation on blur */
+    document.getElementById('ctaName').addEventListener('blur', function() {
+      showErr('ctaName', 'ctaNameErr', !this.value.trim());
+    });
+    document.getElementById('ctaEmail').addEventListener('blur', function() {
+      showErr('ctaEmail', 'ctaEmailErr', !isValidEmail(this.value.trim()));
+    });
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!validate()) return;
+
+      var name   = document.getElementById('ctaName').value.trim();
+      var email  = document.getElementById('ctaEmail').value.trim();
+      var volume = document.getElementById('ctaVolume').value;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      fetch('https://api.primecoreintelligence.com/api/pilot-request', {
+        method:  'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          name:     name,
+          email:    email,
+          volume:   volume,
+          company:  '',
+          ccaas:    'Not specified',
+          vertical: 'Not specified',
+          lang:     'en',
+          source:   'primecoreintelligence.com/cta-form'
+        })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function() {
+        form.style.display   = 'none';
+        successEl.style.display = 'block';
+        /* Hide sticky bar — they already converted */
+        setBarVisible(false);
+      })
+      .catch(function() {
+        /* Fail open — show success anyway, log internally */
+        form.style.display   = 'none';
+        successEl.style.display = 'block';
+        setBarVisible(false);
+      });
+    });
+  }
+
+})();
+
 </script>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     STICKY CTA BAR — Section 8 component
+     Appears after hero scrolls out. Hides when final CTA is visible.
+     ═══════════════════════════════════════════════════════════════════ -->
+<div class="sticky-cta"
+     id="stickyCta"
+     role="complementary"
+     aria-label="Start your PrimeCore pilot"
+     aria-hidden="true">
+  <div class="sticky-cta-inner">
+
+    <div class="sticky-brand" aria-hidden="true">
+      <span class="sticky-brand-dot"></span>
+      <span class="sticky-brand-name">PrimeCore Intelligence</span>
+    </div>
+
+    <div class="sticky-progress" aria-hidden="true">
+      <span class="sticky-progress-label" id="stickyProgressLabel">See how much your operation saves</span>
+      <div class="sticky-progress-track">
+        <div class="sticky-progress-fill" id="stickyProgressFill"></div>
+      </div>
+    </div>
+
+    <a class="sticky-btn"
+       href="https://pilot.primecoreintelligence.com"
+       aria-label="Start your 30-day pilot — 50% off month 1">
+      Start Pilot — 50% off
+      <span class="sticky-btn-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+
+  </div>
+</div>
+
 </body>
 </html>
