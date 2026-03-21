@@ -737,6 +737,320 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   .cta-submit { flex-direction: column; align-items: stretch; }
   .cta-submit-btn { justify-content: center; }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   SECTION 3 — 4-Mode Toggle
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Tab strip */
+.mode-tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 5px;
+  margin: 40px 0 0;
+  position: relative;
+}
+/* Sliding underline indicator */
+.mode-tab-indicator {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  height: calc(100% - 10px);
+  border-radius: 6px;
+  background: rgba(255,255,255,.07);
+  transition: transform var(--dur-std) var(--ease-out-quart),
+              width var(--dur-std) var(--ease-out-quart);
+  pointer-events: none;
+  z-index: 0;
+}
+.mode-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color var(--dur-std) ease;
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
+}
+.mode-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  border-radius: 6px;
+}
+.mode-tab.active { color: var(--text); font-weight: 600; }
+.mode-tab-icon { font-size: 16px; flex-shrink: 0; }
+.mode-tab-cost {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  letter-spacing: .3px;
+  display: none; /* hidden on narrow tabs */
+}
+
+/* Mode panel container */
+.mode-panels {
+  position: relative;
+  margin-top: 20px;
+  min-height: 360px; /* prevent layout shift */
+}
+
+/* Individual panels */
+.mode-panel {
+  display: none;
+  animation: modeFadeIn 200ms var(--ease-out-quart) both;
+}
+.mode-panel.active { display: grid; }
+
+@keyframes modeFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Panel layout: left content + right stat card */
+.mode-panel-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Left: description card */
+.mode-content {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.mode-content-top {
+  height: 3px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+}
+.mode-content-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.mode-icon-lg {
+  width: 52px; height: 52px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.mode-name {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+  margin-bottom: 4px;
+}
+.mode-tagline {
+  font-size: 13px;
+  color: var(--muted);
+  font-style: italic;
+}
+.mode-cost-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+}
+
+/* AI does / Agent does split */
+.mode-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.mode-split-col h4 {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.mode-split-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.mode-split-col li {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  line-height: 1.5;
+}
+.mode-split-col li::before {
+  content: '→';
+  font-size: 11px;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+/* Verticals */
+.mode-verticals {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.mode-verticals-label {
+  font-size: 11px;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.mode-vertical-tag {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Right: stat card */
+.mode-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mode-stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--dur-std) ease;
+}
+.mode-stat-card:hover { border-color: var(--border2); }
+.mode-stat-card::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+}
+.mode-stat-value {
+  font-family: var(--font-head);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.mode-stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.mode-stat-sub {
+  font-size: 11px;
+  color: var(--dim);
+  margin-top: 3px;
+}
+
+/* Volume indicator at bottom of stat column */
+.mode-volume-bar {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+}
+.mode-volume-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--dim);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.mode-volume-track {
+  height: 6px;
+  background: rgba(255,255,255,.06);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 7px;
+}
+.mode-volume-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 400ms var(--ease-out-expo);
+}
+.mode-volume-pct {
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Pill showing typical % of call mix */
+.mode-mix-hint {
+  margin-top: 20px;
+  padding: 14px 20px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  text-align: center;
+}
+.mode-mix-hint strong { color: var(--text); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mode-panel { animation: none !important; }
+  .mode-tab-indicator { transition: none !important; }
+  .mode-volume-fill { transition: none !important; }
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .mode-panel-grid { grid-template-columns: 1fr; }
+  .mode-stats { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .mode-volume-bar { grid-column: 1 / -1; }
+  .mode-mix-hint { display: none; }
+}
+@media (max-width: 700px) {
+  .mode-tabs { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .mode-tab { scroll-snap-align: start; min-width: 120px; flex: none; padding: 11px 14px; font-size: 12px; }
+  .mode-split { grid-template-columns: 1fr; }
+  .mode-stats { grid-template-columns: 1fr 1fr; }
+  .mode-content { padding: 24px 20px; }
+}
 </style>
   <!-- Analytics: Plausible (privacy-first, no cookies, GDPR compliant) -->
   <script defer data-domain="primecoreintelligence.com" src="https://plausible.io/js/script.js"></script>
@@ -1003,35 +1317,444 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
     <div class="section-eyebrow">Four Ways It Handles Calls</div>
     <h2 class="section-h2">Your AI works the way<br>your operation needs it to.</h2>
     <p class="section-sub">Most operations run 60–80% Mode 1, 15–25% Mode 2, and 5–10% Mode 3. PrimeCore looks at your call volume, SLA targets, and cost-per-call to recommend the right blend — then adjusts it as your data comes in.</p>
-    <div class="features-grid" style="margin-top:48px">
 
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(0,201,167,.1);border-color:rgba(0,201,167,.2)">🤖</div>
-        <div class="feature-title">Fully Autonomous</div>
-        <p class="feature-desc">This isn't FAQ lookup. The AI books the appointment, confirms the delivery window, updates the account — it completes the transaction. No agent involved. Tracking inquiries, appointment scheduling, account lookups — any Tier-1 intent where the answer lives in your WMS or TMS. <strong style="color:var(--accent2)">$0.04 per call.</strong> This is the 89% that never reaches your team.</p>
-      </div>
+    <!-- Tab strip -->
+    <div class="mode-tabs"
+         role="tablist"
+         aria-label="Call handling modes"
+         id="modeTabs">
+      <div class="mode-tab-indicator" id="modeIndicator" aria-hidden="true"></div>
 
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(45,122,255,.1);border-color:rgba(45,122,255,.2)">🎯</div>
-        <div class="feature-title">Agent Assist</div>
-        <p class="feature-desc">Your agent takes the call. The AI listens and displays the right script, caller history, and next action on their screen — but says nothing to the caller. The three-state timer keeps the agent inside SLA. For complaints, disputes, anything requiring a human decision. <strong style="color:var(--accent)">~$2.50 per assisted call.</strong></p>
-      </div>
+      <button class="mode-tab active"
+              role="tab"
+              id="tab-auto"
+              aria-selected="true"
+              aria-controls="panel-auto"
+              data-mode="auto">
+        <span class="mode-tab-icon" aria-hidden="true">🤖</span>
+        <span>Fully Autonomous</span>
+        <span class="mode-tab-cost" style="background:rgba(0,201,167,.12);color:var(--accent2)">$0.04</span>
+      </button>
 
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(139,92,246,.1);border-color:rgba(139,92,246,.2)">🔀</div>
-        <div class="feature-title">Warm Handoff</div>
-        <p class="feature-desc">AI starts the call, captures intent and account data, then transfers to your agent with everything already on screen — prior cases, shipment status, what was said. The agent picks up mid-conversation knowing exactly who they're talking to and why. No repeat-yourself moment. <strong style="color:#a78bfa">~$1.80 per handoff.</strong></p>
-      </div>
+      <button class="mode-tab"
+              role="tab"
+              id="tab-assist"
+              aria-selected="false"
+              aria-controls="panel-assist"
+              data-mode="assist"
+              tabindex="-1">
+        <span class="mode-tab-icon" aria-hidden="true">🎯</span>
+        <span>Agent Assist</span>
+        <span class="mode-tab-cost" style="background:rgba(45,122,255,.12);color:var(--accent)">~$2.50</span>
+      </button>
 
-      <div class="feature-card">
-        <div class="feature-icon" style="background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2)">📞</div>
-        <div class="feature-title">Scheduled Outbound</div>
-        <p class="feature-desc">AI calls your customers before they call you. Each shipment gets a risk score — delay history, carrier performance, weather, lane damage rates. High-risk shipments get a proactive call: "We're running slightly late; your package arrives tomorrow." That one call eliminates the complaint before it happens. <strong style="color:var(--warn)">$0.03 per outbound call.</strong></p>
-      </div>
+      <button class="mode-tab"
+              role="tab"
+              id="tab-handoff"
+              aria-selected="false"
+              aria-controls="panel-handoff"
+              data-mode="handoff"
+              tabindex="-1">
+        <span class="mode-tab-icon" aria-hidden="true">🔀</span>
+        <span>Warm Handoff</span>
+        <span class="mode-tab-cost" style="background:rgba(139,92,246,.12);color:#a78bfa">~$1.80</span>
+      </button>
 
+      <button class="mode-tab"
+              role="tab"
+              id="tab-outbound"
+              aria-selected="false"
+              aria-controls="panel-outbound"
+              data-mode="outbound"
+              tabindex="-1">
+        <span class="mode-tab-icon" aria-hidden="true">📞</span>
+        <span>Outbound</span>
+        <span class="mode-tab-cost" style="background:rgba(245,158,11,.12);color:var(--warn)">$0.03</span>
+      </button>
     </div>
 
-    <div style="margin-top:36px;padding:20px 24px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;display:flex;gap:32px;flex-wrap:wrap;align-items:center">
+    <!-- Panels -->
+    <div class="mode-panels">
+
+      <!-- ── PANEL 1: FULLY AUTONOMOUS ─────────────────────────────── -->
+      <div class="mode-panel active"
+           role="tabpanel"
+           id="panel-auto"
+           aria-labelledby="tab-auto">
+        <div class="mode-panel-grid">
+
+          <div class="mode-content">
+            <div class="mode-content-top"
+                 style="background:linear-gradient(90deg,var(--accent2),rgba(0,201,167,.2))"></div>
+            <div class="mode-content-header">
+              <div class="mode-icon-lg"
+                   style="background:rgba(0,201,167,.1);border:1px solid rgba(0,201,167,.2)">🤖</div>
+              <div>
+                <div class="mode-name">Fully Autonomous</div>
+                <div class="mode-tagline">Zero humans, full call ownership</div>
+              </div>
+            </div>
+            <div class="mode-cost-badge"
+                 style="background:rgba(0,201,167,.1);border:1px solid rgba(0,201,167,.25);color:var(--accent2)">
+              $0.04 per call &mdash; the 89% that never reaches your team
+            </div>
+            <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px">
+              This isn't FAQ lookup. The AI books the appointment, confirms the delivery window,
+              updates the account &mdash; it completes the transaction. Any Tier-1 intent where
+              the answer lives in your WMS or TMS.
+            </p>
+            <div class="mode-split">
+              <div class="mode-split-col">
+                <h4 style="color:var(--accent2)">AI handles</h4>
+                <ul>
+                  <li>Picks up and greets caller</li>
+                  <li>Classifies intent in real time</li>
+                  <li>Queries WMS / TMS for live data</li>
+                  <li>Completes the transaction</li>
+                  <li>Logs outcome + marks FCR</li>
+                </ul>
+              </div>
+              <div class="mode-split-col">
+                <h4 style="color:var(--dim)">Agent handles</h4>
+                <ul>
+                  <li>Nothing &mdash; until the AI</li>
+                  <li>flags an escalation trigger</li>
+                  <li>or caller requests a human</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mode-verticals">
+              <span class="mode-verticals-label">Best for</span>
+              <span class="mode-vertical-tag">Logistics / 3PL</span>
+              <span class="mode-vertical-tag">Healthcare</span>
+              <span class="mode-vertical-tag">Retail</span>
+              <span class="mode-vertical-tag">Fleet</span>
+            </div>
+          </div>
+
+          <div class="mode-stats">
+            <div class="mode-stat-card" style="--mode-color:var(--accent2)">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent2);border-radius:3px 0 0 3px"></div>
+              <div class="mode-stat-value" style="color:var(--accent2)">89%</div>
+              <div class="mode-stat-label">First Call Resolution</div>
+              <div class="mode-stat-sub">Logistics/3PL benchmark</div>
+            </div>
+            <div class="mode-stat-card">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent2);border-radius:3px 0 0 3px"></div>
+              <div class="mode-stat-value" style="color:var(--accent2)">87s</div>
+              <div class="mode-stat-label">Avg Handle Time</div>
+              <div class="mode-stat-sub">vs 5–6 min agent average</div>
+            </div>
+            <div class="mode-stat-card">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent2);border-radius:3px 0 0 3px"></div>
+              <div class="mode-stat-value" style="color:var(--accent2)">$0.04</div>
+              <div class="mode-stat-label">Per call</div>
+              <div class="mode-stat-sub">vs ~$6.50 fully-loaded agent cost</div>
+            </div>
+            <div class="mode-volume-bar">
+              <div class="mode-volume-label">Typical call mix</div>
+              <div class="mode-volume-track">
+                <div class="mode-volume-fill"
+                     style="width:72%;background:var(--accent2)"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span class="mode-volume-pct" style="color:var(--accent2)">60–80%</span>
+                <span style="font-size:11px;color:var(--dim)">of total volume</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── PANEL 2: AGENT ASSIST ──────────────────────────────────── -->
+      <div class="mode-panel"
+           role="tabpanel"
+           id="panel-assist"
+           aria-labelledby="tab-assist">
+        <div class="mode-panel-grid">
+
+          <div class="mode-content">
+            <div class="mode-content-top"
+                 style="background:linear-gradient(90deg,var(--accent),rgba(45,122,255,.2))"></div>
+            <div class="mode-content-header">
+              <div class="mode-icon-lg"
+                   style="background:rgba(45,122,255,.1);border:1px solid rgba(45,122,255,.2)">🎯</div>
+              <div>
+                <div class="mode-name">Agent Assist</div>
+                <div class="mode-tagline">AI + human hybrid &mdash; the agent stays in control</div>
+              </div>
+            </div>
+            <div class="mode-cost-badge"
+                 style="background:rgba(45,122,255,.1);border:1px solid rgba(45,122,255,.25);color:var(--accent)">
+              ~$2.50 per assisted call
+            </div>
+            <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px">
+              Your agent takes the call. The AI listens and displays the right script, caller
+              history, and next action on their screen &mdash; but says nothing to the caller.
+              The three-state timer keeps the agent inside SLA.
+              For complaints, disputes, anything requiring a human decision.
+            </p>
+            <div class="mode-split">
+              <div class="mode-split-col">
+                <h4 style="color:var(--accent)">AI handles</h4>
+                <ul>
+                  <li>Real-time transcript + intent</li>
+                  <li>Script suggestion on screen</li>
+                  <li>SLA timer (Green / Amber / Red)</li>
+                  <li>Next-best-action prompts</li>
+                  <li>Auto wrap-up after call</li>
+                </ul>
+              </div>
+              <div class="mode-split-col">
+                <h4 style="color:var(--accent)">Agent handles</h4>
+                <ul>
+                  <li>Speaks to caller directly</li>
+                  <li>Accepts or ignores suggestions</li>
+                  <li>Makes the call on exceptions</li>
+                  <li>Escalates if needed</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mode-verticals">
+              <span class="mode-verticals-label">Best for</span>
+              <span class="mode-vertical-tag">Complaints</span>
+              <span class="mode-vertical-tag">Disputes</span>
+              <span class="mode-vertical-tag">Financial</span>
+              <span class="mode-vertical-tag">Insurance</span>
+            </div>
+          </div>
+
+          <div class="mode-stats">
+            <div class="mode-stat-card">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);border-radius:3px 0 0 3px"></div>
+              <div class="mode-stat-value" style="color:var(--accent)">30–50%</div>
+              <div class="mode-stat-label">Wrap-up time saved</div>
+              <div class="mode-stat-sub">AI drafts disposition code + summary</div>
+            </div>
+            <div class="mode-stat-card">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);border-radius:3px 0 0 3px"></div>
+              <div class="mode-stat-value" style="color:var(--accent)">0</div>
+              <div class="mode-stat-label">SLA breaches</div>
+              <div class="mode-stat-sub">Three-state timer catches every at-risk call</div>
+            </div>
+            <div class="mode-stat-card">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);border-radius:3px 0 0 3px"></div>
+              <div class="mode-stat-value" style="color:var(--accent)">~$2.50</div>
+              <div class="mode-stat-label">Per assisted call</div>
+              <div class="mode-stat-sub">vs $8–12 unassisted complex call</div>
+            </div>
+            <div class="mode-volume-bar">
+              <div class="mode-volume-label">Typical call mix</div>
+              <div class="mode-volume-track">
+                <div class="mode-volume-fill"
+                     style="width:20%;background:var(--accent)"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span class="mode-volume-pct" style="color:var(--accent)">15–25%</span>
+                <span style="font-size:11px;color:var(--dim)">of total volume</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── PANEL 3: WARM HANDOFF ──────────────────────────────────── -->
+      <div class="mode-panel"
+           role="tabpanel"
+           id="panel-handoff"
+           aria-labelledby="tab-handoff">
+        <div class="mode-panel-grid">
+
+          <div class="mode-content">
+            <div class="mode-content-top"
+                 style="background:linear-gradient(90deg,#a78bfa,rgba(139,92,246,.2))"></div>
+            <div class="mode-content-header">
+              <div class="mode-icon-lg"
+                   style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2)">🔀</div>
+              <div>
+                <div class="mode-name">Warm Handoff</div>
+                <div class="mode-tagline">Seamless transfer &mdash; agent picks up mid-sentence</div>
+              </div>
+            </div>
+            <div class="mode-cost-badge"
+                 style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.25);color:#a78bfa">
+              ~$1.80 per handoff
+            </div>
+            <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px">
+              AI starts the call, captures intent and account data, then transfers to your agent
+              with everything already on screen &mdash; prior cases, shipment status, what was said.
+              The agent picks up knowing exactly who they're talking to and why. No repeat-yourself moment.
+            </p>
+            <div class="mode-split">
+              <div class="mode-split-col">
+                <h4 style="color:#a78bfa">AI handles</h4>
+                <ul>
+                  <li>Greets + confirms intent</li>
+                  <li>Fetches account + case history</li>
+                  <li>Scores escalation risk</li>
+                  <li>Builds context card</li>
+                  <li>Routes to right agent tier</li>
+                </ul>
+              </div>
+              <div class="mode-split-col">
+                <h4 style="color:#a78bfa">Agent handles</h4>
+                <ul>
+                  <li>Receives full context on screen</li>
+                  <li>Resolves the escalation</li>
+                  <li>No re-confirmation required</li>
+                  <li>40–60% faster to resolution</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mode-verticals">
+              <span class="mode-verticals-label">Best for</span>
+              <span class="mode-vertical-tag">Damage claims</span>
+              <span class="mode-vertical-tag">Billing disputes</span>
+              <span class="mode-vertical-tag">Healthcare</span>
+            </div>
+          </div>
+
+          <div class="mode-stats">
+            <div class="mode-stat-card">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#a78bfa;border-radius:3px 0 0 3px"></div>
+              <div class="mode-stat-value" style="color:#a78bfa">40–60%</div>
+              <div class="mode-stat-label">Faster to resolution</div>
+              <div class="mode-stat-sub">Agent has full context at pickup</div>
+            </div>
+            <div class="mode-stat-card">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#a78bfa;border-radius:3px 0 0 3px"></div>
+              <div class="mode-stat-value" style="color:#a78bfa">0</div>
+              <div class="mode-stat-label">"Can you repeat that?"</div>
+              <div class="mode-stat-sub">Context card pre-loads before agent picks up</div>
+            </div>
+            <div class="mode-stat-card">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#a78bfa;border-radius:3px 0 0 3px"></div>
+              <div class="mode-stat-value" style="color:#a78bfa">~$1.80</div>
+              <div class="mode-stat-label">Per handoff</div>
+              <div class="mode-stat-sub">AI phase + context prep included</div>
+            </div>
+            <div class="mode-volume-bar">
+              <div class="mode-volume-label">Typical call mix</div>
+              <div class="mode-volume-track">
+                <div class="mode-volume-fill"
+                     style="width:8%;background:#a78bfa"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span class="mode-volume-pct" style="color:#a78bfa">5–10%</span>
+                <span style="font-size:11px;color:var(--dim)">of total volume</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── PANEL 4: OUTBOUND ──────────────────────────────────────── -->
+      <div class="mode-panel"
+           role="tabpanel"
+           id="panel-outbound"
+           aria-labelledby="tab-outbound">
+        <div class="mode-panel-grid">
+
+          <div class="mode-content">
+            <div class="mode-content-top"
+                 style="background:linear-gradient(90deg,var(--warn),rgba(245,158,11,.2))"></div>
+            <div class="mode-content-header">
+              <div class="mode-icon-lg"
+                   style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2)">📞</div>
+              <div>
+                <div class="mode-name">Scheduled Outbound</div>
+                <div class="mode-tagline">Proactive campaigns &mdash; call before they call you</div>
+              </div>
+            </div>
+            <div class="mode-cost-badge"
+                 style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:var(--warn)">
+              $0.03 per outbound call
+            </div>
+            <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px">
+              AI calls your customers before they call you. Each shipment gets a risk score —
+              delay history, carrier performance, weather, lane damage rates. High-risk shipments
+              get a proactive call: "We're running slightly late; your package arrives tomorrow."
+              That one call eliminates the complaint before it happens.
+            </p>
+            <div class="mode-split">
+              <div class="mode-split-col">
+                <h4 style="color:var(--warn)">AI handles</h4>
+                <ul>
+                  <li>Risk-scores each shipment</li>
+                  <li>Schedules call timing</li>
+                  <li>Delivers scripted message</li>
+                  <li>Listens for escalation trigger</li>
+                  <li>Logs confirmation / no-answer</li>
+                </ul>
+              </div>
+              <div class="mode-split-col">
+                <h4 style="color:var(--warn)">Use cases</h4>
+                <ul>
+                  <li>Delivery notifications</li>
+                  <li>Appointment reminders</li>
+                  <li>CSAT surveys post-delivery</li>
+                  <li>Callback promise fulfilment</li>
+                </ul>
+              </div>
+            </div>
+            <div class="mode-verticals">
+              <span class="mode-verticals-label">Best for</span>
+              <span class="mode-vertical-tag">Logistics / 3PL</span>
+              <span class="mode-vertical-tag">Healthcare</span>
+              <span class="mode-vertical-tag">Property Mgmt</span>
+            </div>
+          </div>
+
+          <div class="mode-stats">
+            <div class="mode-stat-card">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--warn);border-radius:3px 0 0 3px"></div>
+              <div class="mode-stat-value" style="color:var(--warn)">30–40%</div>
+              <div class="mode-stat-label">Inbound volume eliminated</div>
+              <div class="mode-stat-sub">Proactive calls prevent Tier-1 inquiries</div>
+            </div>
+            <div class="mode-stat-card">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--warn);border-radius:3px 0 0 3px"></div>
+              <div class="mode-stat-value" style="color:var(--warn)">$0.03</div>
+              <div class="mode-stat-label">Per outbound call</div>
+              <div class="mode-stat-sub">Cheapest mode &mdash; no inbound infrastructure needed</div>
+            </div>
+            <div class="mode-stat-card">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--warn);border-radius:3px 0 0 3px"></div>
+              <div class="mode-stat-value" style="color:var(--warn)">AI</div>
+              <div class="mode-stat-label">Risk scores every shipment</div>
+              <div class="mode-stat-sub">Delay history, carrier, weather, lane data</div>
+            </div>
+            <div class="mode-volume-bar">
+              <div class="mode-volume-label">Typical deployment</div>
+              <div class="mode-volume-track">
+                <div class="mode-volume-fill"
+                     style="width:55%;background:var(--warn)"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span class="mode-volume-pct" style="color:var(--warn)">Varies</span>
+                <span style="font-size:11px;color:var(--dim)">set by campaign config</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /mode-panels -->
+
+    <!-- Mode mix hint -->
+    <div class="mode-mix-hint">
+      <strong>Recommended starting blend:</strong>
+      72% Autonomous &nbsp;·&nbsp; 20% Agent Assist &nbsp;·&nbsp; 8% Warm Handoff
+      &nbsp;·&nbsp; Outbound layered on top
+      &nbsp;&mdash;&nbsp; PrimeCore recalibrates this monthly based on your FCR data.
+    </div>
+
+    <!-- CCaaS + CRM bar -->
+    <div style="margin-top:24px;padding:20px 24px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;display:flex;gap:32px;flex-wrap:wrap;align-items:center">
       <div>
         <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--dim);margin-bottom:6px">Connects to your CCaaS</div>
         <div style="font-size:13px;color:var(--muted)">Five9 &middot; Genesys &middot; RingCentral &middot; 3CX &middot; Atento &middot; Bliss</div>
@@ -1480,6 +2203,85 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
       });
     });
   }
+
+})();
+
+
+
+/* ── 4-Mode Toggle ─────────────────────────────────────────────────────
+   Keyboard: arrow keys navigate tabs, Home/End jump to first/last.
+   Indicator: slides to active tab using getBoundingClientRect.
+   Panels:    cross-fade via CSS animation class swap.
+   ─────────────────────────────────────────────────────────────────────── */
+(function() {
+  'use strict';
+
+  var tabs       = Array.from(document.querySelectorAll('#modeTabs .mode-tab'));
+  var panels     = Array.from(document.querySelectorAll('.mode-panel'));
+  var indicator  = document.getElementById('modeIndicator');
+  var tabStrip   = document.getElementById('modeTabs');
+  if (!tabs.length) return;
+
+  function moveIndicator(tab) {
+    if (!indicator || !tabStrip) return;
+    var stripRect = tabStrip.getBoundingClientRect();
+    var tabRect   = tab.getBoundingClientRect();
+    indicator.style.width  = tabRect.width  + 'px';
+    indicator.style.transform = 'translateX(' +
+      (tabRect.left - stripRect.left - (parseFloat(getComputedStyle(tabStrip).paddingLeft) || 5)) +
+      'px)';
+  }
+
+  function activateTab(idx) {
+    tabs.forEach(function(t, i) {
+      var isActive = i === idx;
+      t.classList.toggle('active', isActive);
+      t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      t.setAttribute('tabindex', isActive ? '0' : '-1');
+    });
+    panels.forEach(function(p, i) {
+      var isActive = i === idx;
+      p.classList.toggle('active', isActive);
+    });
+    moveIndicator(tabs[idx]);
+  }
+
+  /* Click */
+  tabs.forEach(function(tab, idx) {
+    tab.addEventListener('click', function() { activateTab(idx); });
+  });
+
+  /* Keyboard: arrow navigation (ARIA tablist pattern) */
+  tabStrip.addEventListener('keydown', function(e) {
+    var cur = tabs.findIndex(function(t) { return t === document.activeElement; });
+    if (cur < 0) return;
+    var next = cur;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      next = (cur + 1) % tabs.length;
+      e.preventDefault();
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      next = (cur - 1 + tabs.length) % tabs.length;
+      e.preventDefault();
+    } else if (e.key === 'Home') {
+      next = 0; e.preventDefault();
+    } else if (e.key === 'End') {
+      next = tabs.length - 1; e.preventDefault();
+    }
+    if (next !== cur) { activateTab(next); tabs[next].focus(); }
+  });
+
+  /* Set initial indicator position after fonts load */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function() { moveIndicator(tabs[0]); });
+  } else {
+    setTimeout(function() { moveIndicator(tabs[0]); }, 100);
+  }
+
+  /* Reposition on resize */
+  window.addEventListener('resize', function() {
+    var active = tabs.findIndex(function(t) { return t.classList.contains('active'); });
+    if (active >= 0) moveIndicator(tabs[active]);
+  }, { passive: true });
 
 })();
 
