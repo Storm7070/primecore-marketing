@@ -349,16 +349,25 @@ function setTrustLang(lang, btn) {
   if (panel) panel.classList.add('active');
   document.getElementById('htmlRoot').setAttribute('lang', lang === 'pt' ? 'pt-BR' : lang);
   var s = TRUST_STRINGS[lang] || TRUST_STRINGS.en;
-  document.getElementById('backLink').textContent = s.back;
+  var backEl = document.getElementById('backLink');
+  backEl.textContent = s.back;
+  // Update back link href to return to correct language homepage
+  var homeMap = { en: '/', es: '/es/', pt: '/pt-br/' };
+  backEl.href = homeMap[lang] || '/';
   document.getElementById('trustFootNote').textContent = s.foot;
+  // Update page title
+  var titles = { en: 'Trust & Security | PrimeCore Intelligence', es: 'Seguridad y Confianza | PrimeCore Intelligence', pt: 'Segurança e Confiança | PrimeCore Intelligence' };
+  document.title = titles[lang] || titles.en;
   try { localStorage.setItem('pc-lang', lang); } catch(e){}
 }
 
-// Auto-detect from stored preference or browser
+// Auto-detect: URL ?lang= param → stored pref → browser language
 (function() {
+  var urlLang = new URLSearchParams(window.location.search).get('lang');
   var stored;
   try { stored = localStorage.getItem('pc-lang'); } catch(e){}
-  var lang = stored || (navigator.language || '').toLowerCase().split('-')[0];
+  var browserLang = (navigator.language || '').toLowerCase().split('-')[0];
+  var lang = urlLang || stored || browserLang;
   if (lang === 'es') {
     setTrustLang('es', document.querySelectorAll('.lang-btn')[1]);
   } else if (lang === 'pt') {

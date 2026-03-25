@@ -120,7 +120,11 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
 .lang-btn.active,.lang-btn:hover{border-color:var(--accent);color:var(--text)}
 @media(max-width:900px){.hero-grid,.features-grid,.pricing-grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.pricing-card.featured{transform:none}.nav-links{display:none}}
 @media(max-width:600px){.steps{grid-template-columns:1fr}.hero{padding:80px 0 60px}section{padding:64px 0}}
-  </style>
+  
+/* ── Currency display ─────────────────────────────────────────── */
+.price-local{display:block;font-size:13px;color:var(--accent2);margin-top:2px;font-weight:500}
+.price-note{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+</style>
 </head>
 <body>
 <nav>
@@ -128,6 +132,7 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
     <a class="nav-brand" href="/pt-br/"><span class="dot"></span>PrimeCore Intelligence</a>
     <ul class="nav-links">
       <li><a href="#plataforma">Plataforma</a></li>
+      <li><a href="#verticais">Verticais</a></li>
       <li><a href="#como-funciona">Como Funciona</a></li>
       <li><a href="#precos">Pre&ccedil;os</a></li>
       <li><a href="/roi">Calculadora ROI</a></li>
@@ -152,7 +157,7 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
         <p class="hero-sub">PrimeCore Intelligence oferece IA aut&ocirc;noma para opera&ccedil;&otilde;es de call center &mdash; orienta&ccedil;&atilde;o a agentes em tempo real, atendimento em 50+ idiomas e an&aacute;lise de desempenho para log&iacute;stica, sa&uacute;de e servi&ccedil;os financeiros. A maioria dos nossos clientes come&ccedil;a com 20 agentes. Seis meses depois, a IA faz o que antes precisava de 14.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="https://pilot.primecoreintelligence.com">Iniciar Piloto &mdash; 50% dto. M&ecirc;s 1</a>
-          <a class="btn btn-ghost" href="/assets/PrimeCore_LATAM_Enterprise_Pack_v1_3.pdf" target="_blank" rel="noopener">Baixar Pacote de Seguran&ccedil;a</a>
+          <a class="btn btn-ghost" href="mailto:security@primecoreintelligence.com?subject=Security%20Packet%20Request" target="_blank" rel="noopener">Baixar Pacote de Seguran&ccedil;a</a>
         </div>
       </div>
       <div class="hero-right">
@@ -478,6 +483,8 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
       <div class="pricing-card">
         <div class="pricing-tier">Starter</div>
         <div class="pricing-price"><sup>$</sup>2.400</div>
+        <span class="price-local" id="pt-p1-local">≈ R$ 12.000/mês</span>
+        <span class="price-note">Cobrado em USD · referência aprox.</span>
         <div class="pricing-period">/ m&ecirc;s &middot; at&eacute; 5.000 chamadas</div>
         <p class="pricing-desc">Para call centers testando IA com uma &uacute;nica fila ou idioma.</p>
         <ul class="pricing-features"><li>Assist&ecirc;ncia a agente em tempo real</li><li>At&eacute; 3 idiomas</li><li>1 integra&ccedil;&atilde;o CCaaS</li><li>Painel de desempenho</li><li>Suporte por e-mail</li></ul>
@@ -488,6 +495,8 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
         <div class="pricing-badge">Mais Popular</div>
         <div class="pricing-tier">Growth</div>
         <div class="pricing-price"><sup>$</sup>5.800</div>
+        <span class="price-local" id="pt-p2-local">≈ R$ 29.000/mês</span>
+        <span class="price-note">Cobrado em USD · referência aprox.</span>
         <div class="pricing-period">/ m&ecirc;s &middot; at&eacute; 20.000 chamadas</div>
         <p class="pricing-desc">Para filas multil&iacute;ngues em m&uacute;ltiplas plataformas CCaaS.</p>
         <ul class="pricing-features"><li>Atendimento aut&ocirc;nomo</li><li>At&eacute; 15 idiomas</li><li>3 integra&ccedil;&otilde;es CCaaS</li><li>Alertas de viola&ccedil;&atilde;o de SLA</li><li>Painel de governan&ccedil;a</li><li>Suporte Slack + e-mail</li></ul>
@@ -503,7 +512,7 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
         <a class="btn btn-ghost" style="width:100%;justify-content:center" href="mailto:sales@primecoreintelligence.com">Contatar Vendas</a>
       </div>
     </div>
-    <p style="text-align:center;margin-top:32px;font-size:13px;color:var(--dim)">Sem PAN/CVV &middot; PHI desativado por padr&atilde;o &middot; <a href="/assets/PrimeCore_LATAM_Enterprise_Pack_v1_3.pdf" style="color:var(--accent)" target="_blank" rel="noopener">Baixar Pacote de Seguran&ccedil;a &rarr;</a></p>
+    <p style="text-align:center;margin-top:32px;font-size:13px;color:var(--dim)">Sem PAN/CVV &middot; PHI desativado por padr&atilde;o &middot; <a href="mailto:security@primecoreintelligence.com?subject=Security%20Packet%20Request" style="color:var(--accent)" target="_blank" rel="noopener">Baixar Pacote de Seguran&ccedil;a &rarr;</a></p>
   </div>
 </section>
 
@@ -535,11 +544,11 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
       </div>
       <div class="comp-badge" role="listitem" tabindex="0" aria-expanded="false" onclick="toggleBadge(this)">
         <div class="badge-header"><span class="badge-icon">🔒</span><div><div class="badge-name">SOC 2 Tipo II</div><div class="badge-status status-roadmap">Roadmap 2026</div></div><span class="badge-chevron">▾</span></div>
-        <div class="badge-detail">Auditoria agendada para T3 2026. A infraestrutura Cloudflare mantém seu próprio SOC 2 Tipo II. <a href="/trust">Arquitetura de segurança completa →</a></div>
+        <div class="badge-detail">Auditoria agendada para T3 2026. A infraestrutura Cloudflare mantém seu próprio SOC 2 Tipo II. <a href="/trust?lang=pt">Arquitetura de segurança completa →</a></div>
       </div>
     </div>
     <p class="comp-footer-note">Sem PAN · Sem CVV · Sem PHI por padrão — Zero dados sensíveis armazenados sem configuração explícita</p>
-    <a class="comp-trust-link" href="/trust">Arquitetura de segurança completa →</a>
+    <a class="comp-trust-link" href="/trust?lang=pt">Arquitetura de segurança completa →</a>
   </div></div>
 </section>
 
@@ -569,7 +578,7 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
         <a href="https://pilot.primecoreintelligence.com">Piloto</a>
         <a href="https://status.primecoreintelligence.com">Status do Sistema</a>
         <a href="/roi">Calculadora ROI</a>
-        <a href="/trust">Seguran&ccedil;a</a>
+        <a href="/trust?lang=pt">Seguran&ccedil;a</a>
         <a href="/legal/?lang=pt">Legal e Termos</a>
         <a href="/legal/?lang=pt">Privacidade</a>
         <a href="mailto:support@primecoreintelligence.com">Suporte</a>
@@ -580,9 +589,122 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   </div>
 </footer>
 
+
 <script>
-(function(){var el=document.getElementById('liveTimer');if(!el)return;var s=134;setInterval(function(){s=(s+1)%(6*60);var m=Math.floor(s/60);var ss=String(s%60).padStart(2,'0');el.textContent=m+':'+ss;},1000);})();
-function setLang(l,b){document.querySelectorAll('.lang-btn').forEach(function(x){x.classList.remove('active')});if(b)b.classList.add('active');if(l==='en')window.location.href='/';if(l==='es')window.location.href='/es/';}
+/* ── Currency reference display (USD base → BRL) ─────────────────
+   Billing always in USD via Paddle. BRL shown for reference only.
+   Update rates quarterly.                                           */
+(function() {
+  var RATE = 5.0; // USD → BRL (approx, update quarterly)
+  var UPDATED = 'Mar 2026';
+  
+  var pairs = [
+    { id: 'pt-p1-local', usd: 2400 },
+    { id: 'pt-p2-local', usd: 5800 }
+  ];
+  pairs.forEach(function(p) {
+    var el = document.getElementById(p.id);
+    if (el) {
+      var brl = Math.round(p.usd * RATE / 100) * 100;
+      el.textContent = '≈ R$ ' + brl.toLocaleString('pt-BR') + '/mês';
+      el.title = 'Câmbio ref.: 1 USD = R$ ' + RATE + ' · ' + UPDATED;
+    }
+  });
+
+  var pricingSection = document.getElementById('precos');
+  if (pricingSection) {
+    var note = document.createElement('p');
+    note.style.cssText = 'text-align:center;font-size:11px;color:var(--dim);margin-top:24px;letter-spacing:.3px';
+    note.innerHTML = 'Preços em USD. Equivalência em BRL é aproximada (1 USD ≈ R$ ' + RATE + ' · ' + UPDATED + '). Cobrado em USD via Paddle.';
+    var grid = pricingSection.querySelector('.pricing-grid');
+    if (grid) grid.after(note);
+  }
+})();
+</script>
+<script>
+window.setLang = function(lang, btn) {
+  document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  var map = { en: '/', es: '/es/', pt: '/pt-br/' };
+  if (map[lang]) window.location.href = map[lang];
+};
+
+/* ── ROI industry presets ── */
+window.setIndustry = function(btn, ind) {
+  document.querySelectorAll('.roi-preset').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var benchmarks = {
+    logistics:  { vol: 22000, agents: 12, cost: 1800 },
+    healthcare: { vol: 8000,  agents: 6,  cost: 2200 },
+    financial:  { vol: 15000, agents: 10, cost: 2500 },
+    retail:     { vol: 30000, agents: 18, cost: 1400 },
+    fleet:      { vol: 10000, agents: 8,  cost: 1600 },
+    bpo:        { vol: 50000, agents: 35, cost: 1200 }
+  };
+  var b = benchmarks[ind] || benchmarks.logistics;
+  var volEl  = document.getElementById('roiVol')    || document.querySelector('.roi-slider[data-metric="vol"]');
+  var agEl   = document.getElementById('roiAgents') || document.querySelector('.roi-slider[data-metric="agents"]');
+  var costEl = document.getElementById('roiCost')   || document.querySelector('.roi-slider[data-metric="cost"]');
+  if (volEl)  { volEl.value  = b.vol;    volEl.dispatchEvent(new Event('input')); }
+  if (agEl)   { agEl.value   = b.agents; agEl.dispatchEvent(new Event('input')); }
+  if (costEl) { costEl.value = b.cost;   costEl.dispatchEvent(new Event('input')); }
+};
+
+/* ── Simulator ── */
+window.startSim = function() {
+  var btn = document.querySelector('.sim-start-btn');
+  var log = document.querySelector('.sim-log');
+  var activeSim = document.querySelector('.sim-tab.active');
+  var industry = activeSim ? (activeSim.dataset.scenario || 'logistics') : 'logistics';
+  var scripts = {
+    logistics:  ['📞 Chamada recebida — rastreamento de envio','🤖 IA: Intenção classificada → rastreamento','🔍 Consultando WMS para pedido #TRK-8821...','✅ Janela de entrega confirmada: Amanhã 14–16h','📋 FCR registrado · $0,04 · 87s'],
+    healthcare: ['📞 Chamada recebida — agendamento','🤖 IA: Intenção classificada → consulta','📅 Verificando disponibilidade do médico...','✅ Consulta agendada: Dr. Silva, 28 de março','📋 FCR registrado · $0,04 · 72s'],
+    financial:  ['📞 Chamada recebida — consulta de conta','🤖 IA: Intenção classificada → saldo','🔐 Identidade verificada via token','✅ Saldo confirmado · sem alertas de fraude','📋 FCR registrado · $0,04 · 61s'],
+    latam:      ['📞 Llamada entrante — consulta en español','🤖 IA: Idioma detectado → español','🔍 Clasificando intención...','✅ Consulta resuelta · sin agente','📋 FCR registrado · $0,04 · 83s']
+  };
+  var steps = scripts[industry] || scripts.logistics;
+  if (btn) btn.disabled = true;
+  if (log) log.innerHTML = '';
+  var i = 0;
+  function next() {
+    if (i >= steps.length) { if (btn) btn.disabled = false; return; }
+    var line = document.createElement('div');
+    line.className = 'sim-log-line';
+    line.textContent = steps[i++];
+    if (log) log.appendChild(line);
+    setTimeout(next, 900);
+  }
+  next();
+};
+
+/* ── switchScenario ── */
+window.switchScenario = function(btn, scenario) {
+  document.querySelectorAll('.sim-tab').forEach(function(t) {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
+};
+
+/* ── Social carousel nav ── */
+(function() {
+  var cards = document.querySelectorAll('.social-card');
+  var dots  = document.querySelectorAll('.social-dot');
+  var cur = 0;
+  if (!cards.length) return;
+  function go(n) {
+    cur = (n + cards.length) % cards.length;
+    cards.forEach(function(c, i) { c.classList.toggle('active', i === cur); });
+    dots.forEach(function(d, i)  { d.classList.toggle('active', i === cur); d.setAttribute('aria-selected', i === cur); });
+  }
+  var pBtn = document.getElementById('socialPrev-pt');
+  var nBtn = document.getElementById('socialNext-pt');
+  if (pBtn) pBtn.onclick = function() { go(cur - 1); };
+  if (nBtn) nBtn.onclick = function() { go(cur + 1); };
+  dots.forEach(function(d, i) { d.onclick = function() { go(i); }; });
+  setInterval(function() { go(cur + 1); }, 6000);
+})();
 </script>
 
 <script>

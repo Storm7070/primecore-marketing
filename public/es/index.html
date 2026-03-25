@@ -127,7 +127,14 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
 .lang-btn.active,.lang-btn:hover{border-color:var(--accent);color:var(--text)}
 @media(max-width:900px){.hero-grid,.features-grid,.verticals-grid,.pricing-grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.pricing-card.featured{transform:none}.nav-links{display:none}}
 @media(max-width:600px){.steps{grid-template-columns:1fr}.hero{padding:80px 0 60px}section{padding:64px 0}}
-  </style>
+  
+/* ── Currency display ─────────────────────────────────────────── */
+.price-local{display:block;font-size:13px;color:var(--accent2);margin-top:2px;font-weight:500}
+.price-note{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+.currency-toggle{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.cur-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:3px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:var(--font-body);transition:all .15s;font-weight:500}
+.cur-btn.active,.cur-btn:hover{border-color:var(--accent);color:var(--text)}
+</style>
 </head>
 <body>
 
@@ -160,7 +167,7 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
         <p class="hero-sub">PrimeCore Intelligence ofrece IA aut&#243;noma para operaciones de centros de contacto &mdash; gu&#237;a de agentes en tiempo real, manejo de llamadas en 50+ idiomas y anal&#237;tica de rendimiento para log&#237;stica, salud y servicios financieros. La mayor&#237;a de nuestros clientes empieza con 20 agentes. Seis meses despu&#233;s, la IA gestiona lo que antes requer&#237;a 14.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="https://pilot.primecoreintelligence.com">Iniciar Piloto &mdash; 50% dto. Mes 1</a>
-          <a class="btn btn-ghost" href="/assets/PrimeCore_LATAM_Enterprise_Pack_v1_3.pdf" target="_blank" rel="noopener">Descargar Paquete de Seguridad</a>
+          <a class="btn btn-ghost" href="mailto:security@primecoreintelligence.com?subject=Security%20Packet%20Request" target="_blank" rel="noopener">Descargar Paquete de Seguridad</a>
         </div>
       </div>
       <div class="hero-right">
@@ -553,6 +560,8 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
       <div class="pricing-card">
         <div class="pricing-tier">Starter</div>
         <div class="pricing-price"><sup>$</sup>2,400</div>
+        <span class="price-local" id="es-p1-local">≈ MXN 40,800/mes</span>
+        <span class="price-note">Cobrado en USD · referencia aprox.</span>
         <div class="pricing-period">/ mes &middot; hasta 5,000 llamadas</div>
         <p class="pricing-desc">Para centros de contacto que prueban IA con una sola cola o idioma.</p>
         <ul class="pricing-features"><li>Asistencia a agente en tiempo real</li><li>Hasta 3 idiomas</li><li>1 integraci&#243;n CCaaS</li><li>Dashboard de rendimiento</li><li>Soporte por correo</li></ul>
@@ -563,6 +572,8 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
         <div class="pricing-badge">M&#225;s Popular</div>
         <div class="pricing-tier">Growth</div>
         <div class="pricing-price"><sup>$</sup>5,800</div>
+        <span class="price-local" id="es-p2-local">≈ MXN 98,600/mes</span>
+        <span class="price-note">Cobrado en USD · referencia aprox.</span>
         <div class="pricing-period">/ mes &middot; hasta 20,000 llamadas</div>
         <p class="pricing-desc">Para colas multiling&#252;es en m&#250;ltiples plataformas CCaaS.</p>
         <ul class="pricing-features"><li>Manejo aut&#243;nomo de llamadas</li><li>Hasta 15 idiomas</li><li>3 integraciones CCaaS</li><li>Alertas de incumplimiento SLA</li><li>Dashboard de gobernanza</li><li>Soporte Slack + correo</li></ul>
@@ -578,7 +589,7 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
         <a class="btn btn-ghost" style="width:100%;justify-content:center" href="mailto:sales@primecoreintelligence.com">Contactar Ventas</a>
       </div>
     </div>
-    <p style="text-align:center;margin-top:32px;font-size:13px;color:var(--dim)">Sin PAN/CVV &middot; PHI deshabilitado por defecto &middot; Controles de protecci&#243;n del Agentic Engineer en todos los planes &middot; <a href="/assets/PrimeCore_LATAM_Enterprise_Pack_v1_3.pdf" style="color:var(--accent)" target="_blank" rel="noopener">Descargar Paquete de Seguridad &rarr;</a></p>
+    <p style="text-align:center;margin-top:32px;font-size:13px;color:var(--dim)">Sin PAN/CVV &middot; PHI deshabilitado por defecto &middot; Controles de protecci&#243;n del Agentic Engineer en todos los planes &middot; <a href="mailto:security@primecoreintelligence.com?subject=Security%20Packet%20Request" style="color:var(--accent)" target="_blank" rel="noopener">Descargar Paquete de Seguridad &rarr;</a></p>
   </div>
 </section>
 
@@ -646,12 +657,12 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
             <span class="badge-chevron">&#9660;</span>
           </div>
           <div class="badge-detail">
-            Auditoría programada para Q3 2026. La infraestructura subyacente de Cloudflare mantiene su propio SOC 2 Tipo II. <a href="/trust">Arquitectura de seguridad completa →</a>
+            Auditoría programada para Q3 2026. La infraestructura subyacente de Cloudflare mantiene su propio SOC 2 Tipo II. <a href="/trust?lang=es">Arquitectura de seguridad completa →</a>
           </div>
         </div>
       </div>
       <p class="comp-footer-note">Sin PAN · Sin CVV · Sin PHI por defecto — Cero datos sensibles almacenados sin configuración explícita</p>
-      <a class="comp-trust-link" href="/trust">Arquitectura de seguridad completa →</a>
+      <a class="comp-trust-link" href="/trust?lang=es">Arquitectura de seguridad completa →</a>
     </div>
   </div>
 </section>
@@ -686,7 +697,7 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
         <a href="mailto:support@primecoreintelligence.com">Soporte</a>
         <a href="/legal/?lang=es">Legal y T&eacute;rminos</a>
         <a href="/legal/?lang=es">Privacidad</a>
-        <a href="/trust">Confianza &amp; Seguridad</a>
+        <a href="/trust?lang=es">Confianza &amp; Seguridad</a>
         <a href="/roi">Calculadora ROI</a>
         <a href="mailto:support@primecoreintelligence.com">Soporte</a>
         <a href="mailto:billing@primecoreintelligence.com">Facturaci&#243;n</a>
@@ -703,17 +714,6 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   var secs=134;
   setInterval(function(){secs=(secs+1)%(6*60);var m=Math.floor(secs/60);var s=String(secs%60).padStart(2,'0');el.textContent=m+':'+s;},1000);
 })();
-
-function(lang, btn) {
-  document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
-  if (btn) btn.classList.add('active');
-  var map = { en: '/', es: '/es/', pt: '/pt-br/' };
-  if (map[lang]) window.location.href = map[lang];
-};);
-  if(btn)btn.classList.add('active');
-  if(lang==='en')window.location.href='/';
-  if(lang==='pt')window.location.href='/pt-br/';
-}
 </script>
 
 <script>
@@ -790,6 +790,132 @@ function toggleBadge(el) {
   if (wrap) obs.observe(wrap);
 })();
 </script>
-<script>window.setLang=function(lang,btn){document.querySelectorAll(".lang-btn").forEach(function(b){b.classList.remove("active")});if(btn)btn.classList.add("active");var m={en:"/",es:"/es/",pt:"/pt-br/"};if(m[lang])window.location.href=m[lang];};</script>
+
+<script>
+/* ── Currency reference display (USD base → MXN) ─────────────────
+   Rates hardcoded, labeled approximate. Billing always in USD via Paddle.
+   Update rates quarterly in this block.                                  */
+(function() {
+  var RATE = 17.0; // USD → MXN (approx, update quarterly)
+  var UPDATED = 'Mar 2026';
+  
+  // Pricing cards
+  var pairs = [
+    { id: 'es-p1-local', usd: 2400 },
+    { id: 'es-p2-local', usd: 5800 }
+  ];
+  pairs.forEach(function(p) {
+    var el = document.getElementById(p.id);
+    if (el) {
+      var mxn = Math.round(p.usd * RATE / 100) * 100;
+      el.textContent = '≈ MXN ' + mxn.toLocaleString('es-MX') + '/mes';
+      el.title = 'Tipo de cambio ref.: 1 USD = MXN ' + RATE + ' · ' + UPDATED;
+    }
+  });
+  
+  // ROI calculator subscription display
+  var roiSub = document.getElementById('rb-sub-es');
+  var roiPrice = document.getElementById('roi-plan-price-es');
+  // These are already USD — add MXN note dynamically if present
+  
+  // Currency disclaimer on pricing section
+  var pricingSection = document.getElementById('precios');
+  if (pricingSection) {
+    var note = document.createElement('p');
+    note.style.cssText = 'text-align:center;font-size:11px;color:var(--dim);margin-top:24px;letter-spacing:.3px';
+    note.innerHTML = 'Precios en USD. La equivalencia en MXN es aproximada (1 USD ≈ MXN ' + RATE + ' · ' + UPDATED + '). Cobrado en USD a través de Paddle.';
+    var grid = pricingSection.querySelector('.pricing-grid');
+    if (grid) grid.after(note);
+  }
+})();
+</script>
+<script>
+window.setLang = function(lang, btn) {
+  document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  var map = { en: '/', es: '/es/', pt: '/pt-br/' };
+  if (map[lang]) window.location.href = map[lang];
+};
+
+/* ── ROI industry presets ── */
+window.setIndustry = function(btn, ind) {
+  document.querySelectorAll('.roi-preset').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var benchmarks = {
+    logistics:  { vol: 22000, agents: 12, cost: 1800 },
+    healthcare: { vol: 8000,  agents: 6,  cost: 2200 },
+    financial:  { vol: 15000, agents: 10, cost: 2500 },
+    retail:     { vol: 30000, agents: 18, cost: 1400 },
+    fleet:      { vol: 10000, agents: 8,  cost: 1600 },
+    bpo:        { vol: 50000, agents: 35, cost: 1200 }
+  };
+  var b = benchmarks[ind] || benchmarks.logistics;
+  var volEl = document.getElementById('roiVol') || document.querySelector('.roi-slider[data-metric="vol"]');
+  var agEl  = document.getElementById('roiAgents') || document.querySelector('.roi-slider[data-metric="agents"]');
+  var costEl = document.getElementById('roiCost') || document.querySelector('.roi-slider[data-metric="cost"]');
+  if (volEl)  { volEl.value  = b.vol;    if (volEl.oninput)  volEl.oninput();  else volEl.dispatchEvent(new Event('input')); }
+  if (agEl)   { agEl.value   = b.agents; if (agEl.oninput)   agEl.oninput();   else agEl.dispatchEvent(new Event('input')); }
+  if (costEl) { costEl.value = b.cost;   if (costEl.oninput) costEl.oninput(); else costEl.dispatchEvent(new Event('input')); }
+};
+
+/* ── Simulator ── */
+window.startSim = function() {
+  var btn = document.getElementById('simStartBtn') || document.querySelector('.sim-start-btn');
+  var log = document.querySelector('.sim-log') || document.querySelector('#sim-log');
+  var activeSim = document.querySelector('.sim-tab.active');
+  var industry = activeSim ? (activeSim.dataset.scenario || activeSim.dataset.sim || 'logistics') : 'logistics';
+  var scripts = {
+    logistics:  ['📞 Incoming call — tracking inquiry','🤖 AI: Intent classified → shipment tracking','🔍 Querying WMS for order #TRK-8821...','✅ Delivery window confirmed: Tomorrow 2–4 PM','📋 FCR logged · $0.04 · 87s'],
+    healthcare: ['📞 Incoming call — appointment request','🤖 AI: Intent classified → scheduling','📅 Checking provider availability...','✅ Appointment booked: Dr. López, March 28','📋 FCR logged · $0.04 · 72s'],
+    financial:  ['📞 Incoming call — account inquiry','🤖 AI: Intent classified → balance check','🔐 Identity verified via IVR token','✅ Balance confirmed · no fraud flags','📋 FCR logged · $0.04 · 61s'],
+    latam:      ['📞 Llamada entrante — consulta en español','🤖 IA: Idioma detectado → español (MX)','🔍 Clasificando intención en tiempo real...','✅ Consulta resuelta · sin agente','📋 FCR registrado · $0.04 · 83s']
+  };
+  var steps = scripts[industry] || scripts.logistics;
+  if (btn) btn.disabled = true;
+  if (log) log.innerHTML = '';
+  var i = 0;
+  function next() {
+    if (i >= steps.length) {
+      if (btn) btn.disabled = false;
+      return;
+    }
+    var line = document.createElement('div');
+    line.className = 'sim-log-line';
+    line.textContent = steps[i++];
+    if (log) log.appendChild(line);
+    setTimeout(next, 900);
+  }
+  next();
+};
+
+/* ── switchScenario (sim tabs) ── */
+window.switchScenario = function(btn, scenario) {
+  document.querySelectorAll('.sim-tab').forEach(function(t) {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected', 'true');
+};
+
+/* ── Social carousel nav ── */
+(function() {
+  var cards = document.querySelectorAll('.social-card');
+  var dots  = document.querySelectorAll('.social-dot');
+  var cur = 0;
+  if (!cards.length) return;
+  function go(n) {
+    cur = (n + cards.length) % cards.length;
+    cards.forEach(function(c, i) { c.classList.toggle('active', i === cur); });
+    dots.forEach(function(d, i)  { d.classList.toggle('active', i === cur); d.setAttribute('aria-selected', i === cur); });
+  }
+  var pBtn = document.getElementById('socialPrev-es');
+  var nBtn = document.getElementById('socialNext-es');
+  if (pBtn) pBtn.onclick = function() { go(cur - 1); };
+  if (nBtn) nBtn.onclick = function() { go(cur + 1); };
+  dots.forEach(function(d, i) { d.onclick = function() { go(i); }; });
+  setInterval(function() { go(cur + 1); }, 6000);
+})();
+</script>
 </body>
 </html>
