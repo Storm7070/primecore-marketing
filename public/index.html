@@ -3189,15 +3189,25 @@ html{scroll-behavior:smooth}
               aria-label="Close demo video"
               style="background:rgba(255,255,255,.08);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center">&#215;</button>
     </div>
-    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:14px">
-      <!-- Replace with actual embed when video is ready -->
-      <div style="text-align:center">
-        <div style="font-size:48px;margin-bottom:12px;opacity:.3">&#9654;</div>
-        <div>Demo video coming soon</div>
-        <div style="margin-top:8px;font-size:12px">
-          <a href="https://pilot.primecoreintelligence.com" style="color:var(--accent)">Start your pilot instead &rarr;</a>
-        </div>
+    <!-- Animated product demo — 60s scripted walkthrough -->
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);aspect-ratio:16/9;position:relative;overflow:hidden" id="demoScreen">
+      <canvas id="demoCanvas" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
+      <div id="demoOverlay" style="position:absolute;inset:0;display:flex;flex-direction:column;pointer-events:none"></div>
+      <div id="demoControls" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:10px;pointer-events:all;z-index:10">
+        <button id="demoPauseBtn" onclick="demoPause()"
+                style="background:rgba(45,122,255,.2);border:1px solid rgba(45,122,255,.4);color:#fff;padding:6px 16px;border-radius:6px;font-size:12px;cursor:pointer;font-family:var(--font-body)">
+          ⏸ Pause
+        </button>
+        <button onclick="demoRestart()"
+                style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:var(--muted);padding:6px 16px;border-radius:6px;font-size:12px;cursor:pointer;font-family:var(--font-body)">
+          ↺ Restart
+        </button>
+        <a href="https://pilot.primecoreintelligence.com"
+           style="background:var(--accent);border:none;color:#fff;padding:6px 16px;border-radius:6px;font-size:12px;cursor:pointer;text-decoration:none;font-family:var(--font-body);pointer-events:all">
+          Start Pilot →
+        </a>
       </div>
+      <div id="demoProgressBar" style="position:absolute;bottom:0;left:0;height:2px;background:var(--accent);width:0%;transition:none;z-index:10"></div>
     </div>
   </div>
 </div>
@@ -4723,7 +4733,7 @@ html{scroll-behavior:smooth}
         <a href="/roi">ROI Calculator</a>
       </div>
     </div>
-    <p class="footer-legal">&copy; 2026 PrimeCore Intelligence S.A. All rights reserved. PrimeCore Intelligence S.A. is a holding company. Not legal, medical, financial, or compliance advice. PrimeCore Intelligence is an AI-powered software platform. Results depend on deployment configuration. Pilot terms apply.</p>
+    <p class="footer-legal">&copy; 2026 PrimeCore Intelligence S.A. &middot; Guatemala City, Guatemala &middot; All rights reserved. Not legal, medical, financial, or compliance advice. PrimeCore Intelligence is an AI-powered software platform. Results depend on deployment configuration. Pilot terms apply.</p>
   </div>
 </footer>
 
@@ -6280,6 +6290,316 @@ window.setLang = function(lang, btn) {
   var map = { en: '/', es: '/es/', pt: '/pt-br/' };
   if (map[lang]) window.location.href = map[lang];
 };
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATED PRODUCT DEMO — 60-second scripted walkthrough
+   Simulates: shadow mode setup → live call → FCR dashboard
+═══════════════════════════════════════════════════════════════ */
+(function() {
+  var canvas, ctx, W, H, raf, paused = false;
+  var tick = 0, totalTicks = 3600; // 60s at 60fps
+  var phase = 0;
+
+  var PHASES = [
+    { start:0,    end:600,  label:'Step 1 of 4 — Shadow Mode Activation',   color:'#2d7aff' },
+    { start:600,  end:1500, label:'Step 2 of 4 — Live Call (Mode 1)',        color:'#00c9a7' },
+    { start:1500, end:2400, label:'Step 3 of 4 — FCR Baseline Report',       color:'#2d7aff' },
+    { start:2400, end:3600, label:'Step 4 of 4 — Production Dashboard',      color:'#00c9a7' },
+  ];
+
+  // Typewriter lines per phase
+  var LINES = [
+    [ // Phase 0 — shadow mode
+      { t:60,  text:'Connecting to Five9 webhook endpoint...',      color:'#7a93b8' },
+      { t:180, text:'✓ Webhook verified · HMAC-SHA256 confirmed',   color:'#00c9a7' },
+      { t:300, text:'Shadow mode active · 0 side-effects',          color:'#00c9a7' },
+      { t:450, text:'Monitoring 1st call events...',                 color:'#7a93b8' },
+      { t:540, text:'✓ First event received · TRK-8812 inbound',    color:'#2d7aff' },
+    ],
+    [ // Phase 1 — live call
+      { t:640,  text:'[CALLER]  Hi, my delivery was supposed to arrive yesterday', color:'#b8c3d9' },
+      { t:780,  text:'[AI]  Locating order TRK-8812 in WMS...',               color:'#2d7aff' },
+      { t:900,  text:'[AI]  Found. Left Memphis DC at 06:14. 12 stops away.',  color:'#2d7aff' },
+      { t:1050, text:'[AI]  Estimated arrival: 2:00–4:00 PM today.',           color:'#2d7aff' },
+      { t:1200, text:'[AI]  Sending SMS notification to file number.',         color:'#2d7aff' },
+      { t:1380, text:'✓ FCR ·  $0.04 ·  1m 38s ·  0 agents involved',        color:'#00c9a7' },
+    ],
+    [ // Phase 2 — FCR report
+      { t:1540, text:'Generating 24h FCR baseline report...',         color:'#7a93b8' },
+      { t:1660, text:'Calls analysed: 847',                           color:'#b8c3d9' },
+      { t:1780, text:'Mode 1 eligible:  89.3% of volume',             color:'#00c9a7' },
+      { t:1900, text:'Projected monthly savings:  $17,200',           color:'#00c9a7' },
+      { t:2050, text:'AHT improvement:  5m 42s → 1m 38s',            color:'#00c9a7' },
+      { t:2200, text:'Recommendation: go-live on Tier-1 queue',       color:'#2d7aff' },
+    ],
+    [ // Phase 3 — dashboard
+      { t:2450, text:'Production mode · Tier-1 queue live',           color:'#00c9a7' },
+      { t:2600, text:'Calls handled today:  1,847,293',               color:'#b8c3d9' },
+      { t:2750, text:'SLA compliance:  99.4%',                        color:'#00c9a7' },
+      { t:2900, text:'Active languages:  14',                         color:'#b8c3d9' },
+      { t:3050, text:'Cost per call:  $0.04',                         color:'#00c9a7' },
+      { t:3200, text:'━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',           color:'#1e2e4a' },
+      { t:3280, text:'Ready to deploy in your contact center →',      color:'#2d7aff' },
+    ]
+  ];
+
+  // Bars for dashboard phase
+  var BARS = [
+    { label:'FCR Rate',    pct:89, color:'#2d7aff' },
+    { label:'Mode 1',      pct:72, color:'#00c9a7' },
+    { label:'SLA',         pct:99, color:'#00c9a7' },
+    { label:'Cost/call',   pct:96, color:'#2d7aff' },
+  ];
+
+  function setup() {
+    canvas = document.getElementById('demoCanvas');
+    if (!canvas) return;
+    ctx = canvas.getContext('2d');
+    resize();
+    window.addEventListener('resize', resize);
+  }
+
+  function resize() {
+    if (!canvas) return;
+    W = canvas.width  = canvas.offsetWidth  || canvas.parentElement.offsetWidth;
+    H = canvas.height = canvas.offsetHeight || canvas.parentElement.offsetHeight;
+  }
+
+  function getPhase(t) {
+    for (var i = 0; i < PHASES.length; i++) {
+      if (t >= PHASES[i].start && t < PHASES[i].end) return i;
+    }
+    return PHASES.length - 1;
+  }
+
+  function draw() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, W, H);
+
+    var p = getPhase(tick);
+
+    // Background
+    var bg = ctx.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0, '#060c1a');
+    bg.addColorStop(1, '#0a1628');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // Grid
+    ctx.strokeStyle = 'rgba(45,122,255,0.04)';
+    ctx.lineWidth = 0.5;
+    for (var gx = 0; gx < W; gx += 32) {
+      ctx.beginPath(); ctx.moveTo(gx,0); ctx.lineTo(gx,H); ctx.stroke();
+    }
+    for (var gy = 0; gy < H; gy += 32) {
+      ctx.beginPath(); ctx.moveTo(0,gy); ctx.lineTo(W,gy); ctx.stroke();
+    }
+
+    // Phase label bar
+    ctx.fillStyle = 'rgba(13,22,40,0.95)';
+    roundRect(ctx, 12, 12, W - 24, 32, 6);
+    ctx.fillStyle = PHASES[p].color;
+    ctx.font = '500 11px ' + getComputedStyle(document.body).fontFamily;
+    ctx.fillText(PHASES[p].label, 22, 32);
+
+    // Progress within phase
+    var phStart = PHASES[p].start, phEnd = PHASES[p].end;
+    var phPct = (tick - phStart) / (phEnd - phStart);
+    ctx.fillStyle = 'rgba(45,122,255,0.15)';
+    roundRect(ctx, 12, 50, W - 24, 3, 1.5);
+    ctx.fillStyle = PHASES[p].color;
+    roundRect(ctx, 12, 50, (W - 24) * phPct, 3, 1.5);
+
+    // Terminal / content area
+    var termY = 68, termH = H - 80;
+    ctx.fillStyle = 'rgba(4,8,18,0.7)';
+    roundRect(ctx, 12, termY, W - 24, termH, 8);
+
+    if (p <= 2) {
+      // Terminal output
+      drawTerminal(p, termY + 16);
+    } else {
+      // Dashboard view
+      drawDashboard(termY + 16);
+    }
+
+    // Cursor blink
+    if (Math.floor(tick / 30) % 2 === 0) {
+      var visibleLines = getLinesVisible(p);
+      if (visibleLines.length > 0) {
+        var last = visibleLines[visibleLines.length - 1];
+        ctx.fillStyle = last.color || '#7a93b8';
+        ctx.font = '13px monospace';
+        var lw = ctx.measureText(last.text).width;
+        var ly = termY + 24 + (visibleLines.length - 1) * 22;
+        ctx.fillRect(28 + lw, ly - 11, 7, 13);
+      }
+    }
+
+    // Overall progress bar
+    var prog = document.getElementById('demoProgressBar');
+    if (prog) prog.style.width = ((tick / totalTicks) * 100) + '%';
+
+    if (!paused) {
+      tick++;
+      if (tick >= totalTicks) tick = 0;
+    }
+    raf = requestAnimationFrame(draw);
+  }
+
+  function getLinesVisible(p) {
+    return (LINES[p] || []).filter(function(l) { return tick >= l.t; });
+  }
+
+  function drawTerminal(p, startY) {
+    var lines = getLinesVisible(p);
+    var lineH = 22;
+    var maxLines = Math.floor((H - startY - 90) / lineH);
+    var show = lines.slice(-maxLines);
+
+    ctx.font = '13px monospace';
+    show.forEach(function(line, i) {
+      ctx.fillStyle = line.color || '#7a93b8';
+      ctx.fillText(line.text, 28, startY + i * lineH);
+    });
+
+    // Typing effect on last line if still "arriving"
+    var all = LINES[p] || [];
+    var nextLine = all.find(function(l) { return tick < l.t; });
+    if (nextLine) {
+      var prev = all.filter(function(l) { return tick < l.t; })[0];
+      var prevDone = all.filter(function(l) { return tick >= l.t; });
+      if (prevDone.length > 0) {
+        // Show partial next if within 60 ticks
+        var lastDone = prevDone[prevDone.length - 1];
+        var gap = nextLine.t - lastDone.t;
+        var since = tick - lastDone.t;
+        if (gap > 30 && since < 30) {
+          ctx.fillStyle = 'rgba(255,255,255,0.2)';
+          ctx.fillText('...', 28, startY + prevDone.length * lineH);
+        }
+      }
+    }
+  }
+
+  function drawDashboard(startY) {
+    var phPct = (tick - PHASES[3].start) / (PHASES[3].end - PHASES[3].start);
+    var cx2 = W / 2, pad = 28;
+    var colW = (W - pad * 2 - 12) / 2;
+
+    // Title
+    ctx.fillStyle = '#fff';
+    ctx.font = '600 14px ' + getComputedStyle(document.body).fontFamily;
+    ctx.fillText('Live Operations Dashboard', pad, startY);
+
+    // Metric cards row
+    var metrics = [
+      { v: Math.round(1847293 * Math.min(phPct * 2, 1)).toLocaleString(), l: 'Calls Today', c: '#2d7aff' },
+      { v: '89%',  l: 'FCR Rate',   c: '#00c9a7' },
+      { v: '$0.04',l: 'Per Call',   c: '#00c9a7' },
+      { v: '99.4%',l: 'SLA',        c: '#2d7aff' },
+    ];
+    var cardW = (W - pad * 2 - 9) / 4;
+    metrics.forEach(function(m, i) {
+      var cx3 = pad + i * (cardW + 3);
+      ctx.fillStyle = 'rgba(13,22,40,0.9)';
+      roundRect(ctx, cx3, startY + 20, cardW, 52, 6);
+      ctx.fillStyle = m.c;
+      ctx.font = '700 16px ' + getComputedStyle(document.body).fontFamily;
+      ctx.fillText(m.v, cx3 + 10, startY + 45);
+      ctx.fillStyle = '#4b5563';
+      ctx.font = '10px ' + getComputedStyle(document.body).fontFamily;
+      ctx.fillText(m.l.toUpperCase(), cx3 + 10, startY + 62);
+    });
+
+    // Bar chart
+    var barY = startY + 90;
+    BARS.forEach(function(b, i) {
+      var bx = pad, by = barY + i * 28;
+      ctx.fillStyle = '#4b5563';
+      ctx.font = '11px monospace';
+      ctx.fillText(b.label, bx, by + 12);
+      var bw = W - pad * 2 - 80;
+      ctx.fillStyle = 'rgba(255,255,255,0.06)';
+      roundRect(ctx, bx + 72, by, bw, 14, 3);
+      ctx.fillStyle = b.color;
+      var fillW = bw * (b.pct / 100) * Math.min(phPct * 3, 1);
+      roundRect(ctx, bx + 72, by, fillW, 14, 3);
+      ctx.fillStyle = '#7a93b8';
+      ctx.font = '10px monospace';
+      ctx.fillText(b.pct + '%', bx + 72 + bw + 6, by + 11);
+    });
+
+    // Live call list
+    var listY = barY + BARS.length * 28 + 16;
+    ctx.fillStyle = '#4b5563';
+    ctx.font = '10px monospace';
+    ctx.fillText('RECENT CALLS', pad, listY);
+    var calls = [
+      { id: 'TRK-8812', lang: 'EN', fcr: '✓', time: '1m 38s', cost: '$0.04' },
+      { id: 'TRK-9041', lang: 'ES', fcr: '✓', time: '1m 52s', cost: '$0.04' },
+      { id: 'TRK-7723', lang: 'PT', fcr: '✓', time: '2m 01s', cost: '$0.04' },
+    ];
+    calls.forEach(function(c, i) {
+      if ((tick - PHASES[3].start) < (i + 1) * 200) return;
+      var ly2 = listY + 16 + i * 20;
+      ctx.fillStyle = 'rgba(13,22,40,0.7)';
+      roundRect(ctx, pad, ly2 - 12, W - pad * 2, 18, 3);
+      ctx.fillStyle = '#7a93b8';
+      ctx.font = '11px monospace';
+      ctx.fillText(c.id, pad + 8, ly2);
+      ctx.fillStyle = '#4b5563';
+      ctx.fillText(c.lang, pad + 80, ly2);
+      ctx.fillStyle = '#00c9a7';
+      ctx.fillText(c.fcr, pad + 110, ly2);
+      ctx.fillStyle = '#7a93b8';
+      ctx.fillText(c.time, pad + 140, ly2);
+      ctx.fillStyle = '#2d7aff';
+      ctx.fillText(c.cost, pad + 200, ly2);
+    });
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    if (w < 0 || h < 0) return;
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  // Start when modal opens
+  var origOpen = window.openDemoModal;
+  window.openDemoModal = function() {
+    if (origOpen) origOpen();
+    setTimeout(function() {
+      setup();
+      tick = 0; paused = false;
+      cancelAnimationFrame(raf);
+      draw();
+    }, 50);
+  };
+
+  window.demoPause = function() {
+    paused = !paused;
+    var btn = document.getElementById('demoPauseBtn');
+    if (btn) btn.textContent = paused ? '▶ Resume' : '⏸ Pause';
+  };
+
+  window.demoRestart = function() {
+    tick = 0; paused = false;
+    var btn = document.getElementById('demoPauseBtn');
+    if (btn) btn.textContent = '⏸ Pause';
+  };
+})();
 </script>
 </body>
 </html>
