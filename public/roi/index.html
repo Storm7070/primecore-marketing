@@ -33,6 +33,9 @@ nav{position:sticky;top:0;z-index:100;background:rgba(4,8,18,.88);backdrop-filte
 .nav-dot{width:7px;height:7px;background:var(--accent2);border-radius:50%;animation:p 2.4s ease-in-out infinite}
 @keyframes p{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
 .back-link{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.lang-strip{display:flex;gap:4px}
+.lang-btn{background:transparent;border:1px solid var(--border2);color:var(--muted);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;font-family:var(--font-body);transition:all .15s}
+.lang-btn.active,.lang-btn:hover{border-color:var(--accent);color:var(--text)}
 
 /* Page header */
 .page-header{padding:56px 0 48px}
@@ -140,15 +143,22 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 <nav>
   <div class="nav-inner">
     <a class="nav-brand" href="/"><span class="nav-dot"></span>PrimeCore Intelligence</a>
-    <a class="back-link" href="/">&larr; Back to site</a>
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="lang-strip">
+        <button class="lang-btn active" onclick="setROILang('en',this)">EN</button>
+        <button class="lang-btn" onclick="setROILang('es',this)">ES</button>
+        <button class="lang-btn" onclick="setROILang('pt',this)">PT</button>
+      </div>
+      <a class="back-link" href="/" id="roiBackLink">&larr; Back to site</a>
+    </div>
   </div>
 </nav>
 
 <div class="container">
   <div class="page-header">
-    <div class="eyebrow">ROI Calculator</div>
-    <h1 class="page-h1">Your exact savings.<br><span class="hl">In 30 seconds.</span></h1>
-    <p class="page-sub">Three inputs. One number. See how much PrimeCore Intelligence saves your contact center every month — based on your actual operation, not industry averages.</p>
+    <div class="eyebrow" id="roiEyebrow">ROI Calculator</div>
+    <h1 class="page-h1"><span id="roiH1a">Your exact savings.</span><br><span class="hl" id="roiH1b">In 30 seconds.</span></h1>
+    <p class="page-sub" id="roiSub">Three inputs. One number. See how much PrimeCore Intelligence saves your contact center every month — based on your actual operation, not industry averages.</p>
   </div>
 
   <div class="calc-wrap">
@@ -417,6 +427,77 @@ function updateCalc() {
 
 // ── Init ──────────────────────────────────────────────────────────────────
 updateCalc();
+</script>
+<script>
+var ROI_STRINGS = {
+  en: {
+    back: '← Back to site',
+    eyebrow: 'ROI Calculator',
+    h1a: 'Your exact savings.',
+    h1b: 'In 30 seconds.',
+    sub: 'Three inputs. One number. See how much PrimeCore Intelligence saves your contact center every month — based on your actual operation, not industry averages.',
+    vol: 'Monthly Call Volume',
+    agents: 'Agents Handling These Calls',
+    cost: 'Monthly Cost per Agent (fully loaded)',
+    savingsLabel: 'Monthly savings',
+    annualLabel: 'Annual:',
+    footNote: 'Not legal, financial, or compliance advice. Savings estimates are based on benchmark data and your inputs. Actual results depend on deployment configuration. © 2026 PrimeCore Intelligence S.A.'
+  },
+  es: {
+    back: '← Volver al sitio',
+    eyebrow: 'Calculadora de ROI',
+    h1a: 'Sus ahorros exactos.',
+    h1b: 'En 30 segundos.',
+    sub: 'Tres valores. Un número. Vea cuánto ahorra PrimeCore Intelligence a su centro de contacto cada mes — basado en su operación real, no en promedios del sector.',
+    vol: 'Volumen Mensual de Llamadas',
+    agents: 'Agentes que Manejan estas Llamadas',
+    cost: 'Costo Mensual por Agente (costo completo)',
+    savingsLabel: 'Ahorros mensuales',
+    annualLabel: 'Anual:',
+    footNote: 'No constituye asesoría legal, financiera ni de cumplimiento. Las estimaciones de ahorro se basan en datos de referencia y sus valores. Los resultados reales dependen de la configuración del despliegue. © 2026 PrimeCore Intelligence S.A.'
+  },
+  pt: {
+    back: '← Voltar ao site',
+    eyebrow: 'Calculadora de ROI',
+    h1a: 'Sua economia exata.',
+    h1b: 'Em 30 segundos.',
+    sub: 'Três valores. Um número. Veja quanto o PrimeCore Intelligence economiza no seu contact center a cada mês — baseado na sua operação real, não em médias do setor.',
+    vol: 'Volume Mensal de Chamadas',
+    agents: 'Agentes Atendendo Essas Chamadas',
+    cost: 'Custo Mensal por Agente (custo total)',
+    savingsLabel: 'Economia mensal',
+    annualLabel: 'Anual:',
+    footNote: 'Não constitui assessoria jurídica, financeira ou de compliance. As estimativas de economia são baseadas em dados de referência e seus valores. Os resultados reais dependem da configuração de implantação. © 2026 PrimeCore Intelligence S.A.'
+  }
+};
+
+function setROILang(lang, btn) {
+  document.querySelectorAll('.lang-btn').forEach(function(b){ b.classList.remove('active'); });
+  if(btn) btn.classList.add('active');
+  var s = ROI_STRINGS[lang] || ROI_STRINGS.en;
+  var el = function(id){ return document.getElementById(id); };
+  if(el('roiBackLink')) el('roiBackLink').textContent = s.back;
+  if(el('roiEyebrow')) el('roiEyebrow').textContent = s.eyebrow;
+  if(el('roiH1a')) el('roiH1a').textContent = s.h1a;
+  if(el('roiH1b')) el('roiH1b').textContent = s.h1b;
+  if(el('roiSub')) el('roiSub').textContent = s.sub;
+  if(el('roiVolLabel')) el('roiVolLabel').textContent = s.vol;
+  if(el('roiAgentsLabel')) el('roiAgentsLabel').textContent = s.agents;
+  if(el('roiCostLabel')) el('roiCostLabel').textContent = s.cost;
+  if(el('roiSavingsLabel')) el('roiSavingsLabel').textContent = s.savingsLabel;
+  if(el('roiAnnualLabel')) el('roiAnnualLabel').textContent = s.annualLabel;
+  if(el('roiFootNote')) el('roiFootNote').textContent = s.footNote;
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+  try{ localStorage.setItem('pc-lang', lang); }catch(e){}
+}
+
+// Auto-detect
+(function(){
+  var stored; try{ stored = localStorage.getItem('pc-lang'); }catch(e){}
+  var lang = stored || (navigator.language||'').toLowerCase().split('-')[0];
+  if(lang==='es') setROILang('es', document.querySelectorAll('.lang-btn')[1]);
+  else if(lang==='pt') setROILang('pt', document.querySelectorAll('.lang-btn')[2]);
+})();
 </script>
 </body>
 </html>
