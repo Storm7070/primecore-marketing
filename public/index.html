@@ -4973,14 +4973,14 @@ html{scroll-behavior:smooth}
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
 
-      fetch('https://api.primecoreintelligence.com/api/pilot-request', {
+      fetch('https://relay.primecoreintelligence.com/relay/pilot-request', {
         method:  'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
           name:     name,
           email:    email,
           volume:   volume,
-          company:  '',
+          company:  email.split('@')[1] ? email.split('@')[1].split('.')[0] : 'Not provided',
           ccaas:    'Not specified',
           vertical: 'Not specified',
           lang:     'en',
