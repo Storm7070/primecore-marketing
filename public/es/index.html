@@ -238,7 +238,7 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
       <div class="vertical-card"><div class="vertical-emoji">&#128179;</div><div class="vertical-name">Servicios Financieros</div><p class="vertical-desc">Consultas de cuentas, resoluci&#243;n de disputas y llamadas sensibles al cumplimiento con pista de auditor&#237;a completa y sin exposici&#243;n PAN/CVV.</p></div>
       <div class="vertical-card"><div class="vertical-emoji">&#128663;</div><div class="vertical-name">Gesti&#243;n de Flotillas</div><p class="vertical-desc">Soporte a conductores, coordinaci&#243;n de despacho y manejo de incidentes a escala en flotas de idiomas mixtos.</p></div>
       <div class="vertical-card"><div class="vertical-emoji">&#127970;</div><div class="vertical-name">Operaciones BPO</div><p class="vertical-desc">Gesti&#243;n de centros de contacto multi-cliente con aislamiento de tenants, aplicaci&#243;n de SLA por cliente e informes consolidados.</p></div>
-      <div class="vertical-card"><div class="vertical-emoji">&#127758;</div><div class="vertical-name">Empresa LATAM</div><p class="vertical-desc">Dise&#241;ado para operaciones en Guatemala, M&#233;xico, Colombia y Brasil. IA nativa en espa&#241;ol y portugu&#233;s con cumplimiento regional.</p></div>
+      <div class="vertical-card"><div class="vertical-emoji">&#127758;</div><div class="vertical-name">Empresa LATAM</div><p class="vertical-desc">Dise&#241;ado para M&#233;xico, Colombia, Brasil y Am&#233;rica Central. IA nativa en espa&#241;ol y portugu&#233;s con cumplimiento regional.</p></div>
     </div>
   </div>
 </section>
@@ -377,7 +377,7 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
         <a href="mailto:billing@primecoreintelligence.com">Facturaci&#243;n</a>
       </div>
     </div>
-    <p class="footer-legal">&copy; 2026 PrimeCore Intelligence S.A. &middot; Ciudad de Guatemala, Guatemala &middot; Operaciones duales EE.UU. y Guatemala &middot; Todos los derechos reservados. No constituye asesor&#237;a legal, m&#233;dica, financiera ni de cumplimiento. PrimeCore Intelligence es una plataforma de software con IA. Los resultados dependen de la configuraci&#243;n del despliegue. Aplican t&#233;rminos del piloto.</p>
+    <p class="footer-legal">&copy; 2026 PrimeCore Intelligence S.A. Todos los derechos reservados. PrimeCore Intelligence S.A. es una sociedad holding. No constituye asesor&#237;a legal, m&#233;dica, financiera ni de cumplimiento. PrimeCore Intelligence es una plataforma de software con IA. Los resultados dependen de la configuraci&#243;n del despliegue. Aplican t&#233;rminos del piloto.</p>
   </div>
 </footer>
 
@@ -389,8 +389,12 @@ footer{padding:40px 0;border-top:1px solid var(--border)}
   setInterval(function(){secs=(secs+1)%(6*60);var m=Math.floor(secs/60);var s=String(secs%60).padStart(2,'0');el.textContent=m+':'+s;},1000);
 })();
 
-function setLang(lang,btn){
-  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});
+function(lang, btn) {
+  document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  var map = { en: '/', es: '/es/', pt: '/pt-br/' };
+  if (map[lang]) window.location.href = map[lang];
+};);
   if(btn)btn.classList.add('active');
   if(lang==='en')window.location.href='/';
   if(lang==='pt')window.location.href='/pt-br/';

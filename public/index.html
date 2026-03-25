@@ -2856,7 +2856,7 @@ html{scroll-behavior:smooth}
     "url": "https://primecoreintelligence.com",
     "logo": "https://primecoreintelligence.com/assets/og-card.png",
     "description": "AI-powered contact center operations platform. Autonomous call handling, 50+ languages, SLA enforcement.",
-    "foundingLocation": { "@type": "Place", "name": "Guatemala City, Guatemala" },
+    
     "contactPoint": [
       { "@type": "ContactPoint", "email": "sales@primecoreintelligence.com", "contactType": "sales" },
       { "@type": "ContactPoint", "email": "support@primecoreintelligence.com", "contactType": "customer support" },
@@ -3554,7 +3554,7 @@ html{scroll-behavior:smooth}
       <div class="vertical-card"><div class="vertical-emoji">💳</div><div class="vertical-name">Financial Services</div><p class="vertical-desc">Account inquiries, dispute resolution, and compliance-sensitive calls with full audit trail and no PAN/CVV exposure.</p></div>
       <div class="vertical-card"><div class="vertical-emoji">🚗</div><div class="vertical-name">Fleet Management</div><p class="vertical-desc">Driver support, dispatch coordination, and vehicle incident handling at scale across mixed-language fleets.</p></div>
       <div class="vertical-card"><div class="vertical-emoji">🏢</div><div class="vertical-name">BPO Operations</div><p class="vertical-desc">Multi-client contact center management with tenant isolation, per-client SLA enforcement, and consolidated reporting.</p></div>
-      <div class="vertical-card"><div class="vertical-emoji">🌎</div><div class="vertical-name">LATAM Enterprise</div><p class="vertical-desc">Purpose-built for Guatemala, Mexico, Colombia, and Brazil. Native Spanish and Portuguese AI with regional compliance.</p></div>
+      <div class="vertical-card"><div class="vertical-emoji">🌎</div><div class="vertical-name">LATAM Enterprise</div><p class="vertical-desc">Purpose-built for Mexico, Colombia, Brazil, and Central America. Native Spanish and Portuguese AI with regional compliance.</p></div>
     </div>
   </div>
 </section>
@@ -4383,7 +4383,7 @@ html{scroll-behavior:smooth}
         <a class="btn btn-ghost" style="width:100%;justify-content:center" href="mailto:sales@primecoreintelligence.com">Contact Sales</a>
       </div>
     </div>
-    <p style="text-align:center;margin-top:32px;font-size:13px;color:var(--dim)">No PAN/CVV &middot; PHI disabled by default &middot; Agentic Engineer protective controls on all plans &middot; <a href="/assets/PrimeCore_LATAM_Enterprise_Pack_v1_3.pdf" style="color:var(--accent)" target="_blank" rel="noopener">Download Security Packet &rarr;</a></p>
+    <p style="text-align:center;margin-top:32px;font-size:13px;color:var(--dim)">No PAN/CVV &middot; PHI disabled by default &middot; Agentic Engineer protective controls on all plans &middot; <a href="mailto:security@primecoreintelligence.com?subject=Security%20Packet%20Request" style="color:var(--accent)" target="_blank" rel="noopener">Download Security Packet &rarr;</a></p>
   </div>
 </section>
 
@@ -4723,7 +4723,7 @@ html{scroll-behavior:smooth}
         <a href="/roi">ROI Calculator</a>
       </div>
     </div>
-    <p class="footer-legal">&copy; 2026 PrimeCore Intelligence S.A. &middot; Guatemala City, Guatemala &middot; USA and Guatemala dual operations &middot; All rights reserved. Not legal, medical, financial, or compliance advice. PrimeCore Intelligence is an AI-powered software platform. Results depend on deployment configuration. Pilot terms apply.</p>
+    <p class="footer-legal">&copy; 2026 PrimeCore Intelligence S.A. All rights reserved. PrimeCore Intelligence S.A. is a holding company. Not legal, medical, financial, or compliance advice. PrimeCore Intelligence is an AI-powered software platform. Results depend on deployment configuration. Pilot terms apply.</p>
   </div>
 </footer>
 
@@ -4927,7 +4927,7 @@ html{scroll-behavior:smooth}
   }
 
   function isValidEmail(v) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2}$/.test(v);
   }
 
   function validate() {
@@ -5209,8 +5209,7 @@ html{scroll-behavior:smooth}
     financial:  { fcr: 0.79, aht: 105, cost: 8.80,  label: 'Financial',      defaultVol: 18000 },
     retail:     { fcr: 0.87, aht: 72,  cost: 5.40,  label: 'Retail/E-com',   defaultVol: 30000 },
     fleet:      { fcr: 0.85, aht: 95,  cost: 7.10,  label: 'Fleet/Dispatch', defaultVol: 12000 },
-    bpo:        { fcr: 0.83, aht: 102, cost: 6.90,  label: 'BPO',            defaultVol: 50000 },
-  };
+    bpo:        { fcr: 0.83, aht: 102, cost: 6.90,  label: 'BPO',            defaultVol: 50000 }};
 
   /* Plans: Starter ≤5k, Growth ≤20k, Enterprise >20k */
   var PLANS = [
@@ -6273,6 +6272,14 @@ html{scroll-behavior:smooth}
   });
 
 })();
+</script>
+<script>
+window.setLang = function(lang, btn) {
+  document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  var map = { en: '/', es: '/es/', pt: '/pt-br/' };
+  if (map[lang]) window.location.href = map[lang];
+};
 </script>
 </body>
 </html>
