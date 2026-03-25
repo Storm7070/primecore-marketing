@@ -231,6 +231,348 @@ html{scroll-behavior:smooth}
   *{animation:none!important;transition:none!important}
   .timer-panel,.feature-card,.pricing-card{transform:none!important}
 }
+/* ═══════════════════════════════════════════════════════════════════════
+   CYBERPUNK HERO — command center scene
+═══════════════════════════════════════════════════════════════════════ */
+.hero-cyber{
+  position:relative;min-height:100vh;padding:0;
+  display:flex;align-items:center;
+  overflow:hidden;background:var(--bg);
+}
+#cyberCanvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  z-index:0;pointer-events:none;
+}
+.cyber-grid{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(45,122,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(45,122,255,.06) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 40%,transparent 100%);
+}
+.scan-sweep{
+  position:absolute;left:0;right:0;height:2px;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(45,122,255,.4),rgba(0,201,167,.3),transparent);
+  animation:scanSweep 4s linear infinite;top:-2px;
+}
+@keyframes scanSweep{0%{top:-2px;opacity:1}80%{opacity:.6}100%{top:100%;opacity:0}}
+
+.hero-cyber-inner{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:48px;align-items:center;
+  padding:100px 0 80px;width:100%;
+}
+
+/* ── Left copy ─────────────────────────────────────────────────────── */
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(45,122,255,.1);border:1px solid rgba(45,122,255,.3);
+  border-radius:999px;padding:6px 16px;
+  font-size:11px;font-weight:600;color:var(--accent);
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:28px;
+}
+.eyebrow-dot{
+  width:7px;height:7px;background:var(--accent2);border-radius:50%;
+  animation:pulse 1.8s ease-in-out infinite;flex-shrink:0;
+}
+.hero-h1{
+  font-family:var(--font-head);font-size:clamp(36px,4.5vw,60px);
+  font-weight:800;line-height:1.07;letter-spacing:-1.5px;margin-bottom:24px;
+}
+.h1-line{display:block}
+.hl{background:linear-gradient(110deg,var(--accent) 0%,var(--accent2) 60%,#7effdb 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:17px;color:var(--muted);line-height:1.7;margin-bottom:32px;font-weight:300;max-width:480px}
+
+/* Metric chips */
+.metric-chips{
+  display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;
+}
+.metric-chip{
+  background:rgba(13,22,40,.8);border:1px solid rgba(45,122,255,.25);
+  border-radius:10px;padding:10px 16px;display:flex;flex-direction:column;
+  align-items:center;min-width:80px;position:relative;overflow:hidden;
+  backdrop-filter:blur(8px);transition:border-color .25s,transform .25s;
+}
+.metric-chip::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(45,122,255,.06),transparent);
+}
+.metric-chip:hover{border-color:rgba(45,122,255,.55);transform:translateY(-3px)}
+.chip-val{
+  font-family:var(--font-head);font-size:22px;font-weight:800;
+  color:var(--accent);line-height:1;position:relative;z-index:1;
+}
+.chip-label{font-size:10px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-top:3px;z-index:1}
+.chip-live{border-color:rgba(0,201,167,.35)}
+.chip-live .chip-val{color:var(--accent2)}
+.chip-pulse{
+  position:absolute;top:8px;right:8px;width:7px;height:7px;
+  background:var(--accent2);border-radius:50%;animation:pulse 1.5s ease-in-out infinite;
+}
+
+/* CTAs */
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:24px}
+.btn-cyber-primary{
+  position:relative;display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;border-radius:10px;font-size:15px;font-weight:600;
+  background:linear-gradient(135deg,var(--accent),#1a5fd4);
+  color:#fff;border:none;cursor:pointer;overflow:hidden;
+  box-shadow:0 0 32px rgba(45,122,255,.35),inset 0 1px 0 rgba(255,255,255,.15);
+  transition:box-shadow .25s,transform .15s;text-decoration:none;
+}
+.btn-cyber-primary:hover{box-shadow:0 0 48px rgba(45,122,255,.55);transform:translateY(-2px)}
+.btn-glow{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);
+  transform:translateX(-100%);animation:shimmer 2.5s ease infinite 1s;
+}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
+.btn-cyber-ghost{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 24px;border-radius:10px;font-size:15px;font-weight:500;
+  background:rgba(45,122,255,.08);border:1px solid rgba(45,122,255,.3);
+  color:var(--text);cursor:pointer;transition:all .25s;
+}
+.btn-cyber-ghost:hover{background:rgba(45,122,255,.16);border-color:rgba(45,122,255,.6)}
+.play-ring{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(45,122,255,.2);border:1px solid rgba(45,122,255,.4);
+  font-size:10px;
+}
+.hero-microcopy{
+  display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--dim);
+}
+.hero-microcopy span::before{content:'✓ ';color:var(--accent2);font-weight:700}
+
+/* ── Right: Command Center ─────────────────────────────────────────── */
+.command-center{
+  position:relative;height:520px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Holo screen backdrop */
+.holo-screen{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:340px;height:240px;
+  background:rgba(4,12,32,.7);
+  border:1px solid rgba(45,122,255,.2);border-radius:12px;
+  padding:20px;overflow:hidden;backdrop-filter:blur(4px);
+}
+.holo-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.holo-bar{height:6px;border-radius:3px;background:rgba(45,122,255,.4);
+  box-shadow:0 0 8px rgba(45,122,255,.4);transition:width 1s ease;
+  animation:hpulse 3s ease-in-out infinite alternate}
+.holo-bar.holo-teal{background:rgba(0,201,167,.45);box-shadow:0 0 8px rgba(0,201,167,.4)}
+.holo-row span{font-size:10px;color:var(--dim);white-space:nowrap;font-family:monospace}
+@keyframes hpulse{0%{opacity:.5}100%{opacity:1}}
+.holo-scan{
+  position:absolute;left:0;right:0;height:1px;top:0;
+  background:linear-gradient(90deg,transparent,rgba(0,201,167,.5),transparent);
+  animation:scanSweep 3.2s linear infinite;
+}
+
+/* ── Robots ─────────────────────────────────────────────────────────── */
+.robot-agent{position:absolute;display:flex;flex-direction:column;align-items:center}
+.robot-main{left:24%;top:50%;transform:translate(-50%,-50%);z-index:4}
+.robot-secondary{left:68%;top:52%;transform:translate(-50%,-50%);z-index:3;scale:.82;opacity:.88}
+
+.robot-aura{
+  position:absolute;width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle,rgba(45,122,255,.2) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-40%);
+  animation:auraPulse 2.5s ease-in-out infinite;
+}
+.aura-teal{background:radial-gradient(circle,rgba(0,201,167,.18) 0%,transparent 70%)}
+@keyframes auraPulse{0%,100%{opacity:.6;transform:translate(-50%,-40%) scale(1)}50%{opacity:1;transform:translate(-50%,-40%) scale(1.2)}}
+
+.robot-head{
+  width:60px;height:52px;
+  background:linear-gradient(160deg,#1a2a4a,#0d1a35);
+  border:1px solid rgba(45,122,255,.4);border-radius:10px 10px 6px 6px;
+  position:relative;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 20px rgba(45,122,255,.2),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.robot-visor{
+  width:44px;height:18px;
+  background:linear-gradient(90deg,rgba(45,122,255,.8),rgba(0,201,167,.6));
+  border-radius:4px;position:relative;overflow:hidden;
+  box-shadow:0 0 12px rgba(45,122,255,.6),0 0 24px rgba(45,122,255,.3);
+  animation:visorGlow 2s ease-in-out infinite alternate;
+}
+.visor-teal{background:linear-gradient(90deg,rgba(0,201,167,.8),rgba(45,122,255,.5))}
+@keyframes visorGlow{0%{box-shadow:0 0 8px rgba(45,122,255,.5)}100%{box-shadow:0 0 20px rgba(45,122,255,.9),0 0 40px rgba(45,122,255,.4)}}
+.visor-scan{
+  position:absolute;top:0;bottom:0;width:3px;
+  background:rgba(255,255,255,.7);
+  animation:visorScan 1.6s linear infinite;left:-3px;
+}
+@keyframes visorScan{0%{left:-3px}100%{left:100%}}
+.visor-glow{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent)}
+
+.robot-ears{
+  position:absolute;width:100%;height:100%;top:0;left:0;pointer-events:none;
+}
+.robot-ears::before,.robot-ears::after{
+  content:'';position:absolute;top:50%;
+  width:7px;height:16px;background:#1a2a4a;border:1px solid rgba(45,122,255,.3);border-radius:2px;
+}
+.robot-ears::before{left:-8px;transform:translateY(-50%)}
+.robot-ears::after{right:-8px;transform:translateY(-50%)}
+.robot-chin{
+  position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);
+  width:24px;height:6px;background:#0d1a35;border:1px solid rgba(45,122,255,.3);border-radius:0 0 4px 4px;
+}
+
+.robot-neck{width:16px;height:10px;background:linear-gradient(180deg,#1a2a4a,#0d1a35);border:1px solid rgba(45,122,255,.25)}
+
+.robot-body{
+  width:70px;height:76px;
+  background:linear-gradient(160deg,#0f1e38,#081228);
+  border:1px solid rgba(45,122,255,.35);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 16px rgba(45,122,255,.15);position:relative;
+}
+.robot-body::before{
+  content:'';position:absolute;top:-1px;left:20%;right:20%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(45,122,255,.6),transparent);
+}
+.robot-chest-panel{width:40px;display:flex;flex-direction:column;gap:5px;align-items:center}
+.chest-line{width:100%;height:2px;background:rgba(45,122,255,.3);border-radius:1px;
+  animation:linePulse 2s ease-in-out infinite alternate}
+.chest-line:nth-child(2){animation-delay:.5s;width:70%}
+@keyframes linePulse{0%{opacity:.3}100%{opacity:.9}}
+.chest-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,60,60,.4);border:1px solid rgba(255,60,60,.5)}
+.chest-dot.active{background:rgba(0,201,167,.6);border-color:rgba(0,201,167,.7);
+  box-shadow:0 0 8px rgba(0,201,167,.5);animation:dotBlink 1.2s ease-in-out infinite}
+@keyframes dotBlink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* Arms */
+.robot-arm{position:absolute;top:calc(100% - 70px);display:flex;flex-direction:column;align-items:center;gap:2px}
+.robot-arm-l{left:-22px;transform-origin:top center;animation:armSwayL 3.5s ease-in-out infinite}
+.robot-arm-r{right:-22px;transform-origin:top center;animation:armSwayR 3.5s ease-in-out infinite 0.3s}
+@keyframes armSwayL{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(5deg)}}
+@keyframes armSwayR{0%,100%{transform:rotate(8deg)}50%{transform:rotate(-5deg)}}
+.arm-segment{width:10px;background:linear-gradient(180deg,#1a2a4a,#0d1628);border:1px solid rgba(45,122,255,.25);border-radius:3px}
+.arm-upper{height:28px}
+.arm-lower{height:22px}
+.arm-hand{width:14px;height:10px;background:#0d1a35;border:1px solid rgba(45,122,255,.3);border-radius:3px}
+
+/* Robot metric overlay */
+.robot-metric{
+  position:absolute;top:-36px;left:50%;transform:translateX(-50%);
+  white-space:nowrap;font-size:11px;font-weight:600;color:var(--accent2);
+  background:rgba(0,201,167,.08);border:1px solid rgba(0,201,167,.3);
+  padding:4px 10px;border-radius:6px;letter-spacing:.3px;
+  animation:floatUp 2.5s ease-in-out infinite;
+}
+@keyframes floatUp{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
+
+/* Speech wave */
+.speech-wave{
+  position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:3px;height:20px;
+}
+.speech-wave span{
+  display:block;width:3px;background:var(--accent);border-radius:2px;
+  animation:waveBar 0.9s ease-in-out infinite;
+}
+.speech-wave span:nth-child(1){animation-delay:0s;height:6px}
+.speech-wave span:nth-child(2){animation-delay:.12s;height:14px}
+.speech-wave span:nth-child(3){animation-delay:.24s;height:20px}
+.speech-wave span:nth-child(4){animation-delay:.36s;height:12px}
+.speech-wave span:nth-child(5){animation-delay:.48s;height:8px}
+@keyframes waveBar{0%,100%{transform:scaleY(.4);opacity:.5}50%{transform:scaleY(1);opacity:1}}
+#wave2 span{background:var(--accent2)}
+
+/* Incoming call rings */
+.call-ring{
+  position:absolute;width:90px;height:90px;border-radius:50%;
+  border:1.5px solid rgba(45,122,255,.5);
+  top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
+  animation:ringPulse 2.4s ease-out infinite;pointer-events:none;
+}
+.ring-b{animation-delay:1.2s;border-color:rgba(0,201,167,.4)}
+@keyframes ringPulse{0%{transform:translate(-50%,-50%) scale(.6);opacity:.8}100%{transform:translate(-50%,-50%) scale(2.2);opacity:0}}
+
+/* Human agent */
+.human-agent{
+  position:absolute;right:4%;top:50%;transform:translateY(-50%);
+  opacity:.38;display:flex;flex-direction:column;align-items:center;
+  filter:blur(0.5px);
+}
+.human-head{
+  width:36px;height:40px;background:rgba(180,180,200,.15);
+  border:1px solid rgba(255,255,255,.15);border-radius:50% 50% 40% 40%;
+  position:relative;display:flex;align-items:center;justify-content:center;
+}
+.human-headset{
+  width:44px;height:22px;border:2px solid rgba(255,255,255,.25);
+  border-bottom:none;border-radius:22px 22px 0 0;position:absolute;top:-4px;
+}
+.human-body{
+  width:50px;height:60px;background:rgba(180,180,200,.1);
+  border:1px solid rgba(255,255,255,.12);border-radius:6px;margin-top:4px;
+}
+.human-badge{
+  font-size:10px;color:rgba(255,255,255,.4);margin-top:8px;
+  font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.1);padding:3px 8px;border-radius:4px;
+  background:rgba(255,255,255,.04);
+}
+
+/* Call orbs */
+.call-orb{
+  position:absolute;width:32px;height:32px;
+  background:rgba(45,122,255,.12);border:1px solid rgba(45,122,255,.4);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:14px;cursor:default;
+}
+.call-orb span{font-size:13px;filter:drop-shadow(0 0 4px rgba(45,122,255,.8))}
+.orb-ring{
+  position:absolute;inset:-6px;border-radius:50%;
+  border:1px solid rgba(45,122,255,.3);
+  animation:ringPulse 2s ease-out infinite;
+}
+.orb-1{top:8%;left:48%;animation:orbit1 8s linear infinite}
+.orb-2{top:20%;left:80%;animation:orbit2 10s linear infinite 1s}
+.orb-3{top:65%;left:82%;animation:orbit1 12s linear infinite 2s;border-color:rgba(0,201,167,.4)}
+.orb-3 span{filter:drop-shadow(0 0 4px rgba(0,201,167,.8))}
+.orb-3 .orb-ring{border-color:rgba(0,201,167,.3)}
+.orb-4{top:80%;left:36%;animation:orbit2 9s linear infinite 3s}
+.orb-5{top:5%;left:16%;animation:orbit1 11s linear infinite 4s;border-color:rgba(0,201,167,.4)}
+@keyframes orbit1{
+  0%{transform:translate(0,0)}25%{transform:translate(8px,12px)}
+  50%{transform:translate(0,20px)}75%{transform:translate(-8px,10px)}100%{transform:translate(0,0)}
+}
+@keyframes orbit2{
+  0%{transform:translate(0,0)}25%{transform:translate(-10px,8px)}
+  50%{transform:translate(-4px,16px)}75%{transform:translate(6px,6px)}100%{transform:translate(0,0)}
+}
+
+/* ── Responsive ────────────────────────────────────────────────────── */
+@media(max-width:900px){
+  .hero-cyber-inner{grid-template-columns:1fr;gap:32px;padding:80px 0 40px}
+  .command-center{height:300px;scale:.75;transform-origin:center top}
+  .hero-sub{max-width:100%}
+}
+@media(max-width:600px){
+  .metric-chips{gap:8px}
+  .metric-chip{min-width:68px;padding:8px 12px}
+  .chip-val{font-size:18px}
+  .command-center{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .scan-sweep,.visor-scan,.holo-scan,
+  .robot-arm-l,.robot-arm-r,.auraPulse,
+  .call-ring,.orb-1,.orb-2,.orb-3,.orb-4,.orb-5,
+  .speech-wave span,.robot-metric,.chest-dot,
+  .eyebrow-dot,.btn-glow{animation:none!important}
+}
+
   
 /* ═══════════════════════════════════════════════════════════════════════
    HERO v2 — KPI counters, refined CTAs, scroll-triggered entry
@@ -2547,126 +2889,185 @@ html{scroll-behavior:smooth}
   </div>
 </nav>
 
-<section class="hero" aria-labelledby="hero-heading" id="vanta-hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-left">
+<section class="hero hero-cyber" aria-labelledby="hero-heading" id="vanta-hero">
 
-        <div class="hero-eyebrow" role="text">Contact Center AI Platform</div>
+  <!-- ░ CANVAS LAYER — particles + robot scene ░ -->
+  <canvas id="cyberCanvas" aria-hidden="true"></canvas>
 
-        <h1 class="hero-h1" id="hero-heading">
-          Every call.<br><span class="hl">Zero SLA breaches.</span>
-        </h1>
+  <!-- ░ GRID OVERLAY ░ -->
+  <div class="cyber-grid" aria-hidden="true"></div>
 
-        <p class="hero-sub">
-          PrimeCore Intelligence delivers autonomous AI for contact center operations — real-time agent guidance, 50+ language call handling, and policy-enforced performance analytics for logistics, healthcare, and financial services. Most clients start with 20 agents. After six months, the AI handles what used to need 14 of them.
-        </p>
+  <!-- ░ SCAN LINE SWEEP ░ -->
+  <div class="scan-sweep" aria-hidden="true"></div>
 
-        <!-- KPI Counter Row -->
-        <div class="hero-kpi-row" role="region" aria-label="Platform metrics">
-          <div class="kpi-card">
-            <span class="kpi-delta" aria-hidden="true">LIVE</span>
-            <span class="kpi-value" id="kpi-calls" aria-live="polite" aria-label="Calls handled today">0</span>
-            <span class="kpi-label">Calls Handled Today</span>
+  <div class="container hero-cyber-inner">
+
+    <!-- LEFT: Copy -->
+    <div class="hero-left" id="heroLeft">
+
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        AI Command Center · Live
+      </div>
+
+      <h1 class="hero-h1" id="hero-heading">
+        <span class="h1-line">Millions of calls.</span>
+        <span class="h1-line"><span class="hl">Zero human limits.</span></span>
+      </h1>
+
+      <p class="hero-sub">
+        Autonomous AI handles 89% of calls at $0.04 each — across 50+ languages, every CCaaS platform, 24 hours a day. Most clients start with 20 agents. Six months later, the AI runs what used to need 14 of them.
+      </p>
+
+      <!-- Floating metric chips -->
+      <div class="metric-chips" role="list" aria-label="Live platform metrics">
+        <div class="metric-chip" role="listitem">
+          <span class="chip-val" data-target="89" data-suffix="%" id="kpi-fcr">0%</span>
+          <span class="chip-label">FCR Rate</span>
+        </div>
+        <div class="metric-chip" role="listitem">
+          <span class="chip-val" data-target="4" data-suffix="¢" id="kpi-cost">0¢</span>
+          <span class="chip-label">Per Call</span>
+        </div>
+        <div class="metric-chip" role="listitem">
+          <span class="chip-val" data-target="51" data-suffix="+" id="kpi-lang">0+</span>
+          <span class="chip-label">Languages</span>
+        </div>
+        <div class="metric-chip chip-live" role="listitem">
+          <span class="chip-pulse"></span>
+          <span class="chip-val" id="kpi-calls">0</span>
+          <span class="chip-label">Calls Today</span>
+        </div>
+      </div>
+
+      <!-- CTAs -->
+      <div class="hero-actions">
+        <a class="btn btn-cyber-primary"
+           href="https://pilot.primecoreintelligence.com"
+           aria-label="Deploy AI Swarm — start your pilot">
+          <span class="btn-glow"></span>
+          Deploy AI Swarm &rarr;
+        </a>
+        <button class="btn btn-cyber-ghost"
+                onclick="openDemoModal()"
+                aria-label="Watch 60-second product demo"
+                aria-haspopup="dialog">
+          <span class="play-ring" aria-hidden="true">&#9654;</span>
+          Watch 60s demo
+        </button>
+      </div>
+
+      <div class="hero-microcopy">
+        <span>No CCaaS changes required</span>
+        <span>Shadow mode from day one</span>
+        <span>Cancel before Month 2</span>
+      </div>
+
+    </div><!-- /hero-left -->
+
+    <!-- RIGHT: Command center visualization -->
+    <div class="hero-right command-center" id="commandCenter" aria-hidden="true">
+
+      <!-- Robot agent 1 — primary -->
+      <div class="robot-agent robot-main" id="robot1">
+        <div class="robot-aura"></div>
+        <div class="robot-head">
+          <div class="robot-visor">
+            <div class="visor-scan"></div>
+            <div class="visor-glow"></div>
           </div>
-          <div class="kpi-card">
-            <span class="kpi-delta" aria-hidden="true">REAL</span>
-            <span class="kpi-value" id="kpi-fcr" aria-label="First call resolution rate">0%</span>
-            <span class="kpi-label">FCR Rate</span>
-          </div>
-          <div class="kpi-card">
-            <span class="kpi-delta" aria-hidden="true">AVG</span>
-            <span class="kpi-value" id="kpi-aht" aria-label="Average handle time">0s</span>
-            <span class="kpi-label">Avg Handle Time</span>
-          </div>
-          <div class="kpi-card">
-            <span class="kpi-delta" aria-hidden="true">50+</span>
-            <span class="kpi-value" id="kpi-lang" aria-label="Languages supported">0</span>
-            <span class="kpi-label">Languages</span>
+          <div class="robot-ears"></div>
+          <div class="robot-chin"></div>
+        </div>
+        <div class="robot-neck"></div>
+        <div class="robot-body">
+          <div class="robot-chest-panel">
+            <div class="chest-line"></div>
+            <div class="chest-line"></div>
+            <div class="chest-dot active"></div>
           </div>
         </div>
-
-        <!-- CTAs -->
-        <div class="hero-actions">
-          <a class="btn btn-demo"
-             href="https://pilot.primecoreintelligence.com"
-             aria-label="Start your PrimeCore Intelligence pilot — 50% off month 1">
-            Try Live Demo <span class="btn-arrow" aria-hidden="true">&rarr;</span>
-          </a>
-          <button class="btn btn-watch"
-                  onclick="openDemoModal()"
-                  aria-label="Watch 60-second product demo video"
-                  aria-haspopup="dialog">
-            <span class="btn-watch-icon" aria-hidden="true">&#9654;</span>
-            Watch 60s demo
-          </button>
+        <div class="robot-arm robot-arm-l">
+          <div class="arm-segment arm-upper"></div>
+          <div class="arm-segment arm-lower"></div>
+          <div class="arm-hand"></div>
         </div>
-
-        <!-- Microcopy trust line -->
-        <div class="hero-microcopy" role="list" aria-label="Key guarantees">
-          <span role="listitem">No CCaaS changes required</span>
-          <span role="listitem">Shadow mode from day one</span>
-          <span role="listitem">Cancel before Month 2</span>
+        <div class="robot-arm robot-arm-r">
+          <div class="arm-segment arm-upper"></div>
+          <div class="arm-segment arm-lower"></div>
+          <div class="arm-hand"></div>
         </div>
-
-      </div><!-- /hero-left -->
-
-      <div class="hero-right">
-        <div class="timer-panel" role="region" aria-label="Live call intelligence monitor">
-
-          <div class="timer-panel-header">
-            <div class="timer-panel-label">Live Call Intelligence &middot; Active State Monitor</div>
-            <div class="live-badge" aria-hidden="true">
-              <span class="live-dot"></span>Live
-            </div>
-          </div>
-
-          <div class="call-states" role="list" aria-label="Active call states">
-            <div class="call-state green" role="listitem">
-              <span class="state-dot green" aria-hidden="true"></span>
-              <div class="state-info">
-                <div class="state-label">Green &mdash; On Track</div>
-                <div class="state-desc">Agent handling &middot; SLA protected &middot; AI assist active</div>
-              </div>
-              <div class="state-timer green" id="liveTimer" aria-label="Call duration" aria-live="off">2:14</div>
-            </div>
-            <div class="call-state amber" role="listitem">
-              <span class="state-dot amber" aria-hidden="true"></span>
-              <div class="state-info">
-                <div class="state-label">Amber &mdash; Approaching Threshold</div>
-                <div class="state-desc">Escalation guidance queued &middot; supervisor alerted</div>
-              </div>
-              <div class="state-timer amber" aria-label="Call at risk duration">4:30</div>
-            </div>
-            <div class="call-state red" role="listitem">
-              <span class="state-dot red" aria-hidden="true"></span>
-              <div class="state-info">
-                <div class="state-label">Red &mdash; SLA Breach Imminent</div>
-                <div class="state-desc">Autonomous intervention &middot; override path ready</div>
-              </div>
-              <div class="state-timer red" aria-label="Breach timer">6:00</div>
-            </div>
-          </div>
-
-          <div class="stats-row" role="list" aria-label="Performance stats">
-            <div class="stat-box" role="listitem">
-              <div class="stat-value">89%</div>
-              <div class="stat-label">FCR Rate</div>
-            </div>
-            <div class="stat-box" role="listitem">
-              <div class="stat-value">50+</div>
-              <div class="stat-label">Languages</div>
-            </div>
-            <div class="stat-box" role="listitem">
-              <div class="stat-value">&lt;200ms</div>
-              <div class="stat-label">AI Latency</div>
-            </div>
-          </div>
-
+        <!-- Floating metric over robot -->
+        <div class="robot-metric">89% FCR · $0.04/call</div>
+        <!-- Speech wave -->
+        <div class="speech-wave" id="wave1">
+          <span></span><span></span><span></span><span></span><span></span>
         </div>
-      </div><!-- /hero-right -->
-    </div>
-  </div>
+        <!-- Incoming call ring -->
+        <div class="call-ring ring-a"></div>
+        <div class="call-ring ring-b"></div>
+      </div>
+
+      <!-- Robot agent 2 — secondary -->
+      <div class="robot-agent robot-secondary" id="robot2">
+        <div class="robot-aura aura-teal"></div>
+        <div class="robot-head">
+          <div class="robot-visor visor-teal">
+            <div class="visor-scan"></div>
+          </div>
+          <div class="robot-ears"></div>
+          <div class="robot-chin"></div>
+        </div>
+        <div class="robot-neck"></div>
+        <div class="robot-body">
+          <div class="robot-chest-panel">
+            <div class="chest-line"></div>
+            <div class="chest-dot"></div>
+          </div>
+        </div>
+        <div class="robot-arm robot-arm-l">
+          <div class="arm-segment arm-upper"></div>
+          <div class="arm-segment arm-lower"></div>
+          <div class="arm-hand"></div>
+        </div>
+        <div class="robot-arm robot-arm-r">
+          <div class="arm-segment arm-upper"></div>
+          <div class="arm-segment arm-lower"></div>
+          <div class="arm-hand"></div>
+        </div>
+        <div class="speech-wave" id="wave2">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="robot-metric">50+ langs · 200ms</div>
+      </div>
+
+      <!-- Human agent (semi-transparent) -->
+      <div class="human-agent" id="humanAgent">
+        <div class="human-head">
+          <div class="human-headset"></div>
+        </div>
+        <div class="human-body"></div>
+        <div class="human-badge">Human Escalation</div>
+      </div>
+
+      <!-- Holographic call orbs -->
+      <div class="call-orb orb-1"><span>📞</span><div class="orb-ring"></div></div>
+      <div class="call-orb orb-2"><span>📞</span><div class="orb-ring"></div></div>
+      <div class="call-orb orb-3"><span>📞</span><div class="orb-ring"></div></div>
+      <div class="call-orb orb-4"><span>📞</span><div class="orb-ring"></div></div>
+      <div class="call-orb orb-5"><span>📞</span><div class="orb-ring"></div></div>
+
+      <!-- Holographic data screen behind robots -->
+      <div class="holo-screen">
+        <div class="holo-row"><div class="holo-bar" style="width:89%"></div><span>FCR</span></div>
+        <div class="holo-row"><div class="holo-bar holo-teal" style="width:72%"></div><span>Mode 1</span></div>
+        <div class="holo-row"><div class="holo-bar" style="width:99%"></div><span>SLA</span></div>
+        <div class="holo-scan"></div>
+      </div>
+
+    </div><!-- /command-center -->
+
+  </div><!-- /container -->
 </section>
 
 <!-- Demo video modal -->
@@ -5513,67 +5914,59 @@ html{scroll-behavior:smooth}
 var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ══════════════════════════════════════════════════════════════════
-   1. NATIVE CANVAS PARTICLE NETWORK — hero background
-   No external deps. Guaranteed to work everywhere.
+   CYBERPUNK CANVAS — particle network + call activity overlay
 ══════════════════════════════════════════════════════════════════ */
-(function initParticles() {
-  var hero = document.getElementById('vanta-hero');
-  if (!hero || reduced) return;
-
-  var canvas = document.createElement('canvas');
-  canvas.style.cssText = [
-    'position:absolute',
-    'top:0','left:0',
-    'width:100%','height:100%',
-    'z-index:0',
-    'pointer-events:none',
-    'opacity:0.6'
-  ].join(';');
-  hero.insertBefore(canvas, hero.firstChild);
-
+(function initCyberCanvas() {
+  var canvas = document.getElementById('cyberCanvas');
+  if (!canvas) return;
   var ctx = canvas.getContext('2d');
   var W, H, pts, raf;
-  var ACCENT  = {r:45,  g:122, b:255};
-  var ACCENT2 = {r:0,   g:201, b:167};
-  var COUNT   = 55;
-  var MAX_DIST = 140;
+  var BLUE = {r:45,g:122,b:255};
+  var TEAL = {r:0,g:201,b:167};
+  var COUNT = 65;
+  var MAX_D = 145;
+  var mouseX = W/2||400, mouseY = H/2||300;
 
   function resize() {
-    W = canvas.width  = hero.offsetWidth;
-    H = canvas.height = hero.offsetHeight;
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
   }
 
   function mkPt() {
     return {
       x:  Math.random() * W,
       y:  Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.45,
-      vy: (Math.random() - 0.5) * 0.45,
-      r:  Math.random() * 1.8 + 0.6,
-      c:  Math.random() > 0.55 ? ACCENT : ACCENT2
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      r:  Math.random() * 1.8 + 0.5,
+      c:  Math.random() > 0.45 ? BLUE : TEAL,
+      baseVx: 0, baseVy: 0
     };
   }
 
   function init() {
     resize();
     pts = [];
-    for (var i = 0; i < COUNT; i++) pts.push(mkPt());
+    for (var i = 0; i < COUNT; i++) {
+      var p = mkPt();
+      p.baseVx = p.vx; p.baseVy = p.vy;
+      pts.push(p);
+    }
   }
 
   function draw() {
-    ctx.clearRect(0, 0, W, H);
+    ctx.clearRect(0,0,W,H);
 
-    /* Lines between close points */
     for (var i = 0; i < pts.length; i++) {
-      for (var j = i + 1; j < pts.length; j++) {
+      for (var j = i+1; j < pts.length; j++) {
         var dx = pts[i].x - pts[j].x;
         var dy = pts[i].y - pts[j].y;
         var dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < MAX_DIST) {
-          var alpha = (1 - dist / MAX_DIST) * 0.18;
+        if (dist < MAX_D) {
+          var a = (1 - dist/MAX_D) * 0.22;
           var c = pts[i].c;
-          ctx.strokeStyle = 'rgba('+c.r+','+c.g+','+c.b+','+alpha+')';
-          ctx.lineWidth = 0.8;
+          ctx.strokeStyle = 'rgba('+c.r+','+c.g+','+c.b+','+a+')';
+          ctx.lineWidth = 0.9;
           ctx.beginPath();
           ctx.moveTo(pts[i].x, pts[i].y);
           ctx.lineTo(pts[j].x, pts[j].y);
@@ -5582,96 +5975,138 @@ var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       }
     }
 
-    /* Dots */
     for (var k = 0; k < pts.length; k++) {
       var p = pts[k];
+      /* glow dot */
+      var grad = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
+      grad.addColorStop(0,'rgba('+p.c.r+','+p.c.g+','+p.c.b+',0.9)');
+      grad.addColorStop(1,'rgba('+p.c.r+','+p.c.g+','+p.c.b+',0)');
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba('+p.c.r+','+p.c.g+','+p.c.b+',0.7)';
+      ctx.arc(p.x,p.y,p.r*3,0,Math.PI*2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = 'rgba('+p.c.r+','+p.c.g+','+p.c.b+',1)';
       ctx.fill();
 
-      /* Move */
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < -10) p.x = W + 10;
+      /* cursor repulsion */
+      var cdx = mouseX - p.x;
+      var cdy = mouseY - p.y;
+      var cd = Math.sqrt(cdx*cdx + cdy*cdy);
+      if (cd < 100) {
+        p.vx -= (cdx / cd) * 0.6 * (1 - cd/100);
+        p.vy -= (cdy / cd) * 0.6 * (1 - cd/100);
+      }
+
+      /* dampen toward base velocity */
+      p.vx = p.vx * 0.98 + p.baseVx * 0.02;
+      p.vy = p.vy * 0.98 + p.baseVy * 0.02;
+
+      /* clamp */
+      var spd = Math.sqrt(p.vx*p.vx + p.vy*p.vy);
+      if (spd > 2.2) { p.vx = p.vx/spd*2.2; p.vy = p.vy/spd*2.2; }
+
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < -10) p.x = W+10;
       if (p.x > W+10) p.x = -10;
-      if (p.y < -10) p.y = H + 10;
+      if (p.y < -10) p.y = H+10;
       if (p.y > H+10) p.y = -10;
     }
 
     raf = requestAnimationFrame(draw);
   }
 
-  /* Mouse parallax */
-  var mouseX = 0, mouseY = 0;
   document.addEventListener('mousemove', function(e) {
-    mouseX = e.clientX; mouseY = e.clientY;
-    pts.forEach(function(p) {
-      var dx = e.clientX - p.x;
-      var dy = e.clientY - p.y;
-      var dist = Math.sqrt(dx*dx + dy*dy);
-      if (dist < 90) {
-        p.vx -= dx * 0.0006;
-        p.vy -= dy * 0.0006;
-        /* clamp velocity */
-        var speed = Math.sqrt(p.vx*p.vx + p.vy*p.vy);
-        if (speed > 1.8) { p.vx = p.vx/speed*1.8; p.vy = p.vy/speed*1.8; }
-      }
-    });
+    var rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
   });
 
   window.addEventListener('resize', function() {
     cancelAnimationFrame(raf);
-    init();
-    draw();
+    init(); draw();
   });
 
-  init();
-  draw();
+  init(); draw();
 })();
 
 /* ══════════════════════════════════════════════════════════════════
-   2. GSAP + SCROLLTRIGGER SETUP
+   GSAP ANIMATIONS
 ══════════════════════════════════════════════════════════════════ */
 if (typeof gsap === 'undefined') return;
 if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
 
-/* ── Hero entrance ───────────────────────────────────────────── */
-if (!reduced) {
-  var heroLeft = document.querySelector('.hero-left');
-  if (heroLeft) {
-    var kids = Array.from(heroLeft.children);
-    gsap.set(kids, { opacity: 0, y: 28 });
-    gsap.to(kids, {
-      opacity: 1, y: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-      stagger: 0.09,
-      delay: 0.15,
-      clearProps: 'transform'
+/* KPI counter animation */
+function runCounters() {
+  document.querySelectorAll('.chip-val[data-target]').forEach(function(el) {
+    var target = parseFloat(el.getAttribute('data-target'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    var isInt  = String(target).indexOf('.') === -1;
+    var obj = {v: 0};
+    gsap.to(obj, {
+      v: target, duration: 2, ease: 'power2.out',
+      onUpdate: function() {
+        var val = isInt ? Math.round(obj.v) : obj.v.toFixed(1);
+        el.textContent = val + suffix;
+      }
     });
-  }
-
-  var tpanel = document.querySelector('.timer-panel');
-  if (tpanel) {
-    gsap.fromTo(tpanel,
-      { opacity: 0, x: 44 },
-      { opacity: 1, x: 0, duration: 0.9, ease: 'power3.out', delay: 0.3, clearProps: 'transform' }
-    );
-  }
-
-  /* Call-state rows stagger */
-  var callRows = document.querySelectorAll('.call-state');
-  if (callRows.length) {
-    gsap.set(callRows, { opacity: 0, x: -14 });
-    gsap.to(callRows, { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.1, delay: 0.55 });
+  });
+  /* Calls counter */
+  var kpiCalls = document.getElementById('kpi-calls');
+  if (kpiCalls) {
+    var obj2 = {v: 0};
+    gsap.to(obj2, {
+      v: 1847293, duration: 2.2, ease: 'power2.out',
+      onUpdate: function() { kpiCalls.textContent = Math.round(obj2.v).toLocaleString(); }
+    });
   }
 }
 
-/* ── Scroll-triggered reveals ────────────────────────────────── */
-if (!reduced && typeof ScrollTrigger !== 'undefined') {
+/* Hero entrance */
+if (!reduced) {
+  var heroLeft = document.getElementById('heroLeft');
+  if (heroLeft) {
+    var kids = Array.from(heroLeft.children);
+    gsap.set(kids, {opacity:0, y:30});
+    gsap.to(kids, {opacity:1, y:0, duration:.9, ease:'power3.out', stagger:.09, delay:.15,
+      onComplete: runCounters});
+  }
 
-  /* Generic section reveal */
+  var cc = document.getElementById('commandCenter');
+  if (cc) {
+    gsap.fromTo(cc,
+      {opacity:0, x:60},
+      {opacity:1, x:0, duration:1.1, ease:'power3.out', delay:.3}
+    );
+  }
+
+  /* Robot 3D tilt on scene hover */
+  var robots = document.querySelectorAll('.robot-agent');
+  if (cc) {
+    cc.addEventListener('mousemove', function(e) {
+      var r = cc.getBoundingClientRect();
+      var dx = (e.clientX - r.left - r.width/2)  / (r.width/2);
+      var dy = (e.clientY - r.top  - r.height/2) / (r.height/2);
+      robots.forEach(function(rob) {
+        gsap.to(rob, {
+          rotateY: dx * 12, rotateX: dy * -8,
+          transformPerspective: 800,
+          duration: .4, ease:'power2.out'
+        });
+      });
+    });
+    cc.addEventListener('mouseleave', function() {
+      robots.forEach(function(rob) {
+        gsap.to(rob, {rotateY:0, rotateX:0, duration:.6, ease:'elastic.out(1,.5)'});
+      });
+    });
+  }
+}
+
+/* ScrollTrigger for all sections */
+if (typeof ScrollTrigger !== 'undefined' && !reduced) {
+
   var sections = [
     '#problem','#social-proof','#features','#verticals',
     '#how-ai-works','#live-sim','#how-it-works',
@@ -5681,14 +6116,12 @@ if (!reduced && typeof ScrollTrigger !== 'undefined') {
     var el = document.querySelector(sel);
     if (!el) return;
     ScrollTrigger.create({
-      trigger: el,
-      start: 'top 84%',
-      once: true,
-      onEnter: function() {
+      trigger:el, start:'top 84%', once:true,
+      onEnter:function() {
         el.classList.add('in-view');
         gsap.fromTo(el,
-          { opacity: 0, y: 36 },
-          { opacity: 1, y: 0, duration: 0.75, ease: 'power3.out', clearProps: 'transform,opacity' }
+          {opacity:0,y:36},
+          {opacity:1,y:0,duration:.75,ease:'power3.out',clearProps:'transform,opacity'}
         );
       }
     });
@@ -5696,160 +6129,90 @@ if (!reduced && typeof ScrollTrigger !== 'undefined') {
 
   /* Section headings */
   document.querySelectorAll('.section-h2').forEach(function(el) {
-    gsap.set(el, { opacity: 0, x: -22 });
+    gsap.set(el,{opacity:0,x:-22});
     ScrollTrigger.create({
-      trigger: el, start: 'top 89%', once: true,
-      onEnter: function() {
-        gsap.to(el, { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out', clearProps: 'all' });
+      trigger:el, start:'top 89%', once:true,
+      onEnter:function() {
+        gsap.to(el,{opacity:1,x:0,duration:.6,ease:'power3.out',clearProps:'all'});
       }
     });
   });
 
-  /* Card stagger grids */
-  [
-    ['.features-grid',   '.feature-card'],
-    ['.pricing-grid',    '.pricing-card'],
-    ['.verticals-grid',  '.vertical-card'],
-    ['#compliance',      '.comp-badge']
+  /* Card stagger */
+  [['.features-grid','.feature-card'],['.pricing-grid','.pricing-card'],
+   ['.verticals-grid','.vertical-card'],['#compliance','.comp-badge']
   ].forEach(function(pair) {
-    var containers = document.querySelectorAll(pair[0]);
-    containers.forEach(function(wrap) {
+    document.querySelectorAll(pair[0]).forEach(function(wrap) {
       var cards = wrap.querySelectorAll(pair[1]);
       if (!cards.length) return;
-      gsap.set(cards, { opacity: 0, y: 28, scale: 0.97 });
+      gsap.set(cards,{opacity:0,y:28,scale:.97});
       ScrollTrigger.create({
-        trigger: wrap, start: 'top 80%', once: true,
-        onEnter: function() {
-          gsap.to(cards, {
-            opacity: 1, y: 0, scale: 1,
-            duration: 0.6, ease: 'power2.out',
-            stagger: 0.08, clearProps: 'transform,opacity'
-          });
+        trigger:wrap, start:'top 80%', once:true,
+        onEnter:function() {
+          gsap.to(cards,{opacity:1,y:0,scale:1,duration:.6,ease:'power2.out',
+            stagger:.08,clearProps:'transform,opacity'});
         }
       });
     });
   });
 
-  /* Problem before/after columns */
-  var probCols = document.querySelectorAll('.before-col, .after-col');
+  /* Problem columns */
+  var probCols = document.querySelectorAll('.before-col,.after-col');
   if (probCols.length) {
-    gsap.set(probCols, { opacity: 0, y: 24 });
+    gsap.set(probCols,{opacity:0,y:24});
     ScrollTrigger.create({
-      trigger: '#problem', start: 'top 78%', once: true,
-      onEnter: function() {
-        gsap.to(probCols, { opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power2.out' });
+      trigger:'#problem', start:'top 78%', once:true,
+      onEnter:function() {
+        gsap.to(probCols,{opacity:1,y:0,duration:.7,stagger:.15,ease:'power2.out'});
       }
     });
   }
-
-  /* Floating orbs (pure CSS-driven via GSAP) */
-  var heroEl = document.getElementById('vanta-hero');
-  if (heroEl) {
-    var orbDefs = [
-      { sz:340, top:'6%',  left:'58%', c:'rgba(45,122,255,0.09)',  dur:16 },
-      { sz:200, top:'52%', left:'70%', c:'rgba(0,201,167,0.07)',   dur:20 },
-      { sz:260, top:'28%', left:'4%',  c:'rgba(45,122,255,0.06)',  dur:24 }
-    ];
-    orbDefs.forEach(function(o, i) {
-      var orb = document.createElement('div');
-      orb.setAttribute('aria-hidden','true');
-      orb.style.cssText = [
-        'position:absolute','width:'+o.sz+'px','height:'+o.sz+'px',
-        'top:'+o.top,'left:'+o.left,
-        'background:radial-gradient(circle,'+o.c+' 0%,transparent 70%)',
-        'border-radius:50%','pointer-events:none','z-index:0',
-        'will-change:transform','filter:blur(1px)'
-      ].join(';');
-      heroEl.appendChild(orb);
-      gsap.to(orb, {
-        y: '+=50', x: i % 2 === 0 ? '+=24' : '-=24',
-        duration: o.dur, ease: 'sine.inOut', repeat: -1, yoyo: true, delay: i * 3
-      });
-    });
-
-    /* Parallax glow scrub */
-    var glow = document.querySelector('.hero::after');
-    gsap.to(heroEl, {
-      '--hero-glow-y': '60px',
-      ease: 'none',
-      scrollTrigger: { trigger: heroEl, start: 'top top', end: 'bottom top', scrub: 2 }
-    });
-  }
-
-  /* Scan line on timer panel */
-  var tp = document.querySelector('.timer-panel');
-  if (tp) {
-    var sl = document.createElement('div');
-    sl.setAttribute('aria-hidden','true');
-    sl.style.cssText = 'position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(45,122,255,0.5),transparent);pointer-events:none;z-index:10;top:0;will-change:top';
-    tp.appendChild(sl);
-    gsap.to(sl, { top:'100%', duration:3.2, ease:'none', repeat:-1, delay:2 });
-  }
 }
 
-/* ── 3D card tilt (desktop only) ─────────────────────────────── */
+/* 3D card tilt on feature/pricing cards */
 if (!reduced && window.matchMedia('(hover:hover)').matches) {
-  var tiltEls = document.querySelectorAll(
-    '.feature-card, .pricing-card, .timer-panel, .comp-badge, .vertical-card'
-  );
-  tiltEls.forEach(function(card) {
+  document.querySelectorAll('.feature-card,.pricing-card,.comp-badge,.metric-chip').forEach(function(card) {
     card.style.willChange = 'transform';
     card.style.transition = 'transform 0.12s ease, box-shadow 0.12s ease';
-
     card.addEventListener('mousemove', function(e) {
-      var r  = card.getBoundingClientRect();
-      var cx = r.left + r.width  / 2;
-      var cy = r.top  + r.height / 2;
-      var dx = (e.clientX - cx) / (r.width  / 2);
-      var dy = (e.clientY - cy) / (r.height / 2);
-      card.style.transform = 'perspective(800px) rotateX('+(dy*-6)+'deg) rotateY('+(dx*6)+'deg) translateZ(4px)';
-      card.style.boxShadow = '0 '+(16+Math.abs(dy)*14)+'px '+(36+Math.abs(dx)*20)+'px rgba(0,0,0,.42),'
-        + '0 0 '+(20+Math.abs(dx)*10)+'px rgba(45,122,255,'+(0.05+Math.abs(dx)*0.07)+')';
+      var r=card.getBoundingClientRect();
+      var dx=(e.clientX-r.left-r.width/2)/(r.width/2);
+      var dy=(e.clientY-r.top-r.height/2)/(r.height/2);
+      card.style.transform='perspective(700px) rotateX('+(dy*-6)+'deg) rotateY('+(dx*6)+'deg) translateZ(4px)';
+      card.style.boxShadow='0 '+(14+Math.abs(dy)*14)+'px '+(32+Math.abs(dx)*18)+'px rgba(0,0,0,.4),'
+        +'0 0 '+(18+Math.abs(dx)*10)+'px rgba(45,122,255,'+(0.04+Math.abs(dx)*0.06)+')';
     });
-
     card.addEventListener('mouseleave', function() {
-      card.style.transform = '';
-      card.style.boxShadow = '';
+      card.style.transform='';card.style.boxShadow='';
     });
   });
 }
 
-/* ── Magnetic buttons ────────────────────────────────────────── */
-if (!reduced && typeof gsap !== 'undefined' && window.matchMedia('(hover:hover)').matches) {
-  document.querySelectorAll('.btn-primary, .btn-accent, .sticky-btn').forEach(function(btn) {
+/* Magnetic CTAs */
+if (!reduced && window.matchMedia('(hover:hover)').matches) {
+  document.querySelectorAll('.btn-cyber-primary,.btn-cyber-ghost,.sticky-btn').forEach(function(btn) {
     btn.addEventListener('mousemove', function(e) {
-      var r  = btn.getBoundingClientRect();
-      var dx = e.clientX - (r.left + r.width  / 2);
-      var dy = e.clientY - (r.top  + r.height / 2);
-      gsap.to(btn, { x: dx*0.3, y: dy*0.3, duration:0.25, ease:'power2.out' });
+      var r=btn.getBoundingClientRect();
+      gsap.to(btn,{x:(e.clientX-r.left-r.width/2)*.32,
+        y:(e.clientY-r.top-r.height/2)*.32,duration:.25,ease:'power2.out'});
     });
     btn.addEventListener('mouseleave', function() {
-      gsap.to(btn, { x:0, y:0, duration:0.5, ease:'elastic.out(1,0.5)' });
+      gsap.to(btn,{x:0,y:0,duration:.5,ease:'elastic.out(1,.5)'});
     });
   });
 }
 
-/* ── Mode toggle — smooth panel entrance ─────────────────────── */
-if (!reduced && typeof gsap !== 'undefined') {
-  document.querySelectorAll('.mode-tab').forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      var panelId = 'mode-panel-' + (tab.dataset.mode || tab.getAttribute('data-mode'));
-      var panel = document.getElementById(panelId);
-      if (!panel) return;
-      gsap.fromTo(panel,
-        { opacity:0, y:10 },
-        { opacity:1, y:0, duration:0.3, ease:'power2.out', clearProps:'transform,opacity' }
-      );
-      var items = panel.querySelectorAll('.mode-stat-card, .mode-feature-item, li');
-      if (items.length) {
-        gsap.fromTo(items,
-          { opacity:0, x:-8 },
-          { opacity:1, x:0, duration:0.35, stagger:0.05, ease:'power2.out', delay:0.08, clearProps:'all' }
-        );
-      }
-    });
+/* Mode toggle panel entrance */
+document.querySelectorAll('.mode-tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    var panelId='mode-panel-'+(tab.dataset.mode||tab.getAttribute('data-mode'));
+    var panel=document.getElementById(panelId);
+    if (!panel||reduced) return;
+    gsap.fromTo(panel,{opacity:0,y:10},{opacity:1,y:0,duration:.3,ease:'power2.out',clearProps:'transform,opacity'});
+    var items=panel.querySelectorAll('.mode-stat-card,.mode-feature-item,li');
+    if (items.length) gsap.fromTo(items,{opacity:0,x:-8},{opacity:1,x:0,duration:.35,stagger:.05,ease:'power2.out',delay:.08,clearProps:'all'});
   });
-}
+});
 
 })();
 </script>
