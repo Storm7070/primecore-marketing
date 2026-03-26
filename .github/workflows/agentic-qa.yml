@@ -1,0 +1,195 @@
+name: Agentic QA — Continuous Test Improvement
+
+on:
+  schedule:
+    # Every Monday at 07:00 UTC — weekly QA agent run
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+    # Allow manual trigger from Actions tab
+
+jobs:
+  agentic-qa:
+    name: AI QA Agent — Find Untested Flows
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Playwright
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Run current test suite and capture failures
+        id: run_tests
+        continue-on-error: true
+        run: |
+          npx playwright test --reporter=json 2>&1 | tee test-output.json || true
+          # Extract failed test names
+          python3 -c "
+          import json, sys
+          try:
+            with open('test-output.json') as f:
+              data = json.load(f)
+            failed = [t['title'] for suite in data.get('suites',[]) 
+                      for t in suite.get('specs',[]) if t.get('ok') == False]
+            print('FAILED_TESTS=' + '|'.join(failed[:10]))
+          except:
+            print('FAILED_TESTS=none')
+          " >> $GITHUB_OUTPUT
+        env:
+          MARKETING_URL: https://primecoreintelligence.com
+          CI: true
+
+      - name: Capture current HTML structure for analysis
+        run: |
+          curl -s https://primecoreintelligence.com > /tmp/en.html
+          curl -s https://primecoreintelligence.com/es/ > /tmp/es.html
+          curl -s https://primecoreintelligence.com/pt-br/ > /tmp/pt.html
+
+          # Extract interactive elements
+          python3 << 'PYEOF'
+          import re
+
+          report = []
+          for lang, path in [("EN", "/tmp/en.html"), ("ES", "/tmp/es.html"), ("PT", "/tmp/pt.html")]:
+            with open(path) as f:
+              html = f.read()
+            buttons = re.findall(r'<button[^>]*>([^<]{1,40})<', html)
+            links   = re.findall(r'href="([^"]{1,80})"', html)
+            forms   = re.findall(r'<form[^>]*id="([^"]*)"', html)
+            report.append(f"{lang}: {len(buttons)} buttons, {len(links)} links, {len(forms)} forms")
+
+          with open("structure-report.txt", "w") as f:
+            f.write("\n".join(report))
+          print("\n".join(report))
+          PYEOF
+
+      - name: AI analysis — find coverage gaps
+        id: ai_analysis
+        run: |
+          python3 << 'PYEOF'
+          import urllib.request, json, os
+
+          # Read current tests
+          with open("tests/marketing.spec.js") as f:
+            current_tests = f.read()
+
+          # Read structure report
+          with open("structure-report.txt") as f:
+            structure = f.read()
+
+          failed_tests = "${{ steps.run_tests.outputs.FAILED_TESTS }}"
+
+          prompt = f"""You are a QA engineer for PrimeCore Intelligence, a B2B SaaS platform.
+
+Current test coverage summary:
+{structure}
+
+Failed tests in last run: {failed_tests}
+
+Current test file has {current_tests.count("test(")} test cases covering these areas:
+- Navigation, language switcher, hero section
+- Social proof carousel, mode toggle, ROI calculator
+- Pricing section, compliance badges, CTA form
+- Sticky bar, footer, subpages, API endpoints
+- Mobile responsive, accessibility basics
+
+Analyze the coverage and identify the TOP 5 most important untested scenarios.
+Focus on: 
+1. User flows that could fail silently (lose leads)
+2. Cross-browser issues
+3. ES/PT specific flows
+4. Edge cases in form validation
+5. API error handling paths
+
+For each gap, write a Playwright test in the exact same style as the existing file.
+Return ONLY valid JavaScript test code, no explanations, no markdown fences.
+Start directly with: // AGENTIC QA ADDITIONS — {os.environ.get("GITHUB_SHA", "manual")[:8]}
+"""
+
+          try:
+            req = urllib.request.Request(
+              "https://api.anthropic.com/v1/messages",
+              data=json.dumps({
+                "model": "claude-sonnet-4-20250514",
+                "max_tokens": 2000,
+                "messages": [{"role": "user", "content": prompt}]
+              }).encode(),
+              headers={
+                "x-api-key": os.environ.get("ANTHROPIC_API_KEY", ""),
+                "anthropic-version": "2023-06-01",
+                "content-type": "application/json"
+              }
+            )
+            with urllib.request.urlopen(req, timeout=30) as resp:
+              data = json.load(resp)
+              new_tests = data["content"][0]["text"]
+
+            with open("tests/agentic-additions.spec.js", "w") as f:
+              f.write(new_tests)
+            print("✅ AI generated new tests")
+            print("TESTS_GENERATED=true", file=open(os.environ["GITHUB_OUTPUT"], "a"))
+          except Exception as e:
+            print(f"AI analysis unavailable: {e}")
+            print("TESTS_GENERATED=false", file=open(os.environ["GITHUB_OUTPUT"], "a"))
+          PYEOF
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Validate generated tests compile
+        if: steps.ai_analysis.outputs.TESTS_GENERATED == 'true'
+        run: |
+          node --check tests/agentic-additions.spec.js && echo "✅ Syntax OK" || echo "⚠️ Syntax error in generated tests"
+
+      - name: Open PR with new tests
+        if: steps.ai_analysis.outputs.TESTS_GENERATED == 'true'
+        run: |
+          BRANCH="agentic-qa-$(date +%Y%m%d)"
+          git config user.name "PrimeCore QA Agent"
+          git config user.email "qa-agent@primecoreintelligence.com"
+          git checkout -b "$BRANCH"
+          git add tests/agentic-additions.spec.js
+          git commit -m "test: agentic QA additions $(date +%Y-%m-%d)
+
+AI-generated Playwright tests targeting uncovered flows.
+Review before merging — validate each test makes sense.
+
+Generated by: agentic-qa GitHub Actions workflow
+Trigger: ${{ github.event_name }}"
+          git push origin "$BRANCH"
+
+          # Create PR via GitHub API
+          curl -s -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            https://api.github.com/repos/${{ github.repository }}/pulls \
+            -d "{
+              \"title\": \"🤖 Agentic QA: New test coverage $(date +%Y-%m-%d)\",
+              \"head\": \"$BRANCH\",
+              \"base\": \"main\",
+              \"body\": \"## Agentic QA — Auto-generated tests\n\nThis PR was opened automatically by the weekly QA agent.\n\nThe agent analyzed current test coverage against the live site structure and identified gaps.\n\n### Review checklist\n- [ ] Each test makes logical sense\n- [ ] Selectors match actual DOM elements\n- [ ] No false positives (tests that pass but test wrong thing)\n- [ ] No duplicate coverage\n\n**Merge or close — the agent will generate new ones next Monday.**\"
+            }"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Weekly test health summary
+        if: always()
+        run: |
+          echo "═══════════════════════════════════════"
+          echo "WEEKLY QA AGENT SUMMARY"
+          echo "═══════════════════════════════════════"
+          echo "Date: $(date)"
+          echo "Failed tests: ${{ steps.run_tests.outputs.FAILED_TESTS }}"
+          echo "New tests generated: ${{ steps.ai_analysis.outputs.TESTS_GENERATED }}"
+          echo "═══════════════════════════════════════"
