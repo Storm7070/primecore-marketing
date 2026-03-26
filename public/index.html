@@ -2653,11 +2653,19 @@ html{scroll-behavior:smooth}
   opacity: .5;
   transform: scale(.97);
 }
+.social-card {
+  cursor: pointer;
+}
 .social-card.active {
-  opacity: 1;
-  transform: scale(1);
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  border-color: rgba(45,122,255,.4);
+  box-shadow: 0 0 0 1px rgba(45,122,255,.2), 0 16px 48px rgba(0,0,0,.45);
+  cursor: default;
+}
+.social-card:not(.active):hover {
+  opacity: .75 !important;
   border-color: var(--border2);
-  box-shadow: 0 16px 48px rgba(0,0,0,.35);
 }
 .social-card::before {
   content: '"';
@@ -3189,25 +3197,36 @@ html{scroll-behavior:smooth}
               aria-label="Close demo video"
               style="background:rgba(255,255,255,.08);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center">&#215;</button>
     </div>
-    <!-- Animated product demo — 60s scripted walkthrough -->
-    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);aspect-ratio:16/9;position:relative;overflow:hidden" id="demoScreen">
-      <canvas id="demoCanvas" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
-      <div id="demoOverlay" style="position:absolute;inset:0;display:flex;flex-direction:column;pointer-events:none"></div>
-      <div id="demoControls" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:10px;pointer-events:all;z-index:10">
-        <button id="demoPauseBtn" onclick="demoPause()"
-                style="background:rgba(45,122,255,.2);border:1px solid rgba(45,122,255,.4);color:#fff;padding:6px 16px;border-radius:6px;font-size:12px;cursor:pointer;font-family:var(--font-body)">
-          ⏸ Pause
-        </button>
-        <button onclick="demoRestart()"
-                style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:var(--muted);padding:6px 16px;border-radius:6px;font-size:12px;cursor:pointer;font-family:var(--font-body)">
-          ↺ Restart
-        </button>
-        <a href="https://pilot.primecoreintelligence.com"
-           style="background:var(--accent);border:none;color:#fff;padding:6px 16px;border-radius:6px;font-size:12px;cursor:pointer;text-decoration:none;font-family:var(--font-body);pointer-events:all">
-          Start Pilot →
-        </a>
+    <!-- Loom embed — replace LOOM_VIDEO_ID with your Loom share ID -->
+    <div id="demoScreen" style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);aspect-ratio:16/9;position:relative;overflow:hidden">
+      <!-- LOOM EMBED: paste your Loom share URL ID below when ready -->
+      <!-- Format: https://www.loom.com/embed/YOUR_VIDEO_ID -->
+      <div id="loomPlaceholder" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:32px;text-align:center">
+        <div style="width:72px;height:72px;background:rgba(45,122,255,.12);border:1px solid rgba(45,122,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px">▶</div>
+        <div>
+          <div style="font-family:var(--font-head);font-size:18px;font-weight:700;margin-bottom:8px">60-Second Product Demo</div>
+          <div style="font-size:14px;color:var(--muted);max-width:400px;line-height:1.6">See PrimeCore Intelligence handle a live Tier-1 logistics call — from inbound greeting to FCR logged — in under 90 seconds. No agent involved.</div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+          <a href="https://pilot.primecoreintelligence.com"
+             style="background:var(--accent);color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+            Start Your Pilot →
+          </a>
+          <a href="mailto:sales@primecoreintelligence.com?subject=Demo%20Request&body=Hi%2C%20I%27d%20like%20to%20schedule%20a%20live%20demo%20of%20PrimeCore%20Intelligence."
+             style="background:rgba(255,255,255,.06);color:var(--muted);padding:10px 22px;border-radius:8px;font-size:14px;text-decoration:none;border:1px solid var(--border2)">
+            Schedule Live Demo
+          </a>
+        </div>
       </div>
-      <div id="demoProgressBar" style="position:absolute;bottom:0;left:0;height:2px;background:var(--accent);width:0%;transition:none;z-index:10"></div>
+      <!-- Uncomment and add Loom ID when video is ready:
+      <iframe id="loomEmbed"
+              src="https://www.loom.com/embed/YOUR_LOOM_VIDEO_ID?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true"
+              style="position:absolute;inset:0;width:100%;height:100%;border:none"
+              frameborder="0"
+              allowfullscreen
+              allow="autoplay; fullscreen">
+      </iframe>
+      -->
     </div>
   </div>
 </div>
@@ -5938,6 +5957,13 @@ html{scroll-behavior:smooth}
   /* Wire prev/next buttons */
   if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1, true); });
   if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1, true); });
+
+  /* Click on inactive card to navigate to it */
+  cards.forEach(function(card, i) {
+    card.addEventListener('click', function() {
+      if (i !== current) goTo(i, true);
+    });
+  });
 
   /* Pause on hover / focus */
   var wrap = document.getElementById('socialTrack');
