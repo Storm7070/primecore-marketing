@@ -36,7 +36,7 @@ See War Room CLAUDE.md for tokens. Fonts: Syne + DM Sans.
 
 ## Outstanding Gap
 `/public/assets/og-card.png` — 1200×630 branded OG card — MISSING
-Every social share shows broken image. Use /sc:build with magic MCP to generate.
+og:image confirmed 1200x630 at /public/assets/og-card.png — all pages updated.
 
 ## MCP Guidance
 - `--c7` for Cloudflare Pages `_redirects` / `_headers` / sitemap format

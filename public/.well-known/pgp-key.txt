@@ -1,0 +1,7 @@
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Comment: PrimeCore Intelligence Security Team
+Comment: security@primecoreintelligence.com
+Comment: Full key available on request — contact security@primecoreintelligence.com
+
+[PGP public key pending — contact security@primecoreintelligence.com for verification]
+-----END PGP PUBLIC KEY BLOCK-----
