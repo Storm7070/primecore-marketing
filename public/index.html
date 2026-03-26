@@ -5935,13 +5935,18 @@ html{scroll-behavior:smooth}
   function stopAuto()    { clearInterval(autoTimer); autoTimer = null; }
   function restartAuto() { stopAuto(); startAuto(); }
 
+  /* Wire prev/next buttons */
+  if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1, true); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1, true); });
+
   /* Pause on hover / focus */
   var wrap = document.getElementById('socialTrack');
   if (wrap) {
-    wrap.closest('.social-carousel-wrap').addEventListener('mouseenter', stopAuto);
-    wrap.closest('.social-carousel-wrap').addEventListener('mouseleave', startAuto);
-    wrap.closest('.social-carousel-wrap').addEventListener('focusin',  stopAuto);
-    wrap.closest('.social-carousel-wrap').addEventListener('focusout', startAuto);
+    var wrapEl = wrap.closest('.social-carousel-wrap') || wrap;
+    wrapEl.addEventListener('mouseenter', stopAuto);
+    wrapEl.addEventListener('mouseleave', startAuto);
+    wrapEl.addEventListener('focusin',  stopAuto);
+    wrapEl.addEventListener('focusout', startAuto);
   }
 
   /* Touch swipe */
@@ -5966,22 +5971,21 @@ html{scroll-behavior:smooth}
     });
   });
 
-  /* Scroll trigger */
+  /* Scroll trigger — also start auto immediately as fallback */
+  startAuto();
   var socialSection = document.getElementById('social-proof');
   if (socialSection && 'IntersectionObserver' in window) {
     var socialIO = new IntersectionObserver(function(entries, obs) {
       entries.forEach(function(e) {
         if (e.isIntersecting) {
           e.target.classList.add('in-view');
-          startAuto();
           obs.disconnect();
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.05 });
     socialIO.observe(socialSection);
   } else if (socialSection) {
     socialSection.classList.add('in-view');
-    startAuto();
   }
 
 })();
