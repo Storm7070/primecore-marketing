@@ -4937,7 +4937,7 @@ html{scroll-behavior:smooth}
   }
 
   function isValidEmail(v) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]{2}$/.test(v);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
   }
 
   function validate() {
