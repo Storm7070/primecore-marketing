@@ -2656,16 +2656,24 @@ html{scroll-behavior:smooth}
 .social-card {
   cursor: pointer;
 }
+.social-card:hover,
+.social-card:focus-visible {
+  opacity: .85 !important;
+  border-color: rgba(45,122,255,.35);
+  box-shadow: 0 0 0 1px rgba(45,122,255,.15), 0 8px 32px rgba(0,0,0,.3);
+  transform: scale(.985) !important;
+}
 .social-card.active {
   opacity: 1 !important;
   transform: scale(1) !important;
-  border-color: rgba(45,122,255,.4);
-  box-shadow: 0 0 0 1px rgba(45,122,255,.2), 0 16px 48px rgba(0,0,0,.45);
+  border-color: rgba(45,122,255,.55);
+  box-shadow: 0 0 0 1px rgba(45,122,255,.3),
+              0 0 24px rgba(45,122,255,.18),
+              0 16px 48px rgba(0,0,0,.45);
   cursor: default;
 }
-.social-card:not(.active):hover {
-  opacity: .75 !important;
-  border-color: var(--border2);
+.social-card.active:hover {
+  transform: scale(1) !important;
 }
 .social-card::before {
   content: '"';
@@ -3367,7 +3375,7 @@ html{scroll-behavior:smooth}
       </div>
 
       <p style="margin-top:16px;font-size:12px;color:var(--dim);line-height:1.6">
-        Based on 22,000 calls/month, Logistics/3PL benchmark, 70% Mode 1 blend.
+        Baseado em 22.000 chamadas/mês, referência Logística/3PL, combinação 70% Modo 1.
         Actual savings depend on your call mix, CCaaS platform, and deployment configuration.
         <a href="/roi" style="color:var(--accent)">Calcule seus próprios números →</a>
       </p>
@@ -3439,7 +3447,7 @@ html{scroll-behavior:smooth}
                 <div class="social-name">Chefe de Operações do Contact Center</div>
                 <div class="social-role">Operador 3PL, Colômbia &mdash; 22.000 chamadas/mês</div>
               </div>
-              <span class="social-badge">Early Access</span>
+              <span class="social-badge">Acesso Antecipado</span>
             </div>
           </div>
 
@@ -3474,7 +3482,7 @@ html{scroll-behavior:smooth}
                 <div class="social-name">VP de Experiência do Cliente</div>
                 <div class="social-role">Rede de saúde, México &mdash; Operação em 15 idiomas</div>
               </div>
-              <span class="social-badge">Early Access</span>
+              <span class="social-badge">Acesso Antecipado</span>
             </div>
           </div>
 
@@ -3509,7 +3517,7 @@ html{scroll-behavior:smooth}
                 <div class="social-name">CTO</div>
                 <div class="social-role">Operador logístico, Brasil &mdash; Genesys + PrimeCore</div>
               </div>
-              <span class="social-badge">Early Access</span>
+              <span class="social-badge">Acesso Antecipado</span>
             </div>
           </div>
 
@@ -3682,7 +3690,7 @@ html{scroll-behavior:smooth}
             </p>
             <div class="mode-split">
               <div class="mode-split-col">
-                <h4 style="color:var(--accent2)">AI handles</h4>
+                <h4 style="color:var(--accent2)">A IA gerencia</h4>
                 <ul>
                   <li>Picks up and greets caller</li>
                   <li>Classifies intent in real time</li>
@@ -3692,7 +3700,7 @@ html{scroll-behavior:smooth}
                 </ul>
               </div>
               <div class="mode-split-col">
-                <h4 style="color:var(--dim)">Agent handles</h4>
+                <h4 style="color:var(--dim)">O agente gerencia</h4>
                 <ul>
                   <li>Nothing &mdash; until the AI</li>
                   <li>flags an escalation trigger</li>
@@ -3701,7 +3709,7 @@ html{scroll-behavior:smooth}
               </div>
             </div>
             <div class="mode-verticals">
-              <span class="mode-verticals-label">Best for</span>
+              <span class="mode-verticals-label">Ideal para</span>
               <span class="mode-vertical-tag">Logistics / 3PL</span>
               <span class="mode-vertical-tag">Saúde</span>
               <span class="mode-vertical-tag">Retail</span>
@@ -3714,12 +3722,12 @@ html{scroll-behavior:smooth}
               <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent2);border-radius:3px 0 0 3px"></div>
               <div class="mode-stat-value" style="color:var(--accent2)">89%</div>
               <div class="mode-stat-label">Resolução na Primeira Chamada</div>
-              <div class="mode-stat-sub">Logistics/3PL benchmark</div>
+              <div class="mode-stat-sub">Referência Logística/3PL</div>
             </div>
             <div class="mode-stat-card">
               <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent2);border-radius:3px 0 0 3px"></div>
               <div class="mode-stat-value" style="color:var(--accent2)">87s</div>
-              <div class="mode-stat-label">Avg Handle Time</div>
+              <div class="mode-stat-label">Tempo Médio de Atendimento</div>
               <div class="mode-stat-sub">vs 5–6 min agent average</div>
             </div>
             <div class="mode-stat-card">
@@ -3764,7 +3772,7 @@ html{scroll-behavior:smooth}
             </div>
             <div class="mode-cost-badge"
                  style="background:rgba(45,122,255,.1);border:1px solid rgba(45,122,255,.25);color:var(--accent)">
-              ~$2.50 per assisted call
+              ~$2,50 por chamada assistida
             </div>
             <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px">
               Your agent takes the call. The AI listens and displays the right script, caller
@@ -3774,7 +3782,7 @@ html{scroll-behavior:smooth}
             </p>
             <div class="mode-split">
               <div class="mode-split-col">
-                <h4 style="color:var(--accent)">AI handles</h4>
+                <h4 style="color:var(--accent)">A IA gerencia</h4>
                 <ul>
                   <li>Real-time transcript + intent</li>
                   <li>Script suggestion on screen</li>
@@ -3784,7 +3792,7 @@ html{scroll-behavior:smooth}
                 </ul>
               </div>
               <div class="mode-split-col">
-                <h4 style="color:var(--accent)">Agent handles</h4>
+                <h4 style="color:var(--accent)">O agente gerencia</h4>
                 <ul>
                   <li>Speaks to caller directly</li>
                   <li>Accepts or ignores suggestions</li>
@@ -3794,7 +3802,7 @@ html{scroll-behavior:smooth}
               </div>
             </div>
             <div class="mode-verticals">
-              <span class="mode-verticals-label">Best for</span>
+              <span class="mode-verticals-label">Ideal para</span>
               <span class="mode-vertical-tag">Complaints</span>
               <span class="mode-vertical-tag">Disputes</span>
               <span class="mode-vertical-tag">Financial</span>
@@ -3857,7 +3865,7 @@ html{scroll-behavior:smooth}
             </div>
             <div class="mode-cost-badge"
                  style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.25);color:#a78bfa">
-              ~$1.80 per handoff
+              ~$1,80 por transferência
             </div>
             <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:20px">
               AI starts the call, captures intent and account data, then transfers to your agent
@@ -3866,7 +3874,7 @@ html{scroll-behavior:smooth}
             </p>
             <div class="mode-split">
               <div class="mode-split-col">
-                <h4 style="color:#a78bfa">AI handles</h4>
+                <h4 style="color:#a78bfa">A IA gerencia</h4>
                 <ul>
                   <li>Greets + confirms intent</li>
                   <li>Fetches account + case history</li>
@@ -3876,7 +3884,7 @@ html{scroll-behavior:smooth}
                 </ul>
               </div>
               <div class="mode-split-col">
-                <h4 style="color:#a78bfa">Agent handles</h4>
+                <h4 style="color:#a78bfa">O agente gerencia</h4>
                 <ul>
                   <li>Receives full context on screen</li>
                   <li>Resolves the escalation</li>
@@ -3886,7 +3894,7 @@ html{scroll-behavior:smooth}
               </div>
             </div>
             <div class="mode-verticals">
-              <span class="mode-verticals-label">Best for</span>
+              <span class="mode-verticals-label">Ideal para</span>
               <span class="mode-vertical-tag">Damage claims</span>
               <span class="mode-vertical-tag">Faturamento disputes</span>
               <span class="mode-vertical-tag">Saúde</span>
@@ -3942,7 +3950,7 @@ html{scroll-behavior:smooth}
               <div class="mode-icon-lg"
                    style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2)">📞</div>
               <div>
-                <div class="mode-name">Scheduled Outbound</div>
+                <div class="mode-name">Saída Agendada</div>
                 <div class="mode-tagline">Proactive campaigns &mdash; call before they call you</div>
               </div>
             </div>
@@ -3958,7 +3966,7 @@ html{scroll-behavior:smooth}
             </p>
             <div class="mode-split">
               <div class="mode-split-col">
-                <h4 style="color:var(--warn)">AI handles</h4>
+                <h4 style="color:var(--warn)">A IA gerencia</h4>
                 <ul>
                   <li>Risk-scores each shipment</li>
                   <li>Schedules call timing</li>
@@ -3978,10 +3986,10 @@ html{scroll-behavior:smooth}
               </div>
             </div>
             <div class="mode-verticals">
-              <span class="mode-verticals-label">Best for</span>
+              <span class="mode-verticals-label">Ideal para</span>
               <span class="mode-vertical-tag">Logistics / 3PL</span>
               <span class="mode-vertical-tag">Saúde</span>
-              <span class="mode-vertical-tag">Property Mgmt</span>
+              <span class="mode-vertical-tag">Gestão Imobiliária</span>
             </div>
           </div>
 
@@ -4055,13 +4063,13 @@ html{scroll-behavior:smooth}
   <div class="container">
     <div class="sim-inner">
 
-      <div class="section-eyebrow">Live Call Simulator</div>
+      <div class="section-eyebrow">Simulador de Chamada ao Vivo</div>
       <h2 class="section-h2" id="sim-heading">
         Watch Mode 1 resolve a call.<br>No agent. No wait.
       </h2>
       <p class="section-sub">
         Pick an industry and press Start Call. This is exactly what runs
-        in your contact center — the AI handles it, logs it, and closes the ticket.
+        no seu contact center — a IA atende, registra e fecha o ticket.
       </p>
 
       <!-- Industry tabs -->
@@ -4396,7 +4404,7 @@ html{scroll-behavior:smooth}
         <div class="pricing-pilot">50% off first month &middot; $1,200</div>
       </div>
       <div class="pricing-card featured">
-        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-badge">Mais Popular</div>
         <div class="pricing-tier">Growth</div>
         <div class="pricing-price"><sup>$</sup>5.800</div>
         <span class="price-local" id="pt-p2-local">≈ R$ 29.000/mês</span>
@@ -4531,7 +4539,7 @@ html{scroll-behavior:smooth}
               All data in transit encrypted with TLS 1.2 or higher.
               Tenant data isolated via prefixed KV key structures —
               no cross-tenant data access is architecturally possible.
-              <br><a href="/trust">Full security architecture &rarr;</a>
+              <br><a href="/trust?lang=pt">Arquitetura de segurança completa &rarr;</a>
             </div>
           </div>
         </div>
@@ -4634,7 +4642,7 @@ html{scroll-behavior:smooth}
           &nbsp;&mdash;&nbsp; Zero sensitive data stored without explicit configuration
         </span>
         <a class="comp-trust-link" href="/trust">
-          Full security architecture &rarr;
+          Arquitetura de segurança completa &rarr;
         </a>
       </div>
 

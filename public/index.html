@@ -2656,16 +2656,24 @@ html{scroll-behavior:smooth}
 .social-card {
   cursor: pointer;
 }
+.social-card:hover,
+.social-card:focus-visible {
+  opacity: .85 !important;
+  border-color: rgba(45,122,255,.35);
+  box-shadow: 0 0 0 1px rgba(45,122,255,.15), 0 8px 32px rgba(0,0,0,.3);
+  transform: scale(.985) !important;
+}
 .social-card.active {
   opacity: 1 !important;
   transform: scale(1) !important;
-  border-color: rgba(45,122,255,.4);
-  box-shadow: 0 0 0 1px rgba(45,122,255,.2), 0 16px 48px rgba(0,0,0,.45);
+  border-color: rgba(45,122,255,.55);
+  box-shadow: 0 0 0 1px rgba(45,122,255,.3),
+              0 0 24px rgba(45,122,255,.18),
+              0 16px 48px rgba(0,0,0,.45);
   cursor: default;
 }
-.social-card:not(.active):hover {
-  opacity: .75 !important;
-  border-color: var(--border2);
+.social-card.active:hover {
+  transform: scale(1) !important;
 }
 .social-card::before {
   content: '"';
