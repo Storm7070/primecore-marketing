@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PrimeCore Intelligence — Piloto 30 Días</title>
+<meta name="description" content="Reduce el costo por llamada de $6.50 a $0.04. Modo sombra 30 días. Cancela antes del Mes 2."/>
+<meta name="robots" content="noindex"/><!-- LP — not for search -->
+<meta property="og:title" content="¿Cuánto te está costando el Nivel 1?"/>
+<meta property="og:description" content="89% FCR. 87 segundos. $0.04 por llamada. Sin cambiar tu CCaaS."/>
+<meta property="og:image" content="https://primecoreintelligence.com/assets/og-card.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#040812;--surface:#080f1e;--card:#0d1628;
+  --border:#162035;--border2:#1e2e4a;
+  --text:#e8effc;--muted:#7a93b8;--dim:#3d5278;
+  --accent:#2d7aff;--accent2:#00c9a7;--warn:#f59e0b;--danger:#ef4444;
+  --font-head:'Bricolage Grotesque',sans-serif;
+  --font-body:'Plus Jakarta Sans',sans-serif;
+  --radius:14px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ── Grid noise texture ── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.4;
+}
+
+/* ── Accent glow ── */
+.glow{
+  position:fixed;top:-200px;right:-100px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(45,122,255,.12) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+.glow2{
+  position:fixed;bottom:-300px;left:-200px;
+  width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,201,167,.06) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+
+.container{max-width:680px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* ── Minimal header ── */
+header{
+  padding:20px 0 0;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{
+  font-family:var(--font-head);font-weight:800;font-size:16px;
+  letter-spacing:-.3px;color:var(--text);text-decoration:none;
+  display:flex;align-items:center;gap:8px;
+}
+.brand-dot{
+  width:7px;height:7px;background:var(--accent2);
+  border-radius:50%;animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
+
+.lang-strip{display:flex;gap:4px}
+.lang-btn{
+  background:transparent;border:1px solid var(--border2);
+  color:var(--muted);padding:4px 10px;border-radius:6px;
+  font-size:11px;cursor:pointer;font-family:var(--font-body);
+  transition:all .15s;
+}
+.lang-btn.active,.lang-btn:hover{border-color:var(--accent);color:var(--text)}
+
+/* ── Hero ── */
+.hero{padding:64px 0 40px}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
+  color:var(--accent2);margin-bottom:20px;
+}
+.eyebrow-line{width:24px;height:1px;background:var(--accent2)}
+
+h1{
+  font-family:var(--font-head);
+  font-size:clamp(32px,6vw,52px);
+  font-weight:800;letter-spacing:-1.5px;
+  line-height:1.08;
+  margin-bottom:20px;
+}
+h1 em{
+  font-style:normal;
+  color:var(--accent2);
+}
+
+.hero-sub{
+  font-size:17px;color:var(--muted);
+  max-width:520px;line-height:1.7;margin-bottom:36px;
+}
+
+/* ── Three numbers ── */
+.numbers{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:12px;margin-bottom:48px;
+}
+.num-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:16px;
+  animation:fadeUp .6s ease both;
+}
+.num-card:nth-child(2){animation-delay:.1s}
+.num-card:nth-child(3){animation-delay:.2s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.num-value{
+  font-family:var(--font-head);font-size:28px;font-weight:800;
+  letter-spacing:-1px;color:var(--accent2);line-height:1;
+  margin-bottom:4px;
+}
+.num-label{font-size:11px;color:var(--muted);line-height:1.4}
+
+/* ── Divider ── */
+.section-divider{
+  height:1px;background:var(--border);margin:48px 0;
+}
+
+/* ── How it works ── */
+.steps-label{
+  font-family:var(--font-head);font-weight:700;font-size:18px;
+  margin-bottom:24px;
+}
+
+.steps{display:flex;flex-direction:column;gap:0}
+.step{
+  display:flex;gap:20px;padding:20px 0;
+  border-bottom:1px solid var(--border);
+  animation:fadeUp .5s ease both;
+}
+.step:last-child{border-bottom:none}
+.step:nth-child(2){animation-delay:.08s}
+.step:nth-child(3){animation-delay:.16s}
+.step:nth-child(4){animation-delay:.24s}
+
+.step-num{
+  font-family:var(--font-head);font-size:11px;font-weight:700;
+  color:var(--dim);letter-spacing:.5px;
+  padding-top:3px;min-width:24px;
+}
+.step-body{}
+.step-title{
+  font-family:var(--font-head);font-weight:700;font-size:15px;
+  margin-bottom:4px;
+}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ── Risk bar ── */
+.risk-bar{
+  background:rgba(0,201,167,.06);
+  border:1px solid rgba(0,201,167,.2);
+  border-radius:var(--radius-sm);
+  padding:16px 20px;margin:32px 0;
+  display:flex;align-items:center;gap:12px;
+  font-size:13px;color:var(--muted);
+}
+.risk-bar strong{color:var(--accent2)}
+.risk-icon{font-size:18px}
+
+/* ── Form ── */
+.form-wrap{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:32px;
+  margin:0 0 80px;
+}
+.form-title{
+  font-family:var(--font-head);font-weight:800;font-size:20px;
+  letter-spacing:-.5px;margin-bottom:6px;
+}
+.form-sub{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6}
+
+.field{margin-bottom:16px}
+.field label{
+  display:block;font-size:12px;font-weight:600;
+  color:var(--muted);text-transform:uppercase;letter-spacing:.4px;
+  margin-bottom:6px;
+}
+.field input,.field select{
+  width:100%;background:var(--surface);
+  border:1px solid var(--border2);border-radius:var(--radius-sm);
+  color:var(--text);font-family:var(--font-body);font-size:14px;
+  padding:10px 14px;outline:none;transition:border-color .15s;
+  appearance:none;
+}
+.field input::placeholder{color:var(--dim)}
+.field input:focus,.field select:focus{border-color:var(--accent)}
+.field select option{background:var(--card)}
+
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.submit-btn{
+  width:100%;background:var(--accent);color:#fff;
+  border:none;border-radius:var(--radius-sm);
+  font-family:var(--font-head);font-size:15px;font-weight:700;
+  padding:14px;cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:8px;letter-spacing:-.2px;
+}
+.submit-btn:hover{background:#1e5bf0;transform:translateY(-1px)}
+.submit-btn:active{transform:none}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+.submit-note{
+  text-align:center;font-size:11px;color:var(--dim);
+  margin-top:10px;line-height:1.6;
+}
+
+.err{font-size:11px;color:var(--danger);margin-top:4px;display:none}
+
+/* ── Success ── */
+.success-wrap{
+  text-align:center;padding:32px 0;display:none;
+}
+.success-icon{font-size:40px;margin-bottom:16px}
+.success-title{
+  font-family:var(--font-head);font-weight:800;font-size:22px;
+  letter-spacing:-.5px;margin-bottom:8px;
+}
+.success-sub{font-size:14px;color:var(--muted);line-height:1.7}
+
+/* ── Footer ── */
+footer{
+  border-top:1px solid var(--border);
+  padding:24px 0;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;color:var(--dim);
+}
+footer a{color:var(--dim);text-decoration:none}
+footer a:hover{color:var(--muted)}
+
+/* ── Mobile ── */
+@media(max-width:520px){
+  .numbers{grid-template-columns:1fr 1fr}
+  .numbers .num-card:last-child{grid-column:1/-1}
+  .field-row{grid-template-columns:1fr}
+  .form-wrap{padding:20px}
+  h1{font-size:32px}
+  footer{flex-direction:column;gap:8px;text-align:center}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="glow2"></div>
+
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <a href="https://primecoreintelligence.com" class="brand">
+      <span class="brand-dot"></span>PrimeCore Intelligence
+    </a>
+    <div class="lang-strip">
+      <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
+      <button class="lang-btn" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn" onclick="setLang('pt',this)">PT</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+
+    <div class="eyebrow">
+      <span class="eyebrow-line"></span>
+      <span id="eyebrow-text">Para centros de contacto en LATAM</span>
+    </div>
+
+    <h1 id="hero-h1">¿Cuánto te está<br>costando el <em>Nivel 1?</em></h1>
+
+    <p class="hero-sub" id="hero-sub">
+      Rastreo de envíos. Confirmación de citas. Consultas de saldo.
+      Estás pagando agentes a $6.50 la llamada para responder preguntas
+      que la IA resuelve en 87 segundos a $0.04.
+    </p>
+
+    <!-- 3 numbers -->
+    <div class="numbers">
+      <div class="num-card">
+        <div class="num-value">89%</div>
+        <div class="num-label" id="num1-label">Resolución en primera llamada</div>
+      </div>
+      <div class="num-card">
+        <div class="num-value">87s</div>
+        <div class="num-label" id="num2-label">Tiempo promedio de atención</div>
+      </div>
+      <div class="num-card">
+        <div class="num-value">$0.04</div>
+        <div class="num-label" id="num3-label">Por llamada Modo 1</div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- How it works -->
+  <div style="margin-bottom:32px">
+    <div class="steps-label" id="steps-label">Cómo funciona el piloto</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <div class="step-title" id="step1-title">Verificación de compatibilidad</div>
+          <div class="step-desc" id="step1-desc">Revisamos tu plataforma CCaaS, volumen de llamadas y mix de idiomas. Si algo no va a funcionar, te lo decimos antes de tocar una sola línea de código.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <div class="step-title" id="step2-title">Modo sombra — semanas 1 a 3</div>
+          <div class="step-desc" id="step2-desc">La IA corre junto a tus agentes sin efectos secundarios. Tu equipo trabaja exactamente como hoy. Tú ves los datos en tiempo real.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <div class="step-title" id="step3-title">Paquete de evidencias — semana 4</div>
+          <div class="step-desc" id="step3-desc">Delta de FCR, mejora de AHT, tasa de incumplimiento SLA, costo por llamada. Tienes todos los números antes de decidir.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <div class="step-title" id="step4-title">Tú apruebas el cambio a producción</div>
+          <div class="step-desc" id="step4-desc">Nada pasa a producción sin tu aprobación explícita. Sin despliegues automáticos. Sin sorpresas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Risk bar -->
+  <div class="risk-bar">
+    <span class="risk-icon">🛡️</span>
+    <span id="risk-text">
+      <strong>Riesgo máximo:</strong> 50% del Mes 1 — cancela antes del Mes 2 y no se cobra nada más.
+      Sin tarifa de configuración. Sin contrato anual.
+    </span>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- Form -->
+  <div class="form-wrap" id="formWrap">
+
+    <div id="formContent">
+      <div class="form-title" id="form-title">Solicitar piloto de 30 días</div>
+      <p class="form-sub" id="form-sub">
+        Respuesta personal el mismo día. Soporte en español disponible.
+      </p>
+
+      <form id="lpForm" novalidate>
+
+        <div class="field-row">
+          <div class="field">
+            <label id="label-name">Nombre completo</label>
+            <input type="text" id="lpName" placeholder="Tu nombre" autocomplete="name" required/>
+            <div class="err" id="err-name"></div>
+          </div>
+          <div class="field">
+            <label id="label-email">Correo de trabajo</label>
+            <input type="email" id="lpEmail" placeholder="tu@empresa.com" autocomplete="email" required/>
+            <div class="err" id="err-email"></div>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label id="label-company">Empresa</label>
+            <input type="text" id="lpCompany" placeholder="Nombre de la empresa" required/>
+          </div>
+          <div class="field">
+            <label id="label-volume">Volumen mensual de llamadas</label>
+            <select id="lpVolume" required>
+              <option value="" disabled selected id="vol-placeholder">Selecciona tu volumen</option>
+              <option value="under-5k" id="vol-1">Menos de 5,000</option>
+              <option value="5k-20k" id="vol-2">5,000 – 20,000</option>
+              <option value="20k-100k" id="vol-3">20,000 – 100,000</option>
+              <option value="100k+" id="vol-4">100,000+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label id="label-ccaas">Plataforma CCaaS</label>
+            <select id="lpCcaas">
+              <option value="" id="ccaas-placeholder">Selecciona tu plataforma</option>
+              <option value="Five9">Five9</option>
+              <option value="Genesys">Genesys</option>
+              <option value="RingCentral">RingCentral</option>
+              <option value="3CX">3CX</option>
+              <option value="Atento">Atento</option>
+              <option value="Bliss">Bliss</option>
+              <option value="other" id="ccaas-other">Otra</option>
+            </select>
+          </div>
+          <div class="field">
+            <label id="label-vertical">Vertical</label>
+            <select id="lpVertical">
+              <option value="" id="vert-placeholder">Selecciona tu industria</option>
+              <option value="logistics" id="vert-1">Logística / 3PL</option>
+              <option value="healthcare" id="vert-2">Salud</option>
+              <option value="financial" id="vert-3">Servicios Financieros</option>
+              <option value="fleet" id="vert-4">Flotillas</option>
+              <option value="bpo" id="vert-5">BPO</option>
+              <option value="other" id="vert-6">Otro</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="lpSubmitBtn">
+          <span id="btn-text">Solicitar Mi Piloto →</span>
+        </button>
+
+        <p class="submit-note" id="submit-note">
+          50% dto. Mes 1 · Cancela antes del Mes 2 · Sin tarifa de configuración
+        </p>
+
+      </form>
+    </div>
+
+    <!-- Success state -->
+    <div class="success-wrap" id="successWrap">
+      <div class="success-icon">✓</div>
+      <div class="success-title" id="success-title">Solicitud recibida.</div>
+      <p class="success-sub" id="success-sub">
+        Recibirás una respuesta personal hoy.<br>
+        Revisa tu bandeja de entrada — el siguiente paso estará ahí.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <span>© 2026 PrimeCore Intelligence S.A.</span>
+    <div style="display:flex;gap:16px">
+      <a href="https://primecoreintelligence.com" id="footer-site">Sitio principal</a>
+      <a href="/legal/?lang=es" id="footer-legal">Legal</a>
+      <a href="/trust?lang=es" id="footer-trust">Seguridad</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+// ── Translations ──────────────────────────────────────────────────────────
+var T = {
+  es: {
+    title: 'PrimeCore Intelligence — Piloto 30 Días',
+    htmlLang: 'es',
+    eyebrow: 'Para centros de contacto en LATAM',
+    h1: '¿Cuánto te está<br>costando el <em>Nivel 1?</em>',
+    sub: 'Rastreo de envíos. Confirmación de citas. Consultas de saldo. Estás pagando agentes a $6.50 la llamada para responder preguntas que la IA resuelve en 87 segundos a $0.04.',
+    num1: 'Resolución en primera llamada', num2: 'Tiempo promedio de atención', num3: 'Por llamada Modo 1',
+    stepsLabel: 'Cómo funciona el piloto',
+    s1t: 'Verificación de compatibilidad', s1d: 'Revisamos tu plataforma CCaaS, volumen de llamadas y mix de idiomas. Si algo no va a funcionar, te lo decimos antes de tocar una sola línea de código.',
+    s2t: 'Modo sombra — semanas 1 a 3', s2d: 'La IA corre junto a tus agentes sin efectos secundarios. Tu equipo trabaja exactamente como hoy. Tú ves los datos en tiempo real.',
+    s3t: 'Paquete de evidencias — semana 4', s3d: 'Delta de FCR, mejora de AHT, tasa de incumplimiento SLA, costo por llamada. Tienes todos los números antes de decidir.',
+    s4t: 'Tú apruebas el cambio a producción', s4d: 'Nada pasa a producción sin tu aprobación explícita. Sin despliegues automáticos. Sin sorpresas.',
+    risk: '<strong>Riesgo máximo:</strong> 50% del Mes 1 — cancela antes del Mes 2 y no se cobra nada más. Sin tarifa de configuración. Sin contrato anual.',
+    formTitle: 'Solicitar piloto de 30 días',
+    formSub: 'Respuesta personal el mismo día. Soporte en español disponible.',
+    labelName: 'Nombre completo', labelEmail: 'Correo de trabajo',
+    labelCompany: 'Empresa', labelVolume: 'Volumen mensual de llamadas',
+    labelCcaas: 'Plataforma CCaaS', labelVertical: 'Vertical',
+    volPh: 'Selecciona tu volumen', vol1: 'Menos de 5,000', vol2: '5,000 – 20,000', vol3: '20,000 – 100,000', vol4: '100,000+',
+    ccaasPh: 'Selecciona tu plataforma', ccaasOther: 'Otra',
+    vertPh: 'Selecciona tu industria', vert1: 'Logística / 3PL', vert2: 'Salud', vert3: 'Servicios Financieros', vert4: 'Flotillas', vert5: 'BPO', vert6: 'Otro',
+    btnText: 'Solicitar Mi Piloto →',
+    submitNote: '50% dto. Mes 1 · Cancela antes del Mes 2 · Sin tarifa de configuración',
+    successTitle: 'Solicitud recibida.',
+    successSub: 'Recibirás una respuesta personal hoy.<br>Revisa tu bandeja de entrada — el siguiente paso estará ahí.',
+    footerSite: 'Sitio principal', footerLegal: 'Legal', footerTrust: 'Seguridad',
+    errName: 'Por favor ingresa tu nombre.',
+    errEmail: 'Por favor ingresa un correo de trabajo válido.',
+    legalPath: '/legal/?lang=es', trustPath: '/trust?lang=es',
+    pilotUrl: 'https://pilot.primecoreintelligence.com/?lang=es',
+  },
+  en: {
+    title: 'PrimeCore Intelligence — 30-Day Pilot',
+    htmlLang: 'en',
+    eyebrow: 'For contact centers in LATAM',
+    h1: 'What is your<br><em>Tier-1 volume</em> costing you?',
+    sub: 'Shipment tracking. Appointment confirmation. Account balance queries. You\'re paying agents $6.50 per call to answer questions AI resolves in 87 seconds at $0.04.',
+    num1: 'First Call Resolution', num2: 'Average Handle Time', num3: 'Per call Mode 1',
+    stepsLabel: 'How the pilot works',
+    s1t: 'Compatibility check', s1d: 'We verify your CCaaS platform, call volume, and language mix. If something won\'t work, we tell you before touching a single line of code.',
+    s2t: 'Shadow mode — weeks 1 to 3', s2d: 'The AI runs alongside your agents with zero side effects. Your team works exactly as today. You see the data in real time.',
+    s3t: 'Evidence pack — week 4', s3d: 'FCR delta, AHT improvement, SLA breach rate, cost per call. You have all the numbers before making a decision.',
+    s4t: 'You approve the production cutover', s4d: 'Nothing moves to production without your explicit approval. No automatic deployments. No surprises.',
+    risk: '<strong>Maximum risk:</strong> 50% of Month 1 — cancel before Month 2 and nothing else is charged. No setup fee. No annual contract.',
+    formTitle: 'Request a 30-day pilot',
+    formSub: 'Personal reply same day. Spanish and Portuguese support available.',
+    labelName: 'Full name', labelEmail: 'Work email',
+    labelCompany: 'Company', labelVolume: 'Monthly call volume',
+    labelCcaas: 'CCaaS platform', labelVertical: 'Vertical',
+    volPh: 'Select your volume', vol1: 'Under 5,000', vol2: '5,000 – 20,000', vol3: '20,000 – 100,000', vol4: '100,000+',
+    ccaasPh: 'Select your platform', ccaasOther: 'Other',
+    vertPh: 'Select your industry', vert1: 'Logistics / 3PL', vert2: 'Healthcare', vert3: 'Financial Services', vert4: 'Fleet', vert5: 'BPO', vert6: 'Other',
+    btnText: 'Request My Pilot →',
+    submitNote: '50% off Month 1 · Cancel before Month 2 · No setup fee',
+    successTitle: 'Request received.',
+    successSub: 'You\'ll get a personal reply today.<br>Check your inbox — the next step will be there.',
+    footerSite: 'Main site', footerLegal: 'Legal', footerTrust: 'Security',
+    errName: 'Please enter your name.',
+    errEmail: 'Please enter a valid work email.',
+    legalPath: '/legal/', trustPath: '/trust',
+    pilotUrl: 'https://pilot.primecoreintelligence.com/?lang=en',
+  },
+  pt: {
+    title: 'PrimeCore Intelligence — Piloto 30 Dias',
+    htmlLang: 'pt-BR',
+    eyebrow: 'Para contact centers na LATAM',
+    h1: 'Quanto está custando<br>o seu <em>volume Nível 1?</em>',
+    sub: 'Rastreamento de envios. Confirmação de consultas. Saldo de conta. Você está pagando agentes $6,50 por chamada para responder perguntas que a IA resolve em 87 segundos a $0,04.',
+    num1: 'Resolução na primeira chamada', num2: 'Tempo médio de atendimento', num3: 'Por chamada Modo 1',
+    stepsLabel: 'Como funciona o piloto',
+    s1t: 'Verificação de compatibilidade', s1d: 'Verificamos sua plataforma CCaaS, volume de chamadas e mix de idiomas. Se algo não vai funcionar, te avisamos antes de tocar em uma linha de código.',
+    s2t: 'Modo sombra — semanas 1 a 3', s2d: 'A IA funciona junto com seus agentes sem efeitos colaterais. Sua equipe trabalha exatamente como hoje. Você vê os dados em tempo real.',
+    s3t: 'Pacote de evidências — semana 4', s3d: 'Delta de FCR, melhora de AHT, taxa de violação de SLA, custo por chamada. Você tem todos os números antes de decidir.',
+    s4t: 'Você aprova a mudança para produção', s4d: 'Nada vai para produção sem sua aprovação explícita. Sem implantações automáticas. Sem surpresas.',
+    risk: '<strong>Risco máximo:</strong> 50% do Mês 1 — cancele antes do Mês 2 e nada mais é cobrado. Sem taxa de configuração. Sem contrato anual.',
+    formTitle: 'Solicitar piloto de 30 dias',
+    formSub: 'Resposta pessoal no mesmo dia. Suporte em português disponível.',
+    labelName: 'Nome completo', labelEmail: 'E-mail corporativo',
+    labelCompany: 'Empresa', labelVolume: 'Volume mensal de chamadas',
+    labelCcaas: 'Plataforma CCaaS', labelVertical: 'Vertical',
+    volPh: 'Selecione seu volume', vol1: 'Menos de 5.000', vol2: '5.000 – 20.000', vol3: '20.000 – 100.000', vol4: '100.000+',
+    ccaasPh: 'Selecione sua plataforma', ccaasOther: 'Outra',
+    vertPh: 'Selecione sua indústria', vert1: 'Logística / 3PL', vert2: 'Saúde', vert3: 'Serviços Financeiros', vert4: 'Frota', vert5: 'BPO', vert6: 'Outro',
+    btnText: 'Solicitar Meu Piloto →',
+    submitNote: '50% desc. Mês 1 · Cancele antes do Mês 2 · Sem taxa de configuração',
+    successTitle: 'Solicitação recebida.',
+    successSub: 'Você receberá uma resposta pessoal hoje.<br>Verifique sua caixa de entrada — o próximo passo estará lá.',
+    footerSite: 'Site principal', footerLegal: 'Legal', footerTrust: 'Segurança',
+    errName: 'Por favor insira seu nome.',
+    errEmail: 'Por favor insira um e-mail corporativo válido.',
+    legalPath: '/legal/?lang=pt', trustPath: '/trust?lang=pt',
+    pilotUrl: 'https://pilot.primecoreintelligence.com/?lang=pt',
+  },
+};
+
+var currentLang = 'es';
+
+function setLang(lang, btn) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  var s = T[lang] || T.es;
+  document.documentElement.lang = s.htmlLang;
+  document.title = s.title;
+
+  function t(id, html) {
+    var el = document.getElementById(id);
+    if (el) el.innerHTML = html;
+  }
+  function tv(id, txt) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = txt;
+  }
+
+  t('eyebrow-text', s.eyebrow);
+  t('hero-h1', s.h1);
+  tv('hero-sub', s.sub);
+  tv('num1-label', s.num1); tv('num2-label', s.num2); tv('num3-label', s.num3);
+  tv('steps-label', s.stepsLabel);
+  tv('step1-title', s.s1t); tv('step1-desc', s.s1d);
+  tv('step2-title', s.s2t); tv('step2-desc', s.s2d);
+  tv('step3-title', s.s3t); tv('step3-desc', s.s3d);
+  tv('step4-title', s.s4t); tv('step4-desc', s.s4d);
+  t('risk-text', s.risk);
+  tv('form-title', s.formTitle); tv('form-sub', s.formSub);
+  tv('label-name', s.labelName); tv('label-email', s.labelEmail);
+  tv('label-company', s.labelCompany); tv('label-volume', s.labelVolume);
+  tv('label-ccaas', s.labelCcaas); tv('label-vertical', s.labelVertical);
+  tv('vol-placeholder', s.volPh); tv('vol-1', s.vol1); tv('vol-2', s.vol2); tv('vol-3', s.vol3); tv('vol-4', s.vol4);
+  tv('ccaas-placeholder', s.ccaasPh); tv('ccaas-other', s.ccaasOther);
+  tv('vert-placeholder', s.vertPh); tv('vert-1', s.vert1); tv('vert-2', s.vert2); tv('vert-3', s.vert3); tv('vert-4', s.vert4); tv('vert-5', s.vert5); tv('vert-6', s.vert6);
+  tv('btn-text', s.btnText);
+  tv('submit-note', s.submitNote);
+  tv('success-title', s.successTitle); t('success-sub', s.successSub);
+  tv('footer-site', s.footerSite); tv('footer-legal', s.footerLegal); tv('footer-trust', s.footerTrust);
+
+  // Update footer links
+  var fl = document.getElementById('footer-legal');
+  var ft = document.getElementById('footer-trust');
+  if (fl) fl.href = s.legalPath;
+  if (ft) ft.href = s.trustPath;
+
+  try { localStorage.setItem('pc-lp-lang', lang); } catch(e) {}
+}
+
+// ── Auto detect ────────────────────────────────────────────────────────────
+(function() {
+  var urlLang = new URLSearchParams(window.location.search).get('lang');
+  var stored; try { stored = localStorage.getItem('pc-lp-lang'); } catch(e) {}
+  var browser = (navigator.language||'').toLowerCase().slice(0,2);
+  var lang = urlLang || stored || browser;
+  var btnMap = { es: 0, en: 1, pt: 2 };
+  var idx = btnMap[lang] || 0;
+  var btns = document.querySelectorAll('.lang-btn');
+  setLang(lang in T ? lang : 'es', btns[idx]);
+})();
+
+// ── Form submit ────────────────────────────────────────────────────────────
+document.getElementById('lpForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var s = T[currentLang] || T.es;
+
+  var name    = document.getElementById('lpName').value.trim();
+  var email   = document.getElementById('lpEmail').value.trim();
+  var company = document.getElementById('lpCompany').value.trim();
+  var volume  = document.getElementById('lpVolume').value;
+  var ccaas   = document.getElementById('lpCcaas').value;
+  var vertical = document.getElementById('lpVertical').value;
+
+  // Validate
+  var valid = true;
+  var errName  = document.getElementById('err-name');
+  var errEmail = document.getElementById('err-email');
+  errName.style.display = errEmail.style.display = 'none';
+
+  if (!name) { errName.textContent = s.errName; errName.style.display = 'block'; valid = false; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errEmail.textContent = s.errEmail; errEmail.style.display = 'block'; valid = false;
+  }
+  if (!valid) return;
+
+  var btn = document.getElementById('lpSubmitBtn');
+  btn.disabled = true;
+  document.getElementById('btn-text').textContent = '...';
+
+  try {
+    var resp = await fetch('https://relay.primecoreintelligence.com/relay/pilot-request', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name, email, company,
+        volume: volume || '',
+        ccaas:  ccaas  || '',
+        vertical: vertical || '',
+        lang: currentLang,
+        source: 'linkedin-lp',
+        notes: 'LinkedIn landing page submission',
+      }),
+    });
+
+    // Show success regardless (don't expose API errors to user)
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('successWrap').style.display = 'block';
+
+  } catch(err) {
+    // Still show success — relay may have received it
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('successWrap').style.display = 'block';
+  }
+});
+</script>
+</body>
+</html>
