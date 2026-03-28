@@ -125,7 +125,7 @@ footer{padding:28px 0;border-top:1px solid var(--border);margin-top:0}
         <button class="lang-btn" onclick="setLang('es',this)">ES</button>
         <button class="lang-btn" onclick="setLang('pt',this)">PT</button>
       </div>
-      <a class="back-link" href="https://primecoreintelligence.com"><span>&#8592;</span> <span>Back to Site</span></a>
+      <a class="back-link" href="/" id="legalBackLink"><span>&#8592;</span> <span id="legalBackText">Back to Site</span></a>
     </div>
   </div>
 </nav>
@@ -815,6 +815,13 @@ let lang = "en";
 
 function detect() {
   const p = new URLSearchParams(location.search).get("lang");
+  // Update back link to return to correct language homepage
+  const homeMap = { en: '/', es: '/es/', pt: '/pt-br/' };
+  const backLabels = { en: 'Back to Site', es: 'Volver al sitio', pt: 'Voltar ao site' };
+  const backEl = document.getElementById('legalBackLink');
+  const backTextEl = document.getElementById('legalBackText');
+  if (backEl) backEl.href = homeMap[p || 'en'] || '/';
+  if (backTextEl) backTextEl.textContent = backLabels[p || 'en'] || 'Back to Site';
   if (p && FOOTER[p]) return p;
   const s = localStorage.getItem("pc_lang");
   if (s && FOOTER[s]) return s;

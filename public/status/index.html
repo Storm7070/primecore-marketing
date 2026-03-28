@@ -325,5 +325,15 @@ runChecks();
 // Auto-refresh every 60 seconds
 setInterval(runChecks, 60000);
 </script>
+
+<script>
+(function() {
+  var lang = new URLSearchParams(window.location.search).get('lang') ||
+             (navigator.language||'').toLowerCase().split('-')[0];
+  var map = { es: '/es/', pt: '/pt-br/' };
+  var el = document.getElementById('statusBackLink');
+  if (el && map[lang]) el.href = map[lang];
+})();
+</script>
 </body>
 </html>
