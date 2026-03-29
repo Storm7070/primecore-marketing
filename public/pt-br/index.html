@@ -5009,7 +5009,7 @@ html{scroll-behavior:smooth}
       var volume = document.getElementById('ctaVolume').value;
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
+      submitBtn.textContent = 'Enviando…';
 
       fetch('https://relay.primecoreintelligence.com/relay/pilot-request', {
         method:  'POST',
@@ -5839,12 +5839,12 @@ html{scroll-behavior:smooth}
       if (lineIndex >= script.lines.length) {
         /* All lines done */
         stopTimer();
-        setStatus do Sistema('resolved', 'Resolved');
-        elStartBtn.textContent = '↺ Restart';
+        setStatus do Sistema('resolved', 'Resolvida');
+        elStartBtn.textContent = '↺ Reiniciar';
         elStartBtn.disabled = false;
         elFooterNote.textContent =
-          'Resolved in ' + fmtTime(timerSecs) +
-          ' · FCR: ✓ · Cost: $0.04 · 0 agents involved';
+          'Resolvida em ' + fmtTime(timerSecs) +
+          ' · FCR: ✓ · Custo: $0.04 · 0 agentes envolvidos';
         simRunning = false;
         return;
       }
@@ -5887,9 +5887,9 @@ html{scroll-behavior:smooth}
     simRunning = true;
 
     /* Ringing state */
-    setStatus do Sistema('ringing', 'Ringing…');
+    setStatus do Sistema('ringing', 'Chamando…');
     var ringT = setTimeout(function() {
-      setStatus do Sistema('active', 'Active');
+      setStatus do Sistema('active', 'Em andamento');
       startTimer();
       runScript(script);
     }, 800);
@@ -5926,7 +5926,7 @@ html{scroll-behavior:smooth}
       elFcrBadge.classList.remove('visible');
       elTimer.textContent = '0:00';
       elTimer.className = 'sim-timer green';
-      setStatus do Sistema('idle', 'Ready');
+      setStatus do Sistema('idle', 'Pronto');
       elStartBtn.textContent = '▶ Iniciar Chamada';
       elStartBtn.disabled = false;
       elFooterNote.textContent = 'Chamada simulada Modo 1 · Lógica de IA real · Sem telefonia ao vivo necessária';
@@ -6411,7 +6411,7 @@ window.setLang = function(lang, btn) {
       { t:900,  text:'[AI]  Found. Left Memphis DC at 06:14. 12 stops away.',  color:'#2d7aff' },
       { t:1050, text:'[AI]  Estimated arrival: 2:00–4:00 PM today.',           color:'#2d7aff' },
       { t:1200, text:'[AI]  Sending SMS notification to file number.',         color:'#2d7aff' },
-      { t:1380, text:'✓ FCR ·  $0.04 ·  1m 38s ·  0 agents involved',        color:'#00c9a7' },
+      { t:1380, text:'✓ FCR ·  $0.04 ·  1m 38s ·  0 agentes envolvidos',        color:'#00c9a7' },
     ],
     [ // Phase 2 — FCR report
       { t:1540, text:'Generating 24h FCR baseline report...',         color:'#7a93b8' },
@@ -6679,13 +6679,13 @@ window.setLang = function(lang, btn) {
   window.demoPause = function() {
     paused = !paused;
     var btn = document.getElementById('demoPauseBtn');
-    if (btn) btn.textContent = paused ? '▶ Resume' : '⏸ Pause';
+    if (btn) btn.textContent = paused ? '▶ Resume' : '⏸ Pausar';
   };
 
   window.demoRestart = function() {
     tick = 0; paused = false;
     var btn = document.getElementById('demoPauseBtn');
-    if (btn) btn.textContent = '⏸ Pause';
+    if (btn) btn.textContent = '⏸ Pausar';
   };
 })();
 </script>
