@@ -4079,10 +4079,13 @@ html{scroll-behavior:smooth}
 
       <!-- Industry tabs -->
       <div class="sim-tabs" role="group" aria-label="Select industry scenario">
-        <button class="sim-tab active" data-sim="logistics" aria-pressed="true">📦 Logistics</button>
+        <button class="sim-tab active" data-sim="logistics" aria-pressed="true">📦 Logistics / 3PL</button>
         <button class="sim-tab" data-sim="healthcare" aria-pressed="false">🏥 Healthcare</button>
-        <button class="sim-tab" data-sim="financial" aria-pressed="false">💳 Financial</button>
-        <button class="sim-tab" data-sim="latam" aria-pressed="false">🌎 LATAM (ES)</button>
+        <button class="sim-tab" data-sim="financial" aria-pressed="false">💳 Financial Services</button>
+        <button class="sim-tab" data-sim="fleet" aria-pressed="false">🚚 Fleet / Dispatch</button>
+        <button class="sim-tab" data-sim="bpo" aria-pressed="false">🌎 BPO Operations</button>
+        <button class="sim-tab" data-sim="retail" aria-pressed="false">🛒 Retail / E-commerce</button>
+        <button class="sim-tab" data-sim="insurance" aria-pressed="false">🔒 Insurance</button>
       </div>
 
       <!-- Simulator widget -->
@@ -5594,12 +5597,12 @@ html{scroll-behavior:smooth}
       scenario: 'Package tracking · Mode 1 Autonomous',
       color: 'var(--accent2)',
       lines: [
-        { speaker: 'caller', text: "Hi, I'm calling about my delivery — order 8812. It was supposed to arrive yesterday and it's still not here.", delay: 0 },
-        { speaker: 'ai', text: "I found order TRK-8812. It left the Memphis distribution center this morning at 6:14 AM. Your driver is currently 12 stops away — estimated delivery is between 2:00 and 4:00 PM today.", delay: 1200, action: 'WMS lookup complete' },
-        { speaker: 'caller', text: "Okay, can you send me a text when they're close?", delay: 2400 },
-        { speaker: 'ai', text: "Done. You'll receive a text to the number on file when the driver is 30 minutes out. Is there anything else I can help with today?", delay: 800, action: 'SMS notification scheduled' },
-        { speaker: 'caller', text: "No, that's great. Thank you.", delay: 1600 },
-        { speaker: 'ai', text: "You're all set. Have a good day.", delay: 600, action: 'FCR confirmed · $0.04' }
+        { speaker: 'caller', text: 'Hi, I\'m calling about my delivery — order 8812. It was supposed to arrive yesterday and it\'s still not here.', delay: 0 },
+        { speaker: 'ai', text: 'I found order TRK-8812. It left the Memphis distribution center this morning at 6:14 AM. Your driver is 12 stops away — estimated delivery between 2:00 and 4:00 PM today.', delay: 1200, action: 'WMS lookup complete' },
+        { speaker: 'caller', text: 'Okay, can you send me a text when they\'re close?', delay: 2400 },
+        { speaker: 'ai', text: 'Done. You\'ll receive a text when the driver is 30 minutes out. Anything else?', delay: 800, action: 'SMS notification scheduled' },
+        { speaker: 'caller', text: 'No, that\'s great. Thank you.', delay: 1600 },
+        { speaker: 'ai', text: 'You\'re all set. Have a good one.', delay: 600, action: 'FCR confirmed · $0.04' }
       ]
     },
     healthcare: {
@@ -5607,38 +5610,77 @@ html{scroll-behavior:smooth}
       scenario: 'Appointment scheduling · Mode 1 Autonomous',
       color: '#a78bfa',
       lines: [
-        { speaker: 'caller', text: "Hello, I need to reschedule my appointment with Dr. Reyes. I have it for Thursday but something came up.", delay: 0 },
-        { speaker: 'ai', text: "I have your appointment on Thursday at 10:30 AM with Dr. Reyes. I can see availability on Friday at 9:00 AM or Monday at 2:15 PM. Which works better for you?", delay: 1400, action: 'EHR calendar loaded' },
-        { speaker: 'caller', text: "Friday at 9 works.", delay: 1800 },
-        { speaker: 'ai', text: "Perfect. I've rescheduled your appointment to Friday at 9:00 AM with Dr. Reyes. You'll receive a confirmation text and a reminder the day before. Is there anything else?", delay: 900, action: 'Appointment rescheduled' },
-        { speaker: 'caller', text: "No, that's all. Thanks.", delay: 1400 },
-        { speaker: 'ai', text: "Have a great day.", delay: 500, action: 'FCR confirmed · $0.04' }
+        { speaker: 'caller', text: 'Hi, I need to reschedule my appointment with Dr. Reyes. I have it Thursday but something came up.', delay: 0 },
+        { speaker: 'ai', text: 'I see your Thursday 10:30 AM with Dr. Reyes. There\'s availability Friday at 9:00 AM or Monday at 2:15 PM — which works?', delay: 1400, action: 'EHR calendar loaded' },
+        { speaker: 'caller', text: 'Friday at 9 works.', delay: 1800 },
+        { speaker: 'ai', text: 'Done — rescheduled to Friday 9:00 AM with Dr. Reyes. You\'ll get a confirmation text and reminder the day before.', delay: 900, action: 'Appointment rescheduled' },
+        { speaker: 'caller', text: 'Perfect, thanks.', delay: 1400 },
+        { speaker: 'ai', text: 'Have a great day.', delay: 500, action: 'FCR confirmed · $0.04' }
       ]
     },
     financial: {
       label: '💳 Financial Services',
-      scenario: 'Account inquiry · Mode 1 Autonomous',
+      scenario: 'Unrecognized charge · Mode 1 Autonomous',
       color: 'var(--accent)',
       lines: [
-        { speaker: 'caller', text: "I'm seeing a charge on my account from yesterday for $47.50 that I don't recognize. The description just says 'SVC FEE'.", delay: 0 },
-        { speaker: 'ai', text: "I can see that charge. The $47.50 SVC FEE is the annual account maintenance fee — it posts every year in March. Your last one was also in March 2024.", delay: 1600, action: 'Transaction history pulled' },
-        { speaker: 'caller', text: "Oh, okay. I forgot about that. Is there any way to waive it?", delay: 2000 },
-        { speaker: 'ai', text: "Based on your account history, you qualify for a one-time fee waiver. I've applied it — you'll see the $47.50 credit within one business day.", delay: 1200, action: 'Fee waiver applied' },
-        { speaker: 'caller', text: "Wow, that was easy. Thank you.", delay: 1400 },
-        { speaker: 'ai', text: "Happy to help. Is there anything else I can do for you today?", delay: 600, action: 'FCR confirmed · $0.04' }
+        { speaker: 'caller', text: 'I\'m seeing a $47.50 charge from yesterday I don\'t recognize. Description just says SVC FEE.', delay: 0 },
+        { speaker: 'ai', text: 'That\'s your annual account maintenance fee — posts every March. Your last one was March 2024, same amount.', delay: 1600, action: 'Transaction history pulled' },
+        { speaker: 'caller', text: 'Oh I forgot about that. Any way to waive it?', delay: 2000 },
+        { speaker: 'ai', text: 'Your account qualifies for a one-time waiver. Applied — you\'ll see the $47.50 credit within one business day.', delay: 1200, action: 'Fee waiver applied' },
+        { speaker: 'caller', text: 'Wow, that was easy. Thanks.', delay: 1400 },
+        { speaker: 'ai', text: 'Happy to help. Anything else?', delay: 600, action: 'FCR confirmed · $0.04' }
       ]
     },
-    latam: {
-      label: '🌎 LATAM BPO',
-      scenario: 'Consulta de envío · Modo 1 Autónomo',
+    fleet: {
+      label: '🚚 Fleet / Dispatch',
+      scenario: 'Driver delay alert · Mode 1 Autonomous',
+      color: '#f97316',
+      lines: [
+        { speaker: 'caller', text: 'This is route 441 — my truck has been at the weigh station for 40 minutes. I\'m going to miss my delivery window.', delay: 0 },
+        { speaker: 'ai', text: 'I see route 441. Your next stop is flagged at 2:15 PM. I\'m pushing the window to 3:30 PM and notifying the recipient now.', delay: 1100, action: 'Delivery window adjusted' },
+        { speaker: 'caller', text: 'Good. What about the warehouse stop in Pereira?', delay: 2200 },
+        { speaker: 'ai', text: 'Pereira is flexible — they close at 6 PM and you\'ll make it by 5:15 at current pace. No adjustment needed.', delay: 900, action: 'Route recalculated' },
+        { speaker: 'caller', text: 'Alright, thanks.', delay: 1200 },
+        { speaker: 'ai', text: 'You\'re set. Safe driving.', delay: 400, action: 'FCR confirmed · $0.04' }
+      ]
+    },
+    bpo: {
+      label: '🌎 BPO Operations',
+      scenario: 'Account status inquiry · Mode 1 Autonomous',
       color: 'var(--warn)',
       lines: [
-        { speaker: 'caller', text: "Hola, llamo por el pedido número 4421. Debía llegar el lunes y todavía no ha llegado.", delay: 0 },
-        { speaker: 'ai', text: "Encontré el pedido 4421. Salió del centro de distribución en Bogotá esta mañana. El courier lo tiene en ruta — entrega estimada hoy entre las 3:00 y las 5:00 PM.", delay: 1300, action: 'Consulta WMS completada' },
-        { speaker: 'caller', text: "¿Me pueden mandar un mensaje cuando vaya a llegar?", delay: 2200 },
-        { speaker: 'ai', text: "Claro. Le enviaremos un SMS al número registrado cuando el courier esté a 30 minutos. ¿Hay algo más en que pueda ayudarle?", delay: 800, action: 'Notificación SMS programada' },
-        { speaker: 'caller', text: "No, eso es todo. Muchas gracias.", delay: 1600 },
-        { speaker: 'ai', text: "Con gusto. Que tenga un buen día.", delay: 500, action: 'FCR confirmado · $0.04' }
+        { speaker: 'caller', text: 'Hi, I need to check on my support ticket from last week. Reference CR-2291.', delay: 0 },
+        { speaker: 'ai', text: 'Ticket CR-2291 was escalated to Tier 2 Thursday and resolved Friday at 4:22 PM. The fix was a configuration update — your account is active now.', delay: 1300, action: 'CRM ticket retrieved' },
+        { speaker: 'caller', text: 'Why didn\'t anyone call me when it was resolved?', delay: 2000 },
+        { speaker: 'ai', text: 'A notification was sent by email Friday at 4:38 PM to the address on file. I can resend it if you\'d like.', delay: 1000, action: 'Notification log checked' },
+        { speaker: 'caller', text: 'No that\'s fine, I\'ll check my spam. Thanks.', delay: 1600 },
+        { speaker: 'ai', text: 'Of course. Anything else?', delay: 500, action: 'FCR confirmed · $0.04' }
+      ]
+    },
+    retail: {
+      label: '🛒 Retail / E-commerce',
+      scenario: 'Return and refund · Mode 1 Autonomous',
+      color: '#ec4899',
+      lines: [
+        { speaker: 'caller', text: 'I received the wrong item — I ordered the blue version and got the red one.', delay: 0 },
+        { speaker: 'ai', text: 'I see order 77-3341. Blue was ordered but red was shipped. Initiating a replacement now — do you want to keep the red one or return it?', delay: 1200, action: 'Order discrepancy confirmed' },
+        { speaker: 'caller', text: 'I\'ll return it. How?', delay: 1800 },
+        { speaker: 'ai', text: 'I\'ll email a prepaid return label. The correct blue item ships tomorrow — arrives in 2 business days.', delay: 800, action: 'Return label generated · Replacement queued' },
+        { speaker: 'caller', text: 'Great, thank you.', delay: 1400 },
+        { speaker: 'ai', text: 'Done. Check your email for the label. Anything else?', delay: 500, action: 'FCR confirmed · $0.04' }
+      ]
+    },
+    insurance: {
+      label: '🔒 Insurance',
+      scenario: 'Policy inquiry · Mode 1 Autonomous',
+      color: '#14b8a6',
+      lines: [
+        { speaker: 'caller', text: 'Hi, does my auto policy cover a rental while my car is in the shop?', delay: 0 },
+        { speaker: 'ai', text: 'Your policy includes rental reimbursement — up to $40 per day, 30 days maximum. Policy is active through November 2026.', delay: 1300, action: 'Policy coverage retrieved' },
+        { speaker: 'caller', text: 'How do I submit the rental receipts?', delay: 1800 },
+        { speaker: 'ai', text: 'Upload them in the app under Claims, or email to claims@. I can also text you the direct link right now.', delay: 900, action: 'Submission instructions sent' },
+        { speaker: 'caller', text: 'Text works, thanks.', delay: 1400 },
+        { speaker: 'ai', text: 'Sent. Anything else?', delay: 400, action: 'FCR confirmed · $0.04' }
       ]
     }
   };

@@ -4078,10 +4078,13 @@ html{scroll-behavior:smooth}
 
       <!-- Industry tabs -->
       <div class="sim-tabs" role="group" aria-label="Select industry scenario">
-        <button class="sim-tab active" data-sim="logistics" aria-pressed="true">📦 Logística</button>
+        <button class="sim-tab active" data-sim="logistics" aria-pressed="true">📦 Logística / 3PL</button>
         <button class="sim-tab" data-sim="healthcare" aria-pressed="false">🏥 Saúde</button>
-        <button class="sim-tab" data-sim="financial" aria-pressed="false">💳 Financeiro</button>
-        <button class="sim-tab" data-sim="latam" aria-pressed="false">🌎 LATAM (ES)</button>
+        <button class="sim-tab" data-sim="financial" aria-pressed="false">💳 Serviços Financeiros</button>
+        <button class="sim-tab" data-sim="fleet" aria-pressed="false">🚚 Frota / Despacho</button>
+        <button class="sim-tab" data-sim="bpo" aria-pressed="false">🌎 Operações BPO</button>
+        <button class="sim-tab" data-sim="retail" aria-pressed="false">🛒 Varejo / E-commerce</button>
+        <button class="sim-tab" data-sim="insurance" aria-pressed="false">🔒 Seguros</button>
       </div>
 
       <!-- Simulator widget -->
@@ -4092,7 +4095,7 @@ html{scroll-behavior:smooth}
           <div class="sim-topbar-left">
             <div>
               <div class="sim-industry-label" id="simIndustryLabel">📦 Logística / 3PL</div>
-              <div class="sim-scenario-label" id="simScenarioLabel">Rastreamento de pacotes · Modo 1 Autônomo</div>
+              <div class="sim-scenario-label" id="simScenarioLabel">Rastreamento de encomenda · Modo 1 Autônomo</div>
             </div>
           </div>
           <div class="sim-status-pill idle" id="simStatus do Sistema" aria-live="polite">
@@ -5594,54 +5597,93 @@ html{scroll-behavior:smooth}
   var SCRIPTS = {
     logistics: {
       label: '📦 Logística / 3PL',
-      scenario: 'Rastreamento de pacotes · Modo 1 Autônomo',
+      scenario: 'Rastreamento de encomenda · Modo 1 Autônomo',
       color: 'var(--accent2)',
       lines: [
-        { speaker: 'caller', text: "Hi, I'm calling about my delivery — order 8812. It was supposed to arrive yesterday and it's still not here.", delay: 0 },
-        { speaker: 'ai', text: "I found order TRK-8812. It left the Memphis distribution center this morning at 6:14 AM. Your driver is currently 12 stops away — estimated delivery is between 2:00 and 4:00 PM today.", delay: 1200, action: 'WMS lookup complete' },
-        { speaker: 'caller', text: "Okay, can you send me a text when they're close?", delay: 2400 },
-        { speaker: 'ai', text: "Done. You'll receive a text to the number on file when the driver is 30 minutes out. Is there anything else I can help with today?", delay: 800, action: 'SMS notification scheduled' },
-        { speaker: 'caller', text: "No, that's great. Thank you.", delay: 1600 },
-        { speaker: 'ai', text: "You're all set. Have a good day.", delay: 600, action: 'FCR confirmed · $0.04' }
+        { speaker: 'caller', text: 'Olá, estou ligando sobre meu pedido 8812. Devia ter chegado ontem e ainda não chegou.', delay: 0 },
+        { speaker: 'ai', text: 'Encontrei o pedido TRK-8812. Saiu do centro de distribuição em Bogotá hoje às 6h14. O entregador está a 12 paradas — previsão entre 14h e 16h hoje.', delay: 1200, action: 'Consulta WMS concluída' },
+        { speaker: 'caller', text: 'Pode me avisar quando estiver chegando?', delay: 2400 },
+        { speaker: 'ai', text: 'Feito. Você receberá um SMS quando o entregador estiver a 30 minutos. Mais alguma coisa?', delay: 800, action: 'Notificação SMS agendada' },
+        { speaker: 'caller', text: 'Não, é isso. Muito obrigado.', delay: 1600 },
+        { speaker: 'ai', text: 'Com prazer. Tenha um bom dia.', delay: 600, action: 'FCR confirmado · $0.04' }
       ]
     },
     healthcare: {
       label: '🏥 Saúde',
-      scenario: 'Appointment scheduling · Mode 1 Autonomous',
+      scenario: 'Remarcação de consulta · Modo 1 Autônomo',
       color: '#a78bfa',
       lines: [
-        { speaker: 'caller', text: "Hello, I need to reschedule my appointment with Dr. Reyes. I have it for Thursday but something came up.", delay: 0 },
-        { speaker: 'ai', text: "I have your appointment on Thursday at 10:30 AM with Dr. Reyes. I can see availability on Friday at 9:00 AM or Monday at 2:15 PM. Which works better for you?", delay: 1400, action: 'EHR calendar loaded' },
-        { speaker: 'caller', text: "Friday at 9 works.", delay: 1800 },
-        { speaker: 'ai', text: "Perfect. I've rescheduled your appointment to Friday at 9:00 AM with Dr. Reyes. You'll receive a confirmation text and a reminder the day before. Is there anything else?", delay: 900, action: 'Appointment rescheduled' },
-        { speaker: 'caller', text: "No, that's all. Thanks.", delay: 1400 },
-        { speaker: 'ai', text: "Have a great day.", delay: 500, action: 'FCR confirmed · $0.04' }
+        { speaker: 'caller', text: 'Olá, preciso remarcar minha consulta com a Dra. Reyes. Tenho ela na quinta mas surgiu um compromisso.', delay: 0 },
+        { speaker: 'ai', text: 'Vejo sua consulta de quinta às 10h30 com a Dra. Reyes. Há disponibilidade na sexta às 9h ou na segunda às 14h15 — qual fica melhor?', delay: 1400, action: 'Agenda EHR carregada' },
+        { speaker: 'caller', text: 'Sexta às 9 está ótimo.', delay: 1800 },
+        { speaker: 'ai', text: 'Pronto — remarcado para sexta às 9h com a Dra. Reyes. Você receberá confirmação por SMS e um lembrete no dia anterior.', delay: 900, action: 'Consulta remarcada' },
+        { speaker: 'caller', text: 'Perfeito, obrigado.', delay: 1400 },
+        { speaker: 'ai', text: 'Tenha um ótimo dia.', delay: 500, action: 'FCR confirmado · $0.04' }
       ]
     },
     financial: {
       label: '💳 Serviços Financeiros',
-      scenario: 'Account inquiry · Mode 1 Autonomous',
+      scenario: 'Cobrança não reconhecida · Modo 1 Autônomo',
       color: 'var(--accent)',
       lines: [
-        { speaker: 'caller', text: "I'm seeing a charge on my account from yesterday for $47.50 that I don't recognize. The description just says 'SVC FEE'.", delay: 0 },
-        { speaker: 'ai', text: "I can see that charge. The $47.50 SVC FEE is the annual account maintenance fee — it posts every year in March. Your last one was also in March 2024.", delay: 1600, action: 'Transaction history pulled' },
-        { speaker: 'caller', text: "Oh, okay. I forgot about that. Is there any way to waive it?", delay: 2000 },
-        { speaker: 'ai', text: "Based on your account history, you qualify for a one-time fee waiver. I've applied it — you'll see the $47.50 credit within one business day.", delay: 1200, action: 'Fee waiver applied' },
-        { speaker: 'caller', text: "Wow, that was easy. Thank you.", delay: 1400 },
-        { speaker: 'ai', text: "Happy to help. Is there anything else I can do for you today?", delay: 600, action: 'FCR confirmed · $0.04' }
+        { speaker: 'caller', text: 'Estou vendo uma cobrança de $47,50 de ontem que não reconheço. Diz só TAXA SVC.', delay: 0 },
+        { speaker: 'ai', text: 'É sua taxa anual de manutenção de conta — lançada todo mês de março. A última foi em março de 2024, mesmo valor.', delay: 1600, action: 'Histórico de transações consultado' },
+        { speaker: 'caller', text: 'Ah, lembrei. Tem como dispensar?', delay: 2000 },
+        { speaker: 'ai', text: 'Sua conta qualifica para uma isenção única. Já apliquei — você verá o crédito de $47,50 em um dia útil.', delay: 1200, action: 'Isenção aplicada' },
+        { speaker: 'caller', text: 'Que rápido, muito obrigado.', delay: 1400 },
+        { speaker: 'ai', text: 'Com prazer. Mais alguma coisa?', delay: 600, action: 'FCR confirmado · $0.04' }
       ]
     },
-    latam: {
-      label: '🌎 LATAM BPO',
-      scenario: 'Consulta de envío · Modo 1 Autónomo',
+    fleet: {
+      label: '🚚 Frota / Despacho',
+      scenario: 'Alerta de atraso · Modo 1 Autônomo',
+      color: '#f97316',
+      lines: [
+        { speaker: 'caller', text: 'Aqui é a rota 441 — estou há 40 minutos na balança. Vou perder a janela de entrega.', delay: 0 },
+        { speaker: 'ai', text: 'Vejo a rota 441. Sua próxima parada está marcada para as 14h15. Estou ajustando a janela para as 15h30 e notificando o destinatário agora.', delay: 1100, action: 'Janela de entrega ajustada' },
+        { speaker: 'caller', text: 'Certo. E o armazém em Pereira?', delay: 2200 },
+        { speaker: 'ai', text: 'Pereira tem margem — fecham às 18h e no seu ritmo você chega antes das 17h15. Sem ajuste necessário.', delay: 900, action: 'Rota recalculada' },
+        { speaker: 'caller', text: 'Perfeito, obrigado.', delay: 1200 },
+        { speaker: 'ai', text: 'Tudo certo. Boa viagem.', delay: 400, action: 'FCR confirmado · $0.04' }
+      ]
+    },
+    bpo: {
+      label: '🌎 Operações BPO',
+      scenario: 'Status de chamado · Modo 1 Autônomo',
       color: 'var(--warn)',
       lines: [
-        { speaker: 'caller', text: "Hola, llamo por el pedido número 4421. Debía llegar el lunes y todavía no ha llegado.", delay: 0 },
-        { speaker: 'ai', text: "Encontré el pedido 4421. Salió del centro de distribución en Bogotá esta mañana. El courier lo tiene en ruta — entrega estimada hoy entre las 3:00 y las 5:00 PM.", delay: 1300, action: 'Consulta WMS completada' },
-        { speaker: 'caller', text: "¿Me pueden mandar un mensaje cuando vaya a llegar?", delay: 2200 },
-        { speaker: 'ai', text: "Claro. Le enviaremos un SMS al número registrado cuando el courier esté a 30 minutos. ¿Hay algo más en que pueda ayudarle?", delay: 800, action: 'Notificación SMS programada' },
-        { speaker: 'caller', text: "No, eso es todo. Muchas gracias.", delay: 1600 },
-        { speaker: 'ai', text: "Con gusto. Que tenga un buen día.", delay: 500, action: 'FCR confirmado · $0.04' }
+        { speaker: 'caller', text: 'Olá, preciso do status do meu chamado da semana passada. Referência CR-2291.', delay: 0 },
+        { speaker: 'ai', text: 'O chamado CR-2291 foi escalado para o Nível 2 na quinta e resolvido na sexta às 16h22. A solução foi uma atualização de configuração — sua conta está ativa.', delay: 1300, action: 'Chamado CRM recuperado' },
+        { speaker: 'caller', text: 'Por que ninguém me ligou quando foi resolvido?', delay: 2000 },
+        { speaker: 'ai', text: 'Uma notificação foi enviada por e-mail na sexta às 16h38 para o endereço cadastrado. Posso reenviar se quiser.', delay: 1000, action: 'Registro de notificações verificado' },
+        { speaker: 'caller', text: 'Não precisa, vou verificar meu spam. Obrigado.', delay: 1600 },
+        { speaker: 'ai', text: 'Com prazer. Mais alguma coisa?', delay: 500, action: 'FCR confirmado · $0.04' }
+      ]
+    },
+    retail: {
+      label: '🛒 Varejo / E-commerce',
+      scenario: 'Devolução e reposição · Modo 1 Autônomo',
+      color: '#ec4899',
+      lines: [
+        { speaker: 'caller', text: 'Recebi o item errado — pedi o azul e veio o vermelho.', delay: 0 },
+        { speaker: 'ai', text: 'Vejo o pedido 77-3341. Correto — consta azul como pedido mas o vermelho foi enviado. Iniciando reposição agora — quer devolver o vermelho ou ficar com ele?', delay: 1200, action: 'Inconsistência do pedido confirmada' },
+        { speaker: 'caller', text: 'Vou devolver. Como faço?', delay: 1800 },
+        { speaker: 'ai', text: 'Vou enviar uma etiqueta de devolução pré-paga para o e-mail cadastrado. O azul correto sai amanhã — chega em 2 dias úteis.', delay: 800, action: 'Etiqueta gerada · Reposição na fila' },
+        { speaker: 'caller', text: 'Ótimo, muito obrigado.', delay: 1400 },
+        { speaker: 'ai', text: 'Pronto. Verifique seu e-mail para a etiqueta. Mais alguma coisa?', delay: 500, action: 'FCR confirmado · $0.04' }
+      ]
+    },
+    insurance: {
+      label: '🔒 Seguros',
+      scenario: 'Consulta de apólice · Modo 1 Autônomo',
+      color: '#14b8a6',
+      lines: [
+        { speaker: 'caller', text: 'Olá, minha apólice de auto cobre carro reserva enquanto o meu está na oficina?', delay: 0 },
+        { speaker: 'ai', text: 'Sua apólice inclui reembolso de carro reserva — até R$40 por dia, máximo 30 dias. Está vigente até novembro de 2026.', delay: 1300, action: 'Cobertura da apólice consultada' },
+        { speaker: 'caller', text: 'Como envio os recibos do carro alugado?', delay: 1800 },
+        { speaker: 'ai', text: 'Pode fazer upload no app em Sinistros, ou enviar por e-mail para sinistros@. Também posso te mandar o link direto por SMS agora.', delay: 900, action: 'Instruções enviadas' },
+        { speaker: 'caller', text: 'O SMS está ótimo, obrigado.', delay: 1400 },
+        { speaker: 'ai', text: 'Enviado. Mais alguma coisa?', delay: 400, action: 'FCR confirmado · $0.04' }
       ]
     }
   };
