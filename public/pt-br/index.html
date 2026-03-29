@@ -4123,11 +4123,11 @@ html{scroll-behavior:smooth}
 
           <!-- Actions panel -->
           <div class="sim-actions-panel">
-            <div class="sim-actions-label">AI Actions</div>
+            <div class="sim-actions-label">Ações da IA</div>
             <div id="simActionsList">
               <!-- Actions injected by JS -->
               <div style="font-size:12px;color:var(--dim);padding:8px 0">
-                Actions appear as the AI works
+                As ações aparecem enquanto a IA trabalha
               </div>
             </div>
             <!-- FCR badge -->
@@ -5882,7 +5882,7 @@ html{scroll-behavior:smooth}
     var script = SCRIPTS[currentSim];
     buildActions(script);
 
-    elStartBtn.textContent = '● In Progress…';
+    elStartBtn.textContent = '● Em andamento…';
     elStartBtn.disabled = true;
     simRunning = true;
 
@@ -5922,7 +5922,7 @@ html{scroll-behavior:smooth}
       ph.textContent = 'Pressione Iniciar Chamada para começar a simulação';
       elTranscript.appendChild(ph);
 
-      elActionsList.innerHTML = '<div style="font-size:12px;color:var(--dim);padding:8px 0">Actions appear as the AI works</div>';
+      elActionsList.innerHTML = '<div style="font-size:12px;color:var(--dim);padding:8px 0">As ações aparecem enquanto a IA trabalha</div>';
       elFcrBadge.classList.remove('visible');
       elTimer.textContent = '0:00';
       elTimer.className = 'sim-timer green';
@@ -6425,10 +6425,10 @@ window.setLang = function(lang, btn) {
       { t:2450, text:'Production mode · Tier-1 queue live',           color:'#00c9a7' },
       { t:2600, text:'Calls handled today:  1,847,293',               color:'#b8c3d9' },
       { t:2750, text:'Conformidade SLA:  99.4%',                        color:'#00c9a7' },
-      { t:2900, text:'Active languages:  14',                         color:'#b8c3d9' },
+      { t:2900, text:'Idiomas ativos:  14',                         color:'#b8c3d9' },
       { t:3050, text:'Cost per call:  $0.04',                         color:'#00c9a7' },
       { t:3200, text:'━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',           color:'#1e2e4a' },
-      { t:3280, text:'Ready to deploy in your contact center →',      color:'#2d7aff' },
+      { t:3280, text:'Pronto para implantar em seu contact center →',      color:'#2d7aff' },
     ]
   ];
 
