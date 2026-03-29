@@ -1,15 +1,147 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Preços | PrimeCore Intelligence</title>
-  <meta name="description" content="Preços da PrimeCore Intelligence. Starter a partir de US$2.400/mês. Piloto com 50% de desconto no 1º mês." />
-  <link rel="canonical" href="https://primecoreintelligence.com/pt-br/precos/" />
-  <meta http-equiv="refresh" content="0; url=/pt-br/#pricing" />
+  <meta name="description" content="Preços da PrimeCore Intelligence. Starter a partir de $2.400/mês. Growth a partir de $5.800/mês. Empresarial personalizado. 50% de desconto no Mês 1 do piloto."/>
+  <link rel="canonical" href="https://primecoreintelligence.com/pt-br/precos/"/>
+  <meta property="og:title" content="Preços | PrimeCore Intelligence"/>
+  <meta property="og:image" content="https://primecoreintelligence.com/assets/og-card.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#040812;--surface:#080f1e;--card:#0d1628;--border:#162035;--border2:#1e2e4a;--text:#e8effc;--muted:#7a93b8;--dim:#3d5278;--accent:#2d7aff;--accent2:#00c9a7;--font-head:'Bricolage Grotesque',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;--radius:14px;--radius-sm:8px}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1140px;margin:0 auto;padding:0 24px}
+    nav{position:sticky;top:0;z-index:100;background:rgba(4,8,18,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px}
+    .nav-inner{max-width:1140px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .nav-brand{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:700;font-size:17px}
+    .nav-brand .dot{width:8px;height:8px;background:var(--accent2);border-radius:50%;animation:pulse 2.4s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+    .btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;border:none;transition:all .2s;white-space:nowrap}
+    .btn-primary{background:var(--accent);color:#fff}
+    .btn-primary:hover{background:#4d8fff;transform:translateY(-1px)}
+    .btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--muted)}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--text)}
+    main{padding:80px 0}
+    .eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:12px;font-weight:600}
+    h1{font-family:var(--font-head);font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-1.5px;line-height:1.08;margin-bottom:16px}
+    .sub{font-size:17px;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:56px;max-width:560px}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+    .pricing-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px 28px;position:relative}
+    .pricing-card.featured{border-color:var(--accent);box-shadow:0 0 0 1px rgba(45,122,255,.3);transform:scale(1.03)}
+    .pricing-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;padding:4px 14px;border-radius:999px;white-space:nowrap}
+    .tier{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px}
+    .price{font-family:var(--font-head);font-size:46px;font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:4px}
+    .price sup{font-size:22px;letter-spacing:0;vertical-align:super}
+    .period{font-size:13px;color:var(--muted);margin-bottom:20px}
+    .desc{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+    ul{list-style:none;margin-bottom:28px}
+    li{font-size:13px;color:var(--muted);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:10px}
+    li::before{content:'✓';color:var(--accent2);flex-shrink:0;font-weight:700}
+    .pilot{font-size:12px;color:var(--accent2);text-align:center;margin-top:12px}
+    .back-link{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:5px;margin-bottom:32px}
+    .back-link:hover{color:var(--text)}
+    footer{padding:32px 0;border-top:1px solid var(--border)}
+    .foot-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .foot-brand{font-family:var(--font-head);font-weight:700;font-size:15px}
+    .notice{font-size:12px;color:var(--dim);margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+    @media(max-width:900px){.pricing-grid{grid-template-columns:1fr}.pricing-card.featured{transform:none}}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  </style>
 </head>
 <body>
-  <p>Redirecionando para <a href="/pt-br/#pricing">página de preços</a>...</p>
-  <script>window.location.replace('/pt-br/#pricing');</script>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="/pt-br/"><span class="dot"></span>PrimeCore Intelligence</a>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a class="btn btn-ghost" style="padding:6px 12px;font-size:13px" href="/es/precios/">ES</a>
+      <a class="btn btn-ghost" style="padding:6px 12px;font-size:13px" href="/roi?lang=pt">Calcular ROI</a>
+      <a class="btn btn-primary" href="https://pilot.primecoreintelligence.com/?lang=pt">Solicitar Piloto &rarr;</a>
+    </div>
+  </div>
+</nav>
+<main>
+  <div class="container">
+    <a class="back-link" href="/pt-br/">&#8592; Voltar ao site</a>
+    <div class="eyebrow">Preços</div>
+    <h1>Preços transparentes.<br>Sem surpresas.</h1>
+    <p class="sub">Cobrança mensal em USD via Paddle. Mês 1 do piloto com 50% de desconto. A partir do Mês 2 renova ao preço padrão, salvo cancelamento antes da renovação.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="tier">Starter</div>
+        <div class="price"><sup>$</sup>2.400</div>
+        <div class="period">/ mês &middot; até 5.000 chamadas</div>
+        <p class="desc">Para contact centers testando IA com uma única fila ou idioma.</p>
+        <ul>
+          <li>Assistência a agentes em tempo real</li>
+          <li>Até 3 idiomas</li>
+          <li>1 integração CCaaS</li>
+          <li>Painel de desempenho</li>
+          <li>PrimeCore Voice</li>
+          <li>Suporte por e-mail</li>
+        </ul>
+        <a class="btn btn-ghost" style="width:100%;justify-content:center" href="https://pilot.primecoreintelligence.com/?lang=pt">Solicitar Piloto</a>
+        <div class="pilot">50% desc. mês 1 &middot; $1.200</div>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Mais Popular</div>
+        <div class="tier">Growth</div>
+        <div class="price"><sup>$</sup>5.800</div>
+        <div class="period">/ mês &middot; até 20.000 chamadas</div>
+        <p class="desc">Para filas multilíngues em múltiplas plataformas CCaaS.</p>
+        <ul>
+          <li>Gestão autônoma de chamadas</li>
+          <li>Até 15 idiomas</li>
+          <li>3 integrações CCaaS</li>
+          <li>Alertas de violação de SLA</li>
+          <li>Painel de governança</li>
+          <li>PrimeCore Voice</li>
+          <li>Suporte Slack + e-mail</li>
+        </ul>
+        <a class="btn btn-primary" style="width:100%;justify-content:center" href="https://pilot.primecoreintelligence.com/?lang=pt">Solicitar Piloto &rarr;</a>
+        <div class="pilot">50% desc. mês 1 &middot; $2.900</div>
+      </div>
+      <div class="pricing-card">
+        <div class="tier">Empresarial</div>
+        <div class="price" style="font-size:32px;letter-spacing:-1px">Personalizado</div>
+        <div class="period">/ mês &middot; volume ilimitado</div>
+        <p class="desc">Para BPOs empresariais e contact centers multi-tenant com requisitos de compliance.</p>
+        <ul>
+          <li>50+ idiomas</li>
+          <li>Integrações CCaaS ilimitadas</li>
+          <li>Isolamento de tenants</li>
+          <li>SLA personalizado</li>
+          <li>Pacote regional LATAM</li>
+          <li>PrimeCore Voice Pro</li>
+          <li>Engenheiro de sucesso dedicado</li>
+        </ul>
+        <a class="btn btn-ghost" style="width:100%;justify-content:center" href="mailto:sales@primecoreintelligence.com">Contatar Vendas</a>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:32px;font-size:13px;color:var(--dim)">
+      Sem PAN/CVV &middot; PHI desativado por padrão &middot;
+      <a href="mailto:security@primecoreintelligence.com?subject=Solicita%C3%A7%C3%A3o%20Pacote%20de%20Seguran%C3%A7a" style="color:var(--accent)">Baixar Pacote de Segurança &rarr;</a>
+    </p>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <div class="foot-inner">
+      <div class="foot-brand">PrimeCore Intelligence</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <a style="font-size:13px;color:var(--muted)" href="https://pilot.primecoreintelligence.com/?lang=pt">Piloto</a>
+        <a style="font-size:13px;color:var(--muted)" href="/trust?lang=pt">Segurança</a>
+        <a style="font-size:13px;color:var(--muted)" href="/legal/?lang=pt">Legal</a>
+        <a style="font-size:13px;color:var(--muted)" href="mailto:support@primecoreintelligence.com">Suporte</a>
+      </div>
+    </div>
+    <p class="notice">Não constitui assessoria jurídica, médica, financeira ou de compliance. PrimeCore Intelligence é uma plataforma de software com IA. Os resultados dependem da configuração da implantação.</p>
+  </div>
+</footer>
 </body>
 </html>
