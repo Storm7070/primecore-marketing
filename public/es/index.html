@@ -5692,8 +5692,8 @@ html{scroll-behavior:smooth}
   var lineTimeouts = [];
 
   /* ── DOM refs ─────────────────────────────────────────────────────── */
-  var elEstado del Sistema      = document.getElementById('simEstado del Sistema');
-  var elEstado del SistemaText  = document.getElementById('simEstado del SistemaText');
+  var elStatus      = document.getElementById('simStatus');
+  var elStatusText  = document.getElementById('simStatusText');
   var elTimer       = document.getElementById('simTimer');
   var elTranscript  = document.getElementById('simTranscript');
   var elPlaceholder = document.getElementById('simPlaceholder');
@@ -5704,7 +5704,7 @@ html{scroll-behavior:smooth}
   var elFooterNote  = document.getElementById('simFooterNote');
   var elIndustry    = document.getElementById('simIndustryLabel');
   var elScenario    = document.getElementById('simScenarioLabel');
-  if (!elEstado del Sistema) return;
+  if (!elStatus) return;
 
   /* ── Timer helpers ───────────────────────────────────────────────── */
   function fmtTime(s) {
@@ -5723,9 +5723,9 @@ html{scroll-behavior:smooth}
   function stopTimer() { clearInterval(timerInt); timerInt = null; }
 
   /* ── Estado del Sistema pill ─────────────────────────────────────────────────── */
-  function setEstado del Sistema(state, text) {
-    elEstado del Sistema.className = 'sim-status-pill ' + state;
-    elEstado del SistemaText.textContent = text;
+  function setStatus(state, text) {
+    elStatus.className = 'sim-status-pill ' + state;
+    elStatusText.textContent = text;
   }
 
   /* ── Render a transcript line ────────────────────────────────────── */
@@ -5835,7 +5835,7 @@ html{scroll-behavior:smooth}
       if (lineIndex >= script.lines.length) {
         /* All lines done */
         stopTimer();
-        setEstado del Sistema('resolved', 'Resuelta');
+        setStatus('resolved', 'Resuelta');
         elStartBtn.textContent = '↺ Reiniciar';
         elStartBtn.disabled = false;
         elFooterNote.textContent =
@@ -5883,9 +5883,9 @@ html{scroll-behavior:smooth}
     simRunning = true;
 
     /* Ringing state */
-    setEstado del Sistema('ringing', 'Llamando…');
+    setStatus('ringing', 'Llamando…');
     var ringT = setTimeout(function() {
-      setEstado del Sistema('active', 'En curso');
+      setStatus('active', 'En curso');
       startTimer();
       runScript(script);
     }, 800);
@@ -5922,7 +5922,7 @@ html{scroll-behavior:smooth}
       elFcrBadge.classList.remove('visible');
       elTimer.textContent = '0:00';
       elTimer.className = 'sim-timer green';
-      setEstado del Sistema('idle', 'Listo');
+      setStatus('idle', 'Listo');
       elStartBtn.textContent = '▶ Iniciar Llamada';
       elStartBtn.disabled = false;
       elFooterNote.textContent = 'Llamada simulada Modo 1 · Lógica de IA real · No requiere telefonía en vivo';

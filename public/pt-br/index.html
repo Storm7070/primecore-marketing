@@ -4098,9 +4098,9 @@ html{scroll-behavior:smooth}
               <div class="sim-scenario-label" id="simScenarioLabel">Rastreamento de encomenda · Modo 1 Autônomo</div>
             </div>
           </div>
-          <div class="sim-status-pill idle" id="simStatus do Sistema" aria-live="polite">
+          <div class="sim-status-pill idle" id="simStatus" aria-live="polite">
             <span class="sim-status-dot"></span>
-            <span id="simStatus do SistemaText">Ready</span>
+            <span id="simStatusText">Ready</span>
           </div>
           <div class="sim-timer green" id="simTimer" aria-label="Call duration" aria-live="off">0:00</div>
         </div>
@@ -5696,8 +5696,8 @@ html{scroll-behavior:smooth}
   var lineTimeouts = [];
 
   /* ── DOM refs ─────────────────────────────────────────────────────── */
-  var elStatus do Sistema      = document.getElementById('simStatus do Sistema');
-  var elStatus do SistemaText  = document.getElementById('simStatus do SistemaText');
+  var elStatus      = document.getElementById('simStatus');
+  var elStatusText  = document.getElementById('simStatusText');
   var elTimer       = document.getElementById('simTimer');
   var elTranscript  = document.getElementById('simTranscript');
   var elPlaceholder = document.getElementById('simPlaceholder');
@@ -5708,7 +5708,7 @@ html{scroll-behavior:smooth}
   var elFooterNote  = document.getElementById('simFooterNote');
   var elIndustry    = document.getElementById('simIndustryLabel');
   var elScenario    = document.getElementById('simScenarioLabel');
-  if (!elStatus do Sistema) return;
+  if (!elStatus) return;
 
   /* ── Timer helpers ───────────────────────────────────────────────── */
   function fmtTime(s) {
@@ -5727,9 +5727,9 @@ html{scroll-behavior:smooth}
   function stopTimer() { clearInterval(timerInt); timerInt = null; }
 
   /* ── Status do Sistema pill ─────────────────────────────────────────────────── */
-  function setStatus do Sistema(state, text) {
-    elStatus do Sistema.className = 'sim-status-pill ' + state;
-    elStatus do SistemaText.textContent = text;
+  function setStatus(state, text) {
+    elStatus.className = 'sim-status-pill ' + state;
+    elStatusText.textContent = text;
   }
 
   /* ── Render a transcript line ────────────────────────────────────── */
@@ -5839,7 +5839,7 @@ html{scroll-behavior:smooth}
       if (lineIndex >= script.lines.length) {
         /* All lines done */
         stopTimer();
-        setStatus do Sistema('resolved', 'Resolvida');
+        setStatus('resolved', 'Resolvida');
         elStartBtn.textContent = '↺ Reiniciar';
         elStartBtn.disabled = false;
         elFooterNote.textContent =
@@ -5887,9 +5887,9 @@ html{scroll-behavior:smooth}
     simRunning = true;
 
     /* Ringing state */
-    setStatus do Sistema('ringing', 'Chamando…');
+    setStatus('ringing', 'Chamando…');
     var ringT = setTimeout(function() {
-      setStatus do Sistema('active', 'Em andamento');
+      setStatus('active', 'Em andamento');
       startTimer();
       runScript(script);
     }, 800);
@@ -5926,7 +5926,7 @@ html{scroll-behavior:smooth}
       elFcrBadge.classList.remove('visible');
       elTimer.textContent = '0:00';
       elTimer.className = 'sim-timer green';
-      setStatus do Sistema('idle', 'Pronto');
+      setStatus('idle', 'Pronto');
       elStartBtn.textContent = '▶ Iniciar Chamada';
       elStartBtn.disabled = false;
       elFooterNote.textContent = 'Chamada simulada Modo 1 · Lógica de IA real · Sem telefonia ao vivo necessária';
