@@ -1,33 +1,192 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Careers | PrimeCore Intelligence</title>
-  <meta name="description" content="Join PrimeCore Intelligence — we are building AI voice infrastructure for enterprise contact centers." />
-  <link rel="canonical" href="https://primecoreintelligence.com/careers" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <meta name="description" content="Join PrimeCore Intelligence — building AI voice infrastructure for enterprise contact centers in LATAM. Pre-team stage. High ownership. Real problems."/>
+  <link rel="canonical" href="https://primecoreintelligence.com/careers"/>
+  <meta property="og:title" content="Careers | PrimeCore Intelligence"/>
+  <meta property="og:description" content="We're pre-team. High ownership. Real problems. If you're exceptional at what you do, we want to hear from you."/>
+  <meta property="og:image" content="https://primecoreintelligence.com/assets/og-card.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600&display=swap" rel="stylesheet"/>
   <style>
+    :root{
+      --bg:#040812;--surface:#080f1e;--card:#0d1628;
+      --border:#162035;--border2:#1e2e4a;
+      --text:#e8effc;--muted:#7a93b8;--dim:#3d5278;
+      --accent:#2d7aff;--accent2:#00c9a7;
+      --font-head:'Bricolage Grotesque',sans-serif;
+      --font-body:'Plus Jakarta Sans',sans-serif;
+      --radius:14px;--radius-sm:8px;
+    }
     *{box-sizing:border-box;margin:0;padding:0}
-    body{background:#040812;color:#e8effc;font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center}
-    .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:#e8effc;margin-bottom:60px}
-    .dot{display:inline-block;width:8px;height:8px;background:#00c9a7;border-radius:50%;margin-right:8px;vertical-align:middle}
-    h1{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:800;line-height:1.1;margin-bottom:24px;letter-spacing:-1px}
-    .hl{background:linear-gradient(110deg,#2d7aff,#00c9a7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    p{font-size:18px;color:#7a93b8;max-width:560px;line-height:1.7;margin-bottom:40px}
-    .cta{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:#2d7aff;color:#fff;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;box-shadow:0 0 32px rgba(45,122,255,.3)}
-    .cta:hover{background:#1e5bf0}
-    .back{margin-top:24px;font-size:13px;color:#3d5278}
-    .back a{color:#7a93b8;text-decoration:none}
-    .back a:hover{color:#e8effc}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 60% -20%,rgba(45,122,255,.08) 0%,transparent 60%);pointer-events:none}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:800px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+    nav{position:sticky;top:0;z-index:100;background:rgba(4,8,18,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px}
+    .nav-inner{max-width:800px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between}
+    .brand{font-family:var(--font-head);font-weight:800;font-size:17px;display:flex;align-items:center;gap:8px}
+    .brand-dot{width:7px;height:7px;background:var(--accent2);border-radius:50%;animation:pulse 2.4s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
+    .back-link{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:5px}
+    .back-link:hover{color:var(--text)}
+
+    main{padding:72px 0 80px}
+
+    .eyebrow{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--accent2);margin-bottom:16px}
+
+    h1{font-family:var(--font-head);font-size:clamp(36px,5vw,56px);font-weight:800;letter-spacing:-2px;line-height:1.06;margin-bottom:24px}
+    h1 em{font-style:normal;color:var(--accent2)}
+
+    .lead{font-size:18px;color:var(--muted);line-height:1.75;max-width:620px;margin-bottom:48px}
+
+    .divider{height:1px;background:var(--border);margin:48px 0}
+
+    h2{font-family:var(--font-head);font-size:22px;font-weight:700;letter-spacing:-.5px;margin-bottom:16px}
+
+    .honest-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;margin-bottom:40px}
+    .honest-box p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:12px}
+    .honest-box p:last-child{margin-bottom:0}
+    .honest-box strong{color:var(--text)}
+
+    .roles{display:flex;flex-direction:column;gap:16px;margin-bottom:40px}
+    .role-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;transition:border-color .2s}
+    .role-card:hover{border-color:var(--border2)}
+    .role-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--accent);background:rgba(45,122,255,.1);border-radius:4px;padding:3px 8px;margin-bottom:10px}
+    .role-title{font-family:var(--font-head);font-size:17px;font-weight:700;margin-bottom:6px}
+    .role-desc{font-size:13px;color:var(--muted);line-height:1.7}
+
+    .what-we-offer{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:40px}
+    .offer-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 18px}
+    .offer-label{font-size:11px;font-weight:700;color:var(--accent2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+    .offer-value{font-size:13px;color:var(--muted);line-height:1.5}
+
+    .cta-box{background:rgba(45,122,255,.06);border:1px solid rgba(45,122,255,.2);border-radius:var(--radius);padding:32px;text-align:center}
+    .cta-box h2{margin-bottom:10px}
+    .cta-box p{font-size:14px;color:var(--muted);margin-bottom:24px}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--accent);color:#fff;border-radius:var(--radius-sm);font-family:var(--font-head);font-size:15px;font-weight:700;transition:all .2s}
+    .btn-primary:hover{background:#1e5bf0;transform:translateY(-1px)}
+
+    footer{border-top:1px solid var(--border);padding:24px 0}
+    .foot-inner{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--dim);flex-wrap:wrap;gap:8px}
+    .foot-inner a{color:var(--dim)}
+    .foot-inner a:hover{color:var(--muted)}
+
+    @media(max-width:600px){
+      .what-we-offer{grid-template-columns:1fr}
+      .honest-box{padding:20px}
+      .cta-box{padding:24px}
+    }
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
   </style>
 </head>
 <body>
-  <div class="logo"><span class="dot"></span>PrimeCore Intelligence</div>
-  <h1>We are building<br><span class="hl">contact center AI</span><br>from the ground up.</h1>
-  <p>We are a small, technical team moving fast. We do not have open roles listed yet — but if you are exceptional at what you do and believe AI will reshape how enterprises handle voice operations, we want to hear from you.</p>
-  <a class="cta" href="mailto:careers@primecoreintelligence.com">Send us a note &rarr;</a>
-  <p class="back"><a href="/">&larr; Back to PrimeCore Intelligence</a></p>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="/"><span class="brand-dot"></span>PrimeCore Intelligence</a>
+    <a class="back-link" href="/">&#8592; Back to site</a>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+
+    <div class="eyebrow">Careers</div>
+    <h1>Build AI that runs<br><em>real contact centers.</em></h1>
+    <p class="lead">
+      We're pre-team. One founder, live infrastructure, real clients coming in.
+      If you've ever wanted to join something early enough to matter —
+      this is that moment.
+    </p>
+
+    <div class="honest-box">
+      <p><strong>The honest version:</strong> PrimeCore Intelligence is building AI voice infrastructure for enterprise contact centers in LATAM. The platform is live. The relay worker is deployed. The marketing site is in three languages. The first pilots are starting.</p>
+      <p>There's no HR department. No equity cliff decks. No perks slide. What there is: a real technical problem, a working product, and the opportunity to be employee #1 or #2 at an AI infrastructure company targeting a $12B market that most US companies ignore.</p>
+      <p>If you want to own things fully and work with someone who moves fast and thinks clearly — read on.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>Where we need help</h2>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.7">No open requisitions. These are the three areas where the right person would immediately add leverage.</p>
+
+    <div class="roles">
+      <div class="role-card">
+        <div class="role-tag">Engineering</div>
+        <div class="role-title">CCaaS Integration Engineer</div>
+        <div class="role-desc">You know Five9, Genesys, or RingCentral from the inside — their APIs, their webhook models, their quirks. You can wire a new integration in a day and debug a bad payload in minutes. Cloudflare Workers or equivalent edge compute experience is a plus. Spanish or Portuguese is a significant plus.</div>
+      </div>
+      <div class="role-card">
+        <div class="role-tag">Sales & Partnerships</div>
+        <div class="role-title">LATAM BPO Partnerships Lead</div>
+        <div class="role-desc">You have existing relationships at BPOs or contact center operators in Colombia, Mexico, Guatemala, or Brazil. You understand the margin economics of outsourced contact center work. You can open a door, run a technical demo, and close a pilot agreement. Bilingual (EN/ES or EN/PT) required.</div>
+      </div>
+      <div class="role-card">
+        <div class="role-tag">Engineering</div>
+        <div class="role-title">AI Voice Systems Engineer</div>
+        <div class="role-desc">You've worked with real-time audio pipelines — STT, TTS, voice synthesis, telephony protocols (mulaw, SIP, WebRTC). You care about latency at the millisecond level. You can look at an 87-second call and tell us exactly where the 40ms of latency is coming from and how to fix it.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2>What this actually looks like</h2>
+    <div class="what-we-offer">
+      <div class="offer-item">
+        <div class="offer-label">Ownership</div>
+        <div class="offer-value">You own your domain entirely. No committee approvals for architectural decisions.</div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-label">Equity</div>
+        <div class="offer-value">Early. Meaningful. We'll talk specifics when we talk — not before.</div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-label">Remote</div>
+        <div class="offer-value">Fully remote. Operations in the US. LATAM timezone friendly.</div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-label">Stack</div>
+        <div class="offer-value">Cloudflare Workers, Claude API, Cartesia, Notion, GitHub. No legacy to maintain.</div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-label">Stage</div>
+        <div class="offer-value">Pre-revenue, post-product. Infrastructure is live. Pilots are starting.</div>
+      </div>
+      <div class="offer-item">
+        <div class="offer-label">Market</div>
+        <div class="offer-value">LATAM contact centers. 50+ languages. $4.50 → $0.04 per call. Real ROI.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="cta-box">
+      <h2>Send a note — not a resume</h2>
+      <p>Tell us what you've built, what you know, and what kind of problem you want to work on. A paragraph is enough. We'll respond within 24 hours if there's a fit.</p>
+      <a class="btn-primary" href="mailto:careers@primecoreintelligence.com">careers@primecoreintelligence.com &rarr;</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot-inner">
+      <span>© 2026 PrimeCore Intelligence S.A.</span>
+      <div style="display:flex;gap:16px">
+        <a href="/">Home</a>
+        <a href="/legal/">Legal</a>
+        <a href="/trust">Security</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
