@@ -5908,8 +5908,10 @@ html{scroll-behavior:smooth}
       tab.setAttribute('aria-pressed', 'true');
 
       var script = SCRIPTS[currentSim];
-      elIndustry.textContent  = script.label;
-      elScenario.textContent  = script.scenario;
+      var _ind = document.getElementById('simIndustryLabel');
+      var _scn = document.getElementById('simScenarioLabel');
+      if (_ind) _ind.textContent = script.label;
+      if (_scn) _scn.textContent = script.scenario;
 
       /* Reset widget */
       elTranscript.innerHTML = '';
