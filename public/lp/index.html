@@ -271,6 +271,8 @@ footer a:hover{color:var(--muted)}
       <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
       <button class="lang-btn" onclick="setLang('en',this)">EN</button>
       <button class="lang-btn" onclick="setLang('pt',this)">PT</button>
+      <button class="lang-btn" onclick="setLang('de',this)">DE</button>
+      <button class="lang-btn" onclick="setLang('fr',this)">FR</button>
     </div>
   </header>
 
@@ -425,6 +427,15 @@ footer a:hover{color:var(--muted)}
           </div>
         </div>
 
+        <!-- GDPR consent — shown for EU visitors (DE/FR) -->
+        <div class="field" id="gdpr-field" style="display:none">
+          <label style="flex-direction:row;align-items:flex-start;gap:10px;cursor:pointer">
+            <input type="checkbox" id="lpGdpr" style="margin-top:3px;flex-shrink:0;width:16px;height:16px"/>
+            <span id="gdpr-label" style="font-size:12px;color:var(--muted);line-height:1.6"></span>
+          </label>
+          <div class="err" id="err-gdpr"></div>
+        </div>
+
         <button type="submit" class="submit-btn" id="lpSubmitBtn">
           <span id="btn-text">Solicitar Mi Piloto →</span>
         </button>
@@ -558,6 +569,77 @@ var T = {
   },
 };
 
+  de: {
+    title: 'PrimeCore Intelligence — 30-Tage-Pilot',
+    htmlLang: 'de',
+    eyebrow: 'Für Contact Center in Europa & LATAM',
+    h1: 'Was kostet Ihr<br><em>Tier-1-Volumen</em> wirklich?',
+    sub: 'Sendungsverfolgung. Terminbestätigung. Kontostandsabfragen. Sie zahlen Agenten 6,50 $ pro Anruf für Fragen, die KI in 87 Sekunden für 0,04 $ löst.',
+    num1: 'First Call Resolution', num2: 'Durchschnittliche Bearbeitungszeit', num3: 'Pro Anruf Modus 1',
+    stepsLabel: 'So funktioniert der Pilot',
+    s1t: 'Kompatibilitätsprüfung', s1d: 'Wir prüfen Ihre CCaaS-Plattform, Ihr Anrufvolumen und Ihren Sprachmix. Falls etwas nicht funktioniert, sagen wir es Ihnen, bevor eine einzige Zeile Code angefasst wird.',
+    s2t: 'Shadow Mode — Wochen 1 bis 3', s2d: 'Die KI läuft parallel zu Ihren Agenten ohne Nebeneffekte. Ihr Team arbeitet exakt wie heute. Sie sehen die Daten in Echtzeit.',
+    s3t: 'Evidenzpaket — Woche 4', s3d: 'FCR-Delta, AHT-Verbesserung, SLA-Verletzungsrate, Kosten pro Anruf. Sie haben alle Zahlen, bevor Sie entscheiden.',
+    s4t: 'Sie genehmigen den Produktionsübergang', s4d: 'Nichts geht ohne Ihre ausdrückliche Genehmigung in Produktion. Keine automatischen Deployments. Keine Überraschungen.',
+    risk: '<strong>Maximales Risiko:</strong> 50 % des 1. Monats — kündigen Sie vor Monat 2 und es wird nichts weiter berechnet. Keine Einrichtungsgebühr. Kein Jahresvertrag.',
+    formTitle: '30-Tage-Pilot anfordern',
+    formSub: 'Persönliche Antwort am selben Tag. Support auf Deutsch verfügbar.',
+    labelName: 'Vollständiger Name', labelEmail: 'Geschäftliche E-Mail',
+    labelCompany: 'Unternehmen', labelVolume: 'Monatliches Anrufvolumen',
+    labelCcaas: 'CCaaS-Plattform', labelVertical: 'Branche',
+    volPh: 'Volumen auswählen', vol1: 'Unter 5.000', vol2: '5.000 – 20.000', vol3: '20.000 – 100.000', vol4: '100.000+',
+    ccaasPh: 'Plattform auswählen', ccaasOther: 'Andere',
+    vertPh: 'Branche auswählen', vert1: 'Logistik / 3PL', vert2: 'Gesundheitswesen', vert3: 'Finanzdienstleistungen', vert4: 'Fuhrpark', vert5: 'BPO', vert6: 'Andere',
+    btnText: 'Meinen Pilot anfordern →',
+    submitNote: '50 % Rabatt Monat 1 · Kündigung vor Monat 2 möglich · Keine Einrichtungsgebühr',
+    successTitle: 'Anfrage erhalten.',
+    successSub: 'Sie erhalten heute eine persönliche Antwort.<br>Prüfen Sie Ihren Posteingang — der nächste Schritt wird dort sein.',
+    footerSite: 'Hauptseite', footerLegal: 'Rechtliches', footerTrust: 'Sicherheit',
+    errName: 'Bitte geben Sie Ihren Namen ein.',
+    errEmail: 'Bitte geben Sie eine gültige geschäftliche E-Mail-Adresse ein.',
+    errGdpr: 'Bitte bestätigen Sie die Datenschutzerklärung, um fortzufahren.',
+    gdprLabel: 'Ich stimme zu, dass PrimeCore Intelligence meine Daten zur Bearbeitung dieser Anfrage gemäß der <a href="/legal/" style="color:var(--accent)">Datenschutzerklärung</a> verarbeitet. Diese Zustimmung kann jederzeit widerrufen werden.',
+    legalPath: '/legal/', trustPath: '/trust',
+    pilotUrl: 'https://pilot.primecoreintelligence.com/?lang=en',
+    isEU: true,
+  },
+  fr: {
+    title: 'PrimeCore Intelligence — Pilote 30 Jours',
+    htmlLang: 'fr',
+    eyebrow: 'Pour les centres de contact en Europe & LATAM',
+    h1: 'Combien vous coûte<br>votre <em>volume Niveau 1 ?</em>',
+    sub: 'Suivi d'expéditions. Confirmation de rendez-vous. Consultation de solde. Vous payez des agents 6,50 $ par appel pour répondre à des questions que l'IA résout en 87 secondes à 0,04 $.',
+    num1: 'Résolution au premier appel', num2: 'Durée moyenne de traitement', num3: 'Par appel Mode 1',
+    stepsLabel: 'Comment fonctionne le pilote',
+    s1t: 'Vérification de compatibilité', s1d: 'Nous vérifions votre plateforme CCaaS, votre volume d'appels et votre mix linguistique. Si quelque chose ne fonctionne pas, nous vous le disons avant de toucher une seule ligne de code.',
+    s2t: 'Mode shadow — semaines 1 à 3', s2d: 'L'IA fonctionne en parallèle de vos agents sans effets secondaires. Votre équipe travaille exactement comme aujourd'hui. Vous voyez les données en temps réel.',
+    s3t: 'Pack de preuves — semaine 4', s3d: 'Delta FCR, amélioration AHT, taux de violation SLA, coût par appel. Vous avez tous les chiffres avant de décider.',
+    s4t: 'Vous approuvez la bascule en production', s4d: 'Rien ne passe en production sans votre approbation explicite. Aucun déploiement automatique. Aucune surprise.',
+    risk: '<strong>Risque maximum :</strong> 50 % du Mois 1 — résiliez avant le Mois 2 et rien d'autre n'est facturé. Aucun frais d'installation. Aucun contrat annuel.',
+    formTitle: 'Demander un pilote de 30 jours',
+    formSub: 'Réponse personnelle le jour même. Support en français disponible.',
+    labelName: 'Nom complet', labelEmail: 'E-mail professionnel',
+    labelCompany: 'Entreprise', labelVolume: 'Volume mensuel d'appels',
+    labelCcaas: 'Plateforme CCaaS', labelVertical: 'Secteur',
+    volPh: 'Sélectionnez votre volume', vol1: 'Moins de 5 000', vol2: '5 000 – 20 000', vol3: '20 000 – 100 000', vol4: '100 000+',
+    ccaasPh: 'Sélectionnez votre plateforme', ccaasOther: 'Autre',
+    vertPh: 'Sélectionnez votre secteur', vert1: 'Logistique / 3PL', vert2: 'Santé', vert3: 'Services financiers', vert4: 'Flotte', vert5: 'BPO', vert6: 'Autre',
+    btnText: 'Demander mon pilote →',
+    submitNote: '50 % de réduction Mois 1 · Résiliation possible avant Mois 2 · Aucun frais d'installation',
+    successTitle: 'Demande reçue.',
+    successSub: 'Vous recevrez une réponse personnelle aujourd'hui.<br>Consultez votre boîte mail — la prochaine étape s'y trouvera.',
+    footerSite: 'Site principal', footerLegal: 'Mentions légales', footerTrust: 'Sécurité',
+    errName: 'Veuillez entrer votre nom.',
+    errEmail: 'Veuillez entrer une adresse e-mail professionnelle valide.',
+    errGdpr: 'Veuillez accepter la politique de confidentialité pour continuer.',
+    gdprLabel: 'J'accepte que PrimeCore Intelligence traite mes données pour le traitement de cette demande conformément à la <a href="/legal/" style="color:var(--accent)">Politique de confidentialité</a>. Ce consentement peut être retiré à tout moment.',
+    legalPath: '/legal/', trustPath: '/trust',
+    pilotUrl: 'https://pilot.primecoreintelligence.com/?lang=en',
+    isEU: true,
+  },
+
+};
+
 var currentLang = 'es';
 
 function setLang(lang, btn) {
@@ -606,6 +688,20 @@ function setLang(lang, btn) {
   if (fl) fl.href = s.legalPath;
   if (ft) ft.href = s.trustPath;
 
+  // GDPR consent — show for EU languages
+  var gdprField = document.getElementById('gdpr-field');
+  var gdprLabel = document.getElementById('gdpr-label');
+  if (gdprField) {
+    if (s.isEU) {
+      gdprField.style.display = 'block';
+      if (gdprLabel && s.gdprLabel) gdprLabel.innerHTML = s.gdprLabel;
+    } else {
+      gdprField.style.display = 'none';
+      var gdprCheck = document.getElementById('lpGdpr');
+      if (gdprCheck) gdprCheck.checked = false;
+    }
+  }
+
   try { localStorage.setItem('pc-lp-lang', lang); } catch(e) {}
 }
 
@@ -615,10 +711,11 @@ function setLang(lang, btn) {
   var stored; try { stored = localStorage.getItem('pc-lp-lang'); } catch(e) {}
   var browser = (navigator.language||'').toLowerCase().slice(0,2);
   var lang = urlLang || stored || browser;
-  var btnMap = { es: 0, en: 1, pt: 2 };
-  var idx = btnMap[lang] || 0;
+  var btnMap = { es: 0, en: 1, pt: 2, de: 3, fr: 4 };
+  var idx = btnMap[lang] !== undefined ? btnMap[lang] : 0;
   var btns = document.querySelectorAll('.lang-btn');
-  setLang(lang in T ? lang : 'es', btns[idx]);
+  var detected = lang in T ? lang : 'es';
+  setLang(detected, btns[btnMap[detected] || 0]);
 })();
 
 // ── Form submit ────────────────────────────────────────────────────────────
@@ -637,11 +734,21 @@ document.getElementById('lpForm').addEventListener('submit', async function(e) {
   var valid = true;
   var errName  = document.getElementById('err-name');
   var errEmail = document.getElementById('err-email');
+  var errGdpr  = document.getElementById('err-gdpr');
   errName.style.display = errEmail.style.display = 'none';
+  if (errGdpr) errGdpr.style.display = 'none';
 
   if (!name) { errName.textContent = s.errName; errName.style.display = 'block'; valid = false; }
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     errEmail.textContent = s.errEmail; errEmail.style.display = 'block'; valid = false;
+  }
+  // GDPR consent required for EU languages
+  if (s.isEU) {
+    var gdprCheck = document.getElementById('lpGdpr');
+    if (!gdprCheck || !gdprCheck.checked) {
+      if (errGdpr) { errGdpr.textContent = s.errGdpr; errGdpr.style.display = 'block'; }
+      valid = false;
+    }
   }
   if (!valid) return;
 
@@ -661,6 +768,8 @@ document.getElementById('lpForm').addEventListener('submit', async function(e) {
         lang: currentLang,
         source: 'linkedin-lp',
         notes: 'LinkedIn landing page submission',
+        gdpr_consent: (currentLang === 'de' || currentLang === 'fr'),
+        market: (currentLang === 'de' || currentLang === 'fr') ? 'eu' : 'latam',
       }),
     });
 
