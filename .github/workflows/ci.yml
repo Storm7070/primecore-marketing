@@ -76,7 +76,7 @@ jobs:
           fi
 
           # Check for TODO/placeholder text
-          if grep -riP "\bTODO\b|\bPLACEHOLDER\b|\bINSERT_HERE\b|lorem ipsum" public/ --include="*.html"; then
+          if grep -rP "\bTODO\b|\bPLACEHOLDER\b|\bINSERT_HERE\b|lorem ipsum" public/ --include="*.html"; then
             echo "❌ FAIL: Placeholder content found"
             exit 1
           fi
